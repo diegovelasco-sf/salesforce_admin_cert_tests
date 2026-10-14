@@ -1,0 +1,792 @@
+{
+  "fc-001": {
+    "section": "service",
+    "explanationEs": "Una macro ejecuta con un clic una serie de pasos sobre el caso abierto en la consola: cambiar el estado y el propietario y enviar un email con plantilla, apoyándose en quick actions. Las case assignment rules y los autolaunched flows actúan solos al guardar, sin que el agente decida cuándo, y Quick Text solo inserta texto.",
+    "review": "ok"
+  },
+  "fc-002": {
+    "section": "automation",
+    "explanationEs": "Un approval process gestiona la revisión de managers y directores, y como acción final de aprobación puede lanzar un outbound message, que envía los datos del registro al sistema externo de RR. HH. Un email alert solo avisa por correo y una quick action no integra con otros sistemas.",
+    "review": "ok"
+  },
+  "fc-003": {
+    "section": "objects",
+    "explanationEs": "Una relación muchos a muchos se modela con un junction object: un objeto personalizado con dos relaciones master-detail, una hacia cada objeto. Con lookups se pierde el comportamiento de junction (propiedad y borrado heredados, roll-ups en ambos padres), y los campos URL no relacionan registros.",
+    "review": "ok"
+  },
+  "fc-004": {
+    "section": "agentforce",
+    "explanationEs": "Agentforce SDR trabaja leads de forma autónoma: responde sus preguntas con información fiable de la empresa (grounding en los datos de Salesforce), los cualifica y puede agendar reuniones. No negocia precios ni cierra acuerdos, ni es una herramienta de coaching para comerciales.",
+    "review": "ok"
+  },
+  "fc-005": {
+    "section": "data",
+    "explanationEs": "Filtrar el informe por propietario igual a $USER, el usuario que lo ejecuta, hace que cada comercial vea solo sus registros con el mismo informe; en Lightning se suele hacer con el filtro «Show Me: My…». Cambiar el OWD a Private quitaría visibilidad que sí necesitan, y una carpeta privada no filtra datos.",
+    "review": "ok"
+  },
+  "fc-006": {
+    "section": "productivity",
+    "explanationEs": "En la configuración de marca de la app móvil se puede subir el logo de la pantalla de carga y elegir el color de marca, que se aplica al fondo de la cabecera. El fondo de los registros no se personaliza.",
+    "review": "ok"
+  },
+  "fc-007": {
+    "section": "automation",
+    "explanationEs": "Si un manager intenta aprobar y salta un error, una causa típica es que el siguiente aprobador del proceso esté inactivo o vacío, porque la solicitud no se puede enrutar. La visibilidad de campos o la FLS no hacen fallar la aprobación, y añadir un delegated approver no arregla un paso mal definido.",
+    "review": "ok"
+  },
+  "fc-008": {
+    "section": "service",
+    "explanationEs": "Las case escalation rules actúan cuando un caso lleva cierto tiempo sin resolver: lo reasignan a otra cola (la urgente) y notifican a quien indiques, aquí el manager de soporte. Las assignment rules solo se aplican al crear o editar el caso, y los informes o dashboards no mueven casos.",
+    "review": "ok"
+  },
+  "fc-009": {
+    "section": "config",
+    "explanationEs": "Por mínimo privilegio, se mantiene el perfil habitual de esos usuarios y se añade un permission set con el permiso necesario (Modify All en los objetos que toque, o Modify All Data). El perfil System Administrator les daría control de toda la configuración, los perfiles estándar no se pueden editar y los roles no conceden permisos.",
+    "review": "ok"
+  },
+  "fc-010": {
+    "section": "service",
+    "explanationEs": "En Support Settings se definen el Default Case Owner y el Automated Case User, que aparece como autor de los cambios hechos por automatismos (assignment rules, escalation rules, Email-to-Case…). Poner ahí un usuario de integración evita que los casos parezcan creados o modificados por una persona.",
+    "review": "ok"
+  },
+  "fc-011": {
+    "section": "data",
+    "explanationEs": "Un bucket column agrupa en el propio informe varios valores de un campo en categorías nuevas, por ejemplo varios sectores en «Servicios financieros», sin crear campos ni tocar datos. Un filtro excluiría registros, el unique count cuenta valores distintos y un gráfico solo visualiza.",
+    "review": "ok"
+  },
+  "fc-012": {
+    "section": "config",
+    "explanationEs": "Con un modelo privado, dos roles hermanos no se ven entre sí, porque la jerarquía solo da acceso hacia arriba. Una sharing rule de propietario que comparta los registros del rol Sales Team A con el rol Sales Team B resuelve el acceso lateral. Compartir a mano no escala, y las reglas por criterios son para cuando el acceso depende de valores de campos.",
+    "review": "ok"
+  },
+  "fc-013": {
+    "section": "objects",
+    "explanationEs": "Como comparten perfil, la diferencia está en los permisos: en Lightning App Builder se añade un filtro de visibilidad al componente de la related list, por ejemplo con un custom permission incluido solo en el permission set de Client Services. Las asignaciones de page layout y de record type van por perfil, y las sharing settings controlan datos, no la interfaz.",
+    "review": "ok"
+  },
+  "fc-014": {
+    "section": "objects",
+    "explanationEs": "Los filtros de visibilidad de Lightning App Builder muestran u ocultan componentes según el usuario (perfil, permisos), el dispositivo o valores del registro, así que cada rol ve lo útil en la misma página. Borrar componentes o campos afectaría a todos por igual.",
+    "review": "ok"
+  },
+  "fc-015": {
+    "section": "config",
+    "explanationEs": "Los delegated administrators gestionan usuarios de los roles que se les asignan: crean y editan usuarios, restablecen contraseñas, desbloquean cuentas y asignan los perfiles y permission sets permitidos. Lo que no pueden es crear ni modificar permission sets, ni cambiar la field-level security.",
+    "review": "ok"
+  },
+  "fc-016": {
+    "section": "objects",
+    "explanationEs": "Pasar un campo de texto a picklist puede perder datos, y según la documentación se borran las list views que usan ese campo y pueden verse afectadas las assignment y escalation rules que lo referencian. Salesforce no actualiza solo las referencias en Visualforce, y un global value set no evita la pérdida de datos.",
+    "review": "ok"
+  },
+  "fc-017": {
+    "section": "service",
+    "explanationEs": "La Service Console exige la feature license Service Cloud User, que se activa con la casilla del mismo nombre en el registro de cada usuario. Un permission set no concede feature licenses, y la licencia Salesforce Platform no incluye casos ni la consola.",
+    "review": "ok"
+  },
+  "fc-018": {
+    "section": "agentforce",
+    "explanationEs": "Un caso de uso típico de Agentforce en ventas es cualificar leads: el agente conversa con el prospecto, hace preguntas de descubrimiento, decide si cumple los criterios y actualiza el registro o agenda una reunión. Los bots básicos siguen guiones fijos, y «automatizar todo el marketing» no es un caso de uso concreto.",
+    "review": "ok"
+  },
+  "fc-019": {
+    "section": "automation",
+    "explanationEs": "Para que las oportunidades de más de 100 000 $ lleguen solas al CFO, un record-triggered flow con esa condición las envía a aprobación (Flow Approvals), sin que el comercial pulse nada. El botón Submit for Approval es manual, Next Best Action solo recomienda y un Apex trigger es código innecesario.",
+    "review": "ok"
+  },
+  "fc-020": {
+    "section": "objects",
+    "explanationEs": "Las etiquetas de campos estándar como Type se cambian con Rename Tabs and Labels, y el cambio se ve en layouts, informes y list views sin tocar los datos. Crear un campo nuevo y borrar el estándar sería destructivo, y un global value set no cambia etiquetas.",
+    "review": "ok"
+  },
+  "fc-021": {
+    "section": "automation",
+    "explanationEs": "Un delegated approver puede aprobar o rechazar las solicitudes en nombre de otro usuario, por ejemplo durante sus vacaciones; se indica en el registro del usuario. Una queue reparte aprobaciones entre varias personas, y el manager es parte fija de la jerarquía.",
+    "review": "ok"
+  },
+  "fc-022": {
+    "section": "automation",
+    "explanationEs": "Los entry criteria del approval process deciden qué registros pueden entrar, por ejemplo Stage = Closed Won y un importe mínimo; si un registro no los cumple, no se puede enviar a aprobación. Ni un screen flow ni una validation rule sustituyen ese filtro.",
+    "review": "ok"
+  },
+  "fc-023": {
+    "section": "automation",
+    "explanationEs": "Un record-triggered flow sobre Opportunity que se dispare al pasar a Closed Won puede obtener los Opportunity Products y aplicarles el descuento en bloque. Un formula field solo calcula para mostrar y no escribe en otros registros, y ni una macro ni un approval process actualizan registros hijos.",
+    "review": "ok"
+  },
+  "fc-024": {
+    "section": "productivity",
+    "explanationEs": "Mobile Home es la página de inicio configurable de la app móvil: decide qué ve el usuario nada más abrirla, así que es donde se coloca la información clave. Añadir las pestañas de informes o de dashboards no hace que sea lo primero que se ve, y Today se centra en la agenda del día.",
+    "review": "ok"
+  },
+  "fc-025": {
+    "section": "sales",
+    "explanationEs": "Cuando un mismo objeto debe recoger información distinta según el tipo de iniciativa, se usan record types con su propio page layout y sus valores de picklist: Email, Trade Show y Webinar ven cada uno sus campos. Un campo de tipo no oculta los campos que no aplican, y la jerarquía de campañas sirve para agrupar campañas.",
+    "review": "ok"
+  },
+  "fc-026": {
+    "section": "sales",
+    "explanationEs": "Path muestra la etapa actual con sus key fields y consejos; las validation rules impiden avanzar sin rellenar lo necesario; y los campos obligatorios en el page layout aseguran lo básico. Flow no es la forma de marcar campos obligatorios, y «guided selling» no es una función estándar de oportunidades.",
+    "review": "ok"
+  },
+  "fc-027": {
+    "section": "data",
+    "explanationEs": "En Reports and Dashboards Settings puedes ocultar report types para que no aparezcan al crear informes, lo que limita qué tipos de informe se pueden hacer. Compartir carpetas controla quién ve los informes ya creados, no cuáles se pueden crear.",
+    "review": "ok"
+  },
+  "fc-028": {
+    "section": "config",
+    "explanationEs": "Con el OWD del objeto en Private, cada usuario solo ve sus registros (y los de quien tenga por debajo en la jerarquía), y los informes siempre respetan esa visibilidad. Hacer un informe por usuario no protege nada, y Apex sharing es innecesario.",
+    "review": "ok"
+  },
+  "fc-029": {
+    "section": "data",
+    "explanationEs": "Deshacer una importación es borrar lo que se creó: Mass Delete Records lo hace desde Setup para objetos estándar comunes, y Data Loader puede borrar en bloque con el fichero de éxito de la importación, que trae los Id. El Data Import Wizard no borra, y la Weekly Data Export es una copia de seguridad.",
+    "review": "ok"
+  },
+  "fc-030": {
+    "section": "config",
+    "explanationEs": "Setup Audit Trail registra los cambios de configuración (quién hizo qué y cuándo) de los últimos 180 días. Field history tracking y feed tracking siguen cambios en los datos de los registros, y Health Check compara tu seguridad con una línea base.",
+    "review": "ok"
+  },
+  "fc-031": {
+    "section": "objects",
+    "explanationEs": "Al pasar un campo de Auto Number a Text, los valores existentes se conservan tal cual como texto; lo único que cambia es que los registros nuevos ya no se numeran solos.",
+    "review": "ok"
+  },
+  "fc-032": {
+    "section": "config",
+    "explanationEs": "Cada zona horaria necesita su propio registro de Business Hours, que se asigna a los casos o reglas que correspondan, porque escalation rules y milestones cuentan el tiempo según ese horario. Ampliar el horario actual para cubrir a los dos equipos falsearía los cálculos.",
+    "review": "ok"
+  },
+  "fc-033": {
+    "section": "automation",
+    "explanationEs": "Un screen flow guía al usuario paso a paso para enviar el gasto y, al terminar, lo manda a un approval process, que se encarga del enrutado y de las autorizaciones. Una quick action solo sería la forma de lanzar el flow, y una validation rule ni guía ni enruta.",
+    "review": "ok"
+  },
+  "fc-034": {
+    "section": "data",
+    "explanationEs": "Para 300 cuentas con sus contactos, el Data Import Wizard es lo más sencillo: funciona en el navegador, importa cuentas y contactos a la vez relacionándolos y comprueba duplicados. Data Loader y dataloader.io también sirven, pero están pensados para volúmenes mayores u objetos que el wizard no admite.",
+    "review": "ok"
+  },
+  "fc-035": {
+    "section": "config",
+    "explanationEs": "La buena práctica es activar y probar la actualización en un sandbox, corregir lo que se rompa y luego activarla en producción antes de su fecha de activación automática. Dejar que se active sola, o activarla directamente en producción, es arriesgarse a romper algo.",
+    "review": "ok"
+  },
+  "fc-036": {
+    "section": "agentforce",
+    "explanationEs": "Las instrucciones de una acción deben decir qué hace, para qué sirve y cuándo usarla. La mejor deja claro que modifica la dirección del registro y que el agente solo debe usarla cuando el usuario pide expresamente cambiarla. Las otras son vagas o añaden una condición (que no haya pedidos activos) que no forma parte del requisito.",
+    "review": "ok"
+  },
+  "fc-037": {
+    "section": "service",
+    "explanationEs": "Una case escalation rule con una entrada de 2 horas desde la creación y un criterio como Status = New avisa al manager cuando se cumple el plazo. Las assignment rules actúan al crear el caso, un formula field no envía avisos, y Omni-Channel Supervisor es para supervisar en tiempo real.",
+    "review": "ok"
+  },
+  "fc-038": {
+    "section": "productivity",
+    "explanationEs": "Task y Event tienen cada uno su propio campo Subject con su lista de valores, así que los de tareas se añaden al Subject de Task y los de eventos al de Event. Juntarlos todos mezclaría ambos, y los predefined field values de una acción fijan un valor por defecto, no la lista.",
+    "review": "ok"
+  },
+  "fc-039": {
+    "section": "config",
+    "explanationEs": "En Company Settings están la información de la empresa (zona horaria, divisa corporativa, licencias), Fiscal Year, Business Hours, Holidays y, con multidivisa, la gestión de divisas. User Management Settings, Custom Settings y Feature Settings son otra cosa.",
+    "review": "ok"
+  },
+  "fc-040": {
+    "section": "config",
+    "explanationEs": "A un usuario bloqueado por intentos fallidos se le desbloquea con el botón Unlock de su registro, y si no recuerda la contraseña se le envía un enlace con Reset Password. Iniciar sesión como él no lo desbloquea, y cambiar las políticas de contraseñas afecta a toda la org.",
+    "review": "ok"
+  },
+  "fc-041": {
+    "section": "sales",
+    "explanationEs": "En Path puedes definir para cada etapa unos key fields, que se muestran y editan justo en ese momento del proceso, junto con la Guidance for Success. Dynamic Forms muestra campos según criterios, pero no está ligado a las etapas como Path.",
+    "review": "ok"
+  },
+  "fc-042": {
+    "section": "agentforce",
+    "explanationEs": "Para que los agentes tengan una vista completa y fiable del cliente, sus datos deben estar unificados: Data Cloud ingiere y armoniza datos de distintas fuentes y es la base en la que Agentforce se apoya (grounding). Email-to-Case o un nuevo layout de consola no aportan esa vista unificada.",
+    "review": "ok"
+  },
+  "fc-043": {
+    "section": "agentforce",
+    "explanationEs": "Cada prueba de una plantilla en Prompt Builder es una llamada nueva al LLM, y los modelos generativos no son deterministas: la respuesta varía. Para resultados más consistentes hay que afinar las instrucciones; no hay caché ni simulación.",
+    "review": "ok"
+  },
+  "fc-044": {
+    "section": "automation",
+    "explanationEs": "Un flow solo se ejecuta si su versión está activa; si no crea registros en producción, lo primero es comprobar que se activó. Un record-triggered flow no se puede guardar sin desencadenante, y ni ser de solo lectura ni la URL impiden que se ejecute.",
+    "review": "ok"
+  },
+  "fc-045": {
+    "section": "config",
+    "explanationEs": "Al desactivar un usuario se eliminan los registros que le habían compartido manualmente, y reactivarlo no los recupera. Como la org no usa sharing rules por criterios, lo más probable es que ese acceso viniera de compartición manual.",
+    "review": "ok"
+  },
+  "fc-046": {
+    "section": "agentforce",
+    "explanationEs": "Agentforce brilla en procesos de varios pasos que requieren razonar y adaptarse: entiende la intención, elige qué acciones ejecutar y cambia de plan si la conversación cambia. Para tareas de un solo paso o sin decisiones, un flow o una macro son más sencillos y baratos.",
+    "review": "ok"
+  },
+  "fc-047": {
+    "section": "sales",
+    "explanationEs": "Un sales process define qué valores de Stage se ven, así que se crean dos (uno de 4 etapas y otro de 8) y se asocia cada uno a un record type con su propio page layout. Los page layouts no controlan valores de picklist, y los public groups no asignan record types.",
+    "review": "ok"
+  },
+  "fc-048": {
+    "section": "config",
+    "explanationEs": "El perfil Minimum Access – Salesforce no incluye el permiso Lightning Experience User, así que hay que darlo, mejor con un permission set, para que puedan entrar en Lightning. Crear páginas o componentes no sirve si no tienen acceso a Lightning.",
+    "review": "ok"
+  },
+  "fc-049": {
+    "duplicateOf": "fc-034"
+  },
+  "fc-050": {
+    "section": "objects",
+    "explanationEs": "La Activity Timeline es un componente de la página de registro: si falta, se añade el componente Activities a la Lightning record page de Account con Lightning App Builder. No es un permiso ni un botón del Object Manager.",
+    "review": "ok"
+  },
+  "fc-051": {
+    "section": "sales",
+    "explanationEs": "Los account teams permiten que varias personas trabajen una cuenta, cada una con su rol y su nivel de acceso a la cuenta, sus oportunidades y sus casos. Con un default account team, el propietario añade a su equipo habitual de una vez a cada cuenta. Las sharing rules o la jerarquía no van cuenta por cuenta.",
+    "review": "ok"
+  },
+  "fc-052": {
+    "section": "productivity",
+    "explanationEs": "Un grupo unlisted de Chatter no aparece en búsquedas ni listados: solo lo conocen sus miembros (y quien tenga permiso para gestionar grupos unlisted), y se entra por invitación. Un grupo privado sí aparece en búsquedas aunque su contenido esté oculto.",
+    "review": "ok"
+  },
+  "fc-053": {
+    "section": "objects",
+    "explanationEs": "Quitar un campo del layout no lo borra, así que se puede volver a arrastrar desde la paleta de campos del Page Layout Editor. Si el layout ha cambiado mucho, también puedes volver a desplegar la versión original desde un sandbox. La papelera es para registros y campos borrados, no para layouts.",
+    "review": "ok"
+  },
+  "fc-054": {
+    "section": "productivity",
+    "explanationEs": "Un Chatter stream combina en un solo feed las publicaciones de las personas, grupos y registros que elijas, por ejemplo el CEO, varios grupos y ciertos registros. Un grupo es un espacio concreto, y el daily digest es un resumen por email.",
+    "review": "ok"
+  },
+  "fc-055": {
+    "section": "data",
+    "explanationEs": "Un dashboard con un running user que ve todas las oportunidades muestra los totales de toda la empresa a cualquiera que lo abra, sin tocar la compartición. Al bajar al detalle, cada uno solo ve lo que puede ver. Filtrar o cambiar la carpeta no amplía los datos.",
+    "review": "ok"
+  },
+  "fc-056": {
+    "section": "service",
+    "explanationEs": "Los milestones de entitlement management miden el tiempo de pasos concretos del soporte (primera respuesta, resolución…) contando solo las business hours, y se pueden reportar. Las escalation rules y las assignment rules mueven casos, pero no miden ni informan de cuánto tiempo pasan en cada fase.",
+    "review": "ok"
+  },
+  "fc-057": {
+    "section": "data",
+    "explanationEs": "Para publicar en Chatter instantáneas de componentes de dashboards hay que activar el feed tracking de Dashboards. Los reporting snapshots guardan históricos de datos, y descargar el gráfico es un paso manual.",
+    "review": "ok"
+  },
+  "fc-058": {
+    "section": "data",
+    "explanationEs": "Con Show Unique Count en la columna de cuenta, el informe cuenta cada cuenta una sola vez aunque tenga varias oportunidades. Agrupar filas las ordena pero no da ese total directamente, y ni un bucket ni un filtro cuentan valores distintos.",
+    "review": "ok"
+  },
+  "fc-059": {
+    "section": "agentforce",
+    "review": "disputed",
+    "reviewNote": "No he podido confirmar en la documentación qué pasa exactamente con las conversaciones en curso al desactivar un agente, y la redacción de la respuesta de la fuente es confusa. Trátala con cautela.",
+    "explanationEs": "Para modificar un agente activo hay que desactivarlo (o crear una versión nueva). Según la fuente, las conversaciones en curso siguen con la configuración con la que empezaron hasta que terminan, y no se pueden iniciar nuevas hasta reactivarlo."
+  },
+  "fc-060": {
+    "section": "data",
+    "explanationEs": "Para entender la calidad y la completitud de los datos primero hay que medirlas: un informe o dashboard de cuentas y oportunidades con los campos clave vacíos muestra dónde faltan. Hacer los campos obligatorios evita el problema desde ahora, pero no enseña lo que ya falta.",
+    "review": "ok"
+  },
+  "fc-061": {
+    "section": "sales",
+    "explanationEs": "Al convertir un lead, todas sus actividades, abiertas y cerradas, pasan a la cuenta, el contacto y la oportunidad resultantes. Los registros de objetos personalizados relacionados no se mueven solos, y la historia de campañas pasa al contacto.",
+    "review": "ok"
+  },
+  "fc-062": {
+    "section": "data",
+    "explanationEs": "Los filtros de dashboard (hasta tres) permiten a quien lo mira filtrar todos los componentes por un valor: origen, estado o propietario del caso. Un bucket column agrupa dentro de un informe, y un gráfico combinado no filtra.",
+    "review": "ok"
+  },
+  "fc-063": {
+    "section": "productivity",
+    "explanationEs": "En AppExchange se encuentran apps y componentes (por ejemplo, Lightning components para tus páginas) y también un directorio de consultores para ayudarte con la implantación. Clientes o comunidades no son algo que se «encuentre» allí.",
+    "review": "ok"
+  },
+  "fc-064": {
+    "section": "sales",
+    "explanationEs": "Big Deal Alert envía un email automático cuando una oportunidad supera el importe y la probabilidad que definas, aquí 250 000 $ y 75 %. Un informe o dashboard hay que ir a consultarlo, y Guidance for Success o Similar Opportunities no avisan a nadie.",
+    "review": "ok"
+  },
+  "fc-065": {
+    "section": "automation",
+    "explanationEs": "Una validation rule que salte cuando Stage = Closed Won y Lead Source está vacío impide guardar como ganada una oportunidad sin origen. Las dependent picklists filtran valores, pero no obligan a rellenar otro campo.",
+    "review": "ok"
+  },
+  "fc-066": {
+    "section": "sales",
+    "explanationEs": "Einstein Opportunity Scoring puntúa cada oportunidad abierta según su probabilidad de ganarse y muestra los factores que suben o bajan la nota, para que los comerciales prioricen. Lead Scoring trabaja con leads, Activity Capture registra emails y eventos, y Search Personalization afecta a la búsqueda.",
+    "review": "ok"
+  },
+  "fc-067": {
+    "section": "objects",
+    "explanationEs": "El botón Analyze de Lightning App Builder evalúa el rendimiento de la página que estás editando y sugiere mejoras, como mover componentes a pestañas. La Lightning Usage App da métricas de uso de toda la org, no el diagnóstico de una página.",
+    "review": "ok"
+  },
+  "fc-068": {
+    "section": "agentforce",
+    "explanationEs": "Si las acciones del bucle no dan un resultado satisfactorio, el agente pide al usuario más información o una aclaración y vuelve a intentarlo con mejores datos. Pasar la conversación a una persona es la escalada para cuando ni así lo resuelve o el usuario lo pide.",
+    "review": "ok"
+  },
+  "fc-069": {
+    "section": "data",
+    "explanationEs": "Un text widget añade títulos, contexto y mensajes entre los componentes del dashboard, lo que ayuda a contar una historia con los datos. El Highlights Panel es de las páginas de registro, no de los dashboards.",
+    "review": "ok"
+  },
+  "fc-070": {
+    "section": "automation",
+    "explanationEs": "Para comprobar un picklist en una fórmula hay que usar ISPICKVAL (no se puede comparar con =), y para saber si un texto está vacío, ISBLANK. La regla debe dar error cuando se cumplen las dos cosas a la vez: AND(ISPICKVAL(LeadSource, 'Other'), ISBLANK(Source__c)).",
+    "review": "ok"
+  },
+  "fc-071": {
+    "section": "service",
+    "explanationEs": "Los niveles de servicio Gold, Silver y Bronze se modelan con entitlements, y un record-triggered flow puede crear o asociar el entitlement adecuado cuando la cuenta pasa a ser cliente. El routing, Email-to-Case o las assignment rules deciden quién atiende, no qué servicio corresponde.",
+    "review": "ok"
+  },
+  "fc-072": {
+    "section": "automation",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "automate3the",
+        "to": "automate the"
+      }
+    ],
+    "explanationEs": "El approval process es la herramienta para que personas concretas revisen y decidan sobre un registro según criterios: lo bloquea, lo enruta a los aprobadores y ejecuta acciones según se apruebe o se rechace. Las assignment rules solo cambian el propietario.",
+    "review": "ok"
+  },
+  "fc-073": {
+    "section": "agentforce",
+    "explanationEs": "Las buenas prácticas de prompts piden lenguaje natural y claro, con instrucciones concretas y concisas. Las condiciones anidadas confunden al modelo, la jerga y las abreviaturas pueden malinterpretarse y los conceptos abstractos dan respuestas vagas.",
+    "review": "ok"
+  },
+  "fc-074": {
+    "section": "objects",
+    "explanationEs": "En una relación master-detail, el maestro puede ser estándar o personalizado, admite roll-up summary fields sobre sus detalles, y el detalle no tiene propietario propio: hereda el del maestro y su compartición. Un objeto admite como máximo dos relaciones master-detail.",
+    "review": "ok"
+  },
+  "fc-075": {
+    "section": "automation",
+    "explanationEs": "Un record-triggered flow sobre Opportunity que se dispare al pasar a Closed Won puede buscar las demás oportunidades abiertas de la misma cuenta y ponerlas en Closed Lost. Un outbound message es para sistemas externos, una quick action exige un clic y Flow Orchestration es excesivo para esto.",
+    "review": "ok"
+  },
+  "fc-076": {
+    "duplicateOf": "fc-067"
+  },
+  "fc-077": {
+    "section": "config",
+    "explanationEs": "El username debe ser único en todas las orgs de Salesforce, sean producción, sandboxes o Developer Edition de cualquier empresa, aunque tenga formato de email. El email, en cambio, se puede repetir.",
+    "review": "ok"
+  },
+  "fc-078": {
+    "section": "objects",
+    "explanationEs": "Si el campo debe estar relleno en todos los registros, se creen por la interfaz, por API o desde una integración, hay que marcarlo como obligatorio en la definición del campo. Hacerlo obligatorio solo en el layout o en el record type no afecta a las cargas por API.",
+    "review": "ok"
+  },
+  "fc-079": {
+    "section": "agentforce",
+    "review": "disputed",
+    "reviewNote": "El enunciado está mal planteado: pide mejorar unos nombres que ya empiezan todos por «Get», y la respuesta de la fuente es precisamente usar «Get» de forma consistente. Quédate con la idea de fondo: nombres de acción consistentes y descriptivos.",
+    "explanationEs": "Para que el agente elija bien entre acciones parecidas, sus nombres deben ser claros, descriptivos y consistentes, por ejemplo empezando por el mismo verbo todas las que consultan datos. Quitar los verbos o mezclar sinónimos (Find, Retrieve…) confunde al modelo, y añadir «Salesforce» no aporta contexto."
+  },
+  "fc-080": {
+    "section": "data",
+    "explanationEs": "Con un dashboard filter sobre el campo de equipo, un único dashboard sirve para los tres equipos: el manager elige el equipo y todos los componentes se actualizan. Mantener varios dashboards iguales es costoso, y los cross filters son de los informes.",
+    "review": "ok"
+  },
+  "fc-081": {
+    "section": "service",
+    "explanationEs": "Una escalation rule con una entrada de 7 días (168 horas) reasigna automáticamente los casos que lleven abiertos más tiempo. Las assignment rules no tienen temporizador, las auto-response rules envían emails al cliente y las validation rules no cambian el propietario.",
+    "review": "ok"
+  },
+  "fc-082": {
+    "section": "objects",
+    "review": "disputed",
+    "reviewNote": "Hasta donde sé, en Lightning las tarjetas del Kanban muestran los primeros campos de la list view, no los del compact layout. La fuente da Compact Layout: compruébalo antes de fiarte de esta respuesta.",
+    "explanationEs": "El compact layout define los campos clave de un objeto que se muestran en la cabecera del registro y en otras vistas resumidas. Hasta donde sé, las tarjetas del Kanban muestran los primeros campos de la list view: lee la nota antes de quedarte con esta respuesta."
+  },
+  "fc-083": {
+    "section": "automation",
+    "explanationEs": "Las acciones automáticas de un approval process, al enviar, aprobar, rechazar o retirar, pueden ser field updates, email alerts, tasks y outbound messages. Un Chatter post o un flow no están entre ellas.",
+    "review": "ok"
+  },
+  "fc-084": {
+    "section": "automation",
+    "explanationEs": "Para que el screen flow esté en el caso, se añade el componente Flow a la Lightning record page de Case con Lightning App Builder. En la Home no tendría el contexto del caso, y los filtros de componente solo deciden cuándo se ve.",
+    "review": "ok"
+  },
+  "fc-085": {
+    "section": "automation",
+    "review": "outdated",
+    "reviewNote": "El enunciado habla de un flow lanzado por un proceso de Process Builder, que ya no tiene soporte (desde el 31/12/2025). La idea de fondo sigue valiendo: para depurar un flow, usa el Debug de Flow Builder.",
+    "explanationEs": "Para depurar un flow lo más directo es el botón Debug de Flow Builder: simula la ejecución con un registro y muestra paso a paso qué valores toman las variables, qué camino se sigue y dónde falla. Los debug logs también sirven, pero son mucho más difíciles de leer."
+  },
+  "fc-086": {
+    "section": "automation",
+    "explanationEs": "Las recall actions se ejecutan cuando el remitente o un administrador retira una solicitud de aprobación: lo habitual es devolver el estado a borrador y desbloquear el registro para poder editarlo. Las initial submission actions son las que lo bloquean.",
+    "review": "ok"
+  },
+  "fc-087": {
+    "section": "sales",
+    "explanationEs": "Deal Change Highlights resalta en las list views y en el Kanban los cambios recientes de importe y fecha de cierre, en verde o rojo según suban o bajen, para priorizar las oportunidades que se han movido. Big Deal Alert avisa por email de las oportunidades grandes.",
+    "review": "ok"
+  },
+  "fc-088": {
+    "section": "service",
+    "explanationEs": "En Email-to-Case, cada routing address puede tener su propietario de caso por defecto, un usuario o una queue, así que los emails a cada dirección crean casos en la cola correcta. Las escalation rules actúan con el paso del tiempo, no al crear el caso.",
+    "review": "ok"
+  },
+  "fc-089": {
+    "section": "objects",
+    "explanationEs": "Para relacionar tareas y eventos con un objeto personalizado hay que activar Allow Activities en sus propiedades. Añadir la related list sin eso no sirve, y ni la compartición ni los permisos sobre Task habilitan la relación.",
+    "review": "ok"
+  },
+  "fc-090": {
+    "section": "config",
+    "explanationEs": "Login Hours y Login IP Ranges se configuran en el profile: fuera de ese horario, o desde otra IP, el usuario no puede entrar. Los trusted IP ranges de la org solo evitan la verificación de identidad, y el rol controla la visibilidad de registros.",
+    "review": "ok"
+  },
+  "fc-091": {
+    "section": "data",
+    "explanationEs": "Un bucket column sobre un campo numérico o de divisa crea rangos con nombre (Small, Medium, Large) directamente en el informe, sin campos nuevos. Agrupar filas agruparía por cada importe exacto.",
+    "review": "ok"
+  },
+  "fc-092": {
+    "section": "config",
+    "explanationEs": "En Company Information, la related list User Licenses muestra cada tipo de licencia comprada, cuántas hay, cuántas se usan y cuántas quedan. Usage-based entitlements recoge recursos de consumo, no licencias de usuario.",
+    "review": "ok"
+  },
+  "fc-093": {
+    "section": "config",
+    "review": "disputed",
+    "reviewNote": "Hasta donde sé, ser running user de un dashboard no impide desactivar al usuario: el dashboard pasa a dar un error de running user inactivo hasta que lo cambies. Sí bloquean la desactivación otros casos, como estar en un campo de jerarquía personalizado. Trátala con cautela.",
+    "explanationEs": "Según la fuente, ser running user de un dashboard impide desactivar al usuario, y antes hay que cambiar el running user. Lee la nota: hasta donde sé, la desactivación sí se permite y es el dashboard el que da error después."
+  },
+  "fc-094": {
+    "section": "data",
+    "explanationEs": "Un dashboard con un running user fijo enseña a todos los datos que ve ese usuario: si es un manager que ve todos los casos, los agentes verán más de lo que les permite el OWD Private. Para que cada uno vea solo lo suyo, el dashboard debe ser dinámico, ejecutado como el usuario que lo mira.",
+    "review": "ok"
+  },
+  "fc-095": {
+    "section": "sales",
+    "explanationEs": "Los campos personalizados de lead solo pasan al convertir si existe un campo equivalente del mismo tipo en el contacto y se mapean en Map Lead Fields. Ni una validation rule ni hacer el campo obligatorio trasladan el dato.",
+    "review": "ok"
+  },
+  "fc-096": {
+    "section": "config",
+    "correct": [
+      "B"
+    ],
+    "review": "corrected",
+    "reviewNote": "La fuente da como correcta editar los permisos de objeto del perfil Marketing User, pero los permisos de un perfil estándar no se pueden editar (la propia fuente lo reconoce en otra pregunta). Lo coherente es darlos con un permission set.",
+    "explanationEs": "Los perfiles estándar como Marketing User no permiten editar sus permisos de objeto. Para que los marketers trabajen con oportunidades, lo correcto es mantener su perfil y añadir un permission set con el acceso a Opportunity. El rol no da permisos, y añadir la pestaña a una app no concede acceso al objeto."
+  },
+  "fc-097": {
+    "section": "sales",
+    "explanationEs": "Opportunity Update Reminders envía a los comerciales emails periódicos con sus oportunidades abiertas para que las mantengan al día; los managers lo configuran para su equipo. Un informe programado no está pensado para eso, y Big Deal Alert avisa de las oportunidades grandes.",
+    "review": "ok"
+  },
+  "fc-098": {
+    "section": "automation",
+    "explanationEs": "Un approval process con pasos en orden cumple el requisito: el primero va al manager del comercial y, solo si aprueba, el segundo va al miembro de finanzas, con el historial de aprobación como registro. Un screen flow, una quick action con emails o un componente personalizado ni bloquean el registro ni garantizan el orden.",
+    "review": "ok"
+  },
+  "fc-099": {
+    "section": "config",
+    "explanationEs": "Con OWD Private en cuentas y oportunidades, una sharing rule de propietario que comparta las cuentas de un public group de comerciales con ese mismo grupo, incluyendo lectura sobre sus oportunidades, les permite verse e informar entre ellos. Guardar un informe en una carpeta compartida no da acceso a los registros.",
+    "review": "ok"
+  },
+  "fc-100": {
+    "section": "objects",
+    "explanationEs": "Para mostrar valores de picklist distintos a ventas y a marketing, o se usa un único picklist con dos record types (cada uno con sus valores), o se crean dos picklists y cada uno va en el page layout de su equipo. Ni los perfiles ni los permission sets filtran valores de picklist.",
+    "review": "ok"
+  },
+  "fc-101": {
+    "section": "data",
+    "explanationEs": "Un dynamic dashboard se ejecuta como el usuario que lo mira, así que cada persona ve sus propios datos según su compartición, sin crear un dashboard por usuario. Fijar el running user en ti o en otra persona hace que todos vean lo mismo.",
+    "review": "ok"
+  },
+  "fc-102": {
+    "section": "data",
+    "explanationEs": "Salesforce Labs publica en AppExchange paquetes gratuitos de dashboards, como CRM Dashboards, con componentes de pipeline y de casos listos para usar y adaptar: es la forma más rápida de empezar. Hacerlos a mano lleva más tiempo, y CRM Analytics es otro producto con su propia licencia.",
+    "review": "ok"
+  },
+  "fc-103": {
+    "section": "objects",
+    "explanationEs": "Con Lightning App Builder puedes crear app pages, que se pueden añadir a la navegación móvil, y personalizar record pages, incluso con componentes que solo se vean en el móvil. Los dashboards se crean en su propio editor.",
+    "review": "ok"
+  },
+  "fc-104": {
+    "section": "automation",
+    "review": "disputed",
+    "reviewNote": "Success4Exam da otra clave para esta misma pregunta: un record-triggered flow orchestration. La de FreeCram es viable porque un approval process admite hasta 30 pasos, cada uno con sus criterios y su aprobador, pero con tantos conjuntos de criterios Flow Orchestration también encaja. Ninguna fuente oficial lo aclara.",
+    "explanationEs": "Un approval process admite hasta 30 pasos, cada uno con sus propios criterios de entrada y su aprobador, así que puede cubrir los 30 conjuntos de criterios y enrutar cada solicitud al líder correcto sin intervención del comercial. Un botón con plantilla de email o un formulario dependen de que el comercial acierte."
+  },
+  "fc-105": {
+    "section": "automation",
+    "explanationEs": "En un screen flow, la conditional visibility de un componente hace que solo se muestre cuando se cumple una condición, aquí que Lead Source sea Search Engine, y además se puede marcar como obligatorio. Una validation rule avisaría tarde, al guardar, y los elementos Assignment no muestran ni ocultan campos.",
+    "review": "ok"
+  },
+  "fc-106": {
+    "section": "data",
+    "explanationEs": "El acceso a los dashboards se controla por carpeta: aunque tengas la URL, si no te han dado acceso de lectura a la carpeta verás «We couldn't find the record». La solución es compartir la carpeta con el usuario, su rol o un grupo.",
+    "review": "ok"
+  },
+  "fc-107": {
+    "section": "objects",
+    "explanationEs": "Con un lookup desde Shipment hacia Account, los envíos aparecen en una related list de la cuenta y no se borran al borrar la cuenta. Con master-detail se borrarían en cascada, y la relación se crea siempre en el objeto hijo.",
+    "review": "ok"
+  },
+  "fc-108": {
+    "section": "data",
+    "explanationEs": "Mover el dashboard a una carpeta privada, como My Private Dashboards, lo saca de la carpeta compartida mientras lo modificas, sin afectar a los demás dashboards. Quitar el acceso a la carpeta los ocultaría todos.",
+    "review": "ok"
+  },
+  "fc-109": {
+    "section": "agentforce",
+    "explanationEs": "Las acciones son lo que permite a Agentforce actuar en tiempo real según lo que dice el cliente: el agente interpreta la intención y elige la acción adecuada (un flow, Apex o una prompt template) con los datos de la conversación. Data Cloud aporta datos para el grounding, pero no define el comportamiento.",
+    "review": "ok"
+  },
+  "fc-110": {
+    "section": "agentforce",
+    "explanationEs": "En Prompt Builder, los merge fields insertan en la plantilla datos reales del registro, como el asunto o la descripción del caso, al ejecutarla. Un flow sirve para recuperar datos más complejos, pero para campos del propio registro lo directo son los merge fields.",
+    "review": "ok"
+  },
+  "fc-111": {
+    "section": "automation",
+    "explanationEs": "Los approval steps definen la cadena de aprobación: cada paso decide qué registros entran en él, a quién se asigna la solicitud y si el delegado del aprobador puede responder. Los entry criteria solo filtran la entrada al proceso, y las approval actions son lo que ocurre al aprobar o rechazar.",
+    "review": "ok"
+  },
+  "fc-112": {
+    "section": "agentforce",
+    "explanationEs": "Las instrucciones de una acción deben explicar qué hace, para qué sirve y en qué situación usarla. La mejor dice que crea un caso para documentar el problema del cliente y que se usa cuando su intención es dejar constancia formal de él. Las vagas («cualquier consulta») hacen que el agente la use cuando no toca, y hablar de fragmentos de código no ayuda al modelo.",
+    "review": "ok"
+  },
+  "fc-113": {
+    "section": "automation",
+    "explanationEs": "Una validation rule puede combinar datos del registro y del usuario: salta si Stage es Negotiation, Amount está vacío y el perfil del usuario no es el de manager. Hacer el campo obligatorio para todos no deja la excepción para los managers, y darles el perfil de administrador es un riesgo de seguridad.",
+    "review": "ok"
+  },
+  "fc-114": {
+    "section": "objects",
+    "explanationEs": "Los campos del Highlights Panel, la cabecera del registro, vienen del compact layout del objeto: se crea o edita uno en Object Manager y se asigna como principal. El Page Layout Editor no controla esa cabecera.",
+    "review": "ok"
+  },
+  "fc-115": {
+    "section": "productivity",
+    "explanationEs": "Si no hay apps de Lightning para móvil, la navegación de la app móvil se configura en Salesforce Navigation y es la misma para toda la org; los cuatro primeros elementos aparecen también en la barra inferior. Una página necesita su pestaña para poder añadirse, y para menús distintos por perfil hacen falta apps de Lightning.",
+    "review": "ok"
+  },
+  "fc-116": {
+    "section": "sales",
+    "explanationEs": "Las opportunity contact roles relacionan varios contactos con una oportunidad e indican el papel de cada uno (decision maker, influencer…) y cuál es el principal. Los opportunity teams son para personas internas, y los account teams no son específicos de cada oportunidad.",
+    "review": "ok"
+  },
+  "fc-117": {
+    "section": "agentforce",
+    "explanationEs": "Los agentes respetan el modelo de seguridad de Salesforce y solo usan datos que el usuario del agente puede ver. Restringir el acceso al plan de salud del CEO con permisos, compartición y field-level security es la protección real; las instrucciones y los guardrails ayudan, pero no son una barrera de seguridad.",
+    "review": "ok"
+  },
+  "fc-118": {
+    "section": "objects",
+    "explanationEs": "Los botones y acciones del Highlights Panel en Lightning salen de la sección Salesforce Mobile and Lightning Experience Actions del page layout: si Log a Call no aparece, hay que añadirla ahí. No existe un permiso específico de Log a Call.",
+    "review": "ok"
+  },
+  "fc-119": {
+    "section": "config",
+    "explanationEs": "Freeze impide al usuario iniciar sesión al momento sin desactivarlo, y se deshace cuando vuelve. Cambiar las Login Hours o las IP del perfil afectaría a todos los usuarios con ese perfil, y liberar su licencia exige desactivarlo.",
+    "review": "ok"
+  },
+  "fc-120": {
+    "section": "automation",
+    "explanationEs": "Un proceso que debe ejecutarse una vez por semana es un schedule-triggered flow: se programan la frecuencia y la hora, y puede recorrer las cuentas para contar sus casos abiertos. Un record-triggered flow necesita que cambie un registro, y un autolaunched flow necesita que algo lo invoque.",
+    "review": "ok"
+  },
+  "fc-121": {
+    "section": "productivity",
+    "explanationEs": "En AppExchange, las Flow Solutions son flows preconstruidos, muchos gratuitos y de Salesforce Labs, que puedes instalar y adaptar: encajan con un calculador que genere leads, poco plazo y nada de presupuesto. Las Bolt Solutions son plantillas de sitio más completas.",
+    "review": "ok"
+  },
+  "fc-122": {
+    "section": "data",
+    "explanationEs": "Data Loader permite exportar con una consulta SOQL solo los registros y campos que quieres: Closed Won de los últimos 90 días con nombre, Id, fecha de cierre e importe. La Data Export Service exporta toda la org como copia de seguridad, y el Data Import Wizard es para importar.",
+    "review": "ok"
+  },
+  "fc-123": {
+    "section": "agentforce",
+    "review": "disputed",
+    "reviewNote": "Success4Exam da otra clave para esta misma pregunta: que el traspaso cree un caso nuevo en vez de transferir la sesión, con lo que el agente humano no recibe la conversación. Es tan plausible como la de FreeCram, y ninguna fuente oficial lo aclara.",
+    "explanationEs": "Si el equipo de soporte recibe el caso sin contexto, lo más probable es que su página de caso no incluya el componente con el historial de la conversación con el agente. Hay que añadirlo a la Lightning record page de Case con Lightning App Builder."
+  },
+  "fc-124": {
+    "section": "sales",
+    "explanationEs": "La vista Kanban muestra las oportunidades como tarjetas en columnas por etapa, y se arrastran para cambiar de etapa: se ve todo el pipeline y se avanza rápido. Informes y dashboards resumen, pero no permiten mover registros.",
+    "review": "ok"
+  },
+  "fc-125": {
+    "section": "agentforce",
+    "explanationEs": "Al comprobar su respuesta, además de la información de origen, las instrucciones del topic y su alcance, el agente vigila riesgos de prompt injection: intentos de que ignore sus instrucciones o revele datos. Agentforce no verifica en la web, y los tipos de datos o los campos cifrados se tratan en la capa de acceso a datos.",
+    "review": "ok"
+  },
+  "fc-126": {
+    "duplicateOf": "fc-074"
+  },
+  "fc-127": {
+    "section": "service",
+    "explanationEs": "Las escalation rules pueden reasignar el caso a otro usuario o cola y enviar notificaciones por email. Cambiar la prioridad o reabrir el caso no son acciones de una escalation rule; para eso usarías un flow.",
+    "review": "ok"
+  },
+  "fc-128": {
+    "section": "data",
+    "explanationEs": "Mass Transfer Records traspasa desde Setup las cuentas y oportunidades de un usuario a otro, con la opción de mantener los account teams y opportunity teams. Data Loader podría cambiar el OwnerId, pero exige exportar, editar y volver a cargar.",
+    "review": "ok"
+  },
+  "fc-129": {
+    "section": "objects",
+    "explanationEs": "Account admite de forma nativa roll-up summary fields sobre Opportunity, como la suma de importes o el número de oportunidades. Contact y Case se relacionan con Account mediante lookup, así que no admiten roll-ups nativos.",
+    "review": "ok"
+  },
+  "fc-130": {
+    "section": "automation",
+    "explanationEs": "Para limpiar valores ya guardados en muchos leads, un schedule-triggered flow puede recorrer los que tengan Website u Online y cambiarlos a Web. Un record-triggered flow solo actúa cuando alguien edita el registro, y un screen flow obligaría a hacerlo uno a uno.",
+    "review": "ok"
+  },
+  "fc-131": {
+    "section": "service",
+    "explanationEs": "Omni-Channel enruta el trabajo a los agentes disponibles según su capacidad y su estado de presencia, y los supervisores pueden ver la carga de cada uno y reajustar el reparto sin depender del administrador. Las case assignment rules son reglas fijas que mantiene el administrador.",
+    "review": "ok"
+  },
+  "fc-132": {
+    "section": "sales",
+    "explanationEs": "Path muestra la etapa en la que está la oportunidad y, para cada etapa, los key fields y la Guidance for Success con lo que se espera del comercial. Los informes, las list views o Big Deal Alert no guían el proceso.",
+    "review": "ok"
+  },
+  "fc-133": {
+    "section": "service",
+    "explanationEs": "Las escalation rules reasignan automáticamente los casos que superan un tiempo sin resolver, por ejemplo a una cola de Tier 2, y notifican a quien corresponda. Milestones y entitlements miden y muestran el cumplimiento del SLA, y Omni-Channel enruta por disponibilidad, no por tiempo transcurrido.",
+    "review": "ok"
+  },
+  "fc-134": {
+    "section": "objects",
+    "explanationEs": "Los valores de un picklist que ve cada tipo de oportunidad se configuran en su record type, eligiendo qué valores de la lista maestra están disponibles. Fields and Relationships o el global value set definen la lista completa.",
+    "review": "ok"
+  },
+  "fc-135": {
+    "section": "sales",
+    "explanationEs": "Una list view de oportunidades con cierre en los próximos 90 días, vista en Kanban, enseña el pipeline por etapas y permite actualizarlo arrastrando tarjetas o editando en línea. Un informe programado o un dashboard no permiten actualizar rápido.",
+    "review": "ok"
+  },
+  "fc-136": {
+    "section": "sales",
+    "correct": [
+      "A",
+      "B"
+    ],
+    "review": "corrected",
+    "reviewNote": "FreeCram da Forecasting y Opportunity Stages. Success4Exam y el Debrief dan Forecasting y Sales Quotas, que es lo que pide el enunciado: prever ingresos y fijar objetivos con los que medir a los comerciales. La opción decía «Sales Quotes», una errata.",
+    "textFixes": [
+      {
+        "field": "option:A",
+        "from": "Sales Quotes",
+        "to": "Sales Quotas"
+      }
+    ],
+    "explanationEs": "Collaborative Forecasting prevé los ingresos de los próximos trimestres a partir del pipeline, y las cuotas (Sales Quotas) fijan el objetivo de cada comercial, con lo que se puede comparar su rendimiento. Las etapas de oportunidad ya existen y no sirven para fijar objetivos, y una list view solo filtra registros."
+  },
+  "fc-137": {
+    "section": "productivity",
+    "explanationEs": "Salesforce no trae un motor potente de combinación de documentos, así que lo habitual es instalar una app de generación de documentos de AppExchange, probándola antes en un sandbox. No hace falta crear un paquete propio.",
+    "review": "ok"
+  },
+  "fc-138": {
+    "section": "service",
+    "explanationEs": "Una case assignment rule con dos entradas, Platinum a la Priority Support Queue y Silver o Gold a la Regular Support Queue, reparte los casos nuevos según el nivel de la cuenta. Las escalation rules actúan pasado un tiempo, y «Case Rules» no es una función de Salesforce.",
+    "review": "ok"
+  },
+  "fc-139": {
+    "section": "agentforce",
+    "review": "disputed",
+    "reviewNote": "No está claro que sea la buena práctica: la guía de Agentforce insiste en instrucciones claras y específicas más que en listas largas de preguntas de ejemplo. Además, la explicación original venía contaminada con un mensaje de chatbot. Trátala con cautela.",
+    "explanationEs": "Según la fuente, la buena práctica es incluir muchas preguntas de ejemplo en las instrucciones del topic para que el agente aprenda los patrones. Lee la nota: la guía de Agentforce insiste sobre todo en instrucciones claras y específicas que no se solapen entre topics."
+  },
+  "fc-140": {
+    "section": "config",
+    "explanationEs": "Con OWD Private, el acceso a las oportunidades se amplía con la role hierarchy (hacia arriba, a los managers) y con sharing rules (lateral, por propietario o por criterios). Los perfiles dan permisos sobre el objeto, no acceso a registros ajenos, y los sharing sets son para usuarios de Experience Cloud.",
+    "review": "ok"
+  },
+  "fc-141": {
+    "section": "config",
+    "explanationEs": "Las apps de consola se crean en App Manager eligiendo la navegación de tipo Console, o cambiando la de una app que ya existe. Lightning App Builder diseña páginas, no la navegación de la app.",
+    "review": "ok"
+  },
+  "fc-142": {
+    "section": "agentforce",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "two inputs: * productId",
+        "to": "two inputs:\n• productId"
+      },
+      {
+        "field": "stem",
+        "from": " * reasonCode",
+        "to": "\n• reasonCode"
+      },
+      {
+        "field": "stem",
+        "from": "replacement Which set",
+        "to": "replacement.\nWhich set"
+      }
+    ],
+    "explanationEs": "Las instrucciones de las entradas de una acción deben indicar el formato (18 caracteres, tres dígitos), de dónde sacar el dato (el historial de la conversación o lo que diga el usuario) y cuándo es obligatorio. La más completa cubre todo eso; con las vagas, el agente adivina o pasa datos incompletos.",
+    "review": "ok"
+  },
+  "fc-143": {
+    "section": "sales",
+    "explanationEs": "Con una campaign hierarchy, cada evento mensual es una campaña hija de una campaña padre que representa la serie: ves el ROI de cada mes y, con los totales de la jerarquía, el de toda la serie. Repetir el nombre o usar record types distintos no resuelve el informe por serie.",
+    "review": "ok"
+  },
+  "fc-144": {
+    "section": "productivity",
+    "explanationEs": "Con las tareas recurrentes activadas, cada comercial puede crear una tarea semanal, cada lunes, para contactar con su cuenta principal; como son tareas normales, se pueden medir en un informe y en un dashboard. Un email o una alerta avisan, pero no dejan un registro que medir.",
+    "review": "ok"
+  },
+  "fc-145": {
+    "section": "automation",
+    "explanationEs": "Un schedule-triggered flow puede buscar periódicamente los registros con ciertos valores y borrarlos con un elemento Delete Records. Mass Delete Records es manual, Automation Studio es de Marketing Cloud y Flow Orchestration es para procesos de varios pasos y personas.",
+    "review": "ok"
+  },
+  "fc-146": {
+    "section": "config",
+    "explanationEs": "Con OWD Private, la jerarquía de roles da acceso hacia arriba, pero no a ramas que no cuelgan del VP. Las sharing rules permiten compartir con él (o con su rol o un grupo) los registros de esas otras partes de la jerarquía. La FLS y los permission sets no dan acceso a registros, y las restriction rules lo reducen.",
+    "review": "ok"
+  },
+  "fc-147": {
+    "section": "config",
+    "explanationEs": "Los trusted IP ranges de Network Access evitan que se pida un código de verificación a quien entra desde esa red, así que en el call center no habrá que verificar la identidad en cada equipo. Los Login IP Ranges del perfil restringen el acceso, no lo agilizan.",
+    "review": "ok"
+  },
+  "fc-148": {
+    "duplicateOf": "fc-100"
+  },
+  "fc-149": {
+    "section": "config",
+    "explanationEs": "Con «Login as», el administrador ve exactamente lo que ve el usuario, con su perfil, sus permisos y su compartición, que es lo que suele explicar un error que el admin no reproduce, como una validation rule o la FLS. Pedirle la contraseña nunca es aceptable.",
+    "review": "ok"
+  },
+  "fc-150": {
+    "section": "automation",
+    "explanationEs": "Si el aprobador es una queue, se avisa a sus miembros y cualquiera de ellos puede aprobar o rechazar: la primera respuesta cuenta como la de la queue. La aprobación unánime es una opción para varios aprobadores individuales.",
+    "review": "ok"
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "adx-01-1": {
+    "section": "objects",
+    "explanationEs": "Account es el objeto central: se relaciona directamente con Contact (las personas de la empresa) y con Opportunity (sus posibles ventas). Campaign se relaciona con leads y contactos a través de Campaign Member, y «Positions» no es un objeto estándar.",
+    "review": "ok"
+  },
+  "adx-01-2": {
+    "section": "service",
+    "explanationEs": "Service Cloud es la solución de atención al cliente: casos, knowledge y canales de soporte. Sales Cloud cubre las ventas, Marketing Cloud las campañas y Commerce Cloud el comercio electrónico.",
+    "review": "ok"
+  },
+  "adx-01-3": {
+    "section": "objects",
+    "textFixes": [
+      {
+        "field": "option:C",
+        "from": "Scheme Builder",
+        "to": "Schema Builder"
+      }
+    ],
+    "explanationEs": "Schema Builder dibuja los objetos de la org, sus campos y cómo se relacionan entre sí. Object Manager sirve para configurar cada objeto, pero no muestra el modelo de datos de forma gráfica.",
+    "review": "ok"
+  },
+  "adx-01-4": {
+    "section": "objects",
+    "explanationEs": "Object Manager, en Setup, reúne la configuración de todos los objetos estándar y personalizados: campos, page layouts, record types, validation rules… Schema Builder es una vista gráfica y App Launcher sirve para cambiar de app.",
+    "review": "ok"
+  },
+  "adx-02-1": {
+    "section": "config",
+    "explanationEs": "Con identity verification, si el usuario entra desde fuera de los trusted IP ranges (y desde un navegador que no está verificado), Salesforce le pide un código de verificación para continuar. Denegarle el acceso es lo que harían los Login IP Ranges del perfil.",
+    "review": "ok"
+  },
+  "adx-02-2": {
+    "section": "config",
+    "explanationEs": "Un año fiscal estándar siempre empieza el día 1 de un mes y dura doce meses; solo eliges el mes de inicio. Del 15 de agosto al 14 de agosto no cumple eso y necesitaría un año fiscal personalizado.",
+    "review": "ok"
+  },
+  "adx-02-3": {
+    "section": "config",
+    "explanationEs": "Al crear un usuario, su locale, idioma y zona horaria se toman de la configuración de la empresa (Company Information); después cada usuario puede cambiarlos en su configuración personal.",
+    "review": "ok"
+  },
+  "adx-02-4": {
+    "section": "config",
+    "explanationEs": "Las tres afirmaciones son ciertas: los usuarios nuevos heredan la divisa corporativa como divisa personal, los tipos de cambio se pueden actualizar a mano o de forma automática (por ejemplo, vía API) y cada usuario puede cambiar su divisa personal.",
+    "review": "ok"
+  },
+  "adx-03-1": {
+    "section": "config",
+    "explanationEs": "El profile define qué puede hacer un usuario: a qué objetos y campos accede, qué permisos de sistema tiene y qué apps y pestañas ve. El email, el username o el puesto no controlan el acceso.",
+    "review": "ok"
+  },
+  "adx-03-2": {
+    "section": "config",
+    "explanationEs": "El perfil Minimum Access – Salesforce da los mínimos permisos posibles; la buena práctica es asignarlo y añadir lo necesario con permission sets (mínimo privilegio). Standard User, Read Only o un perfil de dirección dan bastante más.",
+    "review": "ok"
+  },
+  "adx-03-3": {
+    "section": "config",
+    "explanationEs": "Los permission sets suman permisos: sirven para dar a un usuario concreto más acceso del que le da su perfil, sin crear un perfil nuevo. No quitan permisos (eso lo hacen los muting permission sets dentro de un grupo), no dan acceso a registros de subordinados y sí se asignan a usuarios individuales.",
+    "review": "ok"
+  },
+  "adx-03-4": {
+    "section": "config",
+    "explanationEs": "Los permission set groups agrupan varios permission sets para asignarlos de una vez según la función del puesto, lo que hace la gestión de permisos más escalable y segura. No dependen del rol de Salesforce, que controla la visibilidad de registros.",
+    "review": "ok"
+  },
+  "adx-04-1": {
+    "section": "config",
+    "explanationEs": "Los Organization-Wide Defaults fijan, para cada objeto, el acceso por defecto a los registros que no son tuyos (Private, Public Read Only o Public Read/Write). La jerarquía de roles y las sharing rules solo amplían ese acceso.",
+    "review": "ok"
+  },
+  "adx-04-2": {
+    "section": "config",
+    "explanationEs": "Es falso: la role hierarchy no tiene que copiar el organigrama, sino reflejar quién necesita ver los datos de quién. Suele parecerse, pero puedes simplificarla o agrupar puestos según las necesidades de acceso.",
+    "review": "ok"
+  },
+  "adx-04-3": {
+    "section": "config",
+    "explanationEs": "Para dar acceso solo a las oportunidades en las que alguien colabora, se le añade al opportunity team de esas oportunidades con el nivel de acceso necesario. Hacer público el OWD o crear sharing rules abriría muchas más oportunidades de las necesarias.",
+    "review": "ok"
+  },
+  "adx-04-4": {
+    "section": "config",
+    "explanationEs": "Las sharing rules se basan en el propietario del registro o en criterios de sus campos. Comparten con roles, roles y subordinados o grupos, pero no con perfiles; se definen objeto por objeto, y no hacen falta si el OWD ya es público.",
+    "review": "ok"
+  },
+  "adx-05-1": {
+    "section": "objects",
+    "explanationEs": "La diferencia clave es que los campos estándar no se pueden borrar, y los personalizados sí. Ambos se pueden ocultar con field-level security, y de los estándar puedes cambiar algunas cosas, como la etiqueta o los valores de picklist, pero no su nombre de API.",
+    "review": "ok"
+  },
+  "adx-05-2": {
+    "section": "objects",
+    "explanationEs": "En las dependent picklists, el campo que manda es el controlling y el que se filtra es el dependiente: Product Type debe ser el controlling y Series el dependent. Una multi-select picklist o un lookup no filtran unos valores según otros.",
+    "review": "ok"
+  },
+  "adx-05-3": {
+    "section": "objects",
+    "explanationEs": "Un cross-object formula field en Opportunity puede mostrar Account.Industry y se actualiza solo, porque se calcula al leerse. La fórmula va en el objeto donde quieres ver el dato, la oportunidad; un roll-up summary agrega datos de los hijos en el padre, no al revés.",
+    "review": "ok"
+  },
+  "adx-05-4": {
+    "section": "objects",
+    "explanationEs": "Es falso: un campo personalizado borrado se puede restaurar durante 15 días, no 30, desde Deleted Fields en Object Manager. Pasado ese plazo desaparece definitivamente.",
+    "review": "ok"
+  },
+  "adx-06-1": {
+    "section": "objects",
+    "explanationEs": "Es falso: puedes tener varios page layouts asignados por perfil sin crear ningún record type. Los record types hacen falta cuando quieres procesos o valores de picklist distintos, o asignar layouts por perfil y tipo de registro.",
+    "review": "ok"
+  },
+  "adx-06-2": {
+    "section": "objects",
+    "explanationEs": "Solo tienen business process Opportunity (sales process), Case (support process), Lead (lead process) y Solution. Account no tiene, así que un record type de cuenta no lo necesita.",
+    "review": "ok"
+  },
+  "adx-06-3": {
+    "section": "objects",
+    "explanationEs": "Las tres son ciertas: los record types permiten usar distintos page layouts en un mismo objeto, recoger datos distintos para cada escenario de negocio (con sus propios valores de picklist) y se asignan mediante perfiles o permission sets.",
+    "review": "ok"
+  },
+  "adx-06-4": {
+    "section": "objects",
+    "explanationEs": "Con el Page Layout Editor puedes marcar campos como obligatorios en ese layout, agruparlos en secciones y reordenar las related lists: todas las afirmaciones son ciertas.",
+    "review": "ok"
+  },
+  "adx-07-1": {
+    "section": "data",
+    "explanationEs": "El Data Import Wizard tiene dos ventajas sobre Data Loader: te deja elegir si se disparan las workflow rules y los procesos al importar, y comprueba duplicados al importar cuentas, contactos y leads. Más de 50 000 registros o cualquier objeto es terreno de Data Loader.",
+    "review": "ok"
+  },
+  "adx-07-2": {
+    "section": "data",
+    "explanationEs": "Data Loader también exporta y borra registros, cosa que el Data Import Wizard no hace. Las validation rules se aplican con las dos herramientas, ambas trabajan con CSV y la prevención de duplicados es una ventaja del wizard.",
+    "review": "ok"
+  },
+  "adx-07-3": {
+    "section": "data",
+    "explanationEs": "Con cualquier herramienta, la carga respeta las reglas de la org: si un registro incumple una validation rule, falla. Un valor nuevo en una picklist no restringida se acepta, y el límite de 50 000 filas es solo del Data Import Wizard.",
+    "review": "ok"
+  },
+  "adx-07-4": {
+    "section": "data",
+    "explanationEs": "La Data Export Service solo se programa semanal o mensualmente, así que para copias diarias de mucho volumen lo adecuado es una solución de backup de AppExchange (o el producto de backup de Salesforce). Informes y exportaciones manuales no son una estrategia de copias de seguridad.",
+    "review": "ok"
+  },
+  "adx-08-1": {
+    "section": "sales",
+    "explanationEs": "Al convertir un lead se crean siempre una cuenta y un contacto (o se asocian a unos que ya existen) y, si quieres, una oportunidad. No se crean campañas ni casos.",
+    "review": "ok"
+  },
+  "adx-08-2": {
+    "section": "sales",
+    "explanationEs": "Una queue por grupo regional y una lead assignment rule que reparta según la región automatizan la distribución. Los public groups no pueden ser propietarios de leads, y una validation rule no asigna nada.",
+    "review": "ok"
+  },
+  "adx-08-3": {
+    "section": "service",
+    "explanationEs": "Una escalation rule puede reasignar el caso a otro agente o cola y enviar notificaciones, por ejemplo al manager. No cambia el estado, no mete el caso en informes y no avisa al cliente.",
+    "review": "ok"
+  },
+  "adx-08-4": {
+    "section": "data",
+    "explanationEs": "Los campos de tipo Email validan su formato automáticamente: es una validación de datos del sistema, no una regla que alguien haya creado. Los OWD, las assignment rules o las queues no intervienen al guardar.",
+    "review": "ok"
+  },
+  "adx-09-1": {
+    "section": "automation",
+    "explanationEs": "Para que el agente rellene lo mínimo mientras habla con el cliente hace falta una interfaz guiada, es decir, un screen flow. Los record-triggered, autolaunched y platform event-triggered flows se ejecutan en segundo plano, sin pantallas.",
+    "review": "ok"
+  },
+  "adx-09-2": {
+    "section": "automation",
+    "explanationEs": "Un record-triggered flow puede actualizar campos, enviar emails y crear tareas (u otros registros) cuando se crea, actualiza o borra un registro: todas son ciertas.",
+    "review": "ok"
+  },
+  "adx-09-3": {
+    "section": "automation",
+    "explanationEs": "En Flow Builder los elementos se agrupan en Interaction (pantallas y acciones), Logic (decisiones, asignaciones, bucles) y Data (crear, obtener, actualizar y borrar registros). «Creation» no es una categoría.",
+    "review": "ok"
+  },
+  "adx-09-4": {
+    "section": "automation",
+    "explanationEs": "El order of execution es el orden en que Salesforce aplica validaciones, flows, triggers y demás automatizaciones al guardar un registro. Conocerlo ayuda a entender por qué una automatización ve o no un valor.",
+    "review": "ok"
+  },
+  "adx-10-1": {
+    "section": "objects",
+    "explanationEs": "Un objeto personalizado sirve para guardar datos de negocio que no encajan en ningún objeto estándar. Para renombrar Opportunity basta con Rename Tabs and Labels, y los informes y gráficos no requieren objetos nuevos.",
+    "review": "ok"
+  },
+  "adx-10-2": {
+    "section": "config",
+    "explanationEs": "Es cierto: el outbound change set se crea y se sube desde la org de origen (por ejemplo, un sandbox) y llega como inbound change set a la de destino, donde se valida y se despliega.",
+    "review": "ok"
+  },
+  "adx-10-3": {
+    "section": "config",
+    "explanationEs": "Primero se configuran y prueban los cambios en un sandbox; después se empaquetan en un outbound change set, se suben y se despliegan en producción como inbound change set.",
+    "review": "ok"
+  },
+  "adx-10-4": {
+    "section": "config",
+    "explanationEs": "Antes de desplegar un inbound change set conviene validarlo: Salesforce simula el despliegue y avisa de errores sin aplicar nada. Los cambios no se configuran directamente en producción.",
+    "review": "ok"
+  },
+  "adx-11-1": {
+    "section": "data",
+    "explanationEs": "Los informes Matrix agrupan por filas y por columnas a la vez, hasta dos agrupaciones en cada eje (cuatro en total), en forma de cuadrícula. Summary agrupa solo por filas, Tabular no agrupa y «Pivot» no es un formato de informe de Salesforce.",
+    "review": "ok"
+  },
+  "adx-11-2": {
+    "section": "data",
+    "explanationEs": "El running user determina qué datos ve todo el que abre el dashboard, porque se muestran con su visibilidad. Quién puede abrir el dashboard depende de la carpeta en la que esté.",
+    "review": "ok"
+  },
+  "adx-11-3": {
+    "section": "data",
+    "explanationEs": "Es cierto: al suscribirte a un informe puedes pedir que el email incluya el informe como archivo adjunto, por ejemplo en CSV.",
+    "review": "ok"
+  },
+  "adx-11-4": {
+    "section": "data",
+    "explanationEs": "Al pulsar un componente, el informe de origen se abre con la visibilidad de quien lo mira, no con la del running user. Con oportunidades privadas, el comercial solo verá las suyas y las que le hayan compartido.",
+    "review": "ok"
+  }
+}

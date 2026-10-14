@@ -1,0 +1,286 @@
+{
+  "questions": [
+    {
+      "id": "dbf-011",
+      "ref": "#11",
+      "stem": "DreamHouse Realty has a master-detail relationship with Open House as the parent object and Visitor as the child object. What should an administrator do to track the number of visitors for each open house?",
+      "options": [
+        { "key": "A", "text": "Create a roll-up summary field on Open House that counts the related Visitor records." },
+        { "key": "B", "text": "Create a formula field on Open House that counts the related Visitor records." },
+        { "key": "C", "text": "Create a cross-object formula field on Visitor that references Open House." },
+        { "key": "D", "text": "Create a lookup field on Open House that points to Visitor." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "DreamHouse has a master-detail relationship setup with open house as parent and visitors as child relationship. What should an admin do to track number of visitors?",
+        "Answer Roll-up Summary (Number - SUM - Roll Up)"
+      ]
+    },
+    {
+      "id": "dbf-040",
+      "ref": "#40",
+      "stem": "Cloud Kicks has a team of product owners that need a space to share feedback and ideas with just the product team. How should the administrator leverage Salesforce to help the team collaborate?",
+      "options": [
+        { "key": "A", "text": "Create a private Chatter group for the product team." },
+        { "key": "B", "text": "Create a public group with the product owners as members." },
+        { "key": "C", "text": "Create a broadcast Chatter group for the product team." },
+        { "key": "D", "text": "Create a Chatter stream that follows each product owner." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "Cloud Kicks has a team of product owners that need a space to share feedback and ideas with just the product team. How should the administrator leverage Salesforce to help the team collaborate?",
+        "Create a chatter private group"
+      ]
+    },
+    {
+      "id": "dbf-043",
+      "ref": "#43",
+      "stem": "Universal Containers has enabled Data Protection and Privacy for its org. Which page layouts will have the Individual field available for tracking data privacy information?",
+      "options": [
+        { "key": "A", "text": "Contact, Lead, and Person Account" },
+        { "key": "B", "text": "Account, Contact, and Opportunity" },
+        { "key": "C", "text": "Lead, Campaign, and Case" },
+        { "key": "D", "text": "User, Account, and Case" }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "Universal Containers has enabled Data Protection and Privacy for its org. Which page layouts will have the Individual field available for tracking data privacy information? Contact, Lead, and Person Account"
+      ]
+    },
+    {
+      "id": "dbf-046",
+      "ref": "#46",
+      "stem": "An administrator gets a rush request from Human Resources to remove a user's access to Salesforce immediately. The user is part of a hierarchy field called Direct Manager. What should the administrator do to fulfill the request?",
+      "options": [
+        { "key": "A", "text": "Freeze the user to prevent them from logging in while removing them from the Direct Manager field." },
+        { "key": "B", "text": "Deactivate the user immediately." },
+        { "key": "C", "text": "Reset the user's password." },
+        { "key": "D", "text": "Change the login hours on the user's profile." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "An administrator gets a rush request from Human Resources to remove a user's access to Salesforce immediately. The user is part of a hierarchy field called Direct Manager. What should the administrator do to fulfill the request?",
+        "Freeze the user to prevent them from logging in while removing them from being referenced in the Direct Manager field."
+      ]
+    },
+    {
+      "id": "dbf-052",
+      "ref": "#52",
+      "stem": "Support agents at Cloud Kicks are spending too much time finding resources to solve customer cases. The agents need a more efficient way to find documentation and similar cases from the Case page layout. How should an administrator meet this requirement?",
+      "options": [
+        { "key": "A", "text": "Configure Knowledge with articles and data categories." },
+        { "key": "B", "text": "Create a Chatter group where agents share documentation." },
+        { "key": "C", "text": "Create a custom object to store documentation and relate it to Cases." },
+        { "key": "D", "text": "Set up Email-to-Case so that the documentation is sent to the agents." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "Support agents at Cloud Kicks are spending too much time finding resources to solve customer cases. The agents need a more efficient way to find documentation and similar cases from the Case page layout. How should an administrator meet this requirement? Configure Knowledge with articles and data categories"
+      ]
+    },
+    {
+      "id": "dbf-058",
+      "ref": "#58",
+      "stem": "A user at Cloud Kicks is having issues logging in to Salesforce. The user asks the administrator to reset their password. Which two options should the administrator consider when resetting the user's password?",
+      "options": [
+        { "key": "A", "text": "After resetting a password, the user may be required to activate their device to successfully log in to Salesforce." },
+        { "key": "B", "text": "Resetting a locked-out user's password automatically unlocks the user's account." },
+        { "key": "C", "text": "Resetting the password removes the permission sets assigned to the user." },
+        { "key": "D", "text": "The new password is displayed to the administrator so they can share it with the user." }
+      ],
+      "correct": ["A", "B"],
+      "authoredOptions": true,
+      "quotes": [
+        "A user at Cloud Kicks is having issues logging in to Salesforce. The user asks the administrator to reset their password. Which two options should the administrator consider when resetting the user's password?",
+        "After resetting a password, the user may be required to activate their device to successfully log in to Salesforce, Resetting a locked-out user's password automatically unlocks the user's account."
+      ]
+    },
+    {
+      "id": "dbf-063",
+      "ref": "#63",
+      "stem": "Universal Containers wants to prevent its service team from accessing deal records. While service users are unable to access deal list views, they are able to find deal records via a search. What should the administrator adjust to fully restrict access?",
+      "options": [
+        { "key": "A", "text": "The object permissions and tab visibility for the service team" },
+        { "key": "B", "text": "The organization-wide default for the Deal object" },
+        { "key": "C", "text": "The list views shared with the service team" },
+        { "key": "D", "text": "The search layout of the Deal object" }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "Universal Containers wants to prevent its service team from accessing deal records. While service users are unable to access deal list views, they are able to find deal records via a search. What option should the administrator adjust to fully restrict access? Permissions and Tab Visibility"
+      ]
+    },
+    {
+      "id": "dbf-065",
+      "ref": "#65",
+      "stem": "The Human Resources department at Northern Trail Outfitters wants employees to provide feedback about their managers using a custom object in Salesforce. It is important that managers are unable to see the feedback records from their staff. How should an administrator configure the custom object to meet this requirement?",
+      "options": [
+        { "key": "A", "text": "Set the organization-wide default to Private and uncheck Grant Access Using Hierarchies." },
+        { "key": "B", "text": "Set the organization-wide default to Public Read Only." },
+        { "key": "C", "text": "Create a criteria-based sharing rule that hides the feedback records from managers." },
+        { "key": "D", "text": "Remove the custom object tab from the app that the managers use." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "The Human Resources department at Northern Trail Outfitters wants employees to provide feedback about their managers using a custom object in Salesforce. It is important that managers are unable to see the feedback records from their staff. How should an administrator configure the custom object to meet this requirement? Uncheck Grant Access using Hierarchies"
+      ]
+    },
+    {
+      "id": "dbf-067",
+      "ref": "#67",
+      "stem": "The administrator has been asked to automate a simple field update on the account. When a support agent changes the status of the account to 'Audited', they would like the system to automatically update the Audited Date field on the account with today's date. Which tool should the administrator use to complete this automation?",
+      "options": [
+        { "key": "A", "text": "Formula field" },
+        { "key": "B", "text": "Record-triggered flow" },
+        { "key": "C", "text": "Validation rule" },
+        { "key": "D", "text": "Approval process" }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "The administrator has been asked to automate a simple field on the account. When a support agent changes the status of the account to 'Audited'",
+        "they would like the system to automatically update the Audited Data field on the account with today's date. Which tool should the administrator use to complete this automation? Formula Field"
+      ]
+    },
+    {
+      "id": "dbf-080",
+      "ref": "#80",
+      "stem": "An administrator needs to create a one-to-many relationship between two objects with limited access to child records. What type of field should the administrator use?",
+      "options": [
+        { "key": "A", "text": "Master-detail relationship" },
+        { "key": "B", "text": "Lookup relationship" },
+        { "key": "C", "text": "Hierarchical relationship" },
+        { "key": "D", "text": "External lookup relationship" }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "An administrator needs to create a one-to-many relationship between two objects with limited access to child records. What type of field should the administrator use? Master Detail Fields"
+      ]
+    },
+    {
+      "id": "dbf-081",
+      "ref": "#81",
+      "stem": "An administrator at DreamHouse Realty wants an easier way to assign cases based on agent capacity and skills. Which feature should the administrator enable to meet this requirement?",
+      "options": [
+        { "key": "A", "text": "Omni-Channel" },
+        { "key": "B", "text": "Case assignment rules" },
+        { "key": "C", "text": "Escalation rules" },
+        { "key": "D", "text": "Queues" }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "An administrator at DreamHouse Realty wants an easier way to assign cases based on agent capacity and skills. Which feature should the administrator enable to meet this requirement? Omni Channel"
+      ]
+    },
+    {
+      "id": "dbf-082",
+      "ref": "#82",
+      "stem": "Northern Trail Outfitters has asked an administrator to ensure that when a contact with the title of CEO is created, the contact's account record gets updated with the CEO's name. Which feature should an administrator use to implement this request?",
+      "options": [
+        { "key": "A", "text": "Workflow rule" },
+        { "key": "B", "text": "Record-triggered flow" },
+        { "key": "C", "text": "Validation rule" },
+        { "key": "D", "text": "Roll-up summary field" }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "Northern Trail Outfitters has asked an administrator to ensure that when contact with the title of CEO is created, the contact's account record gets updated with the CEO's name. Which feature should an administrator use to implement this request? Workflow Rule"
+      ]
+    },
+    {
+      "id": "dbf-091",
+      "ref": "#91",
+      "stem": "Universal Containers plans to offer a partner its services at a discounted rate applied to all opportunities. The administrator needs to ensure that the appropriate prices are applied to services on opportunities for this partner. What should the administrator do to achieve this goal?",
+      "options": [
+        { "key": "A", "text": "Create a new custom price book with the discounted list prices." },
+        { "key": "B", "text": "Change the list prices in the standard price book." },
+        { "key": "C", "text": "Create a validation rule that requires a discount on the partner's opportunities." },
+        { "key": "D", "text": "Ask the sales reps to fill in the Discount field on each opportunity product." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "Universal Container plans to offer a partner its services at a discounted rate applied to all opportunities. The Administrator needs to ensure that the appropriate prices are applied to services on opportunities for this partner. What should the administrator do to achieve this goal? Create a new custom price book with the discounted list prices."
+      ]
+    },
+    {
+      "id": "dbf-103",
+      "ref": "#103",
+      "stem": "Cloud Kicks has asked the administrator to test a new screen flow that creates contacts. What are the two key components of testing the flow?",
+      "options": [
+        { "key": "A", "text": "Run the flow and use it to create contacts." },
+        { "key": "B", "text": "Use Debug to test the flow in Flow Builder." },
+        { "key": "C", "text": "Activate the flow in production and wait for users to report errors." },
+        { "key": "D", "text": "Review the Setup Audit Trail after the flow runs." }
+      ],
+      "correct": ["A", "B"],
+      "authoredOptions": true,
+      "quotes": [
+        "Cloud Kicks has asked the administrator to test a new screen flow that creates contacts. What are the two key components of testing the flow?",
+        "Run the flow using it to create contacts.",
+        "Use Debug to test the flow in Flow Builder."
+      ]
+    },
+    {
+      "id": "dbf-118",
+      "ref": "#118",
+      "stem": "Cloud Kicks wants to have consistency when communicating with customers on cases. The company has requested messages to be sent in an email channel with categories to help search for the proper message. Which solution should an administrator suggest to meet this requirement?",
+      "options": [
+        { "key": "A", "text": "Prebuilt Quick Texts" },
+        { "key": "B", "text": "Prebuilt email templates" },
+        { "key": "C", "text": "Prebuilt flow templates" },
+        { "key": "D", "text": "Prebuilt auto-responses" }
+      ],
+      "correct": ["A"],
+      "quotes": [
+        "Cloud Kicks want to have consistency when communicating with customers on cases. The company has requested messages to be sent in an email channel with categories to help search for the proper message. Which solution should an administrator suggest to meet this requirement?",
+        "A. Prebuilt Quick Texts. B. Prebuilt Email Templates. C. Prebuilt flow Templates. D. Prebuilt Auto-Responses"
+      ]
+    },
+    {
+      "id": "dbf-119",
+      "ref": "#119",
+      "stem": "Universal Containers has been using a queue with its support team to manage tasks. Now, the support team will also be working on cases. Which two actions should the administrator take?",
+      "options": [
+        { "key": "A", "text": "Use assignment rules to assign cases to the queue." },
+        { "key": "B", "text": "Add Case to the objects supported by the existing queue." },
+        { "key": "C", "text": "Create a new queue and add Case as its object." },
+        { "key": "D", "text": "Use a workflow rule." }
+      ],
+      "correct": ["A"],
+      "quotes": [
+        "UC has been using a queue with their support team to manage tasks. Now, the support team will also be working on cases. What two actions should the administrator do?",
+        "Use assignment rules to assign cases to the queue b. Add cases to the existing queue c. create a new queue and add cases as an object d. use a workflow rule"
+      ]
+    },
+    {
+      "id": "dbf-124",
+      "ref": "#124",
+      "stem": "The administrator at Cloud Kicks has been asked to change the company's Shoe Style field to prevent users from selecting more than one style on a record. Which two steps should an administrator take to accomplish this?",
+      "options": [
+        { "key": "A", "text": "Reactivate the appropriate Shoe Style values after the field type changes." },
+        { "key": "B", "text": "Select the \"Choose only one value\" checkbox on the picklist field." },
+        { "key": "C", "text": "Back up the Shoe Style values in existing records." },
+        { "key": "D", "text": "Change the field type from a multi-select picklist field to a picklist field." }
+      ],
+      "correct": ["B", "D"],
+      "quotes": [
+        "The administrator at cloud kicks has been ask to change the company’s Shoe style field to prevent users from selecting more than one style on a record. Which two steps should an administrator do to accomplish this? Choose 2 answers",
+        "Reactivate the appropriate Shoe Style values after the field type changes.",
+        "Select the “Choose only one value “checkbox on the pick list field.",
+        "Back-up the Shoe Style values in existing records.",
+        "Change the field type from a multi-select picklist field to a picklist field."
+      ]
+    }
+  ]
+}

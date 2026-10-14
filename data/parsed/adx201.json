@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "adx-01-1",
+    "source": "adx201",
+    "ref": "L1 Q1",
+    "stem": "Account has a relationship with which of the following objects?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Opportunity."
+      },
+      {
+        "key": "B",
+        "text": "Contact."
+      },
+      {
+        "key": "C",
+        "text": "Campaign."
+      },
+      {
+        "key": "D",
+        "text": "Positions."
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-01-2",
+    "source": "adx201",
+    "ref": "L1 Q2",
+    "stem": "Which of the clouds helps your customers manage support information, connect with their customers for help, and resolve tough cases?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Sales Cloud."
+      },
+      {
+        "key": "B",
+        "text": "Service Cloud."
+      },
+      {
+        "key": "C",
+        "text": "Marketing Cloud."
+      },
+      {
+        "key": "D",
+        "text": "Commerce Cloud."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-01-3",
+    "source": "adx201",
+    "ref": "L1 Q3",
+    "stem": "Which tool can admins use to view what objects are in their org and how they are related to one another?",
+    "options": [
+      {
+        "key": "A",
+        "text": "App Launcher."
+      },
+      {
+        "key": "B",
+        "text": "Setup."
+      },
+      {
+        "key": "C",
+        "text": "Scheme Builder."
+      },
+      {
+        "key": "D",
+        "text": "Object Manager."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-01-4",
+    "source": "adx201",
+    "ref": "L1 Q4",
+    "stem": "Which tool lets admins access object management settings for both standard and custom objects?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Object Manager."
+      },
+      {
+        "key": "B",
+        "text": "Setup."
+      },
+      {
+        "key": "C",
+        "text": "App Launcher."
+      },
+      {
+        "key": "D",
+        "text": "Schema Builder."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-02-1",
+    "source": "adx201",
+    "ref": "L2 Q1",
+    "stem": "With identity verification, what happens when a user logs in from outside a trusted IP range?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The user is denied access to Salesforce."
+      },
+      {
+        "key": "B",
+        "text": "The user must also log in through a social media platform to continue."
+      },
+      {
+        "key": "C",
+        "text": "The user is sent a verification code that they must enter in order to continue."
+      },
+      {
+        "key": "D",
+        "text": "None of the above."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-02-2",
+    "source": "adx201",
+    "ref": "L2 Q2",
+    "stem": "Which of the following is NOT a standard fiscal year?",
+    "options": [
+      {
+        "key": "A",
+        "text": "August 15 - August 14."
+      },
+      {
+        "key": "B",
+        "text": "July 1 - June 30."
+      },
+      {
+        "key": "C",
+        "text": "February 1 - January 31."
+      },
+      {
+        "key": "D",
+        "text": "January 1 - December 31."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-02-3",
+    "source": "adx201",
+    "ref": "L2 Q3",
+    "stem": "User locale settings are initially inherited from where?",
+    "options": [
+      {
+        "key": "A",
+        "text": "CEO Profile."
+      },
+      {
+        "key": "B",
+        "text": "Corporate Locale settings."
+      },
+      {
+        "key": "C",
+        "text": "Salesforce license settings."
+      },
+      {
+        "key": "D",
+        "text": "System Admin user."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-02-4",
+    "source": "adx201",
+    "ref": "L2 Q4",
+    "stem": "What is true about working with multiple currencies in Salesforce?",
+    "options": [
+      {
+        "key": "A",
+        "text": "New users inherit the corporate currency."
+      },
+      {
+        "key": "B",
+        "text": "Exchange rates can be updated manually or can be automated."
+      },
+      {
+        "key": "C",
+        "text": "A user's personal currency can be modified."
+      },
+      {
+        "key": "D",
+        "text": "All of the above.",
+        "pinned": true
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-03-1",
+    "source": "adx201",
+    "ref": "L3 Q1",
+    "stem": "What defines how users access objects and data, and what they can do within the application?",
+    "options": [
+      {
+        "key": "A",
+        "text": "User Profile"
+      },
+      {
+        "key": "B",
+        "text": "Email Address"
+      },
+      {
+        "key": "C",
+        "text": "Username"
+      },
+      {
+        "key": "D",
+        "text": "User Title"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-03-2",
+    "source": "adx201",
+    "ref": "L3 Q2",
+    "stem": "Which of these would be used to give the minimum settings and permissions to a particular user?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Standard User Profile"
+      },
+      {
+        "key": "B",
+        "text": "Read Only Profile"
+      },
+      {
+        "key": "C",
+        "text": "Minimum Access Profile"
+      },
+      {
+        "key": "D",
+        "text": "Executive Profile"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-03-3",
+    "source": "adx201",
+    "ref": "L3 Q3",
+    "stem": "Admins can assign permission sets to individual users to accomplish what?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Giving a manager access to their direct reports' records."
+      },
+      {
+        "key": "B",
+        "text": "Granting an individual more access than their profile allows."
+      },
+      {
+        "key": "C",
+        "text": "Removing access that a certain individual should not have on their profile."
+      },
+      {
+        "key": "D",
+        "text": "Permission sets can only be assigned to groups of users."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-03-4",
+    "source": "adx201",
+    "ref": "L3 Q4",
+    "stem": "Why are permission set groups useful?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They allow admins to bundle permissions together based on a user's salesforce role."
+      },
+      {
+        "key": "B",
+        "text": "They are a scalable and secure solution to more efficiently manage user permissions."
+      },
+      {
+        "key": "C",
+        "text": "They allow admins to bundle permission sets together and assign based on a user's job function."
+      }
+    ],
+    "correct": [
+      "B",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-04-1",
+    "source": "adx201",
+    "ref": "L4 Q1",
+    "stem": "What feature sets the default level of access users have to records they do not own, in each object?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Role Hierarchy"
+      },
+      {
+        "key": "B",
+        "text": "Sharing Rules"
+      },
+      {
+        "key": "C",
+        "text": "Manager Groups"
+      },
+      {
+        "key": "D",
+        "text": "Org Wide Defaults"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-04-2",
+    "source": "adx201",
+    "ref": "L4 Q2",
+    "stem": "True or False: Your role hierarchy must match your org chart.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True"
+      },
+      {
+        "key": "B",
+        "text": "False"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": false,
+    "learnMore": []
+  },
+  {
+    "id": "adx-04-3",
+    "source": "adx201",
+    "ref": "L4 Q3",
+    "stem": "At NTO, product managers do not have access to opportunities. How can an admin grant them access to opportunities if they are assisting with a specific deal?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Change the opportunity OWD to public."
+      },
+      {
+        "key": "B",
+        "text": "Create a sharing rule to give them access to those opportunities."
+      },
+      {
+        "key": "C",
+        "text": "Add them to the opportunity team for those opportunities they are assisting on."
+      },
+      {
+        "key": "D",
+        "text": "Put the product managers in a public group that is used in a sharing rule."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-04-4",
+    "source": "adx201",
+    "ref": "L4 Q4",
+    "stem": "What is true about sharing rules?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Rules can be based on ownership or on criteria of records."
+      },
+      {
+        "key": "B",
+        "text": "You can write a sharing rule to share with a profile."
+      },
+      {
+        "key": "C",
+        "text": "Rules are not unique to each object in your org."
+      },
+      {
+        "key": "D",
+        "text": "They are necessary when using a public data access model."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-05-1",
+    "source": "adx201",
+    "ref": "L5 Q1",
+    "stem": "What is a key difference between standard and custom fields?",
+    "options": [
+      {
+        "key": "A",
+        "text": "You can only modify custom fields."
+      },
+      {
+        "key": "B",
+        "text": "Standard fields cannot be deleted."
+      },
+      {
+        "key": "C",
+        "text": "You cannot hide standard fields using field level security."
+      },
+      {
+        "key": "D",
+        "text": "You can change the field names of standard fields."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-05-2",
+    "source": "adx201",
+    "ref": "L5 Q2",
+    "stem": "Support Agents at NTO need to track the product type and series when creating cases. How can an admin ensure that the product type selected determines the values available for the series?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a series field as a controlling picklist and the product type field as a dependent picklist."
+      },
+      {
+        "key": "B",
+        "text": "Create the product type field as a controlling picklist and the series field as a dependent picklist."
+      },
+      {
+        "key": "C",
+        "text": "Create a lookup field from the product object to the series object."
+      },
+      {
+        "key": "D",
+        "text": "Create a multi-select picklist field that includes values for both product type and series."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-05-3",
+    "source": "adx201",
+    "ref": "L5 Q3",
+    "stem": "NTO populates the Industry field on each account record. This value should display on related opportunity records and update when the value is updated on the account record. How can an admin configure this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a lookup field on the opportunity object."
+      },
+      {
+        "key": "B",
+        "text": "Create a cross-object formula field on the account object."
+      },
+      {
+        "key": "C",
+        "text": "Create a rollup summary field on the account object."
+      },
+      {
+        "key": "D",
+        "text": "Create a cross-object formula field on the opportunity object."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-05-4",
+    "source": "adx201",
+    "ref": "L5 Q4",
+    "stem": "True or False: If a field is deleted you have 30 days to restore it from the Deleted Fields section of the Object Manager.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True"
+      },
+      {
+        "key": "B",
+        "text": "False"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": false,
+    "learnMore": []
+  },
+  {
+    "id": "adx-06-1",
+    "source": "adx201",
+    "ref": "L6 Q1",
+    "stem": "True or False: If I create a page layout, I have to create a record type.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True"
+      },
+      {
+        "key": "B",
+        "text": "False"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": false,
+    "learnMore": []
+  },
+  {
+    "id": "adx-06-2",
+    "source": "adx201",
+    "ref": "L6 Q2",
+    "stem": "Which of the following does not require a business process to be created?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A new case record type."
+      },
+      {
+        "key": "B",
+        "text": "A new account record type."
+      },
+      {
+        "key": "C",
+        "text": "A new opportunity record type that uses only four of eight stage values."
+      },
+      {
+        "key": "D",
+        "text": "A new lead record type."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-06-3",
+    "source": "adx201",
+    "ref": "L6 Q3",
+    "stem": "Why are record types useful?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They allow users to access multiple page layouts per object."
+      },
+      {
+        "key": "B",
+        "text": "They allow unique data to be gathered for different business scenarios"
+      },
+      {
+        "key": "C",
+        "text": "They can be assigned to users via their profiles or permission sets."
+      },
+      {
+        "key": "D",
+        "text": "All of the above.",
+        "pinned": true
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-06-4",
+    "source": "adx201",
+    "ref": "L6 Q4",
+    "stem": "An Admin can use the Page Layout Editor tool to do what?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Make fields required."
+      },
+      {
+        "key": "B",
+        "text": "Group fields together in sections."
+      },
+      {
+        "key": "C",
+        "text": "Rearrange related lists."
+      },
+      {
+        "key": "D",
+        "text": "All of the above.",
+        "pinned": true
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-07-1",
+    "source": "adx201",
+    "ref": "L7 Q1",
+    "stem": "Why would a user choose Import Wizard over Data Loader?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Import greater than 50,000 records at a time."
+      },
+      {
+        "key": "B",
+        "text": "Choose whether to trigger workflow rules."
+      },
+      {
+        "key": "C",
+        "text": "Prevent duplicate records from entering the system."
+      },
+      {
+        "key": "D",
+        "text": "Import data for all standard and custom objects."
+      }
+    ],
+    "correct": [
+      "B",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-07-2",
+    "source": "adx201",
+    "ref": "L7 Q2",
+    "stem": "Why would a user choose Data Loader over Import Wizard?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Choose whether or not to run validation rules."
+      },
+      {
+        "key": "B",
+        "text": "Export or delete data."
+      },
+      {
+        "key": "C",
+        "text": "Import opportunity records and prevent duplicates."
+      },
+      {
+        "key": "D",
+        "text": "A csv file is not needed."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-07-3",
+    "source": "adx201",
+    "ref": "L7 Q3",
+    "stem": "Why might an import or update fail, regardless of the tool used?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Data validation rules are not met."
+      },
+      {
+        "key": "B",
+        "text": "A value is entered that does not exist on a unrestricted picklist."
+      },
+      {
+        "key": "C",
+        "text": "The file is more than 50,000 rows."
+      },
+      {
+        "key": "D",
+        "text": "The owner field is blank."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-07-4",
+    "source": "adx201",
+    "ref": "L7 Q4",
+    "stem": "My org has a LOT of data and needs to be backed up daily. What is my best option?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Explore third party options on AppExchange."
+      },
+      {
+        "key": "B",
+        "text": "Regular exports from Import Wizard."
+      },
+      {
+        "key": "C",
+        "text": "Run reports regularly."
+      },
+      {
+        "key": "D",
+        "text": "Data Export Service."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-08-1",
+    "source": "adx201",
+    "ref": "L8 Q1",
+    "stem": "When a lead is converted, which records are automatically created to store the information from the lead record?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Campaign."
+      },
+      {
+        "key": "B",
+        "text": "Case."
+      },
+      {
+        "key": "C",
+        "text": "Account."
+      },
+      {
+        "key": "D",
+        "text": "Contact."
+      }
+    ],
+    "correct": [
+      "C",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-08-2",
+    "source": "adx201",
+    "ref": "L8 Q2",
+    "stem": "The sales team at NTO creates and distributes leads to different regional sales groups for qualification. How can an admin automate this process?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a marketing team queue and a workflow alert to notify the team when a new lead has been assigned."
+      },
+      {
+        "key": "B",
+        "text": "Create a queue for each regional group and a lead assignment rule to route leads to appropriate queues."
+      },
+      {
+        "key": "C",
+        "text": "Create a public group for each regional team and a lead assignment rule to route the records."
+      },
+      {
+        "key": "D",
+        "text": "Create a queue for each regional group and a validation rule to enforce correct lead assignment."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-08-3",
+    "source": "adx201",
+    "ref": "L8 Q3",
+    "stem": "An escalation rule has just been applied to an NTO support case. Which of the following could happen as a result of the escalation rule?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The support manager is notified and the case status is set to New."
+      },
+      {
+        "key": "B",
+        "text": "The case is added to a weekly report outlining overdue cases."
+      },
+      {
+        "key": "C",
+        "text": "The case is reassigned to another support agent and the support manager is notified."
+      },
+      {
+        "key": "D",
+        "text": "The customer is emailed a notification that the case is delayed."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-08-4",
+    "source": "adx201",
+    "ref": "L8 Q4",
+    "stem": "When entering data for a new distributor account, a sales rep forgets to format the email address field properly. He receives an error and is unable to save the record. What is preventing him from saving the record?",
+    "options": [
+      {
+        "key": "A",
+        "text": "System Data Validation."
+      },
+      {
+        "key": "B",
+        "text": "Organization Wide Defaults."
+      },
+      {
+        "key": "C",
+        "text": "Assignment Rule."
+      },
+      {
+        "key": "D",
+        "text": "Queue Ownership."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-09-1",
+    "source": "adx201",
+    "ref": "L9 Q1",
+    "stem": "When working with customers over the phone, support users want the ability to quickly enter the minimum amount of information needed to create a case record. What kind of flow could be created for this need?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Record-Triggered Flow."
+      },
+      {
+        "key": "B",
+        "text": "Auto-Launched Flow."
+      },
+      {
+        "key": "C",
+        "text": "Screen Flow."
+      },
+      {
+        "key": "D",
+        "text": "Platform Event-Triggered Flow."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-09-2",
+    "source": "adx201",
+    "ref": "L9 Q2",
+    "stem": "Record-Triggered Flows can perform what actions?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Update Fields."
+      },
+      {
+        "key": "B",
+        "text": "Send Emails."
+      },
+      {
+        "key": "C",
+        "text": "Create Tasks."
+      },
+      {
+        "key": "D",
+        "text": "All of the above.",
+        "pinned": true
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-09-3",
+    "source": "adx201",
+    "ref": "L9 Q3",
+    "stem": "Which of the following is not a way to categorize flow elements?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Creation."
+      },
+      {
+        "key": "B",
+        "text": "Logic."
+      },
+      {
+        "key": "C",
+        "text": "Interaction."
+      },
+      {
+        "key": "D",
+        "text": "Data."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-09-4",
+    "source": "adx201",
+    "ref": "L9 Q4",
+    "stem": "What does the Order of Execution refer to?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The order in which a lead becomes associated to a contact and account."
+      },
+      {
+        "key": "B",
+        "text": "The order in which rules and automations occur when a user attempts to save a record."
+      },
+      {
+        "key": "C",
+        "text": "The order of how automations can be created in Salesforce."
+      },
+      {
+        "key": "D",
+        "text": "The rules surrounding which user permissions are needed to execute Salesforce functionality."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-10-1",
+    "source": "adx201",
+    "ref": "L10 Q1",
+    "stem": "Why would an Admin need to build a custom object?",
+    "options": [
+      {
+        "key": "A",
+        "text": "To rename the Opportunity object to Deals."
+      },
+      {
+        "key": "B",
+        "text": "To store business data in Salesforce that does not yet exist."
+      },
+      {
+        "key": "C",
+        "text": "To add a report chart to a page layout."
+      },
+      {
+        "key": "D",
+        "text": "To be more specific when building a report."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-10-2",
+    "source": "adx201",
+    "ref": "L10 Q2",
+    "stem": "True or False: You work with outbound change sets in your Source environment and inbound change sets in the Target environment.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True"
+      },
+      {
+        "key": "B",
+        "text": "False"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": false,
+    "learnMore": []
+  },
+  {
+    "id": "adx-10-3",
+    "source": "adx201",
+    "ref": "L10 Q3",
+    "stem": "What is the first step when managing configuration changes in Salesforce?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create the outbound change set."
+      },
+      {
+        "key": "B",
+        "text": "Deploy change set in the Production org."
+      },
+      {
+        "key": "C",
+        "text": "Configure/Test changes in the Sandbox."
+      },
+      {
+        "key": "D",
+        "text": "Create the inbound change set."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-10-4",
+    "source": "adx201",
+    "ref": "L10 Q4",
+    "stem": "Just before deploying an inbound change set, what action should an Admin take?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Configure the change in Production."
+      },
+      {
+        "key": "B",
+        "text": "Test the inbound change set."
+      },
+      {
+        "key": "C",
+        "text": "Upload the inbound change set."
+      },
+      {
+        "key": "D",
+        "text": "Validate the inbound change set."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-11-1",
+    "source": "adx201",
+    "ref": "L11 Q1",
+    "stem": "What report format allows for up to four levels of groupings in a grid?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Summary."
+      },
+      {
+        "key": "B",
+        "text": "Matrix."
+      },
+      {
+        "key": "C",
+        "text": "Pivot."
+      },
+      {
+        "key": "D",
+        "text": "Tabular."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-11-2",
+    "source": "adx201",
+    "ref": "L11 Q2",
+    "stem": "What is determined by the running user of the dashboard?",
+    "options": [
+      {
+        "key": "A",
+        "text": "What data viewers of the dashboard will see."
+      },
+      {
+        "key": "B",
+        "text": "Which users can access the dashboard."
+      },
+      {
+        "key": "C",
+        "text": "Which users can access the source report(s) for the dashboard."
+      },
+      {
+        "key": "D",
+        "text": "Which users can refresh the dashboard."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "adx-11-3",
+    "source": "adx201",
+    "ref": "L11 Q3",
+    "stem": "True or False: You can attach a CSV file to a subscribed report.",
+    "options": [
+      {
+        "key": "A",
+        "text": "True"
+      },
+      {
+        "key": "B",
+        "text": "False"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": false,
+    "learnMore": []
+  },
+  {
+    "id": "adx-11-4",
+    "source": "adx201",
+    "ref": "L11 Q4",
+    "stem": "Opportunities are private in the NTO org. What will a sales rep see when they click on an opportunity source report from a dashboard component?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Only opportunities that the running user of the dashboard can access."
+      },
+      {
+        "key": "B",
+        "text": "Only opportunities that the sales rep can access."
+      },
+      {
+        "key": "C",
+        "text": "Only opportunities that the running user of the report can access."
+      },
+      {
+        "key": "D",
+        "text": "All opportunities in the org."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  }
+]

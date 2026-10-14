@@ -1,0 +1,945 @@
+{
+  "s4e-001": {
+    "duplicateOf": "fc-091"
+  },
+  "s4e-002": {
+    "duplicateOf": "fc-131"
+  },
+  "s4e-003": {
+    "duplicateOf": "fc-060"
+  },
+  "s4e-004": {
+    "duplicateOf": "fc-047"
+  },
+  "s4e-005": {
+    "duplicateOf": "fc-137"
+  },
+  "s4e-006": {
+    "duplicateOf": "fc-039"
+  },
+  "s4e-007": {
+    "duplicateOf": "fc-146"
+  },
+  "s4e-008": {
+    "duplicateOf": "fc-083"
+  },
+  "s4e-009": {
+    "duplicateOf": "fc-023"
+  },
+  "s4e-010": {
+    "duplicateOf": "fc-096"
+  },
+  "s4e-011": {
+    "duplicateOf": "fc-117"
+  },
+  "s4e-012": {
+    "duplicateOf": "fc-094"
+  },
+  "s4e-013": {
+    "duplicateOf": "fc-129"
+  },
+  "s4e-014": {
+    "duplicateOf": "fc-127"
+  },
+  "s4e-015": {
+    "duplicateOf": "fc-088"
+  },
+  "s4e-016": {
+    "duplicateOf": "fc-056"
+  },
+  "s4e-017": {
+    "duplicateOf": "fc-122"
+  },
+  "s4e-018": {
+    "duplicateOf": "fc-019"
+  },
+  "s4e-019": {
+    "duplicateOf": "fc-051"
+  },
+  "s4e-020": {
+    "duplicateOf": "fc-115"
+  },
+  "s4e-021": {
+    "duplicateOf": "fc-010"
+  },
+  "s4e-022": {
+    "duplicateOf": "fc-143"
+  },
+  "s4e-023": {
+    "duplicateOf": "fc-110"
+  },
+  "s4e-024": {
+    "duplicateOf": "fc-015"
+  },
+  "s4e-025": {
+    "duplicateOf": "fc-138"
+  },
+  "s4e-026": {
+    "duplicateOf": "fc-101"
+  },
+  "s4e-027": {
+    "duplicateOf": "fc-034"
+  },
+  "s4e-028": {
+    "duplicateOf": "fc-113"
+  },
+  "s4e-029": {
+    "duplicateOf": "fc-072"
+  },
+  "s4e-030": {
+    "duplicateOf": "fc-082"
+  },
+  "s4e-031": {
+    "duplicateOf": "fc-033"
+  },
+  "s4e-032": {
+    "duplicateOf": "fc-145"
+  },
+  "s4e-033": {
+    "duplicateOf": "fc-069"
+  },
+  "s4e-034": {
+    "duplicateOf": "fc-009"
+  },
+  "s4e-035": {
+    "duplicateOf": "fc-064"
+  },
+  "s4e-036": {
+    "duplicateOf": "fc-066"
+  },
+  "s4e-037": {
+    "duplicateOf": "fc-134"
+  },
+  "s4e-038": {
+    "duplicateOf": "fc-103"
+  },
+  "s4e-039": {
+    "duplicateOf": "fc-045"
+  },
+  "s4e-040": {
+    "duplicateOf": "fc-020"
+  },
+  "s4e-041": {
+    "duplicateOf": "fc-004"
+  },
+  "s4e-042": {
+    "duplicateOf": "fc-003"
+  },
+  "s4e-043": {
+    "duplicateOf": "fc-105"
+  },
+  "s4e-044": {
+    "duplicateOf": "fc-050"
+  },
+  "s4e-045": {
+    "duplicateOf": "fc-027"
+  },
+  "s4e-046": {
+    "duplicateOf": "fc-123",
+    "reviewNote": "Success4Exam da otra clave: que el traspaso crea un caso nuevo en vez de transferir la sesión. Se conserva fc-123, marcada como dudosa."
+  },
+  "s4e-047": {
+    "duplicateOf": "fc-114"
+  },
+  "s4e-048": {
+    "duplicateOf": "fc-084"
+  },
+  "s4e-049": {
+    "duplicateOf": "fc-053"
+  },
+  "s4e-050": {
+    "duplicateOf": "fc-025"
+  },
+  "s4e-051": {
+    "duplicateOf": "fc-043"
+  },
+  "s4e-052": {
+    "duplicateOf": "fc-057"
+  },
+  "s4e-053": {
+    "duplicateOf": "fc-026"
+  },
+  "s4e-054": {
+    "duplicateOf": "fc-018"
+  },
+  "s4e-055": {
+    "duplicateOf": "fc-100"
+  },
+  "s4e-056": {
+    "duplicateOf": "fc-044"
+  },
+  "s4e-057": {
+    "duplicateOf": "fc-106"
+  },
+  "s4e-058": {
+    "duplicateOf": "fc-022"
+  },
+  "s4e-059": {
+    "duplicateOf": "fc-035"
+  },
+  "s4e-060": {
+    "duplicateOf": "fc-048"
+  },
+  "s4e-061": {
+    "duplicateOf": "fc-149"
+  },
+  "s4e-062": {
+    "duplicateOf": "fc-112"
+  },
+  "s4e-063": {
+    "duplicateOf": "fc-107"
+  },
+  "s4e-064": {
+    "duplicateOf": "fc-078"
+  },
+  "s4e-065": {
+    "duplicateOf": "fc-090"
+  },
+  "s4e-066": {
+    "duplicateOf": "fc-005"
+  },
+  "s4e-067": {
+    "duplicateOf": "fc-031"
+  },
+  "s4e-068": {
+    "duplicateOf": "fc-007"
+  },
+  "s4e-069": {
+    "duplicateOf": "fc-065"
+  },
+  "s4e-070": {
+    "duplicateOf": "fc-128"
+  },
+  "s4e-071": {
+    "duplicateOf": "fc-075"
+  },
+  "s4e-072": {
+    "duplicateOf": "fc-006"
+  },
+  "s4e-073": {
+    "duplicateOf": "fc-046"
+  },
+  "s4e-074": {
+    "duplicateOf": "fc-073"
+  },
+  "s4e-075": {
+    "duplicateOf": "fc-074"
+  },
+  "s4e-076": {
+    "duplicateOf": "fc-142"
+  },
+  "s4e-077": {
+    "duplicateOf": "fc-063"
+  },
+  "s4e-078": {
+    "duplicateOf": "fc-071"
+  },
+  "s4e-079": {
+    "duplicateOf": "fc-052"
+  },
+  "s4e-080": {
+    "duplicateOf": "fc-055"
+  },
+  "s4e-081": {
+    "duplicateOf": "fc-037"
+  },
+  "s4e-082": {
+    "duplicateOf": "fc-085"
+  },
+  "s4e-083": {
+    "duplicateOf": "fc-016"
+  },
+  "s4e-084": {
+    "duplicateOf": "fc-002"
+  },
+  "s4e-085": {
+    "duplicateOf": "fc-032"
+  },
+  "s4e-086": {
+    "duplicateOf": "fc-121"
+  },
+  "s4e-087": {
+    "duplicateOf": "fc-120"
+  },
+  "s4e-088": {
+    "duplicateOf": "fc-135"
+  },
+  "s4e-089": {
+    "duplicateOf": "fc-028"
+  },
+  "s4e-090": {
+    "duplicateOf": "fc-133"
+  },
+  "s4e-091": {
+    "duplicateOf": "fc-095"
+  },
+  "s4e-092": {
+    "duplicateOf": "fc-097"
+  },
+  "s4e-093": {
+    "duplicateOf": "fc-080"
+  },
+  "s4e-094": {
+    "duplicateOf": "fc-067"
+  },
+  "s4e-095": {
+    "duplicateOf": "fc-125"
+  },
+  "s4e-096": {
+    "duplicateOf": "fc-011"
+  },
+  "s4e-097": {
+    "duplicateOf": "fc-017"
+  },
+  "s4e-098": {
+    "duplicateOf": "fc-089"
+  },
+  "s4e-099": {
+    "duplicateOf": "fc-098"
+  },
+  "s4e-100": {
+    "duplicateOf": "fc-139"
+  },
+  "s4e-101": {
+    "duplicateOf": "fc-041"
+  },
+  "s4e-102": {
+    "duplicateOf": "fc-130"
+  },
+  "s4e-103": {
+    "duplicateOf": "fc-136"
+  },
+  "s4e-104": {
+    "duplicateOf": "fc-042"
+  },
+  "s4e-105": {
+    "duplicateOf": "fc-119"
+  },
+  "s4e-106": {
+    "duplicateOf": "fc-140"
+  },
+  "s4e-107": {
+    "duplicateOf": "fc-081"
+  },
+  "s4e-108": {
+    "duplicateOf": "fc-104",
+    "reviewNote": "Success4Exam da otra clave: un record-triggered flow orchestration. Se conserva fc-104, marcada como dudosa."
+  },
+  "s4e-109": {
+    "duplicateOf": "fc-013"
+  },
+  "s4e-110": {
+    "duplicateOf": "fc-118"
+  },
+  "s4e-111": {
+    "duplicateOf": "fc-014"
+  },
+  "s4e-112": {
+    "duplicateOf": "fc-144"
+  },
+  "s4e-113": {
+    "duplicateOf": "fc-012"
+  },
+  "s4e-114": {
+    "duplicateOf": "fc-124"
+  },
+  "s4e-115": {
+    "duplicateOf": "fc-150"
+  },
+  "s4e-116": {
+    "duplicateOf": "fc-008"
+  },
+  "s4e-117": {
+    "duplicateOf": "fc-079"
+  },
+  "s4e-118": {
+    "duplicateOf": "fc-068"
+  },
+  "s4e-119": {
+    "duplicateOf": "fc-092"
+  },
+  "s4e-120": {
+    "duplicateOf": "fc-024"
+  },
+  "s4e-121": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Un master-detail no se puede convertir en lookup mientras el objeto maestro tenga roll-up summary fields que dependan de esa relación: primero hay que borrarlos. Que el campo tenga valor en todos los registros o que sea obligatorio no impide el cambio, y un lookup no necesita ningún junction object."
+  },
+  "s4e-122": {
+    "duplicateOf": "fc-058"
+  },
+  "s4e-123": {
+    "duplicateOf": "fc-030"
+  },
+  "s4e-124": {
+    "duplicateOf": "fc-116"
+  },
+  "s4e-125": {
+    "duplicateOf": "fc-036"
+  },
+  "s4e-126": {
+    "duplicateOf": "fc-040"
+  },
+  "s4e-127": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Un screen flow de Flow Builder puede mostrar pantallas, pedir datos y hacer cálculos, y se lanza desde un botón o una quick action de la oportunidad. Platform Events y Batch Apex trabajan en segundo plano, sin interfaz, y OmniStudio es excesivo para una calculadora sencilla."
+  },
+  "s4e-128": {
+    "duplicateOf": "fc-070"
+  },
+  "s4e-129": {
+    "duplicateOf": "fc-059"
+  },
+  "s4e-130": {
+    "duplicateOf": "fc-086"
+  },
+  "s4e-131": {
+    "duplicateOf": "fc-132"
+  },
+  "s4e-132": {
+    "duplicateOf": "fc-087"
+  },
+  "s4e-133": {
+    "duplicateOf": "fc-021"
+  },
+  "s4e-134": {
+    "duplicateOf": "fc-111"
+  },
+  "s4e-135": {
+    "duplicateOf": "fc-099"
+  },
+  "s4e-136": {
+    "duplicateOf": "fc-001"
+  },
+  "s4e-137": {
+    "duplicateOf": "fc-062"
+  },
+  "s4e-138": {
+    "duplicateOf": "fc-102"
+  },
+  "s4e-139": {
+    "duplicateOf": "fc-093"
+  },
+  "s4e-140": {
+    "duplicateOf": "fc-077"
+  },
+  "s4e-141": {
+    "duplicateOf": "fc-108"
+  },
+  "s4e-142": {
+    "duplicateOf": "fc-054"
+  },
+  "s4e-143": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "Las auto-response rules ya cubren el acuse de recibo. Lo que falta, escalar los casos que siguen en New a las 4 horas, lo hacen las escalation rules: revisan los casos abiertos y, cuando se cumple el plazo, los reasignan o avisan a quien se indique. Los support processes solo definen los valores de Status, y los entitlements miden niveles de servicio con milestones, algo más complejo de lo que se pide."
+  },
+  "s4e-144": {
+    "duplicateOf": "fc-109"
+  },
+  "s4e-145": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Una validation rule puede impedir guardar el lead cuando Lead Status es Qualified y Budget está vacío (con ISPICKVAL e ISBLANK, por ejemplo). Hacer el campo obligatorio lo exigiría siempre, no solo al calificar el lead, y ni la conversión de leads ni un workflow impiden guardar."
+  },
+  "s4e-146": {
+    "duplicateOf": "fc-061"
+  },
+  "s4e-147": {
+    "duplicateOf": "fc-147"
+  },
+  "s4e-148": {
+    "duplicateOf": "fc-029"
+  },
+  "s4e-149": {
+    "duplicateOf": "fc-141"
+  },
+  "s4e-150": {
+    "section": "data",
+    "review": "ok",
+    "explanationEs": "Data Import Wizard admite hasta 50.000 registros por importación, así que para 65.000 hace falta Data Loader, que llega a 5 millones y funciona con cualquier objeto. La REST API obligaría a programar, y Schema Builder solo sirve para ver y editar el modelo de datos."
+  },
+  "s4e-151": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Con el OWD de Opportunity en Private, la forma de abrir solo las oportunidades de cross-sell a un grupo concreto es una criteria-based sharing rule (Type = Cross-sell) que las comparta con un public group donde estén los expertos. Una owner-based sharing rule comparte según el propietario, no según el tipo; Territory Management y la compartición manual no escalan, y pasar el OWD a Public Read/Write abriría todas las oportunidades a todo el mundo."
+  },
+  "s4e-152": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "El elemento Get Records busca los registros que cumplen unas condiciones y guarda sus campos en variables para usarlos después en el flow. Create Records y Update Records crean o modifican registros, y Assignment solo da valor a variables, sin consultar la base de datos."
+  },
+  "s4e-153": {
+    "section": "productivity",
+    "review": "ok",
+    "explanationEs": "En un Chatter broadcast group solo publican los propietarios y managers del grupo; el resto de miembros lee y comenta. Encaja con un comité que quiere publicar novedades sin que los demás publiquen. Un unlisted group solo controla quién ve el grupo, un Chatter stream reúne varios feeds para leerlos y las recomendaciones sugieren contenido."
+  },
+  "s4e-154": {
+    "section": "config",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "option:C",
+        "from": "security taken",
+        "to": "security token"
+      }
+    ],
+    "explanationEs": "Con el permiso Multi-Factor Authentication for API Logins, al entrar en Data Loader el usuario introduce un código de una app autenticadora en lugar del security token. Por eso, la primera vez tendrá que descargar e instalar la app en el móvil y conectarla a su cuenta de Salesforce. Los códigos por email o SMS no sirven aquí, y el security token es justo lo que el código sustituye."
+  },
+  "s4e-155": {
+    "section": "service",
+    "review": "disputed",
+    "reviewNote": "Success4Exam culpa al support process, pero su explicación se equivoca con el ajuste «Show Closed Statuses in Case Status Field» de Support Settings: es el que hace que los estados cerrados aparezcan en el campo Status, y viene desactivado por defecto. Las dos causas son posibles y ninguna fuente oficial lo aclara.",
+    "explanationEs": "El support process asignado al record type de Case decide qué valores de Status se ofrecen; si omite Closed, los agentes no pueden elegirlo. Además, Salesforce no muestra los estados cerrados en el campo Status hasta que se activa «Show Closed Statuses in Case Status Field» en Support Settings; mientras tanto, los casos se cierran con la acción Close Case."
+  },
+  "s4e-156": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "Para reasignar en bloque los casos de otro agente hace falta un permiso que permita gestionar casos ajenos, como Manage Cases, o el perfil de System Administrator, que lo incluye todo. Poder leer la cuenta no da ningún permiso sobre sus casos, y estar por encima en la jerarquía de roles da acceso a registros, no permisos de administración de casos."
+  },
+  "s4e-157": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "El componente Rich Text muestra un texto con formato, como la negrita, y con un filtro de visibilidad solo aparece cuando el caso tiene el record type crítico. El componente Related Record muestra y permite editar un registro relacionado, como la cuenta del caso, sin salir de la página. Record Detail muestra los campos del propio caso, y una related list enumera registros hijos."
+  },
+  "s4e-158": {
+    "section": "sales",
+    "review": "ok",
+    "explanationEs": "Expected Revenue se calcula como Amount × Probability, y la probabilidad por defecto la fija cada etapa (stage) de la oportunidad. Si los valores salen mal, hay que revisar la probabilidad asociada a cada etapa. No existe un valor de Expected Revenue por etapa, y la forecast category solo afecta a las previsiones."
+  },
+  "s4e-159": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Las restricciones de IP se definen en Login IP Ranges del perfil: fuera de esos rangos el usuario no puede iniciar sesión. Para que se comprueben en cada petición y no solo al entrar, hay que activar Enforce Login IP Ranges on Every Request, que está en Session Settings. El single sign-on no se salta las restricciones de IP, y las llaves U2F son un método de verificación de identidad, no controlan la red ni el horario."
+  },
+  "s4e-160": {
+    "exclude": "Misma pregunta que adx-05-3 (mostrar el Industry de la cuenta en la oportunidad con un cross-object formula field), con otra redacción."
+  },
+  "s4e-161": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Un muting permission set dentro del permission set group desactiva permisos concretos, como Delete en esos objetos, sin tocar los permission sets del paquete gestionado. Los permisos se suman: un permission set nuevo sin Delete no quita lo que concede el grupo, y quitarlo del perfil tampoco sirve. Los roles controlan el acceso a registros, no los permisos sobre objetos."
+  },
+  "s4e-162": {
+    "exclude": "Misma pregunta que fc-144 (activar la creación de tareas recurrentes), con otra redacción."
+  },
+  "s4e-163": {
+    "exclude": "Misma pregunta que fc-064 (Big Deal Alerts para avisar de las oportunidades grandes), con otra redacción."
+  },
+  "s4e-164": {
+    "section": "sales",
+    "review": "ok",
+    "explanationEs": "Las campañas calculan solas estadísticas como Value Won Opportunities in Campaign, que suma el importe de las oportunidades ganadas asociadas a cada campaña, así que basta un informe estándar de campañas con ese campo. Opportunity no es detalle de Campaign en un master-detail, por lo que no admite un roll-up summary, y los procesos manuales o con workflow sobran."
+  },
+  "s4e-165": {
+    "section": "sales",
+    "review": "ok",
+    "explanationEs": "La Contact Hierarchy muestra cómo se relacionan los contactos de una cuenta a través del campo Reports To, y respeta el acceso a registros: cada usuario solo ve en ella los contactos que puede ver. No ignora el sharing, y personalizar sus columnas no cambia la list view de contactos vistos recientemente."
+  },
+  "s4e-166": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "Solo puede haber una auto-response rule activa por objeto, pero puede tener varias rule entries que se evalúan en orden. Con tres entradas filtradas por la prioridad del caso, cada una con su plantilla, cada cliente recibe el email que le toca. Las assignment rules asignan el caso y no envían acuses de recibo, y un único workflow con un filtro no distingue tres plantillas."
+  },
+  "s4e-167": {
+    "section": "data",
+    "review": "ok",
+    "explanationEs": "Un dashboard muestra los datos de su último refresco y con la visibilidad de su running user, mientras que el informe se ejecuta al abrirlo y con la visibilidad de quien lo mira. Si el dashboard lleva tiempo sin refrescarse, o si el running user ve otros registros que el usuario, los números no coinciden. Sin acceso a la carpeta no podría abrir el informe, y el informe ya muestra los datos del momento."
+  },
+  "s4e-168": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Un screen flow de Flow Builder funciona como un asistente: varias pantallas con campos y decisiones que guían al usuario y guardan los datos. Process Builder no tiene interfaz (y está retirado), un approval process gestiona aprobaciones y un outbound message envía datos a otro sistema."
+  },
+  "s4e-169": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Un record-triggered flow en Opportunity puede crear la tarea de seguimiento en cuanto la oportunidad se gana y, con un scheduled path, otra tarea 60 días después. Las assignment rules asignan propietarios, una field update solo cambia un campo y un outbound message envía datos fuera de Salesforce."
+  },
+  "s4e-170": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Si un usuario no ve un campo nuevo, lo primero es revisar su field-level security en el perfil del usuario y comprobar que el campo está en el page layout que tiene asignado. Setup Audit Trail registra cambios de configuración y los OWD controlan el acceso a registros; ninguno decide si un campo se ve."
+  },
+  "s4e-171": {
+    "exclude": "Misma pregunta que fc-051 (equipos de cuenta por defecto), con otra redacción."
+  },
+  "s4e-172": {
+    "section": "productivity",
+    "review": "ok",
+    "explanationEs": "Las quick actions aparecen en la app móvil y en Lightning Experience cuando se añaden a la sección Salesforce Mobile and Lightning Experience Actions del page layout. El menú de navegación del móvil muestra objetos y pestañas, no acciones, y el compact layout decide qué campos salen en el panel de resumen."
+  },
+  "s4e-173": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Los filtros de visibilidad de un componente en Lightning App Builder pueden combinar una condición sobre el usuario (User > Profile > Name = Sales User) y otra sobre el dispositivo (Form Factor = Phone). Filtrar por rol no garantiza el perfil, y no existe un filtro «View = Mobile/Tablet»: el tipo de dispositivo se filtra con Form Factor."
+  },
+  "s4e-174": {
+    "section": "sales",
+    "review": "ok",
+    "explanationEs": "El flujo guiado de configuración de etapas (Stage Setup Flow) sirve para definir las fases del proceso de venta: los estados de Lead y las etapas de Opportunity. Campaign y Campaign Member tienen sus propios estados, pero no forman parte de ese proceso."
+  },
+  "s4e-175": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Health Check compara la configuración de seguridad del org, incluida la de sesión, con la línea base de Salesforce, puntúa los riesgos y permite corregirlos con Fix Risks. Setup Audit Trail registra cambios de configuración, Field History Tracking registra cambios de valores y los OWD controlan el acceso a registros; ninguno detecta vulnerabilidades."
+  },
+  "s4e-176": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Una validation rule que dé error cuando Stage es Closed Lost y Loss Reason está vacío obliga a rellenar el motivo solo cuando hace falta. Marcar el campo como obligatorio en el page layout o en Object Manager lo exigiría en todas las oportunidades, y un workflow no puede mostrar errores ni impedir el guardado."
+  },
+  "s4e-177": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Si el picklist no está restringido (la casilla «Restrict picklist to the values defined in the value set» está desmarcada), la API y las importaciones aceptan valores que no están en la lista, como Unrated. Un global value set o añadir el valor a todos los record types no cambian eso, y la field-level security solo decide quién ve o edita el campo."
+  },
+  "s4e-178": {
+    "section": "data",
+    "review": "ok",
+    "explanationEs": "En el layout de un custom report type, «Add fields related via lookup» añade campos de los registros relacionados por un lookup: así el informe de Event muestra campos del contacto principal sin crear otro report type. Contact es el padre de ese lookup, así que no se puede añadir como objeto relacionado (hijo) del report type, y los formula fields o un dashboard no lo resuelven tan bien."
+  },
+  "s4e-179": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Un dependent picklist muestra en Lead Source solo los valores asociados a la Product Category elegida, que actúa como campo controlador, y un mismo origen puede asociarse a varias categorías. Los page layouts no filtran valores de picklist, los Lead Processes solo definen los valores de Lead Status y los record types obligarían a elegir uno antes de rellenar el lead."
+  },
+  "s4e-180": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "Una case auto-response rule puede enviar un email automático a quien abre el caso por web-to-case cuando se cumple un criterio, como que el asunto contenga forgot y password. El texto con las instrucciones va en una email template. Email-to-Case crea casos a partir de emails, y la plantilla de restablecimiento de contraseña de Salesforce es para los usuarios del org, no para los clientes."
+  },
+  "s4e-181": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Hace falta un objeto personalizado para los diseños y, en él, un campo master-detail hacia Product: así cada producto puede tener muchos diseños y un roll-up summary field en Product puede contarlos. Un lookup no permite roll-up summary fields, y no existe ningún objeto estándar para diseños."
+  },
+  "s4e-182": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Un screen flow puede guiar la creación de cuentas pidiendo solo los campos imprescindibles, en una o varias pantallas, en lugar de un formulario largo. Las workflow rules, los approval processes y las validation rules actúan al guardar o después, pero no cambian lo que el usuario ve al crear el registro."
+  },
+  "s4e-183": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Si el perfil no da acceso al objeto Lead, hay que añadir permisos de objeto, y para un grupo concreto lo más limpio es un permission set con Read y Edit sobre Lead asignado a esos usuarios. Un perfil nuevo también funcionaría, pero da más trabajo y es menos flexible. El manual sharing y los roles dan acceso a registros, no al objeto."
+  },
+  "s4e-184": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Un record type propio para los leads de los becarios, asignado a su perfil o a un permission set, marca cada lead nuevo para distinguirlo de los existentes, y además permite darles su propio page layout y sus valores de picklist. Web-to-Lead sirve para formularios web, las assignment rules reparten la propiedad y una app aparte no marca los registros."
+  },
+  "s4e-185": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Un fault connector lleva el flow por otro camino cuando falla un elemento, y ahí una pantalla puede explicar qué ha pasado y qué datos de la cuenta hay que completar. Ocultar los errores, quitar validation rules o dar permisos para saltárselas no resuelve el problema y empeora la calidad de los datos."
+  },
+  "s4e-186": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "En el page layout de Case se puede dejar marcada por defecto la casilla «Assign using active assignment rule». Entonces también los casos creados a mano pasan por las assignment rules, y los que no cumplen ninguna entrada van al propietario por defecto de Support Settings, aquí el administrador. Las escalation rules actúan pasado un tiempo, no al crear el caso."
+  },
+  "s4e-187": {
+    "exclude": "Misma pregunta que fc-102 (dashboards prediseñados de AppExchange para ir rápido), con otra redacción."
+  },
+  "s4e-188": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "En Company Information se definen datos de toda la organización, como el idioma por defecto (Default Language), el locale y el Currency Locale. Las login hours y las password policies no son ajustes de empresa: las primeras van en el perfil y las segundas en la seguridad del org."
+  },
+  "s4e-189": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Salesforce no deja desactivar a un usuario que sea el único destinatario de una email alert o que figure en un campo de jerarquía personalizado, como un Manager: antes hay que sustituirlo. Ser el rol más alto de la jerarquía o pertenecer a una jerarquía de territorios no bloquea la desactivación. Mientras se resuelve, se puede congelar (freeze) al usuario para que no entre."
+  },
+  "s4e-190": {
+    "section": "data",
+    "review": "ok",
+    "explanationEs": "Mientras un custom report type está en In Development, solo los usuarios con el permiso Manage Custom Report Types ven los informes que lo usan; hay que pasarlo a Deployed. Y si el informe está en una carpeta privada, solo lo ve su propietario. El límite de report types impediría crear más, no usar los que ya existen."
+  },
+  "s4e-191": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Para ver la pestaña de Account, el perfil o un permission set tienen que dar al menos Read sobre el objeto. El OWD, las sharing rules y la jerarquía de roles deciden qué registros se ven, pero no dan acceso al objeto si el perfil no lo tiene."
+  },
+  "s4e-192": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Con dos record types (casa y condominio), cada uno con su page layout y sus valores de picklist, los pasos extra solo aparecen en las visitas de condominio, y un approval process gestiona las aprobaciones de la comunidad de propietarios. Un único page layout no muestra cosas distintas según el tipo, y dos layouts sin record types no se asignan solos al registro adecuado."
+  },
+  "s4e-193": {
+    "section": "sales",
+    "review": "ok",
+    "explanationEs": "Con Contacts to Multiple Accounts, un contacto se relaciona con varias cuentas (sus agencias) además de su cuenta principal, y al cambiar de agencia se conserva el historial sin duplicar el contacto. Crear un contacto por agencia rompe ese historial, un junction object personalizado reinventa algo que Salesforce ya trae y una partner community sirve para dar acceso a usuarios externos."
+  },
+  "s4e-194": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Una validation rule se define con una error condition formula, que devuelve verdadero cuando los datos no son válidos, y con un mensaje de error y su ubicación: arriba de la página o junto a un campo. No tiene fecha de activación (solo se activa o se desactiva), y la fórmula siempre devuelve un booleano, así que su tipo no se elige."
+  },
+  "s4e-195": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Una casilla de verificación es un valor booleano, así que la condición del decision element debe ser High Value Customer Equals {!$GlobalConstant.True}; si se cumple, el flow salta a la segunda pantalla. El operador Contains es para texto, y comparar con el nombre del campo escrito como texto no tiene sentido."
+  },
+  "s4e-196": {
+    "section": "data",
+    "review": "ok",
+    "explanationEs": "Con el OWD de Shoe en Private, el manager ve los registros de su equipo gracias a la jerarquía de roles; además necesita field-level security sobre los campos del informe y acceso a la carpeta donde está guardado. Una suscripción solo envía el informe, y el report type define qué objetos y campos se pueden usar, pero no da acceso a nada."
+  },
+  "s4e-197": {
+    "section": "config",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "deployed my domain",
+        "to": "deployed My Domain"
+      },
+      {
+        "field": "stem",
+        "from": "policies in my domain settings",
+        "to": "policies in the My Domain settings"
+      }
+    ],
+    "explanationEs": "La redirect policy «Redirect with a warning to the same page within the domain» lleva a los usuarios a la URL de My Domain y les avisa de que actualicen sus marcadores, así que da un periodo de transición. Sin redirección nadie llega a la URL de marca, y bloquear el login desde login.salesforce.com cortaría el acceso de golpe, sin periodo de gracia."
+  },
+  "s4e-198": {
+    "section": "data",
+    "review": "ok",
+    "explanationEs": "Un campo marcado como External ID guarda el identificador del registro en el sistema financiero, y Data Loader o Data Import Wizard lo usan para casar los registros al actualizar o al hacer upsert. El Record ID de Salesforce no existe en el sistema externo, un auto-number lo genera Salesforce y un rich text no sirve como identificador."
+  },
+  "s4e-199": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Los external objects de Salesforce Connect muestran datos que viven en otro sistema sin copiarlos a Salesforce, y con una pestaña personalizada en la Support App los agentes los consultan como cualquier otro objeto. Las list views, los record types y el permiso Manage List Views solo trabajan con datos que ya están en Salesforce."
+  },
+  "s4e-200": {
+    "section": "sales",
+    "review": "ok",
+    "explanationEs": "Los estados de miembro de campaña no se editan en Object Manager: se definen en cada campaña, en la related list Campaign Member Statuses. Para poder modificarlos, esa related list tiene que estar en el page layout de Campaign. Campaign Status es otro campo: el estado de la propia campaña."
+  },
+  "s4e-201": {
+    "section": "productivity",
+    "review": "ok",
+    "explanationEs": "Para compartir registros en grupos de Chatter, el page layout del objeto debe tener la related list Groups y el publisher de los grupos debe incluir la acción Add Record. Así los miembros añaden registros al grupo y colaboran sobre ellos junto a los temas generales. Los usuarios pueden crear sus propios grupos, y Salesforce no crea grupos por departamento."
+  },
+  "s4e-202": {
+    "section": "automation",
+    "review": "outdated",
+    "reviewNote": "Process Builder está retirado y ya no se usa para automatizaciones nuevas. Hoy se haría con un scheduled path de un record-triggered flow que se ejecute solo cuando el registro pasa a cumplir la condición: si deja de cumplirla antes de la fecha, la acción programada también se cancela.",
+    "explanationEs": "Una acción programada de Process Builder se quita de la cola si, antes de ejecutarse, el registro deja de cumplir los criterios del proceso. Al pasar el estado a Interviewing el día 10, el post de Chatter pendiente se cancela: no se pausa ni se envía más tarde."
+  },
+  "s4e-203": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Un campo Geolocation guarda la latitud y la longitud, así que sirve para registrar las coordenadas de un envío. Un campo de dirección guarda la dirección postal, un external lookup relaciona con un external object y una geofence es un área geográfica, no un tipo de campo."
+  },
+  "s4e-204": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Un informe de usuarios, con un custom report type que incluya las asignaciones de permission sets si hace falta, muestra quién tiene cada licencia, perfil y permission set, y está siempre al día, sin mantener una hoja de cálculo. La Lightning Usage App mide la adopción, Login History registra los accesos y los permission set groups agrupan permisos, pero no sirven para hacer este seguimiento."
+  },
+  "s4e-205": {
+    "exclude": "Misma pregunta que s4e-198 (un External ID para casar los registros con el sistema externo), con otra redacción."
+  },
+  "s4e-206": {
+    "exclude": "Misma pregunta que fc-030 (Setup Audit Trail para revisar los cambios de configuración), con otra redacción."
+  },
+  "s4e-207": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Una Lightning record page puede llevar un componente Tabs con una pestaña para los detalles, otra para las related lists y otra para el feed de Chatter. Las home pages y las app pages no están ligadas a un registro, y un componente es una pieza de una página, no un tipo de página."
+  },
+  "s4e-208": {
+    "section": "config",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "hidden in the All App Launcher or visible in any app",
+        "to": "hidden in the App Launcher and in every app"
+      }
+    ],
+    "explanationEs": "En los Tab Settings del perfil, una pestaña en Tab Hidden desaparece del App Launcher y de todas las apps, pero si el perfil tiene permisos sobre el objeto, el usuario sigue viendo sus registros desde búsquedas, related lists o enlaces. Los permisos de objeto controlan el acceso a los datos, no la visibilidad de la pestaña, y los OWD tampoco tienen que ver con ella."
+  },
+  "s4e-209": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Al guardar un caso, Salesforce ejecuta primero las validation rules y, con el registro ya guardado, las assignment rules, las auto-response rules, las workflow rules y, al final, las escalation rules. Por eso el orden es asignación, respuesta automática, workflow y escalado; las validaciones van antes que todo eso."
+  },
+  "s4e-210": {
+    "section": "productivity",
+    "review": "ok",
+    "explanationEs": "El menú de navegación de la app móvil (Salesforce Navigation, en Setup) puede incluir elementos como Chatter, Dashboards o páginas de Lightning, entre ellas la home. La utility bar es una función de Lightning Experience en escritorio y no existe en la app móvil."
+  },
+  "s4e-211": {
+    "section": "config",
+    "review": "disputed",
+    "reviewNote": "Hasta donde sé, Password Policies no tiene ningún ajuste llamado «Prohibited password values»; sí tiene «Maximum invalid login attempts». Puede que la clave correcta sea caducidad, complejidad y máximo de intentos fallidos, aunque este último protege contra ataques más que ayudar a elegir buenas contraseñas.",
+    "explanationEs": "La caducidad y los requisitos de complejidad son password policies que obligan a renovar la contraseña y a que sea robusta; según la fuente, prohibir ciertos valores (contraseñas débiles o habituales) completa el trío. El máximo de intentos fallidos bloquea la cuenta tras varios errores, así que protege contra ataques pero no ayuda a elegir la contraseña. Salesforce no exige ninguna app de gestión de contraseñas."
+  },
+  "s4e-212": {
+    "section": "objects",
+    "review": "corrected",
+    "correct": [
+      "A",
+      "B"
+    ],
+    "reviewNote": "Success4Exam marca el dependent picklist, pero aquí los valores no dependen de otro campo, sino del record type. El Debrief da esta otra clave: un campo picklist personalizado en Account y otro en Case que comparten un global value set.",
+    "explanationEs": "Un global value set (global picklist) guarda la lista de valores una sola vez, y cada objeto la usa en su propio campo picklist personalizado Category, así que Account y Case comparten siempre los mismos valores. Después, en cada record type se eligen los valores que se muestran. Un dependent picklist filtra según otro campo, no según el record type, y un multi-select picklist solo permite marcar varios valores."
+  },
+  "s4e-213": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Para que los aprobadores respondan con facilidad se puede activar la respuesta por email (Enable Email Approval Response), permitir las aprobaciones en Chatter (Allow Approvals, en Chatter Settings) y añadir el componente Items to Approve a su home page. Las initial submission actions se ejecutan al enviar el registro y no ayudan a responder, y aprobarlo todo con un flow anula el proceso."
+  },
+  "s4e-214": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Con un perfil base sin Delete, un permission set que añada Read, Create y Edit sobre los objetos da justo lo que hace falta sin permitir borrar. El perfil de System Administrator da muchos más permisos, Delete incluido, y View All solo da lectura. Un perfil personalizado también serviría, pero Salesforce recomienda perfiles mínimos y ampliar el acceso con permission sets."
+  },
+  "s4e-215": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "En Support Settings se elige la plantilla del email de cierre de casos, y la casilla Notify Contact del close case layout permite enviarlo al contacto en el momento de cerrar el caso. Las auto-response rules solo actúan al crear el caso, y el componente de Knowledge no envía emails."
+  },
+  "s4e-216": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Al iniciar sesión por la interfaz, Salesforce comprueba, entre otras cosas, las login hours del perfil y si el usuario tiene el permiso Multi-Factor Authentication for User Interface Logins, que le obliga a verificar su identidad. Las restricciones de IP van en el perfil o en la red del org, no en el rol, y el permiso de MFA for API Logins solo afecta a los accesos por API."
+  },
+  "s4e-217": {
+    "section": "service",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "Ursa Solar Major",
+        "to": "Ursa Major Solar"
+      },
+      {
+        "field": "stem",
+        "from": "made available with out of the box Service Cloud",
+        "to": "made available out of the box with Service Cloud"
+      }
+    ],
+    "explanationEs": "Case, Account y Contract son objetos estándar que vienen con Salesforce y encajan en un caso de soporte: el caso recoge la incidencia, la cuenta al cliente y el contrato sus condiciones de servicio. Request y Ticket no existen como objetos estándar: en Salesforce las incidencias son casos."
+  },
+  "s4e-218": {
+    "section": "config",
+    "review": "corrected",
+    "correct": [
+      "A"
+    ],
+    "reviewNote": "Success4Exam marca un año fiscal Custom con inicio en febrero, pero un año fiscal Standard ya permite elegir el mes de inicio; Custom es para estructuras especiales, como trimestres 4-4-5 o 13 periodos. El Debrief y ADX201 coinciden con esta clave.",
+    "explanationEs": "Un año fiscal Standard sigue el calendario gregoriano y permite cambiar el mes de inicio (y si el año se nombra por el mes de inicio o por el de fin), así que basta con elegir febrero. Los Custom fiscal years son para estructuras que no encajan, como 4-4-5 o 13 periodos, y una vez activados no se pueden desactivar. La duración de 12 meses no se configura: es la del año estándar."
+  },
+  "s4e-219": {
+    "section": "sales",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "Which two options should the administrator configure",
+        "to": "What should the administrator configure"
+      }
+    ],
+    "explanationEs": "Los Opportunity Contact Roles relacionan contactos con la oportunidad e indican su papel, como decisor o influenciador. Personalizando sus roles y añadiendo su related list al page layout de Opportunity, la información se ve en el registro y se puede usar en informes. Los campaign members y sus estados sirven para campañas de marketing, no para los interesados de una oportunidad."
+  },
+  "s4e-220": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Las acciones programadas de un flow se comprueban con los datos actuales del registro. Al renovar la garantía cambia la fecha de caducidad, el registro ya no cumple la condición del recordatorio y el email no se envía; no se queda retenido en la cola ni se envía con la fecha antigua."
+  },
+  "s4e-221": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Una validation rule con una condición como AnnualRevenue < 0 o AnnualRevenue > 100.000.000.000 impide guardar valores fuera de ese rango. Salesforce no tiene ningún ajuste de límites para ese campo, un informe solo encuentra los errores cuando ya existen y hacerlo obligatorio no controla el valor."
+  },
+  "s4e-222": {
+    "exclude": "Misma pregunta que adx-08-1 (al convertir un lead se crean la cuenta y el contacto), con otra redacción. Además pide dos registros pero solo da una opción combinada."
+  },
+  "s4e-223": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Un valor por defecto calculado con una fórmula, como la fecha de hoy más un año, rellena la caducidad al crear el registro, y el campo sigue siendo editable para ampliar la garantía cuando haga falta. Un formula field sería de solo lectura, una validation rule solo obliga a rellenarlo y ponerlo en el layout del móvil no lo calcula."
+  },
+  "s4e-224": {
+    "section": "sales",
+    "review": "ok",
+    "explanationEs": "Una lead auto-response rule envía un email automático al lead creado por web-to-lead, y sus rule entries pueden usar una plantilla distinta según el valor de Industry. Las validation rules no envían emails, las assignment rules solo asignan el propietario y Process Builder ya no se usa para automatizaciones nuevas."
+  },
+  "s4e-225": {
+    "section": "sales",
+    "review": "ok",
+    "explanationEs": "Opportunity Splits reparte el crédito de una oportunidad entre los miembros del opportunity team por porcentajes, según lo que haya aportado cada uno. Las colas asignan la propiedad, las list views filtran registros y las etapas reflejan el avance de la venta."
+  },
+  "s4e-226": {
+    "exclude": "Misma pregunta que fc-105 (conditional visibility en un screen flow), con otra redacción."
+  },
+  "s4e-227": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Un record-triggered flow puede enviar un outbound message como acción cuando se crea o modifica un registro, y es la herramienta recomendada ahora que workflow y Process Builder están retirados. Las auto-response rules envían emails de acuse de recibo, y una asignación de tareas no envía nada fuera de Salesforce."
+  },
+  "s4e-228": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Un screen flow se puede colocar en una página de Experience Cloud para que los inspectores rellenen un formulario, y con esos datos crear o actualizar registros. Un autolaunched flow no tiene pantallas, y los componentes Record Detail y Related List muestran datos que ya existen."
+  },
+  "s4e-229": {
+    "exclude": "Misma pregunta que th-u2-06 (revisar el Login History del usuario), con otra redacción."
+  },
+  "s4e-230": {
+    "section": "service",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "Which two solutions should an administrator use",
+        "to": "Which solutions should an administrator use"
+      }
+    ],
+    "explanationEs": "Web-to-Case crea casos a partir de un formulario web y Email-to-Case a partir de los emails que llegan a una dirección de soporte, así que los dos permiten que el cliente abra casos por su cuenta. Las colas y las escalation rules sirven para gestionar casos que ya existen."
+  },
+  "s4e-231": {
+    "section": "objects",
+    "review": "disputed",
+    "reviewNote": "La idea de fondo es correcta: un campo personalizado borrado se puede recuperar con sus datos durante 15 días. Pero no se restaura desde la Papelera (Recycle Bin), sino desde la lista Deleted Fields del objeto, en Object Manager.",
+    "explanationEs": "Al borrar un campo personalizado, el campo y sus datos se conservan 15 días y durante ese tiempo se pueden restaurar; pasado el plazo, se borran para siempre. No es un borrado inmediato ni un plazo de 20 días."
+  },
+  "s4e-232": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Una validation rule puede exigir una cosa o la otra: dar error si Product Type está vacío y Needs Review no está marcado. Un campo obligatorio se exige siempre, un workflow actúa después de guardar y un before-save flow puede cambiar campos, pero no es la herramienta para impedir el guardado."
+  },
+  "s4e-233": {
+    "section": "data",
+    "review": "ok",
+    "explanationEs": "Un gauge muestra un único valor, el total de ventas del año, frente a un objetivo, con rangos de colores que indican lo cerca que está de la meta. Un donut reparte un total en partes, una tabla enumera valores y una barra apilada compara categorías."
+  },
+  "s4e-234": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Las columnas de una related list se configuran en sus propiedades dentro del page layout. Con un page layout de Account para Sales y otro para Customer Care, asignados por perfil, cada equipo ve sus propios campos en la related list de Case. Los compact layouts controlan el panel de resumen, los search layouts los resultados de búsqueda y los lookup filters qué registros se pueden elegir en un lookup."
+  },
+  "s4e-235": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "En Lightning App Builder, una Lightning record page se puede activar como predeterminada para una app concreta (App Default), así que Account puede tener una página en la Sales Console y otra en la Service Console. Los record types, los perfiles y los page layouts no tienen en cuenta en qué app se abre el registro."
+  },
+  "s4e-236": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Los objetos estándar vienen incluidos con Salesforce, y tanto los estándar como los personalizados tienen campos estándar, como Created By o Last Modified By. Un administrador solo puede crear objetos personalizados, no estándar, y las relaciones master-detail también admiten objetos personalizados."
+  },
+  "s4e-237": {
+    "duplicateOf": "fc-038"
+  },
+  "s4e-238": {
+    "exclude": "Misma pregunta que fc-095 (crear el campo en el objeto de destino y mapearlo en la conversión de leads), con otra redacción."
+  }
+}

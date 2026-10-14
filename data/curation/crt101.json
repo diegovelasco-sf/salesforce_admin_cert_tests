@@ -1,0 +1,109 @@
+{
+  "crt-01": {
+    "section": "config",
+    "explanationEs": "Con el OWD de cuentas en Private, el acceso a las cuentas de un propietario concreto se da con Account Teams: si Bob añade a Amy a sus account teams (o a su default account team), Amy ve solo las cuentas de Bob. Una sharing rule entre «Sales West» y «Sales East» compartiría las cuentas de todo el grupo, no solo las de Bob; meter a Amy en «Sales East» no le da acceso por sí solo, y subirla de rol le abriría todo lo que cuelga por debajo.",
+    "review": "ok"
+  },
+  "crt-02": {
+    "section": "objects",
+    "explanationEs": "Los campos estándar no se pueden borrar ni cambiar de tipo. Lo que sí puedes hacer es quitarlos del page layout si no son obligatorios y cambiar su etiqueta con Rename Tabs and Labels, de modo que se adapten al proceso sin crear campos nuevos.",
+    "review": "ok"
+  },
+  "crt-03": {
+    "section": "data",
+    "explanationEs": "Deshacer la importación es borrar los registros creados: Mass Delete Records lo hace desde Setup para leads y otros objetos estándar comunes, y Data Loader puede borrarlos en bloque con el fichero de éxito de la importación, que trae sus Id. No existe un «roll-back» de importaciones, y el Data Import Wizard solo inserta o actualiza.",
+    "review": "ok"
+  },
+  "crt-04": {
+    "section": "sales",
+    "explanationEs": "Las lead assignment rules reparten los leads automáticamente según criterios, y una queue por grupo regional hace de bandeja compartida de la que cada equipo toma los suyos. Una validation rule no asigna nada, y los default sales teams (opportunity teams) no reciben leads.",
+    "review": "ok"
+  },
+  "crt-05": {
+    "section": "data",
+    "explanationEs": "El report type define qué objetos y relaciones entran en el informe y qué campos tiene disponibles, incluidas las columnas por defecto. Que el informe pueda llevar gráfico o ir en un dashboard depende de su formato (por ejemplo, agrupado), no del report type.",
+    "review": "ok"
+  },
+  "crt-06": {
+    "section": "config",
+    "explanationEs": "Para que unas cuentas solo las vea un equipo y otras las vean todos, se parte de lo más restrictivo, OWD Private, y se abre el acceso con sharing rules por criterio: las High Wealth para el grupo de ese equipo y las Retirement para todos los comerciales. Las sharing rules solo amplían acceso, nunca lo restringen, y ni los perfiles ni los record types deciden qué registros se ven.",
+    "review": "ok"
+  },
+  "crt-07": {
+    "section": "config",
+    "explanationEs": "El permiso Export Reports llega por perfil o por permission set. Para quitarlo hay que desmarcarlo en el profile o, si viene dentro de un permission set group, anularlo con un muting permission set en ese grupo. Un permission set suelto solo suma permisos y el registro del usuario no los controla.",
+    "review": "ok"
+  },
+  "crt-08": {
+    "section": "config",
+    "explanationEs": "Un usuario nuevo no se guarda si su username ya existe en cualquier org de Salesforce (debe ser único a nivel global) o si no quedan licencias del tipo elegido. Una zona horaria distinta o el campo Manager vacío no impiden guardarlo.",
+    "review": "ok"
+  },
+  "crt-09": {
+    "section": "config",
+    "explanationEs": "Con OWD Private, los usuarios de un mismo rol no ven los registros de sus compañeros, porque la jerarquía solo da acceso hacia arriba. Una sharing rule de propietario que comparta las cuentas de ese rol con el propio rol les da la lectura que necesitan. Grant Access Using Hierarchies solo afecta al acceso hacia arriba.",
+    "review": "ok"
+  },
+  "crt-10": {
+    "section": "automation",
+    "explanationEs": "Avisar al propietario de la cuenta cuando entra un caso de un record type concreto es un record-triggered flow con una acción de email. Las assignment y escalation rules gestionan quién es el propietario del caso, y un Chatter post no es una herramienta de automatización.",
+    "review": "ok"
+  },
+  "crt-11": {
+    "section": "objects",
+    "explanationEs": "Para que distintos usuarios vean distintos valores de Lead Status se crean dos lead processes, cada uno con su subconjunto de valores, y se asocia cada uno a un record type asignado por perfil. La field-level security oculta el campo entero, no algunos valores, y un page layout no filtra picklists.",
+    "review": "ok"
+  },
+  "crt-12": {
+    "section": "automation",
+    "explanationEs": "El elemento Screen de un screen flow muestra información y recoge datos del usuario, así que es el que sirve para presentar el guion. Loop, Assignment y Variable son lógica y datos internos que el usuario no ve.",
+    "review": "ok"
+  },
+  "crt-13": {
+    "section": "objects",
+    "explanationEs": "Account y Opportunity tienen una relación de tipo master-detail, así que en la cuenta se puede crear un roll-up summary field que cuente las oportunidades abiertas (con un filtro por IsClosed). Un formula field no puede agregar registros hijos, y un record type o un lookup no calculan nada.",
+    "review": "ok"
+  },
+  "crt-14": {
+    "section": "automation",
+    "explanationEs": "Crear una factura cuando una oportunidad pasa a Closed Won es un record-triggered flow con un elemento Create Records. Validation rules, auto-response rules y assignment rules no crean registros de otros objetos.",
+    "review": "ok"
+  },
+  "crt-15": {
+    "section": "data",
+    "explanationEs": "Un registro falla al importar si incumple las reglas de la org: le falta un campo obligatorio o lo bloquea una validation rule. Que no venga propietario no hace fallar la importación (por defecto es quien importa).",
+    "review": "ok"
+  },
+  "crt-16": {
+    "section": "config",
+    "explanationEs": "Los permisos de un usuario vienen de su profile y de los permission sets o permission set groups que tenga asignados. La role hierarchy y los public groups afectan a qué registros ve, no a lo que puede hacer.",
+    "review": "ok"
+  },
+  "crt-17": {
+    "section": "service",
+    "explanationEs": "Una escalation rule reasigna automáticamente los casos de ese producto que siguen sin resolver pasadas 3 horas a la cola o al usuario de Tier 2, y puede avisar a la vez a los Service Managers, sin construir ninguna automatización. Las assignment rules solo actúan al crear o editar el caso, y Process Builder ya no tiene soporte.",
+    "review": "ok"
+  },
+  "crt-18": {
+    "section": "objects",
+    "textFixes": [
+      {
+        "field": "option:A",
+        "from": "to make rearrange",
+        "to": "to rearrange"
+      }
+    ],
+    "explanationEs": "Qué componentes tiene la página de registro de Lightning y en qué orden se edita con Lightning App Builder. El Page Layout Editor ordena campos, secciones y related lists dentro del detalle, pero no los componentes de la página.",
+    "review": "ok"
+  },
+  "crt-19": {
+    "section": "productivity",
+    "explanationEs": "La afirmación falsa es que los campos, objetos, record types y page layouts personalizados no están disponibles en la app móvil: la app de Salesforce sí los muestra. Lo demás es cierto: se puede usar Salesforce desde el navegador del móvil, cambiar el price book de una oportunidad y crear páginas para móvil con Lightning App Builder.",
+    "review": "ok"
+  },
+  "crt-20": {
+    "section": "automation",
+    "explanationEs": "En un Flow Approval Process, cuando un paso se asigna a un grupo de aprobadores puedes exigir aprobación unánime: el registro solo avanza si todos aprueban. Aprobar con la primera respuesta es justo lo contrario, y que una fórmula pueda referenciarse a sí misma no tiene que ver con las aprobaciones.",
+    "review": "ok"
+  }
+}

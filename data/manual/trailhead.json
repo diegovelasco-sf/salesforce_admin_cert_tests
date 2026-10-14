@@ -1,0 +1,204 @@
+{
+  "casing": {
+    "th-u2-01:A": "Business hours, translation settings, corporate currency",
+    "th-u2-01:B": "Organization name, default time zone, default language",
+    "th-u2-01:C": "Primary contact, Chatter settings, set domains",
+    "th-u2-01:D": "Fiscal year, password policies, default time zone",
+
+    "th-u2-02:A": "Business hours and holidays",
+    "th-u2-02:B": "Time and number display format",
+    "th-u2-02:C": "First/last name and date format",
+    "th-u2-02:D": "Phone number and currency format",
+
+    "th-u2-03:A": "Enable Inline Editing",
+    "th-u2-03:B": "Enable Enhanced Lists",
+    "th-u2-03:C": "Enable Enhanced Page Layout Editor",
+    "th-u2-03:D": "Enable Enhanced Profile List Views",
+
+    "th-u2-04:A": "Enable Service Cloud User on the user record detail page.",
+    "th-u2-04:B": "Clone the sample console and assign it to the user.",
+    "th-u2-04:C": "Create a new permission set license agreement.",
+    "th-u2-04:D": "Enable Service Console in Support Settings.",
+
+    "th-u2-05:A": "Usernames must be unique across all production Salesforce orgs.",
+    "th-u2-05:B": "Usernames must be in the form of an email address.",
+    "th-u2-05:C": "Usernames must be the same as the user's email address.",
+    "th-u2-05:D": "Usernames must include the company's email domain.",
+
+    "th-u2-06:A": "Check the user's Login History related list on the user record.",
+    "th-u2-06:B": "Review entries in the Setup Audit Trail.",
+    "th-u2-06:C": "Log in as the user to view the error message.",
+    "th-u2-06:D": "Search the debug log for the error message.",
+
+    "th-u2-07:A": "Reset the user's password.",
+    "th-u2-07:B": "Freeze the user's account.",
+    "th-u2-07:C": "Change the user's login hours.",
+    "th-u2-07:D": "Delete the user's account.",
+
+    "th-u2-08:A": "The license becomes available for reassignment.",
+    "th-u2-08:B": "The license is deleted.",
+    "th-u2-08:C": "The license is removed from the billable licenses for the organization.",
+    "th-u2-08:D": "The license is automatically assigned to another user.",
+
+    "th-u2-09:A": "Users who log in within the network are not required to verify their identity.",
+    "th-u2-09:B": "All attempts to log in from outside the network are denied.",
+    "th-u2-09:C": "Users are unable to log in through the API on networks not marked as trusted.",
+    "th-u2-09:D": "AppExchange packages can communicate with an external site.",
+
+    "th-u2-10:A": "Individual user records",
+    "th-u2-10:B": "Permission sets assigned to the users",
+    "th-u2-10:C": "Profiles assigned to the users",
+    "th-u2-10:D": "Roles assigned to the users",
+
+    "th-u2-11:A": "Set Opportunity org-wide default sharing settings to Private.",
+    "th-u2-11:B": "Save the report in a folder shared with the Executive Team.",
+    "th-u2-11:C": "Name the report \"For Executive Team Use Only - Do Not Use.\"",
+    "th-u2-11:D": "Save the report in the My Personal Reports folder.",
+
+    "th-u2-12:A": "Record type assignment",
+    "th-u2-12:B": "Security at the field level",
+    "th-u2-12:C": "Assigned apps",
+    "th-u2-12:D": "Feature license assignment",
+    "th-u2-12:E": "Locale settings",
+
+    "th-u3-01:A": "Accounts",
+    "th-u3-01:B": "Assets",
+    "th-u3-01:C": "Products",
+    "th-u3-01:D": "Opportunities",
+
+    "th-u3-02:A": "Cases",
+    "th-u3-02:B": "Campaigns",
+    "th-u3-02:C": "Opportunities",
+    "th-u3-02:D": "Leads",
+
+    "th-u3-03:A": "Lead",
+    "th-u3-03:B": "Contact",
+    "th-u3-03:C": "Account",
+    "th-u3-03:D": "Opportunity",
+    "th-u3-03:E": "Contact Role",
+
+    "th-u3-04:A": "ISPICKVAL",
+    "th-u3-04:B": "TEXT",
+    "th-u3-04:C": "IF",
+    "th-u3-04:D": "AND",
+
+    "th-u3-05:A": "Create a formula field to calculate the time since last update and display an image of a red flag if it meets the defined criteria.",
+    "th-u3-05:B": "Add a formula to the default value of the Last Modified Date field to turn the text red if the record meets the criteria.",
+    "th-u3-05:C": "Add a formula to the default value of the Opportunity Name field to turn the background red if the record meets the criteria.",
+    "th-u3-05:D": "Create a formula field to show the last login date of the owner and display an alert message if it meets the defined criteria.",
+
+    "th-u3-06:A": "Remove read access permissions for Contacts from the CEO's profile.",
+    "th-u3-06:B": "Set the Contact org-wide default sharing settings to Private.",
+    "th-u3-06:C": "Create an Account page layout without the Contacts related list.",
+    "th-u3-06:D": "Remove the Account related list from the Contact page layout.",
+
+    "th-u3-07:A": "Use a bucket field that defines the color for each value.",
+    "th-u3-07:B": "Configure report conditional highlighting for each value.",
+    "th-u3-07:C": "Update the picklist field and set the color for each value.",
+    "th-u3-07:D": "Create a formula field that defines the color for each value.",
+
+    "th-u3-08:A": "Create a new page layout and profile for the Finance team.",
+    "th-u3-08:B": "Set the Invoice Payment org-wide sharing settings to Private.",
+    "th-u3-08:C": "Build an Invoice Payment report with a running user of Finance.",
+    "th-u3-08:D": "Grant Finance access only to the Invoice Payment object.",
+
+    "th-u3-09:A": "Update the marketing team's home page in the App Launcher.",
+    "th-u3-09:B": "Update the marketing team's home page in the Lightning App Builder.",
+    "th-u3-09:C": "Update the org-wide home page in the Lightning App Builder.",
+    "th-u3-09:D": "Update the marketing team's home page with a hyper link to the dashboard.",
+
+    "th-u3-10:A": "Confirm the page is activated in the Lightning App Builder.",
+    "th-u3-10:B": "Create a permission set to grant access to the Project object.",
+    "th-u3-10:C": "Add the page to the App Launcher.",
+    "th-u3-10:D": "Review the component visibility filters."
+  },
+  "questions": [
+    {
+      "id": "th-u2-f08",
+      "ref": "U2 Card 8",
+      "stem": "Ursa Major Solar uses a private sharing model for Cases. Each product line has several product specialists who want to have visibility to all Cases involving their product line. How should the administrator meet this requirement?",
+      "options": [
+        { "key": "A", "text": "Create a predefined Case Team for each group of product specialists and assign the team using Case Assignment Rules." },
+        { "key": "B", "text": "Change the organization-wide default for Cases to Public Read/Write." },
+        { "key": "C", "text": "Give the product specialists' profile the View All permission on Cases." },
+        { "key": "D", "text": "Add a Product Line field to the Case page layout." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "Ursa Major Solar uses a private sharing model for Cases. Each product line has several product specialists who want to have visibility to all Cases involving their product line. How should the administrator meet this requirement?",
+        "Create a predefined Case Team for each group of product specialists and assign the team using Case Assignment Rules."
+      ]
+    },
+    {
+      "id": "th-u2-f10",
+      "ref": "U2 Card 10",
+      "stem": "Ursa Major Solar has three Account record types: Prospect, Customer, and Vendor. The Customer record type is only for Accounts that have a Closed Won Opportunity. How should a System Administrator prevent users from selecting the Customer record type when they create new Account records?",
+      "options": [
+        { "key": "A", "text": "Remove the Customer record type as an assigned record type in the users' profiles and permission sets." },
+        { "key": "B", "text": "Set the Prospect record type as the default record type in the users' profiles." },
+        { "key": "C", "text": "Remove the Record Type field from the Account page layout." },
+        { "key": "D", "text": "Delete the Customer record type and create it again when an Opportunity is Closed Won." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "Ursa Major Solar has three Account record types: Prospect, Customer, and Vendor. The Customer record type is only for Accounts that have a Closed Won Opportunity. How should a System Administrator prevent users from selecting the Customer Record Type when they create new Account records?",
+        "Remove the Customer record type as an Assigned record type in the users' profiles and permission sets."
+      ]
+    },
+    {
+      "id": "th-u3-f01",
+      "ref": "U3 Card 1",
+      "stem": "A delegated administrator at Ursa Major Solar cannot edit the Created Date field for the Account record. What reason should the administrator give for why this is occurring?",
+      "options": [
+        { "key": "A", "text": "Created Date is a system audit field, and it is read-only for existing records." },
+        { "key": "B", "text": "The delegated administrator needs the Modify All Data permission to edit the field." },
+        { "key": "C", "text": "The field is hidden from the page layout assigned to the delegated administrator." },
+        { "key": "D", "text": "Created Date is a formula field that is recalculated every time the record is saved." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "A delegated administrator at Ursa Major Solar cannot edit the Created Date field for the Account record.",
+        "What reason should the administrator give for why this is occurring?",
+        "This is a System Audit field and it is Read-Only for existing records without logging a case."
+      ]
+    },
+    {
+      "id": "th-u3-f02",
+      "ref": "U3 Card 2",
+      "stem": "Ursa Major Solar wants to create a field to store credit card numbers and needs to make sure the information is protected. Which two actions allow the administrator to provide enhanced security for this field?",
+      "options": [
+        { "key": "A", "text": "Create an Encrypted Text field." },
+        { "key": "B", "text": "Update Field-Level Security settings." },
+        { "key": "C", "text": "Create a Text field with a validation rule that hides the value." },
+        { "key": "D", "text": "Make the field read-only on the page layout." }
+      ],
+      "correct": ["A", "B"],
+      "authoredOptions": true,
+      "quotes": [
+        "Ursa Major Solar wants to create a field to store credit card numbers and needs to make sure the information is protected. Which two actions allow the administrator to provide enhanced security for this field?",
+        "Create an Encrypted Text field.",
+        "Update Field-Level Security settings."
+      ]
+    },
+    {
+      "id": "th-u3-f05",
+      "ref": "U3 Card 5",
+      "stem": "The customer support team wants to use a different page layout when closing a Case. Which method should the administrator use to fulfill this request?",
+      "options": [
+        { "key": "A", "text": "Use a Case Close page layout." },
+        { "key": "B", "text": "Add a Close Case button to the existing Case page layout." },
+        { "key": "C", "text": "Create a new Case home page in the Lightning App Builder." },
+        { "key": "D", "text": "Create an escalation rule that changes the page layout when the Case is closed." }
+      ],
+      "correct": ["A"],
+      "authoredOptions": true,
+      "quotes": [
+        "The customer support team wants to use a different Page Layout when closing a Case. Which method should the administrator use to fulfill this request?",
+        "Case Close Page Layout"
+      ]
+    }
+  ]
+}

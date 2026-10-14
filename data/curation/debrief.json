@@ -1,0 +1,105 @@
+{
+  "dbf-011": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "En un master-detail, un roll-up summary field en el maestro (Open House) puede contar los registros detalle (Visitor) y se actualiza solo. Un formula field no puede contar registros hijos, una fórmula en Visitor solo ve su propia visita y un lookup en el sentido contrario no cuenta nada."
+  },
+  "dbf-040": {
+    "section": "productivity",
+    "review": "ok",
+    "explanationEs": "Un grupo privado de Chatter solo deja ver y publicar a sus miembros, así que el equipo de producto tiene su propio espacio para compartir ideas. Un public group sirve para compartir registros, no para conversar; en un broadcast group solo publican sus propietarios y managers, y un Chatter stream es una vista personal de varios feeds."
+  },
+  "dbf-043": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Con Data Protection and Privacy activado, el campo Individual, que enlaza con el registro de preferencias de privacidad de la persona, se puede añadir a los page layouts de Contact, Lead y Person Account, los objetos que representan a personas. Las cuentas de empresa, las oportunidades, las campañas y los casos no lo tienen."
+  },
+  "dbf-046": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Un usuario que aparece en un campo de jerarquía personalizado, como Direct Manager, no se puede desactivar hasta quitarlo de ahí; mientras tanto, congelarlo (freeze) le impide entrar al momento. Restablecer la contraseña no sirve, porque el usuario recibe un enlace para elegir otra, y cambiar las login hours del perfil afectaría a todos los usuarios con ese perfil."
+  },
+  "dbf-052": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "Salesforce Knowledge guarda artículos organizados con data categories, y su componente en la página de caso sugiere artículos relacionados sin salir del registro. Un grupo de Chatter o un objeto personalizado no ofrecen esa búsqueda ni esas sugerencias, y Email-to-Case sirve para crear casos a partir de emails."
+  },
+  "dbf-058": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Al restablecer la contraseña, el usuario puede tener que verificar su identidad (activar su dispositivo) la próxima vez que entre, y si estaba bloqueado por demasiados intentos, el restablecimiento lo desbloquea. Salesforce le envía un enlace para elegir una contraseña nueva, así que el administrador nunca la ve, y no se quita ningún permission set."
+  },
+  "dbf-063": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Que no vean las list views no impide encontrar los registros con la búsqueda. Para cortar el acceso del todo hay que quitar el permiso de objeto sobre Deal en el perfil del equipo de servicio y ocultar la pestaña. El OWD solo decide qué registros se ven entre quienes ya tienen acceso al objeto, y cambiar las list views o el search layout no quita el acceso."
+  },
+  "dbf-065": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Con el OWD del objeto en Private y la casilla Grant Access Using Hierarchies desmarcada (solo se puede desmarcar en objetos personalizados), los managers no heredan el acceso a los registros de su equipo. Public Read Only dejaría verlos a todos, las sharing rules solo amplían el acceso, nunca lo quitan, y quitar la pestaña no impide abrir los registros."
+  },
+  "dbf-067": {
+    "section": "automation",
+    "review": "corrected",
+    "correct": [
+      "B"
+    ],
+    "reviewNote": "El Debrief da «Formula Field», pero una fórmula se recalcula cada vez que se consulta: no guarda la fecha en que la cuenta pasó a Audited. Para eso hace falta actualizar el campo con un record-triggered flow.",
+    "explanationEs": "Un record-triggered flow en Account que se ejecute cuando Status pasa a Audited puede poner la fecha de hoy en el campo Audited Date, y esa fecha queda guardada. Un formula field con TODAY() cambiaría cada día, una validation rule solo bloquea el guardado y un approval process sirve para aprobaciones."
+  },
+  "dbf-080": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "En un master-detail, el acceso a los registros hijo depende del padre: no tienen propietario ni sharing propios, así que su visibilidad queda limitada por la del registro padre. Con un lookup, los hijos tienen su propio propietario y su sharing; la relación hierarchical solo existe en User, y el external lookup enlaza con external objects."
+  },
+  "dbf-081": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "Omni-Channel reparte el trabajo según la capacidad de cada agente y, con skills-based routing, según sus habilidades. Las case assignment rules asignan por criterios del caso sin tener en cuenta la carga de trabajo, las escalation rules actúan cuando pasa un tiempo y las colas solo agrupan casos a la espera."
+  },
+  "dbf-082": {
+    "section": "automation",
+    "review": "corrected",
+    "correct": [
+      "B"
+    ],
+    "reviewNote": "El Debrief da «Workflow Rule», que era la respuesta antes de que Salesforce retirara workflow y Process Builder. Hoy esta automatización se hace con un record-triggered flow.",
+    "explanationEs": "Un record-triggered flow en Contact que se ejecute al crear un contacto con el cargo CEO puede actualizar un campo de su cuenta con el nombre del contacto, porque los flows pueden modificar registros relacionados. Ya no se pueden crear workflow rules, una validation rule no actualiza nada y un roll-up summary solo resume registros detalle de un master-detail."
+  },
+  "dbf-091": {
+    "section": "sales",
+    "review": "ok",
+    "explanationEs": "Un price book personalizado con los precios rebajados para ese partner hace que sus oportunidades usen siempre esos precios. Cambiar el price book estándar afectaría a todos los clientes, una validation rule no fija precios y pedir a los comerciales que apliquen el descuento a mano no garantiza nada."
+  },
+  "dbf-103": {
+    "section": "automation",
+    "review": "ok",
+    "explanationEs": "Para probar un screen flow conviene usar Debug en Flow Builder, que lo ejecuta paso a paso mostrando los valores, y ejecutarlo de verdad para comprobar que crea los contactos. Activarlo en producción y esperar a que fallen los usuarios no es probarlo, y Setup Audit Trail solo registra cambios de configuración."
+  },
+  "dbf-118": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "Quick Text guarda mensajes predefinidos que se insertan en emails, chats y otros canales, y cada mensaje tiene un canal y una categoría que ayudan a encontrarlo. Las email templates se organizan en carpetas, sin esas categorías por canal; las flow templates son plantillas de automatización y las auto-responses solo responden al crear un caso."
+  },
+  "dbf-119": {
+    "section": "service",
+    "review": "corrected",
+    "correct": [
+      "A",
+      "B"
+    ],
+    "reviewNote": "El Debrief solo marca las assignment rules, pero el enunciado pide dos acciones: además hay que añadir Case a los objetos de la cola, porque una cola solo recibe registros de los objetos que admite.",
+    "explanationEs": "Una cola puede contener registros de varios objetos: basta con añadir Case a los objetos admitidos por la cola existente y usar case assignment rules para enviarle los casos. Crear otra cola obligaría a repetir los miembros, y las workflow rules están retiradas."
+  },
+  "dbf-124": {
+    "section": "objects",
+    "review": "corrected",
+    "correct": [
+      "C",
+      "D"
+    ],
+    "reviewNote": "El Debrief marca la casilla «Choose only one value», que no existe en los picklists de Salesforce. Al pasar de multi-select picklist a picklist se pueden perder los valores guardados, así que antes hay que hacer una copia de seguridad.",
+    "explanationEs": "Para que solo se pueda elegir un estilo hay que cambiar el tipo de campo de multi-select picklist a picklist. Al convertirlo se pueden perder los valores ya guardados, así que antes conviene exportar una copia de seguridad del campo. Los picklists no tienen ninguna casilla «Choose only one value»."
+  }
+}

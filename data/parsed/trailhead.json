@@ -1,0 +1,808 @@
+[
+  {
+    "id": "th-u2-01",
+    "source": "trailhead",
+    "ref": "U2 E1",
+    "stem": "Solar components and systems supplier, Ursa Major Solar wants to ensure that the information is up to date on their Company Information page in Salesforce. Which set of information can an administrator specify in the Company Information page?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Business hours, translation settings, corporate currency"
+      },
+      {
+        "key": "B",
+        "text": "Organization name, default time zone, default language"
+      },
+      {
+        "key": "C",
+        "text": "Primary contact, Chatter settings, set domains"
+      },
+      {
+        "key": "D",
+        "text": "Fiscal year, password policies, default time zone"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-02",
+    "source": "trailhead",
+    "ref": "U2 E2",
+    "stem": "Ursa Major Solar wants to ensure that all of its locale settings are up to date and consistent in the Salesforce system. The administrator is going through the process of making updates and configuring parameters for this information. Which two sets of parameters are configured using Locale settings?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Business hours and holidays"
+      },
+      {
+        "key": "B",
+        "text": "Time and number display format"
+      },
+      {
+        "key": "C",
+        "text": "First/last name and date format"
+      },
+      {
+        "key": "D",
+        "text": "Phone number and currency format"
+      }
+    ],
+    "correct": [
+      "B",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-03",
+    "source": "trailhead",
+    "ref": "U2 E3",
+    "stem": "The VP of sales has changed the naming convention for opportunities to make it more uniform across the company. The sales manager wants to update multiple opportunity names for his sales team in Europe using his “Team Europe” list view in Salesforce. Which user interface settings should be used to allow users, with all required profile permissions, to edit records in List Views?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Enable Inline Editing"
+      },
+      {
+        "key": "B",
+        "text": "Enable Enhanced Lists"
+      },
+      {
+        "key": "C",
+        "text": "Enable Enhanced Page Layout Editor"
+      },
+      {
+        "key": "D",
+        "text": "Enable Enhanced Profile List Views"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-04",
+    "source": "trailhead",
+    "ref": "U2 E4",
+    "stem": "A new hire at Ursa Major Solar has joined the customer service team to interact with customers and handle cases. This user needs access to the Service Console to manage the cases and customer information. What should an administrator do to assign a Service Cloud user license to a new user?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Enable Service Cloud User on the user record detail page."
+      },
+      {
+        "key": "B",
+        "text": "Clone the sample console and assign it to the user."
+      },
+      {
+        "key": "C",
+        "text": "Create a new permission set license agreement."
+      },
+      {
+        "key": "D",
+        "text": "Enable Service Console in Support Settings."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-05",
+    "source": "trailhead",
+    "ref": "U2 E5",
+    "stem": "Ursa Major Solar, a medium-sized, Southwest-based supplier of solar components and systems, is growing internationally. An administrator receives details of a new hire in the Tokyo office, who requires access to the Salesforce organization. Which two requirements should the administrator consider when creating a new user in a production Salesforce org?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Usernames must be unique across all production Salesforce orgs."
+      },
+      {
+        "key": "B",
+        "text": "Usernames must be in the form of an email address."
+      },
+      {
+        "key": "C",
+        "text": "Usernames must be the same as the user's email address."
+      },
+      {
+        "key": "D",
+        "text": "Usernames must include the company's email domain."
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-06",
+    "source": "trailhead",
+    "ref": "U2 E6",
+    "stem": "A new employee is trying to login to Salesforce, but is having trouble. He reaches out to you the Salesforce Admin for help. What should the administrator do first to troubleshoot login error messages?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Check the user's Login History related list on the user record."
+      },
+      {
+        "key": "B",
+        "text": "Review entries in the Setup Audit Trail."
+      },
+      {
+        "key": "C",
+        "text": "Log in as the user to view the error message."
+      },
+      {
+        "key": "D",
+        "text": "Search the debug log for the error message."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-07",
+    "source": "trailhead",
+    "ref": "U2 E7",
+    "stem": "The administrator is notified that one of Ursa Major Solar’s employees is going on leave for a few weeks. Ursa Major Solar does not want the employee logging in to Salesforce while on leave. What should the administrator do to temporarily prevent a User from logging into Salesforce?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Reset the user's password."
+      },
+      {
+        "key": "B",
+        "text": "Freeze the user's account."
+      },
+      {
+        "key": "C",
+        "text": "Change the user's login hours."
+      },
+      {
+        "key": "D",
+        "text": "Delete the user's account."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-08",
+    "source": "trailhead",
+    "ref": "U2 E8",
+    "stem": "The administrator is asked to deactivate the Salesforce user account for an employee who has recently left the company. When a user account is deactivated, what happens to the associated license?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The license becomes available for reassignment."
+      },
+      {
+        "key": "B",
+        "text": "The license is deleted."
+      },
+      {
+        "key": "C",
+        "text": "The license is removed from the billable licenses for the organization."
+      },
+      {
+        "key": "D",
+        "text": "The license is automatically assigned to another user."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-09",
+    "source": "trailhead",
+    "ref": "U2 E9",
+    "stem": "The Executive Team at Ursa Major Solar is exploring ways to increase protection of the organization’s Salesforce data from unauthorized access. It has been proposed to leverage the Trusted IP Ranges feature. What is a benefit of entering Trusted IP Ranges in the Network Access section?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Users who log in within the network are not required to verify their identity."
+      },
+      {
+        "key": "B",
+        "text": "All attempts to log in from outside the network are denied."
+      },
+      {
+        "key": "C",
+        "text": "Users are unable to log in through the API on networks not marked as trusted."
+      },
+      {
+        "key": "D",
+        "text": "AppExchange packages can communicate with an external site."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-10",
+    "source": "trailhead",
+    "ref": "U2 E10",
+    "stem": "The Executive Team at Ursa Major Solar is exploring ways to increase protection of the organization’s Salesforce data from unauthorized access. It has been proposed to leverage the Trusted IP Ranges feature. What is a benefit of entering Trusted IP Ranges in the Network Access section?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Individual user records"
+      },
+      {
+        "key": "B",
+        "text": "Permission sets assigned to the users"
+      },
+      {
+        "key": "C",
+        "text": "Profiles assigned to the users"
+      },
+      {
+        "key": "D",
+        "text": "Roles assigned to the users"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-11",
+    "source": "trailhead",
+    "ref": "U2 E11",
+    "stem": "Ursa Major Solar's Vice President of Global Sales has requested that the Sales Rep Commission report be visible to the Executive Team. How should the System Administrator provide visibility to the Sales Rep Commission report to the Executive Team only?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set Opportunity org-wide default sharing settings to Private."
+      },
+      {
+        "key": "B",
+        "text": "Save the report in a folder shared with the Executive Team."
+      },
+      {
+        "key": "C",
+        "text": "Name the report \"For Executive Team Use Only - Do Not Use.\""
+      },
+      {
+        "key": "D",
+        "text": "Save the report in the My Personal Reports folder."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-12",
+    "source": "trailhead",
+    "ref": "U2 E12",
+    "stem": "A user’s profile can be controlled by which three settings?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Record type assignment"
+      },
+      {
+        "key": "B",
+        "text": "Security at the field level"
+      },
+      {
+        "key": "C",
+        "text": "Assigned apps"
+      },
+      {
+        "key": "D",
+        "text": "Feature license assignment"
+      },
+      {
+        "key": "E",
+        "text": "Locale settings"
+      }
+    ],
+    "correct": [
+      "A",
+      "B",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-01",
+    "source": "trailhead",
+    "ref": "U3 E1",
+    "stem": "The VP of Sales at Ursa Major Solar wants to take a look at all of the sales deals that are currently in play for his the Sales team to determine how well they are tracking toward their goal for quarter end. Which standard object stores information about sales deals?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Accounts"
+      },
+      {
+        "key": "B",
+        "text": "Assets"
+      },
+      {
+        "key": "C",
+        "text": "Products"
+      },
+      {
+        "key": "D",
+        "text": "Opportunities"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-02",
+    "source": "trailhead",
+    "ref": "U3 E2",
+    "stem": "A sales team member at Ursa Major Solar wants to view information related to one of their accounts to have a 360 degree view of the customer. Which two standard objects are related to Account records?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Cases"
+      },
+      {
+        "key": "B",
+        "text": "Campaigns"
+      },
+      {
+        "key": "C",
+        "text": "Opportunities"
+      },
+      {
+        "key": "D",
+        "text": "Leads"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-03",
+    "source": "trailhead",
+    "ref": "U3 E3",
+    "stem": "The marketing manager at Ursa Major Solar wants to run a marketing campaign for their upcoming event called the Ray-A-Thon. the manager wants to make sure to capture as much information as possible generated from the campaign in Salesforce. Which three objects have a relationship with a Campaign?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Lead"
+      },
+      {
+        "key": "B",
+        "text": "Contact"
+      },
+      {
+        "key": "C",
+        "text": "Account"
+      },
+      {
+        "key": "D",
+        "text": "Opportunity"
+      },
+      {
+        "key": "E",
+        "text": "Contact Role"
+      }
+    ],
+    "correct": [
+      "A",
+      "B",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-04",
+    "source": "trailhead",
+    "ref": "U3 E4",
+    "stem": "Ursa Major Solar needs a field that reflects Account size based on the standard field, number of employees. Which formula function should an administrator use to evaluate different results based on a specific condition with multiple outcomes?",
+    "options": [
+      {
+        "key": "A",
+        "text": "ISPICKVAL"
+      },
+      {
+        "key": "B",
+        "text": "TEXT"
+      },
+      {
+        "key": "C",
+        "text": "IF"
+      },
+      {
+        "key": "D",
+        "text": "AND"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-05",
+    "source": "trailhead",
+    "ref": "U3 E5",
+    "stem": "The sales managers at Ursa Major Solar want Opportunities that have NOT been updated in the past 30 days to be flagged automatically . How should an administrator implement this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a formula field to calculate the time since last update and display an image of a red flag if it meets the defined criteria."
+      },
+      {
+        "key": "B",
+        "text": "Add a formula to the default value of the Last Modified Date field to turn the text red if the record meets the criteria."
+      },
+      {
+        "key": "C",
+        "text": "Add a formula to the default value of the Opportunity Name field to turn the background red if the record meets the criteria."
+      },
+      {
+        "key": "D",
+        "text": "Create a formula field to show the last login date of the owner and display an alert message if it meets the defined criteria."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-06",
+    "source": "trailhead",
+    "ref": "U3 E6",
+    "stem": "The Ursa Major Solar CEO does NOT want to see the list of Contacts when viewing an Account page, but still needs to access Contact records. How should the administrator configure this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Remove read access permissions for Contacts from the CEO's profile."
+      },
+      {
+        "key": "B",
+        "text": "Set the Contact org-wide default sharing settings to Private."
+      },
+      {
+        "key": "C",
+        "text": "Create an Account page layout without the Contacts related list."
+      },
+      {
+        "key": "D",
+        "text": "Remove the Account related list from the Contact page layout."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-07",
+    "source": "trailhead",
+    "ref": "U3 E7",
+    "stem": "The VP of Sales at Universal Containers wants to ensure that there is a consistent, color-coded report to easily track picklist values from the Stage field on an Opportunity. How should an administrator ensure that a picklist field’s values display in consistent colors on all reports?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a bucket field that defines the color for each value."
+      },
+      {
+        "key": "B",
+        "text": "Configure report conditional highlighting for each value."
+      },
+      {
+        "key": "C",
+        "text": "Update the picklist field and set the color for each value."
+      },
+      {
+        "key": "D",
+        "text": "Create a formula field that defines the color for each value."
+      }
+    ],
+    "correct": [
+      "C",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-08",
+    "source": "trailhead",
+    "ref": "U3 E8",
+    "stem": "Universal Containers wants to track Invoice Payments on an Opportunity Related List. Only the Finance Team should see this Related List; however, all Users should be able to view Invoice Payment reports. How should the administrator implement this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a new page layout and profile for the Finance team."
+      },
+      {
+        "key": "B",
+        "text": "Set the Invoice Payment org-wide sharing settings to Private."
+      },
+      {
+        "key": "C",
+        "text": "Build an Invoice Payment report with a running user of Finance."
+      },
+      {
+        "key": "D",
+        "text": "Grant Finance access only to the Invoice Payment object."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-09",
+    "source": "trailhead",
+    "ref": "U3 E9",
+    "stem": "The marketing team at Ursa Major Solar wants a chart added to the home page specific to their lead generation. What should an administrator recommend to meet this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Update the marketing team's home page in the App Launcher."
+      },
+      {
+        "key": "B",
+        "text": "Update the marketing team's home page in the Lightning App Builder."
+      },
+      {
+        "key": "C",
+        "text": "Update the org-wide home page in the Lightning App Builder."
+      },
+      {
+        "key": "D",
+        "text": "Update the marketing team's home page with a hyper link to the dashboard."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u3-10",
+    "source": "trailhead",
+    "ref": "U3 E10",
+    "stem": "The administrator updated the sales operation team’s project record page with new fields and dynamic components. However, when they refreshed the page the changes are missing. What should the administrator troubleshoot to ensure the changes are implemented?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Confirm the page is activated in the Lightning App Builder."
+      },
+      {
+        "key": "B",
+        "text": "Create a permission set to grant access to the Project object."
+      },
+      {
+        "key": "C",
+        "text": "Add the page to the App Launcher."
+      },
+      {
+        "key": "D",
+        "text": "Review the component visibility filters."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": []
+  },
+  {
+    "id": "th-u2-f08",
+    "source": "trailhead",
+    "ref": "U2 Card 8",
+    "stem": "Ursa Major Solar uses a private sharing model for Cases. Each product line has several product specialists who want to have visibility to all Cases involving their product line. How should the administrator meet this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a predefined Case Team for each group of product specialists and assign the team using Case Assignment Rules."
+      },
+      {
+        "key": "B",
+        "text": "Change the organization-wide default for Cases to Public Read/Write."
+      },
+      {
+        "key": "C",
+        "text": "Give the product specialists' profile the View All permission on Cases."
+      },
+      {
+        "key": "D",
+        "text": "Add a Product Line field to the Case page layout."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "authoredOptions": true
+  },
+  {
+    "id": "th-u2-f10",
+    "source": "trailhead",
+    "ref": "U2 Card 10",
+    "stem": "Ursa Major Solar has three Account record types: Prospect, Customer, and Vendor. The Customer record type is only for Accounts that have a Closed Won Opportunity. How should a System Administrator prevent users from selecting the Customer record type when they create new Account records?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Remove the Customer record type as an assigned record type in the users' profiles and permission sets."
+      },
+      {
+        "key": "B",
+        "text": "Set the Prospect record type as the default record type in the users' profiles."
+      },
+      {
+        "key": "C",
+        "text": "Remove the Record Type field from the Account page layout."
+      },
+      {
+        "key": "D",
+        "text": "Delete the Customer record type and create it again when an Opportunity is Closed Won."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "authoredOptions": true
+  },
+  {
+    "id": "th-u3-f01",
+    "source": "trailhead",
+    "ref": "U3 Card 1",
+    "stem": "A delegated administrator at Ursa Major Solar cannot edit the Created Date field for the Account record. What reason should the administrator give for why this is occurring?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Created Date is a system audit field, and it is read-only for existing records."
+      },
+      {
+        "key": "B",
+        "text": "The delegated administrator needs the Modify All Data permission to edit the field."
+      },
+      {
+        "key": "C",
+        "text": "The field is hidden from the page layout assigned to the delegated administrator."
+      },
+      {
+        "key": "D",
+        "text": "Created Date is a formula field that is recalculated every time the record is saved."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "authoredOptions": true
+  },
+  {
+    "id": "th-u3-f02",
+    "source": "trailhead",
+    "ref": "U3 Card 2",
+    "stem": "Ursa Major Solar wants to create a field to store credit card numbers and needs to make sure the information is protected. Which two actions allow the administrator to provide enhanced security for this field?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create an Encrypted Text field."
+      },
+      {
+        "key": "B",
+        "text": "Update Field-Level Security settings."
+      },
+      {
+        "key": "C",
+        "text": "Create a Text field with a validation rule that hides the value."
+      },
+      {
+        "key": "D",
+        "text": "Make the field read-only on the page layout."
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "authoredOptions": true
+  },
+  {
+    "id": "th-u3-f05",
+    "source": "trailhead",
+    "ref": "U3 Card 5",
+    "stem": "The customer support team wants to use a different page layout when closing a Case. Which method should the administrator use to fulfill this request?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use a Case Close page layout."
+      },
+      {
+        "key": "B",
+        "text": "Add a Close Case button to the existing Case page layout."
+      },
+      {
+        "key": "C",
+        "text": "Create a new Case home page in the Lightning App Builder."
+      },
+      {
+        "key": "D",
+        "text": "Create an escalation rule that changes the page layout when the Case is closed."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "authoredOptions": true
+  }
+]

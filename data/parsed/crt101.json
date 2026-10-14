@@ -1,0 +1,749 @@
+[
+  {
+    "id": "crt-01",
+    "source": "crt101",
+    "ref": "Q1",
+    "stem": "Universal Containers has set the organization-wide default settings for accounts to private. Amy and Bob are on separate sales teams but are assigned to the same role in the hierarchy. Amy is a member of the \"Sales West\" public group and needs access to all accounts owned by Bob, a member of the \"Sales East\" public group. How would Amy obtain access to only Bob's accounts?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Add Amy to the \"Sales East\" public group."
+      },
+      {
+        "key": "B",
+        "text": "Create a sharing rule between the \"Sales West\" and \"Sales East\" public groups."
+      },
+      {
+        "key": "C",
+        "text": "Add Amy to the role above Bob in the role hierarchy."
+      },
+      {
+        "key": "D",
+        "text": "Add Amy to Bob's account teams."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Collaborate on Accounts by Using Teams",
+        "url": "https://help.salesforce.com/s/articleView?id=sales.accountteam.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-02",
+    "source": "crt101",
+    "ref": "Q2",
+    "stem": "A system administrator has gotten a request from the Accounts Payable team for new fields to capture additional details on customer contracts. There are several standard fields on the contract object already that could possibly be used instead of creating new fields. What customization options are available for those standard fields?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Delete standard fields"
+      },
+      {
+        "key": "B",
+        "text": "Change the field type of standard fields"
+      },
+      {
+        "key": "C",
+        "text": "Remove non-required standard fields from a page layout"
+      },
+      {
+        "key": "D",
+        "text": "Rename standard field labels in the user interface"
+      }
+    ],
+    "correct": [
+      "C",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Customize Standard Fields",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.customize_stdfields.htm&type=5"
+      },
+      {
+        "title": "Rename Tabs & Field Labels",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.customize_rename.htm&type=5"
+      },
+      {
+        "title": "Work with Standard and Custom Fields",
+        "url": "https://trailhead.salesforce.com/content/learn/projects/customize-a-salesforce-object/standard-custom-fields"
+      },
+      {
+        "title": "Page Layout",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.customize_layout.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-03",
+    "source": "crt101",
+    "ref": "Q3",
+    "stem": "A system administrator at Universal Containers incorrectly imported a set of lead records from a .csv file they received from the Marketing Manager. They need to remove some of the records from Salesforce quickly before users begin to work with the incorrect records. Which tool should the administrator use to complete the task?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Salesforce roll-back"
+      },
+      {
+        "key": "B",
+        "text": "Data Loader"
+      },
+      {
+        "key": "C",
+        "text": "Mass Delete"
+      },
+      {
+        "key": "D",
+        "text": "Import Wizard"
+      }
+    ],
+    "correct": [
+      "B",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Perform Mass Delete (Dataloader)",
+        "url": "https://developer.salesforce.com/docs/atlas.en-us.dataLoader.meta/dataLoader/performing_mass_deletes.htm"
+      },
+      {
+        "title": "Delete Multiple Records and reports",
+        "url": "https://help.salesforce.com/s/articleView?id=xcloud.admin_massdelete.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-04",
+    "source": "crt101",
+    "ref": "Q4",
+    "stem": "The Marketing team at Universal Containers is responsible for creating new leads and distributing them to different regional sales groups for qualification. How can a system administrator automate this process?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a queue for the marketing team and a flow to notify the team each time a lead is assigned to the queue."
+      },
+      {
+        "key": "B",
+        "text": "Create a queue for each regional group and a lead assignment rule to route leads to the queues."
+      },
+      {
+        "key": "C",
+        "text": "Create a default sales team for each regional group and a lead assignment rule to route leads to the default sales team."
+      },
+      {
+        "key": "D",
+        "text": "Create a queue for each regional group and a validation rule to enforce that the leads are assigned to the correct group."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Set up Assignment Rules",
+        "url": "https://help.salesforce.com/s/articleView?id=service.creating_assignment_rules.htm&type=5"
+      },
+      {
+        "title": "Set up Queues",
+        "url": "https://help.salesforce.com/s/articleView?id=service.queues_overview.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-05",
+    "source": "crt101",
+    "ref": "Q5",
+    "stem": "What does the report type determine when a new report is created?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The objects included in the report"
+      },
+      {
+        "key": "B",
+        "text": "Whether the report can be displayed in a dashboard"
+      },
+      {
+        "key": "C",
+        "text": "The default columns in the report"
+      },
+      {
+        "key": "D",
+        "text": "Whether the report can contain a chart"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Reports & Dashboards for Lightning Experience",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/lex_implementation_reports_dashboards"
+      }
+    ]
+  },
+  {
+    "id": "crt-06",
+    "source": "crt101",
+    "ref": "Q6",
+    "stem": "Universal Finance has segmented its customer base into two categories: High Wealth and Retirement. High Wealth accounts should be visible to the High Wealth sales team members only. Retirement accounts should be visible to all sales users. How can a system administrator accomplish this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a new profile for Retirement sales team members and remove read access to High Wealth account records."
+      },
+      {
+        "key": "B",
+        "text": "Set the organization-wide default sharing to private and create sharing rules to share High Wealth accounts with the High Wealth team members public group and Retirement accounts with all sales users."
+      },
+      {
+        "key": "C",
+        "text": "Create a new record type for the High Wealth accounts and share the record type with High Wealth sales team members."
+      },
+      {
+        "key": "D",
+        "text": "Set the organization-wide default sharing to public read-only and create a sharing rule to limit access to High Wealth accounts."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Data Security",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/data_security"
+      }
+    ]
+  },
+  {
+    "id": "crt-07",
+    "source": "crt101",
+    "ref": "Q7",
+    "stem": "An administrator needs to prevent users from exporting reports. Which tools could the admin use to accomplish this request?",
+    "options": [
+      {
+        "key": "A",
+        "text": "User Record"
+      },
+      {
+        "key": "B",
+        "text": "Permission Set"
+      },
+      {
+        "key": "C",
+        "text": "Profile"
+      },
+      {
+        "key": "D",
+        "text": "Muting Permission Set in Group"
+      }
+    ],
+    "correct": [
+      "C",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Permission Set Groups",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/permission-set-groups"
+      },
+      {
+        "title": "Profiles",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.admin_userprofiles.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-08",
+    "source": "crt101",
+    "ref": "Q8",
+    "stem": "A system administrator is creating new user records for a new hire class starting next week for the Service team. The first few records created with no issues, but this last one is not saving properly. What could be the issue?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The username is not unique."
+      },
+      {
+        "key": "B",
+        "text": "The time zone is different from the corporate default."
+      },
+      {
+        "key": "C",
+        "text": "The Manager field is left blank."
+      },
+      {
+        "key": "D",
+        "text": "A license is not available."
+      }
+    ],
+    "correct": [
+      "A",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "User Management",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/lex_implementation_user_setup_mgmt/lex_implementation_user_setup_mgmt_configure_user_access-hoc?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-certified-associate-credential"
+      }
+    ]
+  },
+  {
+    "id": "crt-09",
+    "source": "crt101",
+    "ref": "Q9",
+    "stem": "Universal Containers set the organization-wide default settings for account to private. The system administrator has added a new role to the role hierarchy. Users assigned to the new role need read access to accounts owned by other members of the role. How can an administrator accomplish this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Select Grant Access Using Hierarchies for accounts."
+      },
+      {
+        "key": "B",
+        "text": "Add the role to the account teams."
+      },
+      {
+        "key": "C",
+        "text": "Create an account sharing rule."
+      },
+      {
+        "key": "D",
+        "text": "Create a public group for the role."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Data Security",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/data_security"
+      },
+      {
+        "title": "Sharing Rules",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.security_about_sharing_rules.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-10",
+    "source": "crt101",
+    "ref": "Q10",
+    "stem": "The Support team has a case record type for refund requests. The account owner should be notified when a refund request is entered for one of their accounts. What tool would the administrator use to fulfill this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Assignment Rules"
+      },
+      {
+        "key": "B",
+        "text": "Flow"
+      },
+      {
+        "key": "C",
+        "text": "Chatter Post"
+      },
+      {
+        "key": "D",
+        "text": "Escalation Rules"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Record-Triggered Flow",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/record-triggered-flows"
+      }
+    ]
+  },
+  {
+    "id": "crt-11",
+    "source": "crt101",
+    "ref": "Q11",
+    "stem": "Sales representatives at Universal Containers perform the initial steps in the lead qualification process and sales managers complete the final qualification steps. Universal Containers' requirements include those listed below: Sales managers can access all lead status values. Sales representatives can only access the first three lead status values. Sales representatives cannot access the final two lead status values. How can a system administrator meet these requirements?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use field-level security to restrict access to the lead status values."
+      },
+      {
+        "key": "B",
+        "text": "Create two separate page layouts."
+      },
+      {
+        "key": "C",
+        "text": "Create two separate lead processes and record types."
+      },
+      {
+        "key": "D",
+        "text": "Create a validation rule to prevent lead conversion."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Tailor Business Process to Different Record Types",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.customize_recordtype.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-12",
+    "source": "crt101",
+    "ref": "Q12",
+    "stem": "It's important for Universal Containers to always convey a consistent message. When marketing reps talk with leads, they should follow a specific script written by the marketing manager. An administrator is planning to take the script and create a flow with it. What flow element would an administrator use to present the script?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Screen"
+      },
+      {
+        "key": "B",
+        "text": "Loop"
+      },
+      {
+        "key": "C",
+        "text": "Assignment"
+      },
+      {
+        "key": "D",
+        "text": "Variable"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Flow Builder Basics",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/flow-basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential"
+      },
+      {
+        "title": "Screen Flows",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/screen-flows"
+      }
+    ]
+  },
+  {
+    "id": "crt-13",
+    "source": "crt101",
+    "ref": "Q13",
+    "stem": "Silvio, the team leader of the LACA regional sales team, has asked that his sales team have the ability to view the number of open opportunities related to each of their accounts while viewing the account record. Currently they have to scroll to find that information and are reporting this is taking valuable time while they are on the phone with a customer. Silvio wants to do everything we can to help his team meet their quotas this quarter. How can a system administrator accomplish this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a new account record type"
+      },
+      {
+        "key": "B",
+        "text": "Create a custom formula field"
+      },
+      {
+        "key": "C",
+        "text": "Create a roll-up summary field"
+      },
+      {
+        "key": "D",
+        "text": "Create a lookup field from accounts to opportunities"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Formula and Validation",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/point_click_business_logic"
+      },
+      {
+        "title": "Roll-up Summary Field",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.fields_about_roll_up_summary_fields.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-14",
+    "source": "crt101",
+    "ref": "Q14",
+    "stem": "The Accounts Payable team would like to automate the creation of an invoice record on a custom object when an opportunity is marked as Closed Won. Which automation tools could be considered for this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Validation Rule"
+      },
+      {
+        "key": "B",
+        "text": "Auto-Response Rule"
+      },
+      {
+        "key": "C",
+        "text": "Flow Builder"
+      },
+      {
+        "key": "D",
+        "text": "Assignment Rule"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "About Flows and Flow Builder",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.automate_flow_about.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-15",
+    "source": "crt101",
+    "ref": "Q15",
+    "stem": "An administrator has imported a file of leads and noticed that some records failed during the import. What could have caused this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Locale Settings were incorrect"
+      },
+      {
+        "key": "B",
+        "text": "A required field was not in the import file"
+      },
+      {
+        "key": "C",
+        "text": "The owner was not assigned"
+      },
+      {
+        "key": "D",
+        "text": "A custom validation rule was enforced"
+      }
+    ],
+    "correct": [
+      "B",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Data Management",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/lex_implementation_data_management"
+      },
+      {
+        "title": "Make a custom field required",
+        "url": "https://help.salesforce.com/s/articleView?id=000384974&type=1"
+      },
+      {
+        "title": "Validation Rules",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.fields_about_field_validation.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-16",
+    "source": "crt101",
+    "ref": "Q16",
+    "stem": "Which tools can be used to give an end user permissions in Salesforce?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Profiles"
+      },
+      {
+        "key": "B",
+        "text": "Role Hierarchy"
+      },
+      {
+        "key": "C",
+        "text": "Permission Set Groups"
+      },
+      {
+        "key": "D",
+        "text": "Public Groups"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Data Security",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/data_security"
+      },
+      {
+        "title": "Profiles",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.admin_userprofiles.htm&type=5"
+      },
+      {
+        "title": "Permission Sets",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.perm_sets_overview.htm&type=5"
+      }
+    ]
+  },
+  {
+    "id": "crt-17",
+    "source": "crt101",
+    "ref": "Q17",
+    "stem": "The Support team at Universal Containers wants to reassign ownership of cases related to a new product that have not been resolved after 3 hours. These cases should be owned by Tier 2 Agents. The Service Managers are also asking to be notified when/if a case changes ownership. What Salesforce tool can an administrator use to most efficiently meet these requirements?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create an Escalation Rule"
+      },
+      {
+        "key": "B",
+        "text": "Use Flow to reassign ownership of cases related to that product and send an email to the Service Managers"
+      },
+      {
+        "key": "C",
+        "text": "Create a case assignment rule to reassign ownership of cases related to that product and a flow to send an email to the Service Managers"
+      },
+      {
+        "key": "D",
+        "text": "Create a process using Process Builder to reassign ownership of cases related to that product and send an email to the Tier 2 Agents"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Create a Process for Managing Support Cases",
+        "url": "https://trailhead.salesforce.com/content/learn/projects/create-a-process-for-managing-support-cases"
+      }
+    ]
+  },
+  {
+    "id": "crt-18",
+    "source": "crt101",
+    "ref": "Q18",
+    "stem": "The Service team is reporting that case records are getting cluttered with components that are not always relevant. They want a more efficient interface with the most frequently used components at the top of the page. How can a system administrator accomplish this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Use Lightning App Builder to make rearrange and/or remove the components."
+      },
+      {
+        "key": "B",
+        "text": "Create a page layout, service process, and record type for the case object."
+      },
+      {
+        "key": "C",
+        "text": "Use Page Layout Editor to rearrange the fields and sections."
+      },
+      {
+        "key": "D",
+        "text": "Create a Flow to make the components conditionally visible."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Lightning App Builder",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/lightning_app_builder"
+      }
+    ]
+  },
+  {
+    "id": "crt-19",
+    "source": "crt101",
+    "ref": "Q19",
+    "stem": "Which statement about the Salesforce Mobile App is false?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Custom fields, objects, record types and page layouts are not available on the Mobile App."
+      },
+      {
+        "key": "B",
+        "text": "Salesforce can be accessed from the browser on a mobile device."
+      },
+      {
+        "key": "C",
+        "text": "You can change an opportunity's price book."
+      },
+      {
+        "key": "D",
+        "text": "You can create mobile-specific pages using the Lightning App Builder."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Salesforce Mobile App Basics",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/lex_salesforce1_basics"
+      },
+      {
+        "title": "Salesforce Mobile App Customization",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/salesforce1_mobile_app"
+      }
+    ]
+  },
+  {
+    "id": "crt-20",
+    "source": "crt101",
+    "ref": "Q20",
+    "stem": "A purchase order requisition is going through the Flow approval process. For amounts over $10,000 a group of managers must all review and agree to the approval. What does the administrator need to set on the approval to make this happen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Approve or reject based on the first response"
+      },
+      {
+        "key": "B",
+        "text": "Set the first response approval from all selected approvers"
+      },
+      {
+        "key": "C",
+        "text": "Require unanimous approval when configuring the approval step"
+      },
+      {
+        "key": "D",
+        "text": "Formula fields can reference themselves in the formula"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [
+      {
+        "title": "Automate Your Approvals with Flow Approval Processes",
+        "url": "https://help.salesforce.com/s/articleView?id=platform.automate_automated_approvals.htm&type=5"
+      },
+      {
+        "title": "Require Unanimous Approval for Approval Steps Assigned to Groups",
+        "url": "https://help.salesforce.com/s/articleView?id=release-notes.rn_automate_automated_approvals_unanimous_approvals.htm&release=262&type=5"
+      }
+    ]
+  }
+]

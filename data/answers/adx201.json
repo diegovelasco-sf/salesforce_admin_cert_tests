@@ -1,0 +1,14 @@
+{
+  "_nota": "Clave del ADX201 recuperada de la diapositiva de revelado (recuadro azul y check verde), que no está en el texto del PDF. 'B=False' indica que la opción B debe ser 'False'.",
+  "L1": ["E", "B", "C", "A"],
+  "L2": ["C", "A", "B", "D"],
+  "L3": ["A", "C", "B", "D"],
+  "L4": ["D", "B=False", "C", "A"],
+  "L5": ["B", "B", "D", "B=False"],
+  "L6": ["B=False", "B", "D", "D"],
+  "L7": ["E", "B", "A", "A"],
+  "L8": ["E", "B", "C", "A"],
+  "L9": ["C", "D", "A", "B"],
+  "L10": ["B", "A=True", "C", "D"],
+  "L11": ["B", "A", "A=True", "B"]
+}

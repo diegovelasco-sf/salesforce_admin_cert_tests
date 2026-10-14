@@ -1,0 +1,8 @@
+[
+  { "id": "freecram", "file": "AdminCertificateExam/ADM-201 V22.35.pdf", "pages": 71, "questions": 150 },
+  { "id": "crt101", "file": "CRT101_QA_SU26v1-EN-SG.pdf", "pages": 112, "questions": 20 },
+  { "id": "adx201", "file": "AdminCertificateExam/ADX201-WI26-EN-SG-v4.pdf", "pages": 365, "questions": 44 },
+  { "id": "success4exam", "file": "../Platform Administrator-Practice Test 2.pdf", "pages": 173, "questions": 238 },
+  { "id": "trailhead", "file": "Administrator Certification Prep Module 1.pdf", "pages": 34, "questions": 27 },
+  { "id": "debrief", "file": "Admin 201 Debrief - Recent Version.pdf", "pages": 10, "questions": 17 }
+]

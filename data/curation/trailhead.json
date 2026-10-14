@@ -1,0 +1,175 @@
+{
+  "th-u2-01": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Company Information recoge los datos generales del org, como el nombre de la organización, la zona horaria y el idioma por defecto, y es el único conjunto en el que están los tres. Business hours y fiscal year tienen su propia página en Company Settings, las password policies están en la sección de seguridad, la traducción en Translation Workbench, y Chatter y los dominios tienen sus propias secciones."
+  },
+  "th-u2-02": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Según la guía oficial, el locale fija formatos que son iguales en todo su ámbito: cómo se muestran la hora y los números, el orden del nombre y los apellidos y el formato de fecha. El horario laboral y los festivos dependen de cada sede, y el formato del teléfono y de la moneda puede variar entre países que comparten locale."
+  },
+  "th-u2-03": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Enable Inline Editing permite editar campos directamente desde una list view, y Enable Enhanced Lists permite ver, personalizar y editar los datos de la lista con rapidez; con las dos activadas, el manager puede corregir los nombres desde su vista «Team Europe». Enable Enhanced Page Layout Editor sirve para editar page layouts, y Enable Enhanced Profile List Views para editar perfiles en bloque."
+  },
+  "th-u2-04": {
+    "exclude": "Misma pregunta que fc-017 (activar la feature license Service Cloud User en el registro del usuario), con otra redacción."
+  },
+  "th-u2-05": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "El username debe tener formato de email y ser único en todos los orgs de producción de Salesforce, aunque no tiene por qué ser una dirección real. Por eso puede ser distinto del email del usuario y usar cualquier dominio, no solo el de la empresa."
+  },
+  "th-u2-06": {
+    "section": "config",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "reaches out to you the Salesforce Admin",
+        "to": "reaches out to the Salesforce Admin"
+      }
+    ],
+    "explanationEs": "El primer paso es revisar la related list Login History del usuario, que registra cada intento de acceso y el motivo del fallo. Setup Audit Trail registra los cambios de configuración de los administradores, iniciar sesión como el usuario no reproduce su error de login y los debug logs no recogen los intentos de acceso."
+  },
+  "th-u2-07": {
+    "exclude": "Misma pregunta que fc-119 (congelar la cuenta de un usuario que se va de baja), con otra redacción."
+  },
+  "th-u2-08": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Al desactivar a un usuario, su licencia queda libre para asignarla a otra persona. No se borra ni deja de facturarse, porque la empresa ya la ha pagado, y tampoco se reasigna sola: lo hace el administrador."
+  },
+  "th-u2-09": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "Quien inicia sesión desde un rango de Trusted IP Ranges (Network Access) no tiene que verificar su identidad con un código. Desde fuera de esos rangos se puede seguir entrando tras verificar la identidad, o con el security token si es por API, y los paquetes de AppExchange no se ven afectados."
+  },
+  "th-u2-10": {
+    "section": "config",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "The Executive Team at Ursa Major Solar is exploring ways to increase protection of the organization’s Salesforce data from unauthorized access. It has been proposed to leverage the Trusted IP Ranges feature. What is a benefit of entering Trusted IP Ranges in the Network Access section?",
+        "to": "Sales reps at Ursa Major Solar, who all share the same profile, report that their passwords expire too often. Where should an administrator adjust the password expiration for these users?"
+      }
+    ],
+    "explanationEs": "Como todos los afectados comparten perfil, la caducidad de la contraseña se ajusta en las password policies de ese perfil, que prevalecen sobre las del org. El registro del usuario no tiene ese ajuste, los permission sets no incluyen políticas de contraseña y los roles controlan el acceso a registros e informes."
+  },
+  "th-u2-11": {
+    "section": "data",
+    "review": "ok",
+    "explanationEs": "El acceso a un informe depende de la carpeta donde se guarda: en una carpeta compartida solo con el Executive Team (por roles, grupos públicos o usuarios), solo ellos lo verán. Cambiar el OWD de Opportunity afectaría a todo el org, la carpeta personal solo la ve su propietario y poner «do not use» en el nombre no protege nada."
+  },
+  "th-u2-12": {
+    "section": "config",
+    "review": "ok",
+    "explanationEs": "El perfil controla, entre otras cosas, qué record types puede usar el usuario, la seguridad a nivel de campo (field-level security) y las apps que tiene asignadas. Las feature licenses se asignan en el registro del usuario, y los ajustes de locale son preferencias del usuario, no del perfil."
+  },
+  "th-u3-01": {
+    "section": "objects",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "for his the Sales team",
+        "to": "for the Sales team"
+      }
+    ],
+    "explanationEs": "Opportunity es el objeto estándar que guarda las ventas en curso, que avanzan por etapas (stages) hasta ganarse o perderse. Account guarda las empresas o personas clientes, Asset los productos que ya han comprado y Product el catálogo con sus precios."
+  },
+  "th-u3-02": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Cases y Opportunities son objetos estándar relacionados con Account: aparecen como related lists en la cuenta y dan esa visión de 360 grados del cliente. Campaigns no se relaciona con las cuentas, y Leads tampoco: un lead se convierte en cuenta y contacto."
+  },
+  "th-u3-03": {
+    "section": "objects",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "Ray-A-Thon. the manager",
+        "to": "Ray-A-Thon. The manager"
+      }
+    ],
+    "explanationEs": "Leads y contactos se asocian a una campaña como campaign members, y las oportunidades pueden indicar la campaña de la que salieron (Primary Campaign Source) para medir su resultado. Ni las cuentas ni los contact roles tienen una relación directa con Campaign."
+  },
+  "th-u3-04": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "IF devuelve un valor si la condición es verdadera y otro si es falsa, y se pueden anidar varios IF para obtener varios resultados según el número de empleados. ISPICKVAL compara valores de picklist, TEXT convierte un valor en texto y AND solo combina condiciones."
+  },
+  "th-u3-05": {
+    "section": "objects",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "automatically .",
+        "to": "automatically."
+      }
+    ],
+    "explanationEs": "Un formula field puede calcular los días desde la última modificación y, con la función IMAGE, mostrar una bandera roja cuando pasan de 30. Una fórmula no cambia el color del texto ni del fondo de otro campo, y la fecha del último login del propietario no dice nada de si la oportunidad se ha actualizado."
+  },
+  "th-u3-06": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Basta un page layout de Account sin la related list Contacts, asignado al perfil del CEO: dejará de ver la lista en la cuenta, pero podrá seguir abriendo los contactos. Quitarle el permiso de lectura le dejaría sin acceso, cambiar el OWD afectaría a todo el org y quitar la related list Account del layout de Contact cambia la página del contacto, no la de la cuenta."
+  },
+  "th-u3-07": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Cada valor de un picklist puede tener un color fijo, que los gráficos de informes y dashboards usan siempre, y un formula field con la función IMAGE puede mostrar un color distinto para cada valor. Los colores de un bucket field cambian de un informe a otro, y el conditional highlighting de los informes se aplica a rangos de valores numéricos."
+  },
+  "th-u3-08": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Un page layout nuevo con la related list de Invoice Payments, asignado a un perfil del equipo de finanzas, hace que solo ellos la vean, y todos siguen pudiendo consultar los informes. Poner el OWD de Invoice Payment en Private o dar acceso solo a Finanzas impediría que el resto viera esos informes, y un informe con un running user de Finanzas no añade la related list a la página."
+  },
+  "th-u3-09": {
+    "section": "objects",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "option:D",
+        "from": "hyper link",
+        "to": "hyperlink"
+      }
+    ],
+    "explanationEs": "Las home pages de Lightning se editan en Lightning App Builder, y una home page propia del equipo de marketing, asignada a su perfil o a su app, puede incluir el gráfico de leads. Editar la home page de todo el org afectaría a todos los usuarios, el App Launcher no edita páginas y un enlace al dashboard no muestra el gráfico en la página."
+  },
+  "th-u3-10": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Los cambios en una Lightning record page no se ven hasta que la página está activada para la app, el record type o el perfil del equipo. El equipo ya tiene permisos sobre el objeto Project, añadir la página al App Launcher no la activa y los filtros de visibilidad afectan a componentes concretos, no a todos los cambios."
+  },
+  "th-u2-f08": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "Un case team predefinido agrupa a los especialistas de cada línea de producto con un nivel de acceso a los casos, y las case assignment rules pueden añadir ese equipo a los casos de su línea al crearlos. Así ven todos los casos de su producto y nada más. Pasar el OWD a Public Read/Write o dar View All abriría todos los casos, y un campo en el page layout no da acceso a nada."
+  },
+  "th-u2-f10": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Al crear un registro, el usuario solo puede elegir los record types asignados en su perfil y en sus permission sets, así que basta con quitar Customer de esa asignación. Poner Prospect por defecto no impide elegir Customer, quitar el campo Record Type del layout no cambia los record types disponibles y borrar el record type afectaría a las cuentas que ya lo usan."
+  },
+  "th-u3-f01": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Created Date es un campo de auditoría del sistema (system audit field) que Salesforce rellena al crear el registro y que es de solo lectura en los registros existentes, tenga el perfil que tenga el usuario. Ni siquiera Modify All Data permite editarlo; solo se puede fijar al crear registros, por ejemplo en una migración, con el permiso Set Audit Fields upon Record Creation. Tampoco es un formula field, y el page layout no influye."
+  },
+  "th-u3-f02": {
+    "section": "objects",
+    "review": "ok",
+    "explanationEs": "Un campo Encrypted Text guarda el valor cifrado y lo muestra enmascarado salvo a quien tenga el permiso View Encrypted Data, y la field-level security limita qué perfiles ven el campo. Una validation rule no oculta valores, y hacer el campo de solo lectura en el page layout no impide verlo ni consultarlo desde informes o la API."
+  },
+  "th-u3-f05": {
+    "section": "service",
+    "review": "ok",
+    "explanationEs": "Salesforce tiene un tipo de page layout específico para cerrar casos, el close case layout, que se asigna por perfil y puede llevar sus propios campos, como Notify Contact. Añadir un botón al layout normal no cambia el formulario de cierre, una home page no tiene que ver con el caso y las escalation rules no cambian page layouts."
+  }
+}
