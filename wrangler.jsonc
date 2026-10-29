@@ -1,0 +1,7 @@
+{
+  // Despliegue en Cloudflare Workers como sitio estático: `npm run build` genera dist/ y `wrangler deploy` lo sube.
+  // El nombre debe coincidir con el del proyecto en Cloudflare (Workers & Pages).
+  "name": "salesforce-cert-tests",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./dist" }
+}

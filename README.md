@@ -393,16 +393,21 @@ Solo funcionan con `npm run dev`; no entran en la versión de producción.
 No uses GitHub Pages. En el plan gratuito solo funciona con repositorios públicos, y aunque pagues para
 usarlo con uno privado, la web sigue siendo pública.
 
-Si quieres usar la app fuera de este equipo, la opción gratuita y con control de acceso es Cloudflare Pages
-con Cloudflare Access:
+Si quieres usar la app fuera de este equipo, la opción gratuita y con control de acceso es Cloudflare
+Workers (sitio estático) con Cloudflare Access. [wrangler.jsonc](wrangler.jsonc) ya lo configura: el nombre
+del proyecto, `salesforce-cert-tests`, debe coincidir con el de Cloudflare, y los ficheros salen de `dist/`.
 
-1. Crea el proyecto subiendo primero una página vacía, para que el banco no quede público mientras
-   configuras el acceso.
-2. En Cloudflare Zero Trust → Access, crea una aplicación para `<proyecto>.pages.dev` y
-   `*.<proyecto>.pages.dev` que solo admita tu email. Hace falta la segunda dirección porque cada
-   despliegue tiene también su propia URL.
-3. Despliega la app con `npm run build` y `npx wrangler pages deploy dist`, o conecta este repositorio
-   privado para que se despliegue sola con cada cambio.
+1. En Cloudflare, Workers & Pages → Create → Import a repository, y elige este repositorio. Usa
+   *Build command* `npm run build` y *Deploy command* `npx wrangler deploy`. [.node-version](.node-version)
+   fija Node 24 para la compilación.
+2. En *Protect with Cloudflare Access*, activa el alcance *All traffic* y una política *Allow* con *Emails*
+   y tu dirección exacta. No uses *Email domain*: dejaría entrar a cualquiera con ese dominio.
+3. Comprueba el resultado en una ventana privada: la URL debe mostrar el login de Access, no la app.
+
+Sin Cloudflare conectado a GitHub, puedes desplegar a mano con `npm run build` y `npx wrangler deploy`.
+
+Access solo protege la web, no el repositorio: con el repositorio público, el banco sigue legible en GitHub.
+Conecta el despliegue automático solo cuando el repositorio sea privado, o cada push lo publicará.
 
 El progreso se guarda por origen, así que en la versión online empezarás de cero. Para llevártelo, expórtalo
 en Ajustes en una versión e impórtalo en la otra.
