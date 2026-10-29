@@ -1,0 +1,326 @@
+{
+  "ab-fc108-102": {
+    "duplicateOf": "ab-v2335-001"
+  },
+  "ab-fc108-006": {
+    "duplicateOf": "ab-v2335-002"
+  },
+  "ab-fc108-007": {
+    "duplicateOf": "ab-v2335-006"
+  },
+  "ab-fc108-090": {
+    "duplicateOf": "ab-v2335-006"
+  },
+  "ab-fc108-057": {
+    "duplicateOf": "ab-v2335-009"
+  },
+  "ab-fc108-026": {
+    "duplicateOf": "ab-v2335-012"
+  },
+  "ab-fc108-009": {
+    "duplicateOf": "ab-v2335-013"
+  },
+  "ab-fc108-092": {
+    "duplicateOf": "ab-v2335-014"
+  },
+  "ab-fc108-059": {
+    "duplicateOf": "ab-v2335-022"
+  },
+  "ab-fc108-002": {
+    "duplicateOf": "ab-v2335-026"
+  },
+  "ab-fc108-021": {
+    "duplicateOf": "ab-v2335-029"
+  },
+  "ab-fc108-061": {
+    "duplicateOf": "ab-v2335-033"
+  },
+  "ab-fc108-053": {
+    "duplicateOf": "ab-v2335-035"
+  },
+  "ab-fc108-038": {
+    "duplicateOf": "ab-v2335-040"
+  },
+  "ab-fc108-047": {
+    "duplicateOf": "ab-v2335-058"
+  },
+  "ab-fc108-066": {
+    "duplicateOf": "ab-v2335-044"
+  },
+  "ab-fc108-045": {
+    "duplicateOf": "ab-v2335-047"
+  },
+  "ab-fc108-083": {
+    "duplicateOf": "ab-v2335-049"
+  },
+  "ab-fc108-005": {
+    "duplicateOf": "ab-v2335-051"
+  },
+  "ab-fc108-069": {
+    "exclude": "duplicada de ab-v2335-057 (mismas respuestas); se excluye porque su opción «Task» llega con texto ajeno pegado y un duplicado no puede repararlo para emparejarla con la canónica"
+  },
+  "ab-fc108-068": {
+    "duplicateOf": "ab-v2335-059"
+  },
+  "ab-fc108-073": {
+    "duplicateOf": "ab-v2335-059"
+  },
+  "ab-fc108-014": {
+    "duplicateOf": "ab-v2335-060"
+  },
+  "ab-fc108-055": {
+    "duplicateOf": "ab-v2335-062"
+  },
+  "ab-fc108-077": {
+    "duplicateOf": "ab-v2335-063"
+  },
+  "ab-fc108-037": {
+    "duplicateOf": "ab-v2335-064"
+  },
+  "ab-fc108-004": {
+    "duplicateOf": "ab-v2335-067"
+  },
+  "ab-fc108-107": {
+    "duplicateOf": "ab-v2335-068"
+  },
+  "ab-fc108-034": {
+    "duplicateOf": "ab-v2335-069"
+  },
+  "ab-fc108-075": {
+    "duplicateOf": "ab-v2335-077"
+  },
+  "ab-fc108-011": {
+    "duplicateOf": "ab-v2335-079"
+  },
+  "ab-fc108-078": {
+    "duplicateOf": "ab-v2335-081"
+  },
+  "ab-fc108-036": {
+    "duplicateOf": "ab-v2335-088"
+  },
+  "ab-fc108-091": {
+    "duplicateOf": "ab-v2335-091"
+  },
+  "ab-fc108-032": {
+    "exclude": "clave distinta en la fuente: marca dos respuestas (dos page layouts con un proceso, y Dynamic Forms) en una pregunta de respuesta única; solo Dynamic Forms es correcta, porque un layout no cambia según el valor de un campo"
+  },
+  "ab-fc108-058": {
+    "duplicateOf": "ab-v2335-097"
+  },
+  "ab-fc108-049": {
+    "duplicateOf": "ab-v2335-098"
+  },
+  "ab-fc108-087": {
+    "duplicateOf": "ab-v2335-100"
+  },
+  "ab-fc108-020": {
+    "duplicateOf": "ab-v2335-102"
+  },
+  "ab-fc108-035": {
+    "duplicateOf": "ab-v2335-103"
+  },
+  "ab-fc108-013": {
+    "duplicateOf": "ab-v2335-110"
+  },
+  "ab-fc108-031": {
+    "duplicateOf": "ab-v2335-120"
+  },
+  "ab-fc108-067": {
+    "duplicateOf": "ab-v2335-122"
+  },
+  "ab-fc108-082": {
+    "duplicateOf": "ab-v2335-123"
+  },
+  "ab-fc108-076": {
+    "duplicateOf": "ab-v2335-124"
+  },
+  "ab-fc108-033": {
+    "duplicateOf": "ab-v2335-126"
+  },
+  "ab-fc108-016": {
+    "duplicateOf": "ab-v2335-128"
+  },
+  "ab-fc108-070": {
+    "duplicateOf": "ab-v2335-132"
+  },
+  "ab-fc108-084": {
+    "duplicateOf": "ab-v2335-139"
+  },
+  "ab-fc108-048": {
+    "duplicateOf": "ab-v2335-141"
+  },
+  "ab-fc108-103": {
+    "duplicateOf": "ab-v2335-142"
+  },
+  "ab-fc108-040": {
+    "duplicateOf": "ab-v2335-143"
+  },
+  "ab-fc108-105": {
+    "duplicateOf": "ab-v2335-149"
+  },
+  "ab-fc108-008": {
+    "duplicateOf": "ab-v2335-152"
+  },
+  "ab-fc108-095": {
+    "duplicateOf": "ab-v2335-154"
+  },
+  "ab-fc108-022": {
+    "duplicateOf": "ab-v2335-158"
+  },
+  "ab-fc108-027": {
+    "duplicateOf": "ab-v2335-159"
+  },
+  "ab-fc108-062": {
+    "duplicateOf": "ab-v2335-160"
+  },
+  "ab-fc108-028": {
+    "duplicateOf": "ab-v2335-164"
+  },
+  "ab-fc108-080": {
+    "duplicateOf": "ab-v2335-165"
+  },
+  "ab-fc108-086": {
+    "duplicateOf": "ab-v2335-169"
+  },
+  "ab-fc108-019": {
+    "duplicateOf": "ab-v2335-171"
+  },
+  "ab-fc108-017": {
+    "duplicateOf": "ab-v2335-172"
+  },
+  "ab-fc108-063": {
+    "duplicateOf": "ab-v2335-178"
+  },
+  "ab-fc108-072": {
+    "duplicateOf": "ab-v2335-179"
+  },
+  "ab-fc108-088": {
+    "duplicateOf": "ab-v2335-218"
+  },
+  "ab-fc108-106": {
+    "duplicateOf": "ab-v2335-192"
+  },
+  "ab-fc108-039": {
+    "duplicateOf": "ab-v2335-193"
+  },
+  "ab-fc108-101": {
+    "duplicateOf": "ab-v2335-196"
+  },
+  "ab-fc108-025": {
+    "duplicateOf": "ab-v2335-199"
+  },
+  "ab-fc108-064": {
+    "duplicateOf": "ab-v2335-282"
+  },
+  "ab-fc108-054": {
+    "duplicateOf": "ab-v2335-206"
+  },
+  "ab-fc108-094": {
+    "duplicateOf": "ab-v2335-207"
+  },
+  "ab-fc108-085": {
+    "duplicateOf": "ab-v2335-208"
+  },
+  "ab-fc108-001": {
+    "duplicateOf": "ab-v2335-212"
+  },
+  "ab-fc108-046": {
+    "duplicateOf": "ab-v2335-213"
+  },
+  "ab-fc108-030": {
+    "duplicateOf": "ab-v2335-214"
+  },
+  "ab-fc108-081": {
+    "duplicateOf": "ab-v2335-215"
+  },
+  "ab-fc108-003": {
+    "duplicateOf": "ab-v2335-217"
+  },
+  "ab-fc108-071": {
+    "duplicateOf": "ab-v2335-222"
+  },
+  "ab-fc108-100": {
+    "duplicateOf": "ab-v2335-235"
+  },
+  "ab-fc108-065": {
+    "duplicateOf": "ab-v2335-236"
+  },
+  "ab-fc108-060": {
+    "duplicateOf": "ab-v2335-237"
+  },
+  "ab-fc108-023": {
+    "duplicateOf": "ab-v2335-241"
+  },
+  "ab-fc108-024": {
+    "duplicateOf": "ab-v2335-260"
+  },
+  "ab-fc108-029": {
+    "duplicateOf": "ab-v2335-246"
+  },
+  "ab-fc108-108": {
+    "duplicateOf": "ab-v2335-248"
+  },
+  "ab-fc108-074": {
+    "duplicateOf": "ab-v2335-252"
+  },
+  "ab-fc108-052": {
+    "duplicateOf": "ab-v2335-257"
+  },
+  "ab-fc108-050": {
+    "duplicateOf": "ab-v2335-259"
+  },
+  "ab-fc108-089": {
+    "exclude": "duplicada de ab-v2335-268, excluida por tener las opciones corrompidas (fórmulas ilegibles) y una clave que no coincide con la de V23.35 para el mismo texto"
+  },
+  "ab-fc108-079": {
+    "duplicateOf": "ab-v2335-270"
+  },
+  "ab-fc108-099": {
+    "duplicateOf": "ab-v2335-271"
+  },
+  "ab-fc108-093": {
+    "duplicateOf": "ab-v2335-274"
+  },
+  "ab-fc108-051": {
+    "duplicateOf": "ab-v2335-278"
+  },
+  "ab-fc108-042": {
+    "duplicateOf": "ab-v2335-280"
+  },
+  "ab-fc108-015": {
+    "duplicateOf": "ab-v2335-289"
+  },
+  "ab-fc108-044": {
+    "duplicateOf": "ab-v2335-291"
+  },
+  "ab-fc108-041": {
+    "duplicateOf": "ab-v2335-294"
+  },
+  "ab-fc108-018": {
+    "duplicateOf": "ab-v2335-301"
+  },
+  "ab-fc108-056": {
+    "duplicateOf": "ab-v2335-302"
+  },
+  "ab-fc108-096": {
+    "duplicateOf": "ab-v2335-304"
+  },
+  "ab-fc108-012": {
+    "duplicateOf": "ab-v2335-310"
+  },
+  "ab-fc108-097": {
+    "duplicateOf": "ab-v2335-312"
+  },
+  "ab-fc108-098": {
+    "duplicateOf": "ab-v2335-317"
+  },
+  "ab-fc108-043": {
+    "duplicateOf": "ab-v2335-320"
+  },
+  "ab-fc108-010": {
+    "duplicateOf": "ab-v2335-322"
+  },
+  "ab-fc108-104": {
+    "duplicateOf": "ab-v2335-325"
+  }
+}

@@ -246,6 +246,23 @@ button.brand:hover {
   gap: 0.25rem;
 }
 
+/* Selector de certificación: en la barra, entre la marca y el menú; en pantallas estrechas ocupa su propia fila. */
+.cert-switch {
+  flex: 0 1 auto;
+}
+
+@media (max-width: 760px) {
+  .cert-switch {
+    order: 3;
+    width: 100%;
+  }
+
+  .cert-switch .segment {
+    flex: 1 1 0;
+    text-align: center;
+  }
+}
+
 button.nav-item {
   min-height: 36px;
   padding: 0.35rem 0.75rem;
@@ -685,6 +702,63 @@ fieldset.options {
 .segment.on {
   color: #ffffff;
   background: var(--btn-bg);
+}
+
+/* Número exacto: fila propia bajo los preajustes, con − y + a los lados del número. */
+.stepper-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.stepper {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+}
+
+.stepper button {
+  width: 2.75rem;
+  padding: 0.4rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--link);
+  background: var(--surface);
+  border: none;
+  border-radius: 0;
+}
+
+.stepper button:not(:disabled):hover {
+  filter: brightness(0.95);
+}
+
+.stepper button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.stepper .count-input {
+  width: 5.5ch;
+  padding: 0.4rem 0.25rem;
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  text-align: center;
+  background: var(--surface);
+  border: none;
+  border-inline: 1px solid var(--border-strong);
+  border-radius: 0;
+  -moz-appearance: textfield;
+}
+
+.stepper .count-input::-webkit-inner-spin-button,
+.stepper .count-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .segment:has(input:focus-visible) {

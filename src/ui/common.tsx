@@ -1,5 +1,6 @@
 // Piezas pequeñas compartidas: diálogo de confirmación y fichas de KPI.
 import { useEffect, useId, useRef, type ReactNode } from 'react'
+import { useI18n } from './lang.ts'
 
 interface ConfirmDialogProps {
   open: boolean
@@ -13,7 +14,8 @@ interface ConfirmDialogProps {
 }
 
 /** Diálogo modal nativo: atrapa el foco y se cierra con Escape. */
-export function ConfirmDialog({ open, title, children, confirmLabel, cancelLabel = 'Cancelar', danger, onConfirm, onCancel }: ConfirmDialogProps) {
+export function ConfirmDialog({ open, title, children, confirmLabel, cancelLabel, danger, onConfirm, onCancel }: ConfirmDialogProps) {
+  const { t } = useI18n()
   const ref = useRef<HTMLDialogElement>(null)
   const titleId = useId()
   useEffect(() => {
@@ -29,7 +31,7 @@ export function ConfirmDialog({ open, title, children, confirmLabel, cancelLabel
       <div className="dialog-body">{children}</div>
       <div className="actions">
         <button type="button" onClick={onCancel}>
-          {cancelLabel}
+          {cancelLabel ?? t.cancel}
         </button>
         <button type="button" className={danger ? 'danger' : 'primary'} onClick={onConfirm}>
           {confirmLabel}
@@ -58,5 +60,6 @@ export function Stat({ label, value, detail }: StatProps) {
 
 /** Resultado aprobado/suspendido: icono + texto, nunca solo color. */
 export function PassBadge({ passed }: { passed: boolean }) {
-  return <span className={`status ${passed ? 'status-good' : 'status-bad'}`}>{passed ? '✓ Aprobado' : '✗ Suspendido'}</span>
+  const { t } = useI18n()
+  return <span className={`status ${passed ? 'status-good' : 'status-bad'}`}>{passed ? t.passed : t.failed}</span>
 }

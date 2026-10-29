@@ -1,0 +1,114 @@
+{
+  "ab-fc35-002": {
+    "duplicateOf": "ab-v2335-001"
+  },
+  "ab-fc35-014": {
+    "duplicateOf": "ab-v2335-005"
+  },
+  "ab-fc35-008": {
+    "duplicateOf": "ab-v2335-007"
+  },
+  "ab-fc35-023": {
+    "duplicateOf": "ab-v2335-008"
+  },
+  "ab-fc35-030": {
+    "duplicateOf": "ab-v2335-009"
+  },
+  "ab-fc35-006": {
+    "duplicateOf": "ab-v2335-016"
+  },
+  "ab-fc35-035": {
+    "duplicateOf": "ab-v2335-023"
+  },
+  "ab-fc35-027": {
+    "duplicateOf": "ab-v2335-026"
+  },
+  "ab-fc35-026": {
+    "duplicateOf": "ab-v2335-029"
+  },
+  "ab-fc35-009": {
+    "duplicateOf": "ab-v2335-037"
+  },
+  "ab-fc35-013": {
+    "duplicateOf": "ab-v2335-045"
+  },
+  "ab-fc35-032": {
+    "exclude": "duplicada exacta de ab-v2335-052 (misma clave); se excluye solo porque la comprobación de duplicados no distingue sus opciones por texto: «master-detail en Inspection__c» y «master-detail en Building__c» tienen las mismas palabras"
+  },
+  "ab-fc35-018": {
+    "duplicateOf": "ab-v2335-079"
+  },
+  "ab-fc35-029": {
+    "duplicateOf": "ab-v2335-083"
+  },
+  "ab-fc35-022": {
+    "duplicateOf": "ab-v2335-114"
+  },
+  "ab-fc35-033": {
+    "duplicateOf": "ab-v2335-136"
+  },
+  "ab-fc35-007": {
+    "duplicateOf": "ab-v2335-146"
+  },
+  "ab-fc35-019": {
+    "duplicateOf": "ab-v2335-151"
+  },
+  "ab-fc35-003": {
+    "duplicateOf": "ab-v2335-166"
+  },
+  "ab-fc35-020": {
+    "duplicateOf": "ab-v2335-167"
+  },
+  "ab-fc35-031": {
+    "duplicateOf": "ab-v2335-191"
+  },
+  "ab-fc35-034": {
+    "duplicateOf": "ab-v2335-203"
+  },
+  "ab-fc35-025": {
+    "duplicateOf": "ab-v2335-234"
+  },
+  "ab-fc35-017": {
+    "duplicateOf": "ab-v2335-238"
+  },
+  "ab-fc35-001": {
+    "duplicateOf": "ab-v2335-256"
+  },
+  "ab-fc35-016": {
+    "duplicateOf": "ab-v2335-263"
+  },
+  "ab-fc35-012": {
+    "duplicateOf": "ab-v2335-264"
+  },
+  "ab-fc35-005": {
+    "duplicateOf": "ab-v2335-267"
+  },
+  "ab-fc35-011": {
+    "duplicateOf": "ab-v2335-270"
+  },
+  "ab-fc35-021": {
+    "duplicateOf": "ab-v2335-287"
+  },
+  "ab-fc35-010": {
+    "duplicateOf": "ab-v2335-290"
+  },
+  "ab-fc35-024": {
+    "duplicateOf": "ab-v2335-308"
+  },
+  "ab-fc35-028": {
+    "duplicateOf": "ab-v2335-324"
+  },
+  "ab-fc35-004": {
+    "section": "ui",
+    "review": "ok",
+    "explanationEs": "Dynamic Forms permite colocar campos y secciones directamente en la Lightning record page y aplicarles visibility rules basadas en valores de otros campos, de modo que la página cambia a medida que el usuario introduce datos. Los page layouts distintos se asignan por perfil o record type, no reaccionan a lo que se escribe en un campo. Un filtered related list solo afecta a registros relacionados, y un Screen Flow añade un paso guiado que no hace falta para adaptar los campos de la propia página.",
+    "explanationEn": "Dynamic Forms lets you place fields and sections directly on the Lightning record page and apply visibility rules based on the values of other fields, so the page changes as the user enters data. Different page layouts are assigned by profile or record type and do not react to what is typed in a field. A filtered related list only affects related records, and a Screen Flow adds a guided step that is unnecessary to adapt the fields of the page itself."
+  },
+  "ab-fc35-015": {
+    "section": "ui",
+    "review": "disputed",
+    "reviewNote": "La fuente (FreeCram v3.5) marca la pestaña personalizada en Default Off; los tres resolvedores ciegos votaron por crear un search layout. Mantengo la clave de la fuente: el search layout solo decide qué columnas se muestran en los resultados, mientras que la pestaña no oculta (con Allow Search activo en el objeto) es lo que clásicamente hace que sus registros entren en la búsqueda, y es la respuesta esperada en el examen. Duda residual: en versiones recientes lo decisivo es Allow Search, que no aparece entre las opciones.",
+    "explanationEs": "Para que los registros de un objeto personalizado salgan en la búsqueda global, el objeto debe permitir búsqueda y tener una pestaña que no esté oculta para el perfil del usuario; por eso sirve una pestaña personalizada con visibilidad Default Off (o Default On), pero no Hidden. El search layout solo define qué campos aparecen en los resultados, no si el objeto es buscable, y un search filter solo acota los resultados ya existentes.",
+    "explanationEn": "For records of a custom object to appear in Global Search, the object must allow search and have a tab that is not hidden for the user's profile; that is why a custom tab with Default Off (or Default On) visibility works, while Hidden does not. A search layout only defines which fields show in the results and does not make the object searchable, and a search filter only narrows results that already exist."
+  }
+}

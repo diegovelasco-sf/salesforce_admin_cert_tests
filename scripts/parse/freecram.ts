@@ -79,7 +79,7 @@ function parseBlock({ n, lines }: Block): ParsedQuestion {
 }
 
 // Artefactos de citas pegados por la IA que generó el banco: "...reports?31", "?2424".
-const cleanStem = (stem: string): string => stem.replace(/\?\d+$/, '?')
+export const cleanStem = (stem: string): string => stem.replace(/\?\d+$/, '?')
 
 // "Approval Process1", "Flow Solutions8", "custom object.1".
-const cleanOption = (text: string): string => text.replace(/([a-z])\d{1,2}$/, '$1').replace(/([a-z]\.)\d{1,2}$/, '$1')
+export const cleanOption = (text: string): string => text.replace(/([a-z])\d{1,2}$/, '$1').replace(/([a-z]\.)\d{1,2}$/, '$1')

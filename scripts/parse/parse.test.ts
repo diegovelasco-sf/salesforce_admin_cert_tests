@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import type { ParsedQuestion } from '../../src/domain/types.ts'
 import { SOURCES, parsedPath, rawPath, readJson, type RawLine, type RawPage } from '../paths.ts'
 import { parseFreecram } from './freecram.ts'
+import { parseFreecram2, tidy } from './freecram2.ts'
 import { manualQuestions } from './manual.ts'
 import { assertClean, joinLines, normalizeText, visualLines } from './normalize.ts'
 import { parsers } from './parsers.ts'
@@ -213,6 +214,112 @@ describe('manualQuestions', () => {
     ])
     expect(() => manualQuestions('debrief', pages, [{ ...question, quotes: ['Which tool creates records?'] }])).toThrow(/no aparece en la fuente/)
     expect(() => manualQuestions('debrief', pages, [{ ...question, correct: ['D'] }])).toThrow(/no es una opción/)
+  })
+})
+
+describe('FreeCram v2 (NEW QUESTION y NO.N con pies)', () => {
+  const page = (text: string, number = 1): RawPage => ({ page: number, text, links: [] })
+  const ad = [
+    'Valid Platform-App-Builder Dumps shared by EduDump',
+    'Get 35%OFF Special Discount Code: freecram)',
+  ]
+  const fmt = { source: 'abfc143' as const, prefix: 'ab-fc143', layout: 'new' as const }
+
+  it('lee la pregunta, sus opciones y la clave visible', () => {
+    const pages = [
+      page(['NEW QUESTION: 1', 'Which tool creates records?', 'A. Flow', 'B. Process Builder', 'C. Apex', 'Answer: A,C', 'Explanation: Flow and Apex create records.'].join('\n')),
+    ]
+    const [q] = parseFreecram2(pages, fmt)
+    expect(q).toMatchObject({
+      id: 'ab-fc143-001',
+      source: 'abfc143',
+      ref: '#1',
+      stem: 'Which tool creates records?',
+      correct: ['A', 'C'],
+      sourceExplanation: 'Flow and Apex create records.',
+    })
+    expect(q.options.map((o) => o.key)).toEqual(['A', 'B', 'C'])
+  })
+
+  it('quita pies de página, anuncios de EduDump, separadores y números sueltos', () => {
+    const pages = [
+      page(['NEW QUESTION: 1', 'Stem text', 'A. One', 'B. Two', 'C. Three', 'Answer: A', '---', '1', 'IT Certification Guaranteed, The Easy Way!', ...ad, 'Explanation: x'].join('\n')),
+    ]
+    const [q] = parseFreecram2(pages, fmt)
+    expect(q.stem).toBe('Stem text')
+    expect(q.options.map((o) => o.text)).toEqual(['One', 'Two', 'Three'])
+    expect(q.sourceExplanation).toBe('x')
+  })
+
+  it('con (SHOW ANSWER) la clave sale de data/answers y con (LEAVE A REPLY) de la línea', () => {
+    const pages = [
+      page(['NEW QUESTION: 1', 'Stem', 'A. One', 'B. Two', 'C. Three', 'Answer: (SHOW ANSWER)'].join('\n')),
+      page(['NEW QUESTION: 2', 'Stem', 'A. One', 'B. Two', 'C. Three', 'Answer: B (LEAVE A REPLY)'].join('\n')),
+    ]
+    const [hidden, visible] = parseFreecram2(pages, { ...fmt, keys: { '1': ['C', 'A'] } })
+    expect(hidden.correct).toEqual(['C', 'A'])
+    expect(visible.correct).toEqual(['B'])
+  })
+
+  it('una clave oculta sin entrada en data/answers queda vacía, para que el build la rechace', () => {
+    const pages = [page(['NEW QUESTION: 1', 'Stem', 'A. One', 'B. Two', 'C. Three', 'Answer: (SHOW ANSWER)'].join('\n'))]
+    const [q] = parseFreecram2(pages, fmt)
+    expect(q.correct).toEqual([])
+  })
+
+  it('une la clave cuando va partida en dos líneas', () => {
+    const pages = [page(['NEW QUESTION: 1', 'Stem', 'A. One', 'B. Two', 'C. Three', 'Answer: A,', 'C'].join('\n'))]
+    const [q] = parseFreecram2(pages, fmt)
+    expect(q.correct).toEqual(['A'])
+  })
+
+  it('lee el formato NO.N con pies, y su numeración', () => {
+    const pages = [
+      page(['NO.1 Pick the right one', 'A. One', 'B. Two', 'C. Three', 'Answer: C', 'Explanation: because'].join('\n')),
+      page(['NO.2 Second', 'A. One', 'B. Two', 'C. Three', 'Answer: A', 'Explanation: because'].join('\n'), 2),
+    ]
+    const qs = parseFreecram2(pages, { source: 'abfc35', prefix: 'ab-fc35', layout: 'numbered' })
+    expect(qs.map((q) => q.ref)).toEqual(['NO.1', 'NO.2'])
+    expect(qs[0].stem).toBe('Pick the right one')
+  })
+
+  it('ignora la portada de V23.35, con el título partido en dos líneas', () => {
+    const cover = page(['Exam : Platform-App-Builder', 'Title : Salesforce Certified Platform', 'App Builder', 'Vendor : Salesforce', 'Version : V23.35'].join('\n'))
+    const first = page(['IT Certification Guaranteed, The Easy Way!', 'NO.1 Pick one', 'A. One', 'B. Two', 'C. Three', 'Answer: B', 'Explanation: x'].join('\n'), 2)
+    const qs = parseFreecram2([cover, first], { source: 'abv2335', prefix: 'ab-v2335', layout: 'numbered' })
+    expect(qs.map((q) => [q.id, q.stem, q.correct])).toEqual([['ab-v2335-001', 'Pick one', ['B']]])
+  })
+
+  it('tidy arregla apóstrofos, comillas, puntuación y __c sin tocar lo que no es ruido', () => {
+    expect(tidy("The manager ' s sign-off isn ' t needed")).toBe("The manager's sign-off isn't needed")
+    expect(tidy('status changes to " Critical " . The flow')).toBe('status changes to "Critical". The flow')
+    expect(tidy('Add Inspection__c and Sun_c , Opt_In_c .')).toBe('Add Inspection__c and Sun__c, Opt_In__c.')
+    expect(tidy('a field `Account_Region ` or the `Sun_c` object')).toBe('a field Account_Region or the Sun__c object')
+    expect(tidy('the most current version Is active and fields To rich text')).toBe('the most current version is active and fields to rich text')
+    // con la palabra siguiente en mayúscula puede ser un título o un nombre: se deja
+    expect(tidy('Rules Of Engagement and Go To Setup')).toBe('Rules Of Engagement and Go To Setup')
+    // comillas impares, o pares que no todos llevan espacios dentro: las comillas se dejan como están
+    expect(tidy('UserRole.Name = " Marketing \' , ISCHANGED')).toBe('UserRole.Name = " Marketing \', ISCHANGED')
+    expect(tidy('"Yes" , " No "')).toBe('"Yes", " No "')
+    // el apóstrofo de un posesivo plural es ambiguo con una comilla simple de cierre: no se toca
+    expect(tidy("Cloud Kicks ' external site")).toBe("Cloud Kicks ' external site")
+  })
+
+  it('falla si la numeración salta un número', () => {
+    const pages = [page(['NEW QUESTION: 1', 'Stem', 'A. One', 'B. Two', 'C. Three', 'Answer: A'].join('\n') + '\n' + ['NEW QUESTION: 3', 'Stem', 'A. One', 'B. Two', 'C. Three', 'Answer: A'].join('\n'))]
+    expect(() => parseFreecram2(pages, fmt)).toThrow(/se esperaba la pregunta 2 y aparece la 3/)
+  })
+
+  it('falla si el enunciado o una opción no tienen texto (imagen sin transcribir)', () => {
+    const pages = [page(['NEW QUESTION: 1', 'A. One', 'B. Two', 'C. Three', 'Answer: A'].join('\n'))]
+    expect(() => parseFreecram2(pages, fmt)).toThrow(/sin transcribir: #1/)
+  })
+
+  it('usa la transcripción de data/manual cuando el enunciado es imagen', () => {
+    const pages = [page(['NEW QUESTION: 1', 'A. One', 'B. Two', 'C. Three', 'Answer: A'].join('\n'))]
+    const [q] = parseFreecram2(pages, { ...fmt, images: { '1': { stem: 'Transcribed stem', options: { A: 'Alpha', B: 'Beta', C: 'Gamma' } } } })
+    expect(q.stem).toBe('Transcribed stem')
+    expect(q.options.map((o) => o.text)).toEqual(['Alpha', 'Beta', 'Gamma'])
   })
 })
 

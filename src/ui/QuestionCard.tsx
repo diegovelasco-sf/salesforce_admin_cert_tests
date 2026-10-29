@@ -1,7 +1,9 @@
-import { OFFICIAL_SOURCES, SOURCE_LABELS, sectionLabel } from '../domain/exam.ts'
 import { toggleSelection } from '../domain/selection.ts'
 import { displayLetter } from '../domain/shuffle.ts'
-import type { Question, ReviewStatus } from '../domain/types.ts'
+import type { Question } from '../domain/types.ts'
+import { useCert } from './cert.ts'
+import { useI18n } from './lang.ts'
+import { sectionName, sourceLabel } from './messages.ts'
 
 interface Props {
   question: Question
@@ -15,29 +17,24 @@ interface Props {
   position?: { index: number; total: number }
   flagged?: boolean
   onToggleFlag?: () => void
-  /** "revisar" en el simulacro (como en el examen real), "repasar" en la práctica. */
-  flagPurpose?: 'revisar' | 'repasar'
-}
-
-const REVIEW_LABELS: Record<Exclude<ReviewStatus, 'ok'>, string> = {
-  corrected: 'Clave corregida',
-  disputed: 'Respuesta dudosa',
-  outdated: 'Pregunta desactualizada',
+  /** Qué hace la marca: se revisa en el simulacro (como en el examen real) y se repasa en la práctica. */
+  flagContext?: 'exam' | 'practice'
 }
 
 type OptionState = 'idle' | 'selected' | 'right' | 'missed' | 'wrong' | 'neutral'
 
-const VERDICTS: Partial<Record<OptionState, string>> = {
-  right: '✓ Correcta',
-  missed: '✓ Correcta, no la marcaste',
-  wrong: '✗ Tu respuesta',
-}
-
-export function QuestionCard({ question, order, selected, onSelect, revealed, position, flagged, onToggleFlag, flagPurpose = 'repasar' }: Props) {
+export function QuestionCard({ question, order, selected, onSelect, revealed, position, flagged, onToggleFlag, flagContext = 'practice' }: Props) {
+  const { cert } = useCert()
+  const { t, lang } = useI18n()
+  const verdicts: Partial<Record<OptionState, string>> = {
+    right: t.card.verdictRight,
+    missed: t.card.verdictMissed,
+    wrong: t.card.verdictWrong,
+  }
   const max = question.correct.length
   const multi = max > 1
   const interactive = !!onSelect && !revealed
-  const official = OFFICIAL_SOURCES.includes(question.source)
+  const official = cert.officialSources.includes(question.source)
   const byKey = new Map(question.options.map((o) => [o.key, o]))
   const toggle = (key: string) => {
     if (interactive && onSelect) onSelect(toggleSelection(selected, key, max))
@@ -48,16 +45,16 @@ export function QuestionCard({ question, order, selected, onSelect, revealed, po
       <header className="question-meta">
         {position && (
           <span className="question-number">
-            Pregunta {position.index + 1} de {position.total}
+            {t.card.number(position.index + 1, position.total)}
           </span>
         )}
-        <span className="badge">{sectionLabel(question.section)}</span>
+        <span className="badge">{sectionName(cert, question.section, lang)}</span>
         <span className={`badge ${official ? 'badge-official' : 'badge-unofficial'}`}>
-          {SOURCE_LABELS[question.source]} · {question.ref}
+          {sourceLabel(question.source, lang)} · {question.ref}
         </span>
         {onToggleFlag && (
           <button type="button" className={`flag-button${flagged ? ' on' : ''}`} aria-pressed={flagged} onClick={onToggleFlag}>
-            {flagged ? `★ Marcada para ${flagPurpose}` : `☆ Marcar para ${flagPurpose}`}
+            {flagged ? t.card.flagOn(flagContext) : t.card.flagOff(flagContext)}
           </button>
         )}
       </header>
@@ -67,12 +64,12 @@ export function QuestionCard({ question, order, selected, onSelect, revealed, po
       </p>
       {multi && (
         <p className="choose" id={`choose-${question.id}`}>
-          Elige {max} · {selected.length} de {max} marcadas
+          {t.card.chooseN(max, selected.length)}
         </p>
       )}
 
       <fieldset className="options">
-        <legend className="sr-only">Opciones</legend>
+        <legend className="sr-only">{t.card.options}</legend>
         {order.map((key, i) => {
           const option = byKey.get(key)
           if (!option) return null
@@ -104,7 +101,7 @@ export function QuestionCard({ question, order, selected, onSelect, revealed, po
                 {displayLetter(i)}
               </span>
               <span className="option-text">{option.text}</span>
-              {VERDICTS[state] && <span className="option-verdict">{VERDICTS[state]}</span>}
+              {verdicts[state] && <span className="option-verdict">{verdicts[state]}</span>}
             </label>
           )
         })}
@@ -116,31 +113,27 @@ export function QuestionCard({ question, order, selected, onSelect, revealed, po
 }
 
 function Explanation({ question }: { question: Question }) {
+  const { t, lang } = useI18n()
+  const explanation = lang === 'en' ? question.explanationEn : question.explanationEs
   const sourceAnswer = question.sourceCorrect
     ?.map((key) => question.options.find((o) => o.key === key)?.text)
     .filter(Boolean)
     .join(' / ')
   return (
-    <section className="explanation" aria-label="Explicación">
+    <section className="explanation" aria-label={t.card.explanation}>
       {question.review !== 'ok' && (
         <p className={`review-note review-${question.review}`}>
-          <strong>⚠ {REVIEW_LABELS[question.review]}.</strong> {question.reviewNote}
-          {sourceAnswer && <span className="source-answer"> La fuente daba como correcta: «{sourceAnswer}».</span>}
+          <strong>⚠ {t.card.review[question.review]}.</strong> {question.reviewNote}
+          {sourceAnswer && <span className="source-answer">{t.card.sourceGave(sourceAnswer)}</span>}
         </p>
       )}
       {question.authoredOptions && (
-        <p className="authored-note muted">
-          La fuente solo traía la pregunta y su respuesta: las opciones incorrectas se han redactado aparte para poder practicarla.
-        </p>
+        <p className="authored-note muted">{t.card.authored}</p>
       )}
-      {question.explanationEs ? (
-        <p className="explanation-text">{question.explanationEs}</p>
-      ) : (
-        <p className="muted">Explicación pendiente: todavía no está redactada para esta pregunta.</p>
-      )}
+      {explanation ? <p className="explanation-text">{explanation}</p> : <p className="muted">{t.card.pending}</p>}
       {question.learnMore.length > 0 && (
         <div className="learn-more">
-          <span className="learn-more-title">Para saber más</span>
+          <span className="learn-more-title">{t.card.learnMore}</span>
           <ul>
             {question.learnMore.map((link) => (
               <li key={link.title + (link.url ?? '')}>

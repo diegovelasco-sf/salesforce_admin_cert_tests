@@ -7,8 +7,17 @@ export function formatDuration(ms: number): string {
   return hours ? `${hours}:${String(minutes).padStart(2, '0')}:${seconds}` : `${minutes}:${seconds}`
 }
 
-const dateFormat = new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium', timeStyle: 'short' })
-export const formatDate = (ms: number): string => dateFormat.format(ms)
+const dateFormats = new Map<string, Intl.DateTimeFormat>()
+
+/** Fecha y hora con el formato del idioma activo (`locale`, p. ej. es-ES o en-US). */
+export function formatDate(ms: number, locale: string): string {
+  let format = dateFormats.get(locale)
+  if (!format) {
+    format = new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeStyle: 'short' })
+    dateFormats.set(locale, format)
+  }
+  return format.format(ms)
+}
 
 /** Porcentaje entero hacia abajo, para no mostrar un 68 % que en realidad suspende. */
 export const percent = (part: number, total: number): number => (total ? Math.floor((part * 100) / total) : 0)

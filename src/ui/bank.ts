@@ -1,11 +1,10 @@
-import bank from '../data/questions.json'
-import type { Question } from '../domain/types.ts'
+import appbuilder from '../data/appbuilder.json'
+import admin from '../data/questions.json'
+import { CERTS } from '../domain/certs.ts'
+import type { CertId } from '../domain/types.ts'
+import { makeCertData, type CertData } from './certdata.ts'
 
-export const BANK = bank
-export const QUESTIONS_BY_ID: ReadonlyMap<string, Question> = new Map(bank.questions.map((q) => [q.id, q]))
-
-export const question = (id: string): Question => {
-  const found = QUESTIONS_BY_ID.get(id)
-  if (!found) throw new Error(`Pregunta desconocida: ${id}`)
-  return found
+export const CERT_DATA: Record<CertId, CertData> = {
+  admin: makeCertData(CERTS.admin, admin),
+  appbuilder: makeCertData(CERTS.appbuilder, appbuilder),
 }

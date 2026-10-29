@@ -1,0 +1,405 @@
+[
+  {
+    "id": "ab-s4e-001",
+    "source": "abs4e",
+    "ref": "Q1",
+    "stem": "DreamHouse Realty has a policy that requires the phone number on Contact to be deleted when the Do Not Call checkbox is checked. Which automation tool should the app builder recommend?",
+    "options": [
+      {
+        "key": "A",
+        "text": "If-then rule"
+      },
+      {
+        "key": "B",
+        "text": "Validation rule"
+      },
+      {
+        "key": "C",
+        "text": "Quick action"
+      },
+      {
+        "key": "D",
+        "text": "Flow"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Flow is the correct automation tool because it can automatically update records based on specific conditions. A record-triggered flow can detect when the Do Not Call checkbox on a Contact is checked and then clear (delete) the Phone field without any user action. This meets the policy requirement to enforce data changes automatically. Why the other options are incorrect: If-then rule: This is not an actual Salesforce automation feature and cannot be used to enforce data changes. Validation rule: Validation rules only prevent a record from being saved if conditions are not met. They cannot modify or delete field values such as the Phone number. Quick action: Quick actions require manual user interaction. Since the requirement is automatic enforcement when the checkbox is checked, a quick action is not appropriate."
+  },
+  {
+    "id": "ab-s4e-002",
+    "source": "abs4e",
+    "ref": "Q2",
+    "stem": "A production org includes custom objects containing confidential information. A sandbox is needed that includes data records, excludes all of the Confidential objects, and can be refreshed weekly. Which steps should an app builder take to meet these requirements?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a Developer Pro Sandbox and schedule Data Loader to download selected object data weekly."
+      },
+      {
+        "key": "B",
+        "text": "Create a Full Copy Sandbox and use a sandbox template."
+      },
+      {
+        "key": "C",
+        "text": "Create a Partial Copy Sandbox and use a sandbox template."
+      },
+      {
+        "key": "D",
+        "text": "Create a Developer Sandbox and schedule Data Loader to download selected object data weekly."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Create a Partial Copy Sandbox and use a sandbox template is the correct approach because a Partial Copy Sandbox can include data records while allowing the app builder to control exactly which objects are copied. By using a sandbox template, the builder can explicitly exclude all Confidential custom objects. Partial Copy sandboxes also support regular refreshes, including weekly refresh cycles, which meets all stated requirements. Why the other options are incorrect: Create a Developer Pro Sandbox and schedule Data Loader to download selected object data weekly: Developer Pro sandboxes do not include production data by default. Manually loading data with Data Loader adds unnecessary complexity and does not inherently enforce the exclusion of confidential objects during refresh. Create a Full Copy Sandbox and use a sandbox template: Full Copy sandboxes include all production data, including confidential information. Even with a sandbox template, Full Copy sandboxes are refreshed less frequently and are not designed for weekly refreshes. Create a Developer Sandbox and schedule Data Loader to download selected object data weekly: Developer sandboxes do not contain production data and have limited storage. Relying on Data Loader does not meet the requirement for automated, controlled data inclusion and weekly refresh behavior."
+  },
+  {
+    "id": "ab-s4e-003",
+    "source": "abs4e",
+    "ref": "Q3",
+    "stem": "Universal Containers wants sales reps to get permission from their managers before deleting Opportunities. What can be used to meet these requirements?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Two-step approval process"
+      },
+      {
+        "key": "B",
+        "text": "Approval process and flow with a scheduled path"
+      },
+      {
+        "key": "C",
+        "text": "Schedule-triggered flow with Submit for Approval action"
+      },
+      {
+        "key": "D",
+        "text": "Approval process with a record triggered flow"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Approval process with a record-triggered flow is the correct solution because Salesforce does not natively support approvals for delete actions. A record-triggered flow can intercept the delete attempt (before delete), prevent the deletion, and submit the Opportunity for approval. Once a manager approves, the flow can then allow or perform the deletion through controlled automation. This approach ensures sales reps must obtain manager permission before an Opportunity is deleted. Why the other options are incorrect: Two-step approval process: Approval processes alone cannot control or approve record deletions. They are designed for record updates, not delete actions. Approval process and flow with a scheduled path: Scheduled paths are time-based and are not suitable for intercepting or controlling delete operations, which must occur immediately. Schedule-triggered flow with Submit for Approval action: Schedule-triggered flows run at a specific time and cannot respond to a user’s real-time delete action."
+  },
+  {
+    "id": "ab-s4e-004",
+    "source": "abs4e",
+    "ref": "Q4",
+    "stem": "Northern Trail Outfitters wants the field sales team to only see the accounts that they Own. Separate North American and European marketing teams should only see Accounts in their respective regions. The inside sales team needs to see all accounts In Salesforce. How can this be accomplished?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Set the Organization-Wide Default to Public for accounts. Create profiles for each marketing team, and create an Inside Sales Team role that is at the top of the Role Hierarchy."
+      },
+      {
+        "key": "B",
+        "text": "Set the Organization Wide Default to Public for accounts. Create criteria-based sharing rules for Each marketing team, and create an Inside Sales Team permission set with the \"View All\" setting for Accounts."
+      },
+      {
+        "key": "C",
+        "text": "Set the Organization-Wide Default to Private for accounts. Create permission sets for each marketing Team, and create an Inside Sales Team profile with the \"View All\" setting for accounts."
+      },
+      {
+        "key": "D",
+        "text": "Set the Organization Wide Default to Private for accounts. Create criteria-based sharing rules for Each marketing team, and create an Inside Sales Team profile with the \"View All\" setting for Accounts."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Set the Organization-Wide Default (OWD) to Private for Accounts, create criteria-based sharing rules for each marketing team, and create an Inside Sales Team profile with the “View All” permission for Accounts is the correct solution because it satisfies all visibility requirements while following Salesforce security best practices. Private OWD ensures field sales reps can only see Accounts they own by default. Criteria-based sharing rules can be configured to share Accounts with the North American and European marketing teams based on region, ensuring each team only sees Accounts in their respective territories. Granting the Inside Sales team a profile with “View All” access allows them to see all Accounts, regardless of ownership or sharing rules. Why the other options are incorrect: OWD Public + profiles for marketing teams + Inside Sales role at top of hierarchy: Public OWD would allow all users to see all Accounts, which violates the requirement that field sales reps only see Accounts they own. OWD Public + criteria-based sharing rules + Inside Sales permission set with “View All”: Public OWD already grants visibility to all Accounts, making the sharing rules unnecessary and failing to restrict access for field sales reps. OWD Private + permission sets for marketing teams + Inside Sales profile with “View All”: Permission sets do not control record visibility by criteria. Without sharing rules, marketing teams would not be limited to Accounts in their specific regions."
+  },
+  {
+    "id": "ab-s4e-005",
+    "source": "abs4e",
+    "ref": "Q5",
+    "stem": "Sales reps at Universal Containers create multiple quotes per opportunity. Which automation tool should an app builder recommend to delete rejected quotes?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Approval process"
+      },
+      {
+        "key": "B",
+        "text": "Einstein Next Best Action"
+      },
+      {
+        "key": "C",
+        "text": "Flow"
+      },
+      {
+        "key": "D",
+        "text": "Validation rule"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Flow is the correct automation tool because it can automatically take action on records when specific conditions are met. A record-triggered flow can detect when a Quote is marked as Rejected and then automatically delete that Quote. This allows Universal Containers to clean up rejected quotes without manual intervention. Why the other options are incorrect: Approval process: Approval processes are designed to manage record approvals and status changes. They cannot automatically delete records based on outcome without additional automation. Einstein Next Best Action: Einstein Next Best Action provides recommendations to users, not automated data actions such as deleting records. Validation rule: Validation rules only prevent invalid data entry; they cannot delete records."
+  },
+  {
+    "id": "ab-s4e-006",
+    "source": "abs4e",
+    "ref": "Q6",
+    "stem": "An app builder wants to create a custom Sync button on Account that will Call a Lightning Web Component that connects with an external system. This action Should only be available if the custom Status field is set to Ready to Syn What should an app builder use to add this functionality to an Account record page?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Custom link"
+      },
+      {
+        "key": "B",
+        "text": "Formula field"
+      },
+      {
+        "key": "C",
+        "text": "Dynamic action"
+      },
+      {
+        "key": "D",
+        "text": "AppExchange product"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Dynamic action is the correct choice because it allows an app builder to add a custom button (Quick Action) to an Account record page that can conditionally appear based on field values. In this case, the Sync button can be configured to only display when the custom Status field equals “Ready to Sync” and can launch a Lightning Web Component (LWC) that connects to an external system. This provides both the required functionality and conditional visibility without custom code. Why the other options are incorrect: Custom link: Custom links can launch URLs but do not support conditional visibility based on record field values on Lightning record pages. Formula field: Formula fields are used to calculate and display values. They cannot create buttons or invoke Lightning Web Components. AppExchange product: An AppExchange product is not required to build native Salesforce functionality like a conditional Sync button tied to an LWC."
+  },
+  {
+    "id": "ab-s4e-007",
+    "source": "abs4e",
+    "ref": "Q7",
+    "stem": "Universal Containers uses a custom object called Projects. When managers Assign projects, they set a custom field on the Project record called Estimated Hours. Once set, users should be able to decrease but not increase the value. How can an app builder meet this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a validation rule that uses the ISCHANGED function."
+      },
+      {
+        "key": "B",
+        "text": "Create a formula default value for the custom fiel"
+      },
+      {
+        "key": "C",
+        "text": "Create a validation rule that uses the PRIORVALUE function."
+      },
+      {
+        "key": "D",
+        "text": "Create a formula field that uses the PREVGROUPVAL function."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Create a validation rule that uses the PRIORVALUE function is the correct solution because it allows Salesforce to compare the previous value of the Estimated Hours field with the new value being saved. The validation rule can prevent the save when the new value is greater than the prior value, while still allowing users to decrease the number. Why the other options are incorrect: Create a validation rule that uses the ISCHANGED function: ISCHANGED only detects whether a field has changed, not how it changed. It cannot determine whether the value increased or decreased. Create a formula default value for the custom field: A default value only applies when a record is created and does not control how the field can be edited later. Create a formula field that uses the PREVGROUPVAL function: PREVGROUPVAL is used in reports to compare values between grouped rows and cannot be used to enforce validation on record edits."
+  },
+  {
+    "id": "ab-s4e-008",
+    "source": "abs4e",
+    "ref": "Q8",
+    "stem": "What should an app builder consider when choosing a template for a new Lightning record page?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Page structure will automatically adapt to the device being used to view the record page."
+      },
+      {
+        "key": "B",
+        "text": "To view the record page, users need \"View All Data\" permissions for the object."
+      },
+      {
+        "key": "C",
+        "text": "The template is unable to be changed after the initial save."
+      },
+      {
+        "key": "D",
+        "text": "Select a new template for each type of device users use to view the record page."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Page structure will automatically adapt to the device being used to view the record page is the correct consideration when choosing a Lightning record page template. Lightning App Builder templates are responsive, meaning the layout automatically adjusts for desktop, tablet, and mobile devices without requiring separate templates. Why the other options are incorrect: To view the record page, users need “View All Data” permissions for the object: Users only need appropriate object and record access. “View All Data” is an administrative permission and is not required to view record pages. The template is unable to be changed after the initial save: Lightning record page templates can be changed later by editing the page in Lightning App Builder. Select a new template for each type of device users use to view the record page: A single Lightning record page template works across all supported devices due to Salesforce’s responsive design."
+  },
+  {
+    "id": "ab-s4e-009",
+    "source": "abs4e",
+    "ref": "Q9",
+    "stem": "Dreamhouse Realty (DR) has many properties for sale and wants to identify the highest value of all offer records on each Property_record Which solution should the app builder use to meet DR's needs provided that there is a Master-detail relationship between the objects?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Roll-up Summary"
+      },
+      {
+        "key": "B",
+        "text": "Text Area (Long)"
+      },
+      {
+        "key": "C",
+        "text": "Multi-select Picklist"
+      },
+      {
+        "key": "D",
+        "text": "Rich Text Area"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Roll-Up Summary is the correct solution because it can automatically calculate values from related child records when there is a Master-Detail relationship. In this case, a roll-up summary field on the Property (parent) record can be configured to calculate the MAX (highest value) of all related Offer records. This allows Dreamhouse Realty to easily identify the highest offer for each property without custom code. Why the other options are incorrect: Text Area (Long): A long text area field is used to store large amounts of text and cannot perform calculations or summarize related records. Multi-select Picklist: Multi-select picklists allow multiple values to be selected but cannot calculate or determine a highest value. Rich Text Area: Rich text area fields are used for formatted text and do not support numeric aggregation or roll-up calculations."
+  },
+  {
+    "id": "ab-s4e-010",
+    "source": "abs4e",
+    "ref": "Q10",
+    "stem": "An app builder needs to deploy a new account detail page layout from Sandbox to production. Which three components should an app builder include in the Change Set to ensure it Deploys successfully and visually as expected?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Detail page layout"
+      },
+      {
+        "key": "B",
+        "text": "Custom actions"
+      },
+      {
+        "key": "C",
+        "text": "System administrator profile"
+      },
+      {
+        "key": "D",
+        "text": "Custom fields"
+      },
+      {
+        "key": "E",
+        "text": "Lightning App Builder"
+      }
+    ],
+    "correct": [
+      "A",
+      "B",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "To deploy a new Account detail page layout from Sandbox to Production and ensure it appears correctly, the app builder should include the following components in the Change Set: Detail Page Layout – The layout itself defines the arrangement of fields, sections, and related lists on the Account record page. Custom Actions – Any custom actions (Quick Actions, Global Actions) used on the page must be included so they appear and function properly. Custom Fields – If the layout includes custom fields, they must be deployed; otherwise, the layout will break or not display as intended. Why the other options are incorrect: System Administrator profile: Profiles are only needed if you are deploying field-level security or page layout assignments. Including the profile is optional unless you need to preserve these settings. Lightning App Builder: The Lightning App Builder page is separate from the record page layout. If only the standard Account detail layout is being deployed, including the App Builder page is not necessary."
+  },
+  {
+    "id": "ab-s4e-011",
+    "source": "abs4e",
+    "ref": "Q11",
+    "stem": "Which three options are available when activating a Lightning page from The Lightning App Builder?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Assign the page to a combination of apps and permission sets."
+      },
+      {
+        "key": "B",
+        "text": "Assign the page to a combination of apps and profiles."
+      },
+      {
+        "key": "C",
+        "text": "Make the page the default homepage for specific apps."
+      },
+      {
+        "key": "D",
+        "text": "Make the page the default homepage for specific roles."
+      },
+      {
+        "key": "E",
+        "text": "Make the page the org default."
+      }
+    ],
+    "correct": [
+      "B",
+      "C",
+      "E"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "When activating a Lightning page from Lightning App Builder, an app builder can control where and for whom the page is available. The correct options are: Assign the page to a combination of apps and profiles – Lets you control page visibility based on the app and the user profiles. Make the page the default homepage for specific apps – Allows the page to appear as the homepage when users open a particular app. Make the page the org default – Sets the page as the default for all users across the organization unless overridden by app or profile assignments. Why the other options are incorrect: Assign the page to a combination of apps and permission sets: Lightning pages cannot be assigned to permission sets; assignments are based on apps and profiles only. Make the page the default homepage for specific roles: Activation does not support role-based default page assignment. Visibility is controlled through profiles and apps."
+  },
+  {
+    "id": "ab-s4e-012",
+    "source": "abs4e",
+    "ref": "Q12",
+    "stem": "To increase adoption, Universal Containers is proposing changes to its Salesforce data model to allow easier visibility for sales reps into key metrics. The Proposal has three custom objects related to the Account object, one with a master- Detail, and two that are not. Each of these objects has 15 fields they would like to Summarize on the Account object. What are two considerations for this proposal?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Roll-up summaries are limited to master-detail relationships."
+      },
+      {
+        "key": "B",
+        "text": "Roll-up summaries allow MAX, MIN, SUM, COUNT, and AVG."
+      },
+      {
+        "key": "C",
+        "text": "An object can have 25 roll-up summaries."
+      },
+      {
+        "key": "D",
+        "text": "An object can have 20 object references."
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct considerations for this proposal are: Roll-up summaries are limited to master-detail relationships – Only objects in a master-detail relationship can use roll-up summary fields. The two custom objects that are not in a master-detail relationship cannot directly roll up their fields to the Account object. An object can have 25 roll-up summaries – Salesforce enforces a limit of 25 roll-up summary fields per object, so planning is needed when summarizing multiple fields (e.g., 15 fields from three objects might exceed limits). Why the other options are incorrect: Roll-up summaries allow MAX, MIN, SUM, COUNT, and AVG: While this is true, it’s a capability, not a consideration or limitation impacting the proposal. An object can have 20 object references: This refers to the total number of lookup or master-detail relationships on an object, which is not directly relevant to summarizing fields on the Account."
+  },
+  {
+    "id": "ab-s4e-013",
+    "source": "abs4e",
+    "ref": "Q13",
+    "stem": "Universal Containers has a requirement that an opportunity should have a field ing the value of its associated account's billing state. This value should be static After the opportunity has been create What is the recommended solution to configure this automation behavior?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Flow"
+      },
+      {
+        "key": "B",
+        "text": "Apex"
+      },
+      {
+        "key": "C",
+        "text": "Roll-up summary field"
+      },
+      {
+        "key": "D",
+        "text": "Formula field"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Flow is the correct solution because it can copy the Account’s Billing State to the Opportunity when the Opportunity is created and ensure the value remains static afterward. A record-triggered flow can be set to run only on create, populating a custom Opportunity field with the Account’s Billing State. Why the other options are incorrect: Apex: Apex could achieve this, but Salesforce declarative automation (Flow) can meet the requirement without custom code, which is preferred when possible. Roll-up summary field: Roll-up summaries only work for aggregating child records on a parent object. They cannot copy a parent field value to a child. Formula field: Formula fields are dynamic and always reflect the current value of the referenced field. They cannot store a static snapshot of the Account’s Billing State. This was just a demo of the practice exam. Get full access to the complete practice exams, detailed explanations, and real exam-level questions designed to guarantee 100% success in your certification. Access the full exam now:"
+  }
+]

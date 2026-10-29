@@ -1,0 +1,32 @@
+{
+  "10": {
+    "stem": "An app builder has created a custom Lightning App and wants to make it available to the internal users at Universal Containers. Which two steps are necessary to accomplish this task? Choose 2 answers:"
+  },
+  "20": {
+    "stem": "A sales manager at Cloud Kicks wants the team to spend more time in the field and less time manually entering the information found on the business cards they collect. What should an app builder do to help achieve this goal without sacrificing data quality?"
+  },
+  "30": {
+    "stem": "On the Account Lightning record page, users need to see ten fields and the ability to sort and wrap text on their Related Lists. Which Related List type should the app builder select for the Related List Lightning component?"
+  },
+  "40": {
+    "stem": "An app builder at DreamHouse Realty created a custom object which has Fields containing data from two different objects via related lookups. What is needed to create \" with \" or \" without \" reports on the new custom Object?"
+  },
+  "50": {
+    "stem": "Duplicate management for Leads has been implemented at Universal Containers but it seems duplicate leads are still being create The Org Wide Default (OWD) is set to \" Private \" for Leads. Which two actions help prevent duplicate Leads from being created? Choose 2 answers"
+  },
+  "60": {
+    "stem": "An app builder installed a custom Lightning component from AppExchange. What should be done next in order to configure the component for use in a record page?"
+  },
+  "70": {
+    "stem": "Universal Containers wants sales reps to get permission from their managers before deleting Opportunities. What can be used to meet these requirements?"
+  },
+  "80": {
+    "stem": "An app builder wants to update a field on the parent record When a child record connected via lookup is delete Which automation should the app builder use?"
+  },
+  "90": {
+    "stem": "An app builder installs an unmanaged package in a full copy sandbox that is an exact match for production, and now they are ready to install it in production. The app builder attempts to install the package in production, and it fails. Why did the package fail to install?"
+  },
+  "100": {
+    "stem": "An app builder has a custom component they want to make available on the utility bar, but the component is unavailable. How should the component be tagged?"
+  }
+}

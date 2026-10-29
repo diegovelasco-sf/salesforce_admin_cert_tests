@@ -1,0 +1,1057 @@
+[
+  {
+    "id": "ab-fc35-001",
+    "source": "abfc35",
+    "ref": "NO.1",
+    "stem": "Universal Containers would like Account owners to be able to quickly access a report of all of the current Assets associated with their Account. Account owners should access this report through the Account record page. How should the Platform App Builder accomplish this?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Dashboard with Account Filter"
+      },
+      {
+        "key": "B",
+        "text": "Dynamic URL through Custom Link"
+      },
+      {
+        "key": "C",
+        "text": "Scheduled Reports"
+      },
+      {
+        "key": "D",
+        "text": "Custom Report Type"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "A custom link or button that passes the current Account ID into a report filter provides direct access to a report showing only records associated with the Account being viewed. Salesforce ' s official documentation specifically describes creating an Account custom link that opens a report and automatically filters the results by the current Account ' s record ID. This precisely satisfies the requirement for Account owners to access the relevant Asset report from the Account record page. A dashboard filter requires dashboard-level filtering and does not inherently pass the current record context. Scheduled Reports deliver reports at scheduled times, while a Custom Report Type merely defines the objects and fields available for reporting."
+  },
+  {
+    "id": "ab-fc35-002",
+    "source": "abfc35",
+    "ref": "NO.2",
+    "stem": "Dreamhouse Realty requires that field value changes for certain fields such As Asking Price__c and Real Estate Agent on their House__c custom object up prominently on Chatter. Which Chatter feature should the app builder use?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Topics"
+      },
+      {
+        "key": "B",
+        "text": "Feed Tracking"
+      },
+      {
+        "key": "C",
+        "text": "Pin Field"
+      },
+      {
+        "key": "D",
+        "text": "Publisher Actions"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is B. Feed Tracking. DreamHouse Realty wants changes to selected fields, such as Asking_Price__c and Real_Estate_Agent__c , to appear prominently in Chatter. This is exactly what Chatter Feed Tracking is used for. Salesforce documentation states that feed tracking is available for record fields and can be configured for custom objects. Salesforce guidance also says admins can enable feed tracking from Setup, select an object, enable feed tracking, and choose fields to track. A). Topics is used for categorizing Chatter posts, not automatically tracking field changes. C). Pin Field is not the Chatter feature for tracking field updates. D). Publisher Actions are actions users can take from the publisher, not automatic field-change tracking."
+  },
+  {
+    "id": "ab-fc35-003",
+    "source": "abfc35",
+    "ref": "NO.3",
+    "stem": "Universal Containers wants to create a report to show job applications with or without resumes. type? Which consideration should the Platform App Builder be aware of when creating the custom report",
+    "options": [
+      {
+        "key": "A",
+        "text": "When a custom or external object is deleted, the report type and reports remain but cause an error when the report is run."
+      },
+      {
+        "key": "B",
+        "text": "A primary object selection is locked once the custom report type has been saved."
+      },
+      {
+        "key": "C",
+        "text": "Once the report type has been deployed, it is unable to be deleted."
+      },
+      {
+        "key": "D",
+        "text": "An app builder is unable to create custom report types for objects they do not have permissions for."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The primary object of a custom report type is a fundamental design choice and cannot be changed after the report type is saved. Salesforce explicitly states in both the Enhanced and Legacy Custom Report Type Builder documentation that after saving a custom report type, the selected primary object cannot be changed. The primary object determines the base set of records represented by the report type and controls how additional related objects can subsequently be included. Consequently, the app builder must choose the Job Application object deliberately before saving the report type. Deployment does not permanently prevent a custom report type from being deleted, and the other options do not describe the core configuration limitation being tested. Therefore, B is the documented Platform App Builder consideration."
+  },
+  {
+    "id": "ab-fc35-004",
+    "source": "abfc35",
+    "ref": "NO.4",
+    "stem": "A Platform App Builder would like to simplify the user experience with customized, intuitive record pages that change based on field input. What should the app builder consider?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create multiple Page Layouts dependent on the user."
+      },
+      {
+        "key": "B",
+        "text": "Save a Filtered Related List for users to update records."
+      },
+      {
+        "key": "C",
+        "text": "Leverage Screen Flows for user input."
+      },
+      {
+        "key": "D",
+        "text": "Migrate to Dynamic Forms and create visibility rules."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Dynamic Forms allows an app builder to place individual fields and Field Sections directly on Lightning record pages and apply visibility rules to them. Salesforce documents that field visibility can respond dynamically to record field values, allowing fields to appear or disappear as users modify data. This produces a more contextual record experience without maintaining numerous page layouts. Multiple page layouts are generally tied to profiles and record types rather than reacting dynamically to field input. A Filtered Related List controls related records, not the visibility of primary record fields. Screen Flows provide guided interaction but are unnecessary when the requirement concerns dynamic presentation of normal record-page fields. Therefore, Dynamic Forms combined with visibility rules provides the most direct declarative solution for adapting record pages according to field values. Salesforce"
+  },
+  {
+    "id": "ab-fc35-005",
+    "source": "abfc35",
+    "ref": "NO.5",
+    "stem": "A Platform App Builder needs to implement a solution where a virtual assistant can independently handle end- to-end customer service interactions-understanding intent, querying Salesforce data, and taking action- without requiring a human to intervene at each step. Which feature supports this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Case Assignment Rules"
+      },
+      {
+        "key": "B",
+        "text": "Agentforce"
+      },
+      {
+        "key": "C",
+        "text": "Experience Cloud with Live Chat"
+      },
+      {
+        "key": "D",
+        "text": "Einstein Bots"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Agentforce is Salesforce ' s platform for autonomous AI agents that can understand requests, reason over context, retrieve business information, determine appropriate next steps, and execute actions. Salesforce describes Agentforce agents as autonomous and proactive applications capable of taking action with or without continuous human intervention. Agents can use Salesforce CRM data and invoke flows, Apex, APIs, prompts, and other configured actions to complete business tasks. This directly matches the requirement for end-to-end customer service handling. Case Assignment Rules only route Cases. Experience Cloud with Live Chat provides customer interaction channels but does not independently reason and execute complete workflows. Einstein Bots provide conversational automation but do not represent the current autonomous agent architecture described in the scenario. Agentforce is therefore the verified answer."
+  },
+  {
+    "id": "ab-fc35-006",
+    "source": "abfc35",
+    "ref": "NO.6",
+    "stem": "Cloud Kicks is implementing an approval process for opportunities that requires managers to approve all opportunities above $50,000 before they can be marked as Closed Won. Which two delivery methods can a manager utilize to respond to approval requests in the Salesforce Mobile app? Choose 2 answers",
+    "options": [
+      {
+        "key": "A",
+        "text": "Navigation Menu"
+      },
+      {
+        "key": "B",
+        "text": "Home Screen"
+      },
+      {
+        "key": "C",
+        "text": "In-App Notification"
+      },
+      {
+        "key": "D",
+        "text": "Record Detail"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answers are A. Navigation Menu and C. In-App Notification. Salesforce documentation states that users can receive and act on approval requests in the Salesforce mobile app by tapping the notification or by going to Approval Requests in the navigation menu. Salesforce also describes the Approval Requests navigation item as showing pending approvals where users can approve or reject items from within Salesforce. Why others are incorrect: B). Home Screen is not the documented approval-response delivery method in this context. D). Record Detail is not the best answer here because the documented mobile approval response paths are the notification and the Approval Requests navigation item."
+  },
+  {
+    "id": "ab-fc35-007",
+    "source": "abfc35",
+    "ref": "NO.7",
+    "stem": "Cloud Kicks works on an annual subscription model. When a sales rep marks An opportunity as closed won, a new opportunity should automatically be created for The renewal. The contracts team works outside of Salesforce but also needs to be Notified about closed deals in order to initiate the contract process with the customer. Which automation solution would meet these requirements?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Approval Process"
+      },
+      {
+        "key": "B",
+        "text": "Outbound Message"
+      },
+      {
+        "key": "C",
+        "text": "Record-triggered flow"
+      },
+      {
+        "key": "D",
+        "text": "Validation Rule"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is C. A record-triggered flow can run automatically when an Opportunity is updated to Closed Won, create a renewal Opportunity, and notify the contracts team. Salesforce Trailhead explains that record-triggered flows are built around trigger, criteria, and action; for example, when an Opportunity is created or updated and meets criteria, the flow can create another record. Salesforce Flow can also create records and send emails, which fits both requirements: create the renewal Opportunity and notify an external contracts team. Why others are incorrect: A Approval Process is for review/approval routing. B Outbound Message may notify an external system, but it does not handle the full renewal Opportunity creation requirement by itself. D Validation Rule only prevents bad data; it does not create records or send notifications."
+  },
+  {
+    "id": "ab-fc35-008",
+    "source": "abfc35",
+    "ref": "NO.8",
+    "stem": "DreamHouse Realty (DR) is expanding into subsidized housing by partnering with local government entities. DR uses Sales Cloud and has Enabled field history tracking on the Opportunity object. Due to increased information requirements, the App Dev team is changing Text Area (Long) fields To Rich Text fields to allow for up to 1,000 characters and better descriptions. Which two considerations should be made by the team? Choose 2 answers",
+    "options": [
+      {
+        "key": "A",
+        "text": "Data loss may occur when changing custom field types."
+      },
+      {
+        "key": "B",
+        "text": "Audit Trail is available through REST API extracts."
+      },
+      {
+        "key": "C",
+        "text": "Rich text field values of all lengths are displayed fully in reports."
+      },
+      {
+        "key": "D",
+        "text": "Field History Tracking records value changes of 255 characters or less."
+      }
+    ],
+    "correct": [
+      "A",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answers are A. Data loss may occur when changing custom field types and D. Field History Tracking records value changes of 255 characters or less. A is correct because Salesforce warns that changing the data type of an existing custom field can cause data loss in certain situations. This is a key consideration before converting Text Area (Long) fields to Rich Text Area fields. D is correct because Salesforce field history tracking has a character limitation. Salesforce tracks changes to fields with more than 255 characters as edited, but it does not record the old and new values. That means long /rich text changes beyond that limit do not provide full before-and-after history values. Why others are incorrect: B is not the relevant consideration for this field conversion requirement. C is incorrect because Salesforce reports do not display rich text field values of all lengths fully; Salesforce documentation notes report display limits for long text and rich text area fields."
+  },
+  {
+    "id": "ab-fc35-009",
+    "source": "abfc35",
+    "ref": "NO.9",
+    "stem": "Cloud Kicks built a process that is supposed to update record ownership based on several different criteria. Some users report that they are not getting the expected level of access to accounts and contacts. Which two considerations should an app builder be aware of that could be causing the issue? Choose 2 answers",
+    "options": [
+      {
+        "key": "A",
+        "text": "Processes that update record owners do not transfer child records."
+      },
+      {
+        "key": "B",
+        "text": "Processes use the first value if the Owner field is updated multiple times."
+      },
+      {
+        "key": "C",
+        "text": "Processes will fall om records owned by inactive users."
+      },
+      {
+        "key": "D",
+        "text": "Processes will only run if the most current version is active."
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answers are A. Processes that update record owners do not transfer child records and C. Processes will fail on records owned by inactive users. When Process Builder updates a record owner, Salesforce does not automatically transfer associated child records such as related Contacts or other child records. Salesforce documentation says processes that update owners do not automatically transfer associated items, so separate update actions are required for each related record type. Also, Salesforce documentation states that processes can't update records owned by inactive users. If records are still owned by inactive users, automation that tries to update them can fail. B is not the correct consideration here. D is not the best answer because the issue described is about ownership-based access to Accounts and Contacts, not simply whether a process version is active."
+  },
+  {
+    "id": "ab-fc35-010",
+    "source": "abfc35",
+    "ref": "NO.10",
+    "stem": "A Platform App Builder is asked to create a sandbox for a developer. The developer will be testing robust sample data sets and will need to store up to 250 MB of data. The sandbox will be refreshed each day. Which type of sandbox should the app builder create?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Full"
+      },
+      {
+        "key": "B",
+        "text": "Developer"
+      },
+      {
+        "key": "C",
+        "text": "Partial Copy"
+      },
+      {
+        "key": "D",
+        "text": "Developer Pro"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Developer Pro satisfies both requirements. Salesforce ' s current sandbox reference states that a Developer Pro sandbox can be refreshed every one day and provides 1 GB of data storage by default, comfortably exceeding the required 250 MB. A standard Developer sandbox also has a one-day refresh interval, but its standard data- storage allocation is only 200 MB, so it does not satisfy the stated storage requirement without an additional storage upgrade. Partial Copy provides significantly more storage but can only be refreshed every five days. A Full sandbox mirrors production-scale data and storage but has a 29-day refresh interval. Therefore, Developer Pro is the only standard sandbox type among the choices that simultaneously supports at least 250 MB and daily refresh capability."
+  },
+  {
+    "id": "ab-fc35-011",
+    "source": "abfc35",
+    "ref": "NO.11",
+    "stem": "An app builder wants to create a custom object and 10 fields. What should they use to create the object, fields, and relationships quickly from one place?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Schema Builder"
+      },
+      {
+        "key": "B",
+        "text": "Lightning Object Creator"
+      },
+      {
+        "key": "C",
+        "text": "Manage Field Permissions"
+      },
+      {
+        "key": "D",
+        "text": "Developer Console"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is A. Schema Builder. Schema Builder lets an app builder quickly create and view custom objects, fields, and relationships from one visual interface. Salesforce Trailhead states that Schema Builder is used to visualize and edit the data model, including objects, fields, and relationships. Lightning Object Creator is mainly used to create objects and fields from a spreadsheet. Manage Field Permissions controls access, not object creation. Developer Console is not the recommended point-and-click tool for this requirement."
+  },
+  {
+    "id": "ab-fc35-012",
+    "source": "abfc35",
+    "ref": "NO.12",
+    "stem": "Universal Containers wants to collect information from a user and use that input to update a related Account record. Which combination of flow elements should the Platform App Builder use to meet this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Autolaunched flow with a Screen element and an Update Records element"
+      },
+      {
+        "key": "B",
+        "text": "Record-triggered flow with a Screen element and a Create Records element"
+      },
+      {
+        "key": "C",
+        "text": "Schedule-triggered flow with an Assignment element and a Create Records element"
+      },
+      {
+        "key": "D",
+        "text": "Screen flow with Screen elements and an Update Records element"
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "A Screen Flow is required because the process must interact directly with a user and collect input. Salesforce defines screen flows as interactive automation that uses Screen elements and screen components to gather information from running users. After the required information is captured, an Update Records element can locate the related Account and write the supplied values to that existing record. Salesforce ' s Screen Flow documentation specifically describes adding an Update Records element and identifying an Account by its record ID when existing data must be changed. An autolaunched flow cannot contain normal interactive Screen elements. Record-triggered and schedule-triggered flows execute from record or time-based events rather than interactive user input. Create Records is also incorrect because the requirement is to update an existing related Account, not create a new one."
+  },
+  {
+    "id": "ab-fc35-013",
+    "source": "abfc35",
+    "ref": "NO.13",
+    "stem": "Universal Containers (UC) needs a picklist field called Status on three Separate custom objects. UC has a requirement to share the list of values for this field Across each object. Which feature should an app builder use?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Shared Custom Field"
+      },
+      {
+        "key": "B",
+        "text": "Global Picklist Value Se"
+      },
+      {
+        "key": "C",
+        "text": "Dependent Picklist"
+      },
+      {
+        "key": "D",
+        "text": "Related Picklist"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "A Global Picklist Value Set is used when the same picklist values must be reused across multiple objects and fields. Salesforce states that global picklist value sets let admins share values across objects and custom picklist fields. Why not others: A). Shared Custom Field is not a Salesforce feature for this requirement. C). Dependent Picklist controls values based on another field. D). Related Picklist is not the correct Salesforce feature."
+  },
+  {
+    "id": "ab-fc35-014",
+    "source": "abfc35",
+    "ref": "NO.14",
+    "stem": "The marketing director is concerned that too many car parts were given away for free last year. They want to track discounts, samples, and Giveaways by Sales Rep. The manager's sign-off on free parts also needs to be processe Which functionality should an app builder use to meet these requirements?",
+    "options": [
+      {
+        "key": "A",
+        "text": "High Velocity Sales"
+      },
+      {
+        "key": "B",
+        "text": "Quotes"
+      },
+      {
+        "key": "C",
+        "text": "Approval process"
+      },
+      {
+        "key": "D",
+        "text": "Check box"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is C. Approval process. The key requirement is that the manager's sign-off on free parts must be processed. Salesforce approval processes are designed to automate record approval, define approval steps, assign approvers, and perform actions when records are approved or rejected. Salesforce Trailhead gives a similar discount-management example where discount percentage is tracked and manager approval is requested through an approval process. Why others are incorrect: A). High Velocity Sales is for sales engagement/cadences, not approval sign-off. B). Quotes may help with pricing, but it does not by itself process manager approval. D). Checkbox can store a value but cannot route approval."
+  },
+  {
+    "id": "ab-fc35-015",
+    "source": "abfc35",
+    "ref": "NO.15",
+    "stem": "A Platform App Builder has created a custom object that should be included in Global Search results. Which step should the app builder take to ensure the results are generated in Global Search?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a custom tab set to Default Off."
+      },
+      {
+        "key": "B",
+        "text": "Create a search layout."
+      },
+      {
+        "key": "C",
+        "text": "Create a custom tab set to Hidden."
+      },
+      {
+        "key": "D",
+        "text": "Create a search filter."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Salesforce states that to make a custom object ' s records searchable, an administrator can create a custom tab set to Default On or Default Off ; creating the tab enables the object ' s search capability. Salesforce also warns that a custom object ' s tab must be visible for the user ' s profile and specifically says not to set the tab to Tab Hidden. A Search Layout controls which fields users see in search results but does not by itself enable object searchability. A search filter similarly refines results rather than enabling the custom object in Global Search. Therefore, among the available options, creating the custom tab with Default Off is the correct configuration."
+  },
+  {
+    "id": "ab-fc35-016",
+    "source": "abfc35",
+    "ref": "NO.16",
+    "stem": "After utilizing the Lightning Object Creator to create a new object, its fields, and to insert all of the data, an app builder now needs to set up the Lightning Record Page. Which component should the app builder have on their Lightning Record Page to see all of the fields from the page layout?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Highlights Panel"
+      },
+      {
+        "key": "B",
+        "text": "Recommendations"
+      },
+      {
+        "key": "C",
+        "text": "Record Detail"
+      },
+      {
+        "key": "D",
+        "text": "Path"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is C. Record Detail. The Record Detail component on a Lightning Record Page displays the fields and sections from the object's assigned page layout. After using Lightning Object Creator to create the object, fields, and data, the app builder must add the Record Detail component if users need to see the fields from the page layout on the Lightning Record Page. Salesforce documentation states that the Record Detail component displays fields and sections from the page layout associated with the object. Why the other options are incorrect: Highlights Panel shows key record actions and compact-layout information. Recommendations displays recommendation records. Path shows guided stage/status progression, not all page-layout fields."
+  },
+  {
+    "id": "ab-fc35-017",
+    "source": "abfc35",
+    "ref": "NO.17",
+    "stem": "The CFO of Cloud Kicks needs a way for new vendors to accept terms on Agreements for any new major retail store lease before the opportunity can be close Which feature should be used to handle this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Email Alert"
+      },
+      {
+        "key": "B",
+        "text": "Dynamic Action"
+      },
+      {
+        "key": "C",
+        "text": "Approval Process"
+      },
+      {
+        "key": "D",
+        "text": "Validation Rule"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The requirement specifies that a new vendor must accept terms on Agreements before an Opportunity can be closed. Salesforce Approval Processes are the declarative solution for enforcing such business rules. An approval process can: * Require users (vendors) to accept or approve records (Agreements). * Prevent Opportunities from moving to a closed stage until approval is completed. * Send email notifications automatically to approvers. Salesforce documentation confirms that approval processes are used to enforce conditions on record lifecycle and ensure required steps are completed before record status changes. (Salesforce Help) * A. Email Alert cannot enforce record progression. * B. Dynamic Action only controls field-level UI visibility, not enforcement. * D. Validation Rule could prevent saving a record, but it cannot require explicit approval from a specific user group."
+  },
+  {
+    "id": "ab-fc35-018",
+    "source": "abfc35",
+    "ref": "NO.18",
+    "stem": "Universal Containers require different fields to be filled out at each stage of the Opportunity sales process. Which configuration steps can an app builder use to meet this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a validation rule to prevent the user for field information."
+      },
+      {
+        "key": "B",
+        "text": "Set asset format required inside based on the current stages."
+      },
+      {
+        "key": "C",
+        "text": "Define record types and agree formats for each stage."
+      },
+      {
+        "key": "D",
+        "text": "Add the Path component to the Lightning record page."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The verified exam answer is D. Add the Path component to the Lightning record page. Salesforce Path is designed to guide users through stages of a business process. For each step, such as each Opportunity Stage, an app builder can highlight key fields and add guidance for success. Salesforce documentation states that when creating a Path, the app builder can select key fields for each step and enter success guidance. This fits the requirement because users need to know which fields should be completed at each Opportunity stage. Important nuance: Path guides users, but it does not hard-enforce stage-based required fields by itself. Salesforce notes that page layouts cannot require different fields in different Path steps; strict enforcement requires validation rules based on the stage/path step."
+  },
+  {
+    "id": "ab-fc35-019",
+    "source": "abfc35",
+    "ref": "NO.19",
+    "stem": "Universal Containers wants to control the visibility of a specific section of a Lightning page based on the device type used by the user. What should a Platform App Builder recommend?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Configure different Record Types."
+      },
+      {
+        "key": "B",
+        "text": "Create a Lightning Web Component."
+      },
+      {
+        "key": "C",
+        "text": "Edit the Page Layout."
+      },
+      {
+        "key": "D",
+        "text": "Use Dynamic Forms."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Current Salesforce functionality makes D. Dynamic Forms the appropriate declarative answer. Lightning App Builder supports visibility rules on Dynamic Forms Field and Field Section components, and Salesforce specifically documents device-based visibility through the Device context. An app builder can therefore configure a section to appear for the required form factor, such as phone or desktop, without developing a custom Lightning Web Component. Record Types determine business processes, picklist availability, and layout assignments; they are not device-detection mechanisms. Traditional Page Layouts likewise do not provide device-specific section visibility. A custom LWC could implement custom form-factor behavior programmatically, but it is unnecessary when Dynamic Forms provides native declarative visibility controls."
+  },
+  {
+    "id": "ab-fc35-020",
+    "source": "abfc35",
+    "ref": "NO.20",
+    "stem": "Universal Containers is excited to launch a new app. The company wants to increase the adoption rate and guide users through different walkthroughs and targeted prompts. What should the Platform App Builder recommend?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Build a screen flow."
+      },
+      {
+        "key": "B",
+        "text": "Use In-App Guidance."
+      },
+      {
+        "key": "C",
+        "text": "Use Dynamic Actions."
+      },
+      {
+        "key": "D",
+        "text": "Upgrade to Dynamic Forms."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "In-App Guidance is Salesforce ' s native capability for contextual onboarding, feature adoption, prompts, and guided walkthroughs directly inside Lightning Experience. Salesforce documents that administrators can create prompts and walkthroughs, determine the target audience, and specify where and when that guidance appears. Targeted prompts can highlight a specific page element, while walkthroughs connect multiple prompts into a step-by-step guided experience. This aligns directly with Universal Containers ' goals of increasing adoption and guiding users through a newly launched application. A Screen Flow is appropriate when collecting information or executing an interactive business process, but it is not the dedicated adoption feature. Dynamic Actions control which actions appear, while Dynamic Forms controls field and section presentation. Neither provides structured onboarding walkthroughs."
+  },
+  {
+    "id": "ab-fc35-021",
+    "source": "abfc35",
+    "ref": "NO.21",
+    "stem": "Cloud Kicks (CK) wants to track orders against inventory, ensuring its ability to fulfill order requests. CK created a junction object called Request Inventory to enable many-to-many relationships with the Inventory and Order objects. What does the app builder need to provide to ensure users can view Request Inventory records?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Apex-based sharing on the first master object."
+      },
+      {
+        "key": "B",
+        "text": "Read access to both master objects."
+      },
+      {
+        "key": "C",
+        "text": "Sharing rules on Request Inventory object."
+      },
+      {
+        "key": "D",
+        "text": "Read access to the first master object."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Users need Read access to both master objects. Request Inventory is a junction object with two master-detail relationships: Inventory and Order. For junction objects, access is based on the associated master records and the sharing behavior of the master-detail relationships. Salesforce documentation for object relationship considerations explains that sharing access to a junction object record is determined by access to both associated master records. Why not the others? Sharing rules are not created directly on a master-detail detail object in the same way, because it is controlled by parent. Apex-based sharing is not needed. Read access to only the first master object is not enough because the junction record connects two master records."
+  },
+  {
+    "id": "ab-fc35-022",
+    "source": "abfc35",
+    "ref": "NO.22",
+    "stem": "DreamHouse Realty has a mentorship program that pairs Experienced Realtors with new Realtors. Each experienced Realtor can Mentor one or several new Realtors, and each new Realtor is required to Work with a single experienced Realtor they report to for a probationary Perio Which type of relationship would an app builder set up to meet this Specification?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Indirect lookup"
+      },
+      {
+        "key": "B",
+        "text": "Lookup"
+      },
+      {
+        "key": "C",
+        "text": "Many-to-many"
+      },
+      {
+        "key": "D",
+        "text": "Master-detail"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is B. Lookup. This is a one-to-many mentorship relationship: one experienced Realtor can mentor many new Realtors, but each new Realtor works with only one experienced Realtor. A lookup relationship is appropriate for connecting one record to another in this type of flexible parent-child model. Salesforce relationship documentation confirms that lookup relationships are used to relate objects without the strict ownership, sharing, and deletion behavior of master-detail relationships. Master-detail is too restrictive because the new Realtor record should not necessarily inherit ownership and deletion behavior from the mentor. Many-to-many is incorrect because each new Realtor has only one mentor. Indirect lookup is used for external objects, not this internal Salesforce relationship."
+  },
+  {
+    "id": "ab-fc35-023",
+    "source": "abfc35",
+    "ref": "NO.23",
+    "stem": "Universal Containers wants to collaborate with its customers within Salesforce and has decided to enable the Allow Customer Invitations in the Chatter Settings. Which permission is granted to customers when invited to a Chatter group?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The ability to invite members to groups of which they are a member."
+      },
+      {
+        "key": "B",
+        "text": "The ability to interact with members of their groups."
+      },
+      {
+        "key": "C",
+        "text": "The ability to mention accounts of which they are a contact."
+      },
+      {
+        "key": "D",
+        "text": "The ability to request access to public groups."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is B. When customer invitations are enabled for Chatter groups, invited customers get limited collaboration access. Salesforce documentation states that customers can see only the groups they're invited to and can interact only with members of those groups. A is incorrect because invited customers do not automatically get broad group-invitation rights. C is incorrect because Chatter customer access does not grant access to Account records. D is incorrect because customers are invited to specific groups; they do not receive general public-group request access."
+  },
+  {
+    "id": "ab-fc35-024",
+    "source": "abfc35",
+    "ref": "NO.24",
+    "stem": "Universal Containers wants to create a custom checkbox formula field on The Opportunity object. This formula should evaluate to true if the following conditions are met: Stage is set to Negotiation/Review Close Date is less than 1 week away Which formula meets these requirements?",
+    "options": [
+      {
+        "key": "A",
+        "text": "AND (StageName Negotiation/Review \", closeDate -DAY (7) TODAY!)}"
+      },
+      {
+        "key": "B",
+        "text": "AND (ISPICKVAL (StageName, *Negotiation/Review ' ), CloneDate - 7 TODAY () )"
+      },
+      {
+        "key": "C",
+        "text": "AND (StageName = ' Negotiation/Review, CloseDate TODAY (1)"
+      },
+      {
+        "key": "D",
+        "text": "AND (ISPICKVAL (StageName, Negotiation/Review ' ). CloseDate DAY (7) TODAY (1)"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The formula must evaluate true when: * Stage = Negotiation/Review * Close Date < 1 week from today Salesforce formula functions used: * ISPICKVAL() for picklist equality checks * AND() to combine multiple conditions * CloseDate < TODAY() + 7 to check the Close Date is within one week Correct formula: AND( ISPICKVAL(StageName, \" Negotiation/Review \" ), CloseDate < TODAY() + 7 ) * Options A, C, D use invalid syntax (missing quotation marks, incorrect function structure). * Salesforce Help confirms correct syntax for picklist comparison and date arithmetic in formula fields. (Salesforce Help) This formula evaluates true only when both conditions are simultaneously met."
+  },
+  {
+    "id": "ab-fc35-025",
+    "source": "abfc35",
+    "ref": "NO.25",
+    "stem": "Cloud Kicks wants customer care agents to follow a guided, multi-step form directly on the Case record page to capture a product return. The form takes the agent through verifying the order, choosing a return reason, and confirming a refund method, collecting input at each step. Which type of flow should the Platform App Builder use?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Record-triggered flow"
+      },
+      {
+        "key": "B",
+        "text": "Autolaunched flow"
+      },
+      {
+        "key": "C",
+        "text": "Screen flow"
+      },
+      {
+        "key": "D",
+        "text": "Schedule-triggered flow"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "A Screen Flow is specifically designed for interactive processes that display information, ask users questions, and capture user input across one or more screens. Salesforce states that Screen elements can collect text, choices, dates, lookup values, and other inputs, and multiple Screen elements can create a guided multi-page experience. Screen flows can also be embedded directly on Lightning record pages, which precisely matches the requirement to guide customer care agents from the Case page. A record-triggered flow runs automatically when record data changes and does not provide an interactive wizard. An autolaunched flow normally runs without screens, while a schedule-triggered flow executes at defined times for batches of records. Because agents must actively provide information at several stages of the return process, Screen Flow is the correct declarative solution."
+  },
+  {
+    "id": "ab-fc35-026",
+    "source": "abfc35",
+    "ref": "NO.26",
+    "stem": "Universal Containers (UC) has a time-sensitive need for a custom Component to be built in 4 weeks. UC developers require additional Enablement to complete the work and are logged by several months. Which option should an app builder suggest to meet this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Build a screen flow page."
+      },
+      {
+        "key": "B",
+        "text": "Use an AppExchange solution."
+      },
+      {
+        "key": "C",
+        "text": "Build a Lightning record page."
+      },
+      {
+        "key": "D",
+        "text": "Use a Bolt solution."
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is B. Use an AppExchange solution. UC has a time-sensitive need and the developers are delayed for several months. AppExchange is the best recommendation because it provides ready-to-install apps, components, and solutions that can extend Salesforce without building everything from scratch. Salesforce describes AppExchange as the marketplace for ready-to-install solutions, including apps, components, and experts. A and C still require building the solution internally. D. Bolt solution is more specific to prebuilt Experience Cloud/community templates and is not the best answer for a general custom component requirement. Salesforce describes Bolt Solutions as combinations of Lightning apps, business process flows, and Experience Builder templates/pages."
+  },
+  {
+    "id": "ab-fc35-027",
+    "source": "abfc35",
+    "ref": "NO.27",
+    "stem": "Universal Containers (UC) has several picklist fields on the Account object whose values are routinely modified to meet changing business requirements. Due to These revolving changes, UC has a high number of inactive picklist values that are Impacting system performance and user experience. What can the app builder do to alleviate this issue?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Establish upper bound on existing picklists in Picklist Settings."
+      },
+      {
+        "key": "B",
+        "text": "Set up Global Values in Picklist Value Sets."
+      },
+      {
+        "key": "C",
+        "text": "Remove upper bound on inactive picklist values in Picklist Settings."
+      },
+      {
+        "key": "D",
+        "text": "Convert the picklist fields to a different field type that will still meet the business requirements."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is A because Salesforce provides the Establish upper bound on existing picklists option to protect picklist performance by limiting inactive picklist values. Salesforce documentation states that this setting runs a query to identify picklists with fewer than 4,000 inactive values and enforce the limit. Why others are incorrect: B is for reusing picklist values across fields, not reducing inactive picklist performance impact. C would worsen the issue because it removes limits on inactive values. D is too drastic and not the recommended Salesforce feature for this issue."
+  },
+  {
+    "id": "ab-fc35-028",
+    "source": "abfc35",
+    "ref": "NO.28",
+    "stem": "A Platform App Builder created multiple custom fields, page layouts, and reports in the sandbox and added them to a change set. After the change set was deployed to production, the custom fields were not displayed on the page layouts. What should the app builder do?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Update page layout assignments."
+      },
+      {
+        "key": "B",
+        "text": "Redeploy the change set."
+      },
+      {
+        "key": "C",
+        "text": "Update field-level security in production."
+      },
+      {
+        "key": "D",
+        "text": "Recreate the fields in production."
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Page layout visibility depends not only on the existence of the deployed page-layout metadata but also on the layout assignments associated with profiles and, where applicable, record types. Salesforce documents that page layout assignments are profile metadata and that deployments can affect or remove assignments when the required profile, record type, and page layout metadata are not included together. After deployment, the app builder should therefore verify and update the page layout assignments so users receive the intended layout containing the new fields. Redeploying the same components without correcting the assignment does not address the configuration issue. Recreating the fields is unnecessary because deployment already created them. Field-level security controls whether users may access fields, but the question specifically identifies their absence from the assigned page layout."
+  },
+  {
+    "id": "ab-fc35-029",
+    "source": "abfc35",
+    "ref": "NO.29",
+    "stem": "The Service Manager provided the app builder with color code requirements for case age on open cases. - New cases populate a green circle. - Day-old cases populate a yellow circle. - Three d ay-old cases populate a red circle. How should an app builder implement this requirement?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Custom Button"
+      },
+      {
+        "key": "B",
+        "text": "Quick Action"
+      },
+      {
+        "key": "C",
+        "text": "Formula Field"
+      },
+      {
+        "key": "D",
+        "text": "Lightning Web Component"
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is C. Formula Field. The Service Manager wants a visual color indicator based on the age of an open Case: green for new, yellow for one day old, and red for three days old. This can be implemented with a formula field using conditional logic and the Salesforce IMAGE() function to display different colored indicators based on Case age. Salesforce documentation confirms that the IMAGE function is available in formula fields and can display an image based on field values. A formula field can evaluate the case age using fields such as CreatedDate , TODAY() , and IsClosed , then return the correct colored image. A). Custom Button is incorrect because this is not a user action. B). Quick Action is incorrect because the requirement is display-based, not action-based. D). Lightning Web Component could do this with code, but a formula field is the simplest declarative Platform App Builder solution."
+  },
+  {
+    "id": "ab-fc35-030",
+    "source": "abfc35",
+    "ref": "NO.30",
+    "stem": "Universal Container wants customers to be able to open cases from a public-facing website. What should the app builder use to enable visitors to the website?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Web-to-case"
+      },
+      {
+        "key": "B",
+        "text": "Outbound message"
+      },
+      {
+        "key": "C",
+        "text": "Screen flow"
+      },
+      {
+        "key": "D",
+        "text": "Email-to-case"
+      }
+    ],
+    "correct": [
+      "A"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is A. Web-to-Case is the Salesforce feature designed to let visitors submit case information from a public-facing website. Salesforce documentation states that Web-to-Case is set up by enabling the feature, creating and customizing a web form, and adding that form to a website. Why others are incorrect: B). Outbound message sends data out of Salesforce; it does not create cases from a website. C). Screen flow could require extra site/guest-user setup and is not the standard feature for this requirement. D). Email-to-case creates cases from inbound email, not directly from a public web form."
+  },
+  {
+    "id": "ab-fc35-031",
+    "source": "abfc35",
+    "ref": "NO.31",
+    "stem": "Service agents at Ursa Major Solar want a more condensed case view. Service agents also want to be able to modify the associated contact and account Records from the case page layout on the Lightning record page. Which two components should an app builder use to meet these requirements? Choose 2 answers",
+    "options": [
+      {
+        "key": "A",
+        "text": "Tabs"
+      },
+      {
+        "key": "B",
+        "text": "Related record"
+      },
+      {
+        "key": "C",
+        "text": "Path"
+      },
+      {
+        "key": "D",
+        "text": "Rich text"
+      }
+    ],
+    "correct": [
+      "A",
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answers are A. Tabs and B. Related record. Tabs help create a more condensed Lightning record page by grouping information into separate tabbed sections instead of showing everything in one long page. Salesforce Lightning App Builder allows app builders to add, remove, reorder, and customize components on Lightning record pages. Related Record is required because service agents want to modify the associated Contact and Account directly from the Case Lightning record page. Salesforce Help states that the Related Record component uses quick action metadata and requires an associated quick action to update records. Why others are incorrect: Path is used to guide users through stages or status values, not to edit related Account or Contact records. Rich Text displays formatted guidance or static text; it does not provide editable related-record functionality."
+  },
+  {
+    "id": "ab-fc35-032",
+    "source": "abfc35",
+    "ref": "NO.32",
+    "stem": "Universal Containers has two custom objects, Inspection__c and Building__c, that are not yet related. The maintenance team expects to log approximately three inspections for each building every year. The business has two requirements: When a Building record is deleted, all of its related Inspection records must be deleted automatically. Each Inspection record must follow the same sharing and access settings as its Building. How should the Platform App Builder create the relationship?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Create a required lookup relationship field on Building__c that relates it to Inspection__c."
+      },
+      {
+        "key": "B",
+        "text": "Create a master-detail relationship field on Building__c that relates it to Inspection__c."
+      },
+      {
+        "key": "C",
+        "text": "Create a required lookup relationship field on Inspection__c that relates it to Building__c."
+      },
+      {
+        "key": "D",
+        "text": "Create a master-detail relationship field on Inspection__c that relates it to Building__c."
+      }
+    ],
+    "correct": [
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "Inspection__c must be the detail object and Building__c the master. Salesforce master-detail relationships create strong dependency between parent and child records: when a master record is deleted, its related detail records are cascade-deleted. Detail records also inherit record access from the master through the Controlled by Parent sharing model. Salesforce additionally specifies that the master-detail relationship field is created on the detail object. Therefore, the relationship field belongs on Inspection__c and references Building__c . A lookup relationship would leave Inspection records independently owned and would not provide the required cascade-delete and inherited-sharing behavior. Option B reverses the relationship direction and would incorrectly make Building the detail. Thus, D satisfies both lifecycle dependency and security inheritance requirements with the standard declarative Salesforce data model."
+  },
+  {
+    "id": "ab-fc35-033",
+    "source": "abfc35",
+    "ref": "NO.33",
+    "stem": "The Cloud Kicks (CK) sales team is currently using a sales app in Lightning Experience. CK is planning a Salesforce mobile app rollout next month to increase productivity for reps while out in the field. After reviewing the mobile app, the sales operations manager asks about ways to create an enhanced user experience. Which two solutions could an app builder suggest? Choose 2 answers",
+    "options": [
+      {
+        "key": "A",
+        "text": "Allow mobile users to support Account Upstream Agent Closets."
+      },
+      {
+        "key": "B",
+        "text": "Include Today as a guide from in line size."
+      },
+      {
+        "key": "C",
+        "text": "Set up different mobile menu configurations of different types of users."
+      },
+      {
+        "key": "D",
+        "text": "Create a custom app page and Assign to the mobile menu."
+      }
+    ],
+    "correct": [
+      "B",
+      "D"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct solutions are D. Create a custom app page and assign it to the mobile menu and B. Include Today as a navigation item in the app. Salesforce supports creating a mobile app page with Lightning App Builder for the Salesforce mobile app. This allows an app builder to design a mobile-focused experience and make it available through mobile navigation. Salesforce also provides Today in the mobile app to help users manage their day, prepare for meetings, and access relevant mobile productivity information. Salesforce documentation states that users access Today from the Salesforce mobile app navigation menu, and admins can add Today to Lightning app navigation and the Mobile Only app. C is not the best verified exam answer for the standard version of this question. While mobile navigation can be customized, the stronger Platform App Builder mobile UX recommendations here are adding a custom mobile app page and adding Today as a navigation item."
+  },
+  {
+    "id": "ab-fc35-034",
+    "source": "abfc35",
+    "ref": "NO.34",
+    "stem": "Cloud Kicks created a Locked__c custom field to identify Account records that should restrict modifications for all users except the System Administrator. Which validation rule enforces this requirement on locked Account records?",
+    "options": [
+      {
+        "key": "A",
+        "text": "AND(Locked__c = TRUE, $UserRole.Name != \"System Administrator\" )"
+      },
+      {
+        "key": "B",
+        "text": "AND(Locked__c = TRUE, $Profile.Name != \"System Administrator\" )"
+      },
+      {
+        "key": "C",
+        "text": "AND(Locked__c = TRUE, Stage = \"Closed Won\", $UserRole.Name != \"System Administrator\" )"
+      },
+      {
+        "key": "D",
+        "text": "AND(Locked__c = TRUE, $Profile.Name = \"System Administrator\" )"
+      }
+    ],
+    "correct": [
+      "B"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "A Salesforce validation rule prevents a record from being saved when its formula evaluates to TRUE. The rule therefore must return TRUE when the Account is locked and the current user ' s profile is not System Administrator. $Profile.Name is the appropriate global variable for testing the current user ' s profile. Salesforce documents $Profile global merge fields for accessing profile properties, including $Profile.Name , and provides validation-rule examples using profile-name comparisons to exempt authorized profiles. Option A tests the user ' s role, but System Administrator is a profile, not a role. Option C introduces an unrelated Opportunity Stage condition. Option D reverses the logic and would block the System Administrator instead of exempting that profile. Therefore, B correctly implements the stated lock exception."
+  },
+  {
+    "id": "ab-fc35-035",
+    "source": "abfc35",
+    "ref": "NO.35",
+    "stem": "When a deal is closed-won, it has to be approved by the owner's Manager prior to being added to the leaderboard for a quarterly sales Competition. An opportunity is won on the last day of the quarter and the Manager is on vacation. What is recommended to ensure all of the appropriate deals are reviewed and the leaderboard is up to date?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Have the manager's assistant reassign the approval request."
+      },
+      {
+        "key": "B",
+        "text": "Use a quick action to forward the approval request to the next level approver."
+      },
+      {
+        "key": "C",
+        "text": "Set up a delegated approver for the manager."
+      },
+      {
+        "key": "D",
+        "text": "Use an assignment rule to automatically assign a delegated approver."
+      }
+    ],
+    "correct": [
+      "C"
+    ],
+    "shuffle": true,
+    "learnMore": [],
+    "sourceExplanation": "The correct answer is C. A delegated approver is the recommended Salesforce feature when the assigned approver is unavailable, such as during vacation. Salesforce documentation confirms that users can identify a delegate in approval settings, and delegated approvers can approve or reject approval requests. This ensures the closed-won Opportunity can still be reviewed before the leaderboard is updated, even though the owner's manager is away. Why others are incorrect: A is not the best recommended setup because relying on an assistant to reassign requests is manual and reactive. B is incorrect because forwarding approval requests is not the standard solution for planned approver absence. D is incorrect because assignment rules do not assign delegated approvers for approval processes."
+  }
+]

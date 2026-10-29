@@ -1,12 +1,13 @@
 import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
-import type { SourceId } from '../src/domain/types.ts'
+import type { CertId, SourceId } from '../src/domain/types.ts'
 
 export const ROOT = resolve(import.meta.dirname, '..')
 export const DATA = join(ROOT, 'data')
 
 export interface SourceInfo {
   id: SourceId
+  cert: CertId
   file: string
   pages: number
   questions: number
@@ -39,6 +40,9 @@ export interface RawPage {
 export const rawPath = (id: SourceId) => join(DATA, 'raw', `${id}.pages.json`)
 export const parsedPath = (id: SourceId) => join(DATA, 'parsed', `${id}.json`)
 export const curationPath = (id: SourceId) => join(DATA, 'curation', `${id}.json`)
-export const BANK_PATH = join(ROOT, 'src', 'data', 'questions.json')
+export const BANK_PATHS: Record<CertId, string> = {
+  admin: join(ROOT, 'src', 'data', 'questions.json'),
+  appbuilder: join(ROOT, 'src', 'data', 'appbuilder.json'),
+}
 
 export const readJson = <T>(path: string): T => JSON.parse(readFileSync(path, 'utf8')) as T

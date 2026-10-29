@@ -1,79 +1,84 @@
 // Inicio: avisos, simulacro a medias, los tres modos y un resumen del progreso.
 import { useState, type Dispatch } from 'react'
-import { EXAM, sectionLabel } from '../domain/exam.ts'
+import { neededToPass } from '../domain/grading.ts'
 import { mulberry32, randomSeed } from '../domain/rng.ts'
 import { filterPool } from '../domain/sampling.ts'
 import { createExamSession, isSubmitted, remainingMs } from '../domain/session.ts'
 import { inReview } from '../domain/stats.ts'
 import type { Progress } from '../domain/storage.ts'
-import { BANK } from './bank.ts'
+import { useCert } from './cert.ts'
 import { ConfirmDialog, Stat } from './common.tsx'
-import { formatDuration, percent, plural } from './format.ts'
-import { makeRun, type Action } from './state.ts'
+import { formatDuration, percent } from './format.ts'
+import { useI18n } from './lang.ts'
+import { sectionName } from './messages.ts'
+import { makeRun, type Action, type Notice } from './state.ts'
 import { useNow } from './useNow.ts'
 
 /** En desarrollo, ?min=N acorta el simulacro a N minutos para probar la entrega automática. */
-function examDurationMs(): number {
+function examDurationMs(defaultMinutes: number): number {
   const minutes = import.meta.env.DEV ? Number(new URLSearchParams(window.location.search).get('min')) : 0
-  return (minutes > 0 ? minutes : EXAM.durationMinutes) * 60_000
+  return (minutes > 0 ? minutes : defaultMinutes) * 60_000
 }
 
-export function Home({ progress, notices, dispatch }: { progress: Progress; notices: string[]; dispatch: Dispatch<Action> }) {
+export function Home({ progress, notices, dispatch }: { progress: Progress; notices: Notice[]; dispatch: Dispatch<Action> }) {
+  const { cert, bank } = useCert()
+  const { t, lang } = useI18n()
+  const { exam: rules } = cert
   const [confirmDiscard, setConfirmDiscard] = useState(false)
   const now = useNow()
   const exam = progress.activeExam && !isSubmitted(progress.activeExam) ? progress.activeExam : undefined
-  const reviewQuestions = BANK.questions.filter((q) => inReview(progress.stats[q.id], progress.flagged.includes(q.id)))
-  const seen = BANK.questions.filter((q) => progress.stats[q.id]).length
+  const reviewQuestions = bank.questions.filter((q) => inReview(progress.stats[q.id], progress.flagged.includes(q.id)))
+  const seen = bank.questions.filter((q) => progress.stats[q.id]).length
   const totals = Object.values(progress.stats).reduce((acc, s) => ({ correct: acc.correct + s.correct, seen: acc.seen + s.seen }), {
     correct: 0,
     seen: 0,
   })
   const lastExam = progress.history.at(-1)
+  const needed = neededToPass(rules.scoredCount, rules.passPercent)
 
   const startExam = () => {
     const seed = randomSeed()
-    const pool = filterPool(BANK.questions, progress.settings)
-    const { session, shortfall } = createExamSession(BANK, pool, { now: Date.now(), seed, rng: mulberry32(seed), durationMs: examDurationMs() })
-    const messages = [
-      session.questionIds.length < EXAM.questionCount &&
-        `Con tus ajustes solo hay ${session.questionIds.length} preguntas disponibles, así que el simulacro es más corto que el real.`,
-      shortfall.length > 0 &&
-        `No hay preguntas suficientes de ${shortfall.map(sectionLabel).join(', ')}: su hueco se ha cubierto con otras secciones.`,
-    ].filter(Boolean)
-    dispatch({ type: 'exam/start', session, notice: messages.join(' ') || undefined })
+    const pool = filterPool(bank.questions, cert, progress.settings)
+    const { session, shortfall } = createExamSession(bank, cert, pool, {
+      now: Date.now(),
+      seed,
+      rng: mulberry32(seed),
+      durationMs: examDurationMs(rules.durationMinutes),
+    })
+    const notices: Notice[] = []
+    if (session.questionIds.length < rules.questionCount) notices.push({ kind: 'short-exam', available: session.questionIds.length })
+    if (shortfall.length > 0) notices.push({ kind: 'shortfall', sections: shortfall })
+    dispatch({ type: 'exam/start', session, notices })
   }
 
   const startReview = () => {
     const rng = mulberry32(randomSeed())
-    dispatch({ type: 'navigate', screen: { name: 'practice', run: makeRun('Repaso', reviewQuestions, rng) } })
+    dispatch({ type: 'navigate', screen: { name: 'practice', run: makeRun('review', reviewQuestions, rng) } })
   }
 
   return (
     <div className="home">
       {notices.map((notice, index) => (
-        <div key={notice} className="notice" role="status">
-          <span>{notice}</span>
+        <div key={`${index}-${notice.kind}`} className="notice" role="status">
+          <span>{t.notice(notice, (key) => sectionName(cert, key, lang))}</span>
           <button type="button" className="link-button" onClick={() => dispatch({ type: 'notice/dismiss', index })}>
-            Cerrar
+            {t.close}
           </button>
         </div>
       ))}
 
       {exam && (
-        <section className="card resume" aria-label="Simulacro a medias">
+        <section className="card resume" aria-label={t.home.resumeLabel}>
           <div>
-            <h2>Tienes un simulacro a medias</h2>
-            <p className="muted">
-              Quedan {formatDuration(remainingMs(exam, now))} · {plural(Object.keys(exam.answers).length, 'pregunta contestada', 'preguntas contestadas')}{' '}
-              de {exam.questionIds.length}. El tiempo sigue corriendo aunque cierres la página.
-            </p>
+            <h2>{t.home.resumeTitle}</h2>
+            <p className="muted">{t.home.resumeText(formatDuration(remainingMs(exam, now)), Object.keys(exam.answers).length, exam.questionIds.length)}</p>
           </div>
           <div className="actions">
             <button type="button" className="danger" onClick={() => setConfirmDiscard(true)}>
-              Descartar
+              {t.home.discard}
             </button>
             <button type="button" className="primary" onClick={() => dispatch({ type: 'navigate', screen: { name: 'exam' } })}>
-              Reanudar
+              {t.home.resume}
             </button>
           </div>
         </section>
@@ -81,52 +86,49 @@ export function Home({ progress, notices, dispatch }: { progress: Progress; noti
 
       <div className="modes">
         <section className="card mode">
-          <h2>Práctica</h2>
-          <p>Compruebas cada respuesta al momento y ves la explicación. Puedes filtrar por sección y por fuente.</p>
+          <h2>{t.home.practiceTitle}</h2>
+          <p>{t.home.practiceText}</p>
           <button type="button" className="primary" onClick={() => dispatch({ type: 'navigate', screen: { name: 'practice-setup' } })}>
-            Practicar
+            {t.home.practiceButton}
           </button>
         </section>
         <section className="card mode">
-          <h2>Simulacro</h2>
-          <p>
-            {EXAM.questionCount} preguntas repartidas como en el examen, {EXAM.durationMinutes} minutos y aprobado con el {EXAM.passPercent} %.
-            La corrección llega al entregar.
-          </p>
+          <h2>{t.home.examTitle}</h2>
+          <p>{t.home.examText(rules, needed)}</p>
           <button type="button" className="primary" disabled={!!exam} onClick={startExam}>
-            {exam ? 'Ya tienes uno a medias' : 'Empezar simulacro'}
+            {exam ? t.home.examBlocked : t.home.examButton}
           </button>
         </section>
         <section className="card mode">
-          <h2>Repaso</h2>
-          <p>
-            {reviewQuestions.length
-              ? `${plural(reviewQuestions.length, 'pregunta pendiente', 'preguntas pendientes')}: las que has fallado y las que has marcado. Salen al acertarlas dos veces seguidas.`
-              : 'Aquí aparecerán las preguntas que falles o marques, hasta que las aciertes dos veces seguidas.'}
-          </p>
+          <h2>{t.home.reviewTitle}</h2>
+          <p>{t.home.reviewText(reviewQuestions.length)}</p>
           <button type="button" className="primary" disabled={!reviewQuestions.length} onClick={startReview}>
-            Repasar
+            {t.home.reviewButton}
           </button>
         </section>
       </div>
 
-      <section aria-label="Tu progreso">
+      <section aria-label={t.home.progressLabel}>
         <div className="kpis">
-          <Stat label="Preguntas vistas" value={`${seen} de ${BANK.questions.length}`} />
-          <Stat label="Acierto global" value={totals.seen ? `${percent(totals.correct, totals.seen)} %` : '—'} detail={totals.seen ? plural(totals.seen, 'respuesta', 'respuestas') : undefined} />
-          <Stat label="En repaso" value={reviewQuestions.length} />
+          <Stat label={t.home.seen} value={t.ofN(seen, bank.questions.length)} />
           <Stat
-            label="Último simulacro"
-            value={lastExam ? `${percent(lastExam.correct, lastExam.total)} %` : '—'}
-            detail={lastExam ? (lastExam.passed ? '✓ aprobado' : '✗ suspendido') : undefined}
+            label={t.home.globalHit}
+            value={totals.seen ? t.pct(percent(totals.correct, totals.seen)) : '—'}
+            detail={totals.seen ? t.home.answers(totals.seen) : undefined}
+          />
+          <Stat label={t.home.inReview} value={reviewQuestions.length} />
+          <Stat
+            label={t.home.lastExam}
+            value={lastExam ? t.pct(percent(lastExam.correct, lastExam.total)) : '—'}
+            detail={lastExam ? (lastExam.passed ? t.home.lastPassed : t.home.lastFailed) : undefined}
           />
         </div>
       </section>
 
       <ConfirmDialog
         open={confirmDiscard}
-        title="¿Descartar el simulacro?"
-        confirmLabel="Descartar"
+        title={t.home.discardTitle}
+        confirmLabel={t.home.discard}
         danger
         onConfirm={() => {
           setConfirmDiscard(false)
@@ -134,7 +136,7 @@ export function Home({ progress, notices, dispatch }: { progress: Progress; noti
         }}
         onCancel={() => setConfirmDiscard(false)}
       >
-        <p>Se perderán sus respuestas y no contará en el historial.</p>
+        <p>{t.home.discardBody}</p>
       </ConfirmDialog>
     </div>
   )

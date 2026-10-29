@@ -1,5 +1,5 @@
 // Preguntas de prueba para los tests.
-import { SECTIONS } from './exam.ts'
+import { CERTS, type CertConfig } from './certs.ts'
 import type { Bank, Question, SectionKey } from './types.ts'
 
 export function makeQuestion(id: string, section: SectionKey = 'config', extra: Partial<Question> = {}): Question {
@@ -18,8 +18,8 @@ export function makeQuestion(id: string, section: SectionKey = 'config', extra: 
   }
 }
 
-/** Banco con `perSection` preguntas en cada sección. */
-export const makeBank = (perSection = 20, hash = 'test'): Bank => ({
+/** Banco con `perSection` preguntas en cada sección de `cert` (por defecto, Platform Administrator). */
+export const makeBank = (perSection = 20, hash = 'test', cert: CertConfig = CERTS.admin): Bank => ({
   hash,
-  questions: SECTIONS.flatMap((s) => Array.from({ length: perSection }, (_, i) => makeQuestion(`${s.key}-${i}`, s.key))),
+  questions: cert.sections.flatMap((s) => Array.from({ length: perSection }, (_, i) => makeQuestion(`${s.key}-${i}`, s.key))),
 })

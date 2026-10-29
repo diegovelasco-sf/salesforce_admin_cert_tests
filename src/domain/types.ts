@@ -7,8 +7,29 @@ export type SectionKey =
   | 'data'
   | 'automation'
   | 'agentforce'
+  // Platform App Builder
+  | 'fundamentals'
+  | 'datamodel'
+  | 'logic'
+  | 'ui'
+  | 'deployment'
 
-export type SourceId = 'freecram' | 'crt101' | 'adx201' | 'success4exam' | 'trailhead' | 'debrief'
+/** Certificación a la que pertenece una pregunta: cada una tiene su banco, su examen y su progreso. */
+export type CertId = 'admin' | 'appbuilder'
+
+/** abv2335: FreeCram V23.35, la fuente principal de App Builder · abs4e: demo de Success4Exam · abfc143 y abfc108: FreeCram v2026-06-30 y v2026-09-05 · abfc35: FreeCram sin fecha. */
+export type SourceId =
+  | 'freecram'
+  | 'crt101'
+  | 'adx201'
+  | 'success4exam'
+  | 'trailhead'
+  | 'debrief'
+  | 'abv2335'
+  | 'abs4e'
+  | 'abfc143'
+  | 'abfc108'
+  | 'abfc35'
 
 /** ok: clave de la fuente verificada · corrected: clave cambiada · disputed: dudosa · outdated: obsoleta */
 export type ReviewStatus = 'ok' | 'corrected' | 'disputed' | 'outdated'
@@ -58,6 +79,8 @@ export interface Question {
   review: ReviewStatus
   reviewNote?: string
   explanationEs?: string
+  /** Para el modo todo en inglés. Los bancos que solo tienen explicación en español la dejan sin rellenar. */
+  explanationEn?: string
   learnMore: LearnMore[]
   authoredOptions?: boolean
 }
@@ -87,6 +110,7 @@ export interface CurationEntry {
   reviewNote?: string
   textFixes?: TextFix[]
   explanationEs?: string
+  explanationEn?: string
   learnMore?: LearnMore[]
 }
 

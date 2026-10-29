@@ -1,6 +1,6 @@
 // Parser de Success4Exam ("Platform Administrator-Practice Test 2.pdf"): bloques "Question N" con
 // "Options:", opciones "A- …", "Correct Answer:" y una explicación que se guarda solo como referencia.
-import type { Option, ParsedQuestion } from '../../src/domain/types.ts'
+import type { Option, ParsedQuestion, SourceId } from '../../src/domain/types.ts'
 import type { RawPage } from '../paths.ts'
 import { assertClean, fail, isPageNumber, joinLines, nextLetter, normalizeText, visualLines } from './normalize.ts'
 
@@ -16,7 +16,19 @@ interface Block {
   lines: string[]
 }
 
-export function parseSuccess4exam(pages: RawPage[]): ParsedQuestion[] {
+/** Cómo escribe un PDF de Success4Exam: su fuente, el prefijo de sus ids y el formato de cada opción. */
+export interface S4eFormat {
+  source: SourceId
+  /** Prefijo de los ids: s4e-001, ab-s4e-001. */
+  prefix: string
+  /** Línea de opción: "A- texto" en Administrator, "A. texto" en App Builder. */
+  option: RegExp
+}
+
+export const ADMIN_S4E: S4eFormat = { source: 'success4exam', prefix: 's4e', option: /^([A-F])- (.*)$/ }
+export const APP_BUILDER_S4E: S4eFormat = { source: 'abs4e', prefix: 'ab-s4e', option: /^([A-F])\.\s+(.*)$/ }
+
+export function parseSuccess4exam(pages: RawPage[], format: S4eFormat = ADMIN_S4E): ParsedQuestion[] {
   // Las páginas 1 y 2 son la portada y la bienvenida. El orden interno del PDF falla en algunas
   // opciones, así que se lee en orden visual.
   const lines = pages
@@ -35,10 +47,10 @@ export function parseSuccess4exam(pages: RawPage[]): ParsedQuestion[] {
   blocks.forEach((block, i) => {
     if (block.n !== i + 1) fail(`Success4Exam: se esperaba la pregunta ${i + 1} y aparece la ${block.n}`)
   })
-  return blocks.map(parseBlock)
+  return blocks.map((block) => parseBlock(block, format))
 }
 
-function parseBlock({ n, lines }: Block): ParsedQuestion {
+function parseBlock({ n, lines }: Block, format: S4eFormat): ParsedQuestion {
   const where = `Success4Exam Q${n}`
   const optionsAt = lines.indexOf('Options:')
   const answerAt = lines.findIndex((line) => line.startsWith('Correct Answer:'))
@@ -52,7 +64,7 @@ function parseBlock({ n, lines }: Block): ParsedQuestion {
   const optionLines: { key: string; lines: string[] }[] = []
   let expected = 'A'
   for (const line of lines.slice(optionsAt + 1, answerAt)) {
-    const option = /^([A-F])- (.*)$/.exec(line)
+    const option = format.option.exec(line)
     if (option && option[1] === expected) {
       optionLines.push({ key: option[1], lines: [option[2]] })
       expected = nextLetter(expected)
@@ -77,8 +89,8 @@ function parseBlock({ n, lines }: Block): ParsedQuestion {
 
   const explanation = joinLines(lines.slice(answerAt + 1).filter((line) => line !== 'Overall Explanation:'))
   return {
-    id: `s4e-${String(n).padStart(3, '0')}`,
-    source: 'success4exam',
+    id: `${format.prefix}-${String(n).padStart(3, '0')}`,
+    source: format.source,
     ref: `Q${n}`,
     stem,
     options,

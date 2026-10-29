@@ -2,9 +2,9 @@
 // revisión, explicación…) y valida el resultado. Lo usan scripts/build-bank.ts y su test.
 import { createHash } from 'node:crypto'
 import { existsSync } from 'node:fs'
-import { EXAM, SECTIONS, SECTION_KEYS } from '../src/domain/exam.ts'
+import { CERTS, type CertConfig } from '../src/domain/certs.ts'
 import { apportion, filterPool } from '../src/domain/sampling.ts'
-import type { Bank, Curation, CurationEntry, ParsedQuestion, Question, TextFix } from '../src/domain/types.ts'
+import type { Bank, CertId, Curation, CurationEntry, ParsedQuestion, Question, TextFix } from '../src/domain/types.ts'
 import { assertClean, canonical } from './parse/normalize.ts'
 import { SOURCES, curationPath, parsedPath, readJson } from './paths.ts'
 
@@ -15,30 +15,48 @@ export interface BuildResult {
 }
 
 /** "Which two…", "What are three…", "Choose two…": cuántas correctas promete el enunciado. */
-const COUNT_WORDING = /\b(?:which|what are|choose|select)\s+(two|three)\b/i
-const ARTIFACTS: [RegExp, string][] = [
+export const COUNT_WORDING = /\b(?:which|what are|choose|select)\s+(two|three)\b/i
+export const ARTIFACTS: [RegExp, string][] = [
   [/\?\d+$/m, 'número pegado tras la interrogación'],
   [/[a-z]\d+[a-z]/, 'dígito dentro de una palabra'],
   [/[a-z]\d{1,2}$/, 'dígito pegado al final'],
   [/I apologize|IT Certification Guaranteed|FREECRAM/i, 'texto ajeno a la pregunta'],
 ]
 /** Las opciones se barajan, así que las explicaciones no pueden nombrarlas por letra ni posición. */
-const LETTER_REFERENCES: RegExp[] = [
+export const LETTER_REFERENCES: RegExp[] = [
   /\b(?:options?|opci[oó]n(?:es)?)\s+[A-E]\b/i,
   /\([A-E]\)/,
   /\b(?:respuestas?|la|las|letra)\s+[A-E](?:\s*(?:,|y|e|and)\s*[A-E])*(?=[\s.,;:)]|$)/,
   /\b(?:primera|segunda|tercera|cuarta|quinta|[uú]ltima|first|second|third|fourth|last)\s+(?:opci[oó]n|option)/i,
 ]
-const NEAR_DUPLICATE = 0.8
+/** Lo mismo para la explicación en inglés. */
+export const EN_LETTER_REFERENCES: RegExp[] = [
+  /\b(?:options?|answers?|choices?)\s+[A-E]\b/i,
+  /\([A-E]\)/,
+  /\b(?:first|second|third|fourth|fifth|last)\s+(?:option|answer|choice)\b/i,
+]
+export const NEAR_DUPLICATE = 0.8
 /** Parecido mínimo entre una respuesta de un duplicado y la opción equivalente de su destino. */
-const SAME_ANSWER = 0.5
+export const SAME_ANSWER = 0.5
 
-export function buildBank({ strict = false }: { strict?: boolean } = {}): BuildResult {
+/** Banco de una certificación que aún no tiene curación: la app lo muestra como «en preparación». */
+export const PENDING_BANK: Bank = { hash: 'en-preparacion', questions: [] }
+
+/** Una certificación está pendiente mientras ninguna de sus fuentes tenga curación; en cuanto una la tiene, se valida entera. */
+export const isPending = (cert: CertId): boolean =>
+  SOURCES.filter((source) => source.cert === cert).every((source) => !existsSync(curationPath(source.id)))
+
+export function buildBank({ cert = 'admin', strict = false }: { cert?: CertId; strict?: boolean } = {}): BuildResult {
+  const config = CERTS[cert]
+  const sources = SOURCES.filter((source) => source.cert === cert)
+  if (isPending(cert)) {
+    return { bank: PENDING_BANK, errors: [], report: [`Banco ${config.name}: en preparación (sin curación todavía), ${sources.length} fuentes por curar`] }
+  }
   const errors: string[] = []
   const parsed = new Map<string, ParsedQuestion>()
   const curation = new Map<string, CurationEntry>()
 
-  for (const source of SOURCES) {
+  for (const source of sources) {
     const questions = readJson<ParsedQuestion[]>(parsedPath(source.id))
     const entries = existsSync(curationPath(source.id)) ? readJson<Curation>(curationPath(source.id)) : {}
     questions.forEach((q) => parsed.set(q.id, q))
@@ -48,6 +66,19 @@ export function buildBank({ strict = false }: { strict?: boolean } = {}): BuildR
     }
   }
 
+  const questions = assemble(parsed, curation, config, strict, errors)
+  const hash = createHash('sha256').update(JSON.stringify(questions)).digest('hex').slice(0, 12)
+  return { bank: { hash, questions }, errors, report: report(questions, config, sources.map((s) => s.id)) }
+}
+
+/** Fusiona preguntas y curación y aplica todas las validaciones; separado de la lectura de ficheros para poder probar un lote suelto. */
+export function assemble(
+  parsed: Map<string, ParsedQuestion>,
+  curation: Map<string, CurationEntry>,
+  config: CertConfig,
+  strict: boolean,
+  errors: string[],
+): Question[] {
   const questions: Question[] = []
   const duplicates: [ParsedQuestion, CurationEntry][] = []
   for (const p of parsed.values()) {
@@ -57,7 +88,7 @@ export function buildBank({ strict = false }: { strict?: boolean } = {}): BuildR
       duplicates.push([p, entry])
       continue
     }
-    const question = merge(p, entry, errors)
+    const question = merge(p, entry, config, errors)
     if (question) {
       validate(question, entry, strict, errors)
       questions.push(question)
@@ -67,13 +98,11 @@ export function buildBank({ strict = false }: { strict?: boolean } = {}): BuildR
   const included = new Map(questions.map((q) => [q.id, q]))
   for (const [p, entry] of duplicates) checkDuplicate(p, entry, included, errors)
   checkNearDuplicates(questions, curation, errors)
-
-  const hash = createHash('sha256').update(JSON.stringify(questions)).digest('hex').slice(0, 12)
-  return { bank: { hash, questions }, errors, report: report(questions) }
+  return questions
 }
 
-function merge(p: ParsedQuestion, entry: CurationEntry, errors: string[]): Question | undefined {
-  if (!entry.section || !SECTION_KEYS.includes(entry.section)) {
+function merge(p: ParsedQuestion, entry: CurationEntry, config: CertConfig, errors: string[]): Question | undefined {
+  if (!entry.section || !config.sections.some((s) => s.key === entry.section)) {
     errors.push(`${p.id}: sección ${entry.section ? `desconocida "${entry.section}"` : 'sin asignar'}`)
     return undefined
   }
@@ -90,6 +119,7 @@ function merge(p: ParsedQuestion, entry: CurationEntry, errors: string[]): Quest
     review: entry.review ?? 'ok',
     ...(entry.reviewNote ? { reviewNote: entry.reviewNote } : {}),
     ...(entry.explanationEs ? { explanationEs: entry.explanationEs } : {}),
+    ...(entry.explanationEn ? { explanationEn: entry.explanationEn } : {}),
     learnMore: [...p.learnMore, ...(entry.learnMore ?? [])],
     ...(p.authoredOptions ? { authoredOptions: true } : {}),
   }
@@ -149,6 +179,14 @@ function validate(q: Question, entry: CurationEntry, strict: boolean, errors: st
     }
     for (const pattern of [ARTIFACTS[3][0]]) if (pattern.test(q.explanationEs)) fail('texto ajeno en la explicación')
   }
+  if (q.explanationEn !== undefined) {
+    if (!q.explanationEn.trim()) fail('explanationEn vacía')
+    for (const pattern of EN_LETTER_REFERENCES) {
+      const match = pattern.exec(q.explanationEn)
+      if (match) fail(`explanationEn nombra una opción por su letra o posición: "${match[0]}"`)
+    }
+    if (ARTIFACTS[3][0].test(q.explanationEn)) fail('texto ajeno en explanationEn')
+  }
   if (strict) {
     if (!q.explanationEs) fail('falta explanationEs')
     if (!entry.review) fail('falta review explícito')
@@ -195,10 +233,10 @@ function checkDuplicate(p: ParsedQuestion, entry: CurationEntry, included: Map<s
   }
 }
 
-const words = (text: string): Set<string> => new Set(canonical(text).split(' '))
+export const words = (text: string): Set<string> => new Set(canonical(text).split(' '))
 const tokens = (q: Question): Set<string> => words(`${q.stem} ${q.options.map((o) => o.text).sort().join(' ')}`)
 
-function jaccard(a: Set<string>, b: Set<string>): number {
+export function jaccard(a: Set<string>, b: Set<string>): number {
   let shared = 0
   for (const token of a) if (b.has(token)) shared++
   return shared / (a.size + b.size - shared)
@@ -221,18 +259,18 @@ function checkNearDuplicates(questions: Question[], curation: Map<string, Curati
   }
 }
 
-function report(questions: Question[]): string[] {
+function report(questions: Question[], config: CertConfig, sourceIds: string[]): string[] {
   const count = (pred: (q: Question) => boolean) => questions.filter(pred).length
-  const pool = filterPool(questions, { excludeDoubtful: true, officialOnly: false })
-  const quota = apportion(EXAM.questionCount, SECTIONS.map((s) => s.weight))
+  const pool = filterPool(questions, config, { excludeDoubtful: true, officialOnly: false })
+  const quota = apportion(config.exam.questionCount, config.sections.map((s) => s.weight))
   const lines = [
-    `Banco: ${questions.length} preguntas · ` +
-      SOURCES.map((s) => `${s.id} ${count((q) => q.source === s.id)}`).join(' · '),
+    `Banco ${config.name}: ${questions.length} preguntas · ` +
+      sourceIds.map((id) => `${id} ${count((q) => q.source === id)}`).join(' · '),
     `Revisión: ` + (['ok', 'corrected', 'disputed', 'outdated'] as const).map((r) => `${r} ${count((q) => q.review === r)}`).join(' · '),
     `Varias respuestas: ${count((q) => q.correct.length > 1)} · Con explicación: ${count((q) => !!q.explanationEs)}/${questions.length}`,
     `Cobertura para el simulacro (sin dudosas ni obsoletas), disponibles / necesarias:`,
   ]
-  SECTIONS.forEach((s, i) => {
+  config.sections.forEach((s, i) => {
     const available = pool.filter((q) => q.section === s.key).length
     lines.push(`  ${available >= quota[i] ? ' ' : '!'} ${s.label}: ${available} / ${quota[i]}`)
   })

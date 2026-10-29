@@ -1,7 +1,7 @@
-import { EXAM } from './exam.ts'
+import type { CertConfig } from './certs.ts'
 import type { Rng } from './rng.ts'
 import { sampleExam } from './sampling.ts'
-import { optionOrder } from './shuffle.ts'
+import { optionOrder, shuffle } from './shuffle.ts'
 import type { Bank, Question, SectionKey } from './types.ts'
 
 /**
@@ -15,6 +15,8 @@ export interface ExamSession {
   optionOrder: Record<string, string[]>
   answers: Record<string, string[]>
   flagged: string[]
+  /** Preguntas de reserva: están en el simulacro pero no puntúan. Si falta, en simulacros anteriores puntúan todas. */
+  unscored?: string[]
   current: number
   startedAt: number
   /** Hora límite absoluta (ms): el tiempo restante se recalcula siempre a partir de ella. */
@@ -22,19 +24,26 @@ export interface ExamSession {
   submittedAt?: number
 }
 
+/**
+ * Prepara un simulacro de `cert` con las preguntas de `pool`. Las de reserva se eligen entre las ya
+ * elegidas, así que el reparto por sección no cambia.
+ */
 export function createExamSession(
   bank: Bank,
+  cert: CertConfig,
   pool: readonly Question[],
-  { now, seed, rng, durationMs = EXAM.durationMinutes * 60_000 }: { now: number; seed: number; rng: Rng; durationMs?: number },
+  { now, seed, rng, durationMs = cert.exam.durationMinutes * 60_000 }: { now: number; seed: number; rng: Rng; durationMs?: number },
 ): { session: ExamSession; shortfall: SectionKey[] } {
-  const { questions, shortfall } = sampleExam(pool, EXAM.questionCount, rng)
+  const { questions, shortfall } = sampleExam(pool, cert, rng)
+  const questionIds = questions.map((q) => q.id)
   const session: ExamSession = {
     bankHash: bank.hash,
     seed,
-    questionIds: questions.map((q) => q.id),
+    questionIds,
     optionOrder: Object.fromEntries(questions.map((q) => [q.id, optionOrder(q, rng)])),
     answers: {},
     flagged: [],
+    unscored: shuffle(questionIds, rng).slice(0, Math.max(0, questionIds.length - cert.exam.scoredCount)),
     current: 0,
     startedAt: now,
     deadline: now + durationMs,
@@ -45,6 +54,9 @@ export function createExamSession(
 export const remainingMs = (session: ExamSession, now: number): number => Math.max(0, session.deadline - now)
 
 export const isSubmitted = (session: ExamSession): boolean => session.submittedAt !== undefined
+
+/** Preguntas que puntúan: el simulacro menos sus preguntas de reserva. */
+export const scoredIds = (session: ExamSession): string[] => session.questionIds.filter((id) => !session.unscored?.includes(id))
 
 export function setAnswer(session: ExamSession, id: string, keys: string[]): ExamSession {
   if (isSubmitted(session)) return session

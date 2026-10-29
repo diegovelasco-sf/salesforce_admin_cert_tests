@@ -1,0 +1,778 @@
+{
+  "ab-fc143-089": {
+    "section": "fundamentals",
+    "review": "ok",
+    "explanationEs": "Feed Tracking se configura por objeto en Setup y publica automáticamente en el feed de Chatter del registro los cambios de los campos seleccionados, como Asking_Price__c y Real_Estate_Agent__c. Thanks sirve para reconocer públicamente el trabajo de un compañero, Topics etiqueta y agrupa publicaciones y Publisher Actions son acciones que el usuario ejecuta a mano; ninguna registra cambios de valores de campos.",
+    "explanationEn": "Feed Tracking is configured per object in Setup and automatically posts changes to the selected fields, such as Asking_Price__c and Real_Estate_Agent__c, to the record's Chatter feed. Thanks is for publicly recognizing a coworker, Topics tag and group posts, and Publisher Actions are actions a user runs manually; none of them records field value changes.",
+    "distinctFrom": [
+      "ab-v2335-001"
+    ]
+  },
+  "ab-fc143-007": {
+    "section": "logic",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "major show retail",
+        "to": "major shoe retail"
+      }
+    ],
+    "explanationEs": "Un Approval Process (o un Flow Approval Process) envía el registro al CFO para que lo apruebe o lo rechace y puede bloquearlo mientras tanto, así que la operación con más de un 30 % de descuento no se cierra sin su visto bueno. Email Alert y Field Update son acciones que solo avisan o cambian un valor, y Workflow Rule está retirado para automatización nueva y además nunca pudo recoger una aprobación.",
+    "explanationEn": "An Approval Process (or a Flow Approval Process) routes the record to the CFO to approve or reject and can lock it in the meantime, so a deal with a discount above 30% can't close without sign-off. Email Alert and Field Update are actions that only notify or change a value, and Workflow Rule is retired for new automation and could never collect an approval anyway.",
+    "distinctFrom": [
+      "ab-v2335-003"
+    ]
+  },
+  "ab-fc143-022": {
+    "section": "logic",
+    "review": "ok",
+    "explanationEs": "Flow es la herramienta declarativa que puede borrar registros: un record-triggered flow sobre Quote que se ejecute cuando el estado pase a Rejected (o un schedule-triggered flow) usa el elemento Delete Records. Un Approval process solo gestiona aprobaciones y una Validation rule solo impide guardar datos incorrectos; Workflow rule está retirado y, además, sus acciones nunca incluyeron borrar registros.",
+    "explanationEn": "Flow is the declarative tool that can delete records: a record-triggered flow on Quote that runs when the status changes to Rejected (or a schedule-triggered flow) uses the Delete Records element. An Approval process only handles approvals and a Validation rule only blocks bad data from being saved; Workflow rule is retired and its actions never included deleting records."
+  },
+  "ab-fc143-073": {
+    "duplicateOf": "ab-v2335-006"
+  },
+  "ab-fc143-075": {
+    "duplicateOf": "ab-v2335-009"
+  },
+  "ab-fc143-028": {
+    "section": "fundamentals",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-012"
+    ],
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "Containers have",
+        "to": "Universal Containers has"
+      },
+      {
+        "field": "stem",
+        "from": "rote hierarchy",
+        "to": "role hierarchy"
+      }
+    ],
+    "explanationEs": "Con el OWD de Account en Private y los equipos en ramas distintas de la jerarquía de roles, una sharing rule es la función declarativa diseñada para extender el acceso a las cuentas de Sales hacia Marketing sin cambiar el OWD. Un public group solo agrupa usuarios y hace falta como destino dentro de la regla, pero no concede acceso por sí mismo. Flow no es la herramienta estándar para compartir registros por propietario o criterios, y Workflow Rules está retirado y no comparte registros.",
+    "explanationEn": "With the Account OWD set to Private and the teams in different branches of the role hierarchy, a sharing rule is the declarative feature designed to extend access to Sales-owned accounts to Marketing without changing the OWD. A public group only groups users and is needed as a target inside the rule, but it grants no access by itself. Flow is not the standard tool for sharing records by owner or criteria, and Workflow Rules is retired and does not share records."
+  },
+  "ab-fc143-015": {
+    "duplicateOf": "ab-v2335-013"
+  },
+  "ab-fc143-051": {
+    "duplicateOf": "ab-v2335-014"
+  },
+  "ab-fc143-021": {
+    "duplicateOf": "ab-v2335-016"
+  },
+  "ab-fc143-008": {
+    "duplicateOf": "ab-v2335-017"
+  },
+  "ab-fc143-045": {
+    "duplicateOf": "ab-v2335-020"
+  },
+  "ab-fc143-133": {
+    "duplicateOf": "ab-v2335-021"
+  },
+  "ab-fc143-123": {
+    "section": "logic",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-023"
+    ],
+    "explanationEs": "Configurar un delegated approver para el manager permite que otra persona apruebe o rechace en su nombre mientras está ausente, con lo que todas las solicitudes se revisan antes del cierre del trimestre. Reenviar la solicitud a la asistente no es una acción estándar del proceso de aprobación, y pedir al manager que entre y reasigne no resuelve nada si está de vacaciones. Process Builder está retirado y además no sirve para asignar delegados de aprobación.",
+    "explanationEn": "Setting up a delegated approver for the manager lets someone else approve or reject on the manager's behalf while the manager is away, so every request is reviewed before the quarter closes. Forwarding the request to the assistant is not a standard approval process action, and asking the manager to log in and reassign solves nothing when the manager is on vacation. Process Builder is retired and cannot assign delegated approvers anyway."
+  },
+  "ab-fc143-056": {
+    "section": "logic",
+    "review": "ok",
+    "explanationEs": "Para obtener el valor máximo de los registros Offer en Property hace falta un roll-up summary field con MAX en Property, y eso solo existe cuando Offer es hijo en una relación master-detail. Por eso la opción válida es el objeto hijo en master-detail. Un lookup no admite roll-up summary fields, y Text Area (Long) y Multi-select Picklist son campos de entrada que no calculan nada.",
+    "explanationEn": "To get the highest value of the Offer records on Property you need a roll-up summary field using MAX on Property, and that only exists when Offer is the child in a master-detail relationship. That is why the master-detail child object is the workable choice. A lookup cannot hold roll-up summary fields, and Text Area (Long) and Multi-select Picklist are input fields that calculate nothing."
+  },
+  "ab-fc143-125": {
+    "section": "logic",
+    "review": "disputed",
+    "reviewNote": "Premisa dudosa: la única opción viable es el roll-up summary field, pero Opportunity-Account es un lookup y un roll-up nativo no es posible en Account; en la práctica se usaría un Flow o DLRS. Process Builder y Workflow Rule están retirados y tampoco serían la solución. Se mantiene la respuesta que espera el examen.",
+    "explanationEs": "La respuesta que espera el examen es el roll-up summary field en Account con criterios de filtro (Closed Won y Close Date del último año) para contar las oportunidades. Process Builder y Workflow Rule están retirados y no sirven para mostrar un conteo agregado, y el Activity Timeline solo muestra actividades. Ojo: un roll-up summary exige master-detail y Opportunity se relaciona con Account por lookup, por lo que en una org real se usaría un record-triggered Flow o DLRS.",
+    "explanationEn": "The answer the exam expects is the roll-up summary field on Account with filter criteria (Closed Won and a Close Date in the last year) to count the opportunities. Process Builder and Workflow Rule are retired and do not provide an aggregated count, and the Activity Timeline only shows activities. Be aware that a roll-up summary requires master-detail while Opportunity relates to Account through a lookup, so in a real org you would use a record-triggered Flow or DLRS.",
+    "distinctFrom": [
+      "ab-v2335-032"
+    ]
+  },
+  "ab-fc143-060": {
+    "duplicateOf": "ab-v2335-033"
+  },
+  "ab-fc143-031": {
+    "duplicateOf": "ab-v2335-035"
+  },
+  "ab-fc143-111": {
+    "duplicateOf": "ab-v2335-039"
+  },
+  "ab-fc143-033": {
+    "duplicateOf": "ab-v2335-042"
+  },
+  "ab-fc143-067": {
+    "duplicateOf": "ab-v2335-045"
+  },
+  "ab-fc143-043": {
+    "duplicateOf": "ab-v2335-049"
+  },
+  "ab-fc143-100": {
+    "duplicateOf": "ab-v2335-054"
+  },
+  "ab-fc143-141": {
+    "duplicateOf": "ab-v2335-056"
+  },
+  "ab-fc143-136": {
+    "duplicateOf": "ab-v2335-057"
+  },
+  "ab-fc143-006": {
+    "section": "logic",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-057"
+    ],
+    "explanationEs": "Un approval process puede ejecutar al enviar el registro acciones de tipo Email Alert, Outbound Message, Task y Field Update. De las opciones, valen Email Alert, Outbound Message y Task. Invocable Flow no es un tipo de acción del approval process, e Invocable Process Builder tampoco: los procesos invocables pertenecen a Process Builder, una herramienta retirada, y se llaman desde otras automatizaciones, no desde un approval process.",
+    "explanationEn": "An approval process can run Email Alert, Outbound Message, Task and Field Update actions when the record is submitted. Of the choices given, Email Alert, Outbound Message and Task are valid. Invocable Flow is not an approval action type, and neither is Invocable Process Builder: invocable processes belong to Process Builder, a retired tool, and are called from other automations, not from an approval process."
+  },
+  "ab-fc143-058": {
+    "duplicateOf": "ab-v2335-059"
+  },
+  "ab-fc143-059": {
+    "section": "ui",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-060"
+    ],
+    "explanationEs": "Entre estas opciones solo dos pueden aportar componentes a una Lightning page: AppExchange, con componentes empaquetados listos para instalar, y Visualforce, cuyas páginas se pueden mostrar dentro de una Lightning page con el componente estándar de Visualforce. Import Wizard solo importa datos y Apex Code es lógica de servidor, no un componente de interfaz.",
+    "explanationEn": "Of these choices only two can bring components into a Lightning page: AppExchange, with packaged components ready to install, and Visualforce, whose pages can be shown inside a Lightning page through the standard Visualforce component. The Import Wizard only imports data, and Apex Code is server-side logic rather than a UI component."
+  },
+  "ab-fc143-091": {
+    "duplicateOf": "ab-v2335-064"
+  },
+  "ab-fc143-135": {
+    "duplicateOf": "ab-v2335-065"
+  },
+  "ab-fc143-082": {
+    "duplicateOf": "ab-v2335-069"
+  },
+  "ab-fc143-132": {
+    "duplicateOf": "ab-v2335-072"
+  },
+  "ab-fc143-070": {
+    "duplicateOf": "ab-v2335-076"
+  },
+  "ab-fc143-077": {
+    "exclude": "la opción con la respuesta está ilegible en la fuente («Sandbox during» por «Sandbox cloning») y no se puede emparejar con la pregunta canónica ab-v2335-077"
+  },
+  "ab-fc143-092": {
+    "duplicateOf": "ab-v2335-078"
+  },
+  "ab-fc143-099": {
+    "duplicateOf": "ab-v2335-079"
+  },
+  "ab-fc143-072": {
+    "duplicateOf": "ab-v2335-084"
+  },
+  "ab-fc143-061": {
+    "duplicateOf": "ab-v2335-086"
+  },
+  "ab-fc143-044": {
+    "duplicateOf": "ab-v2335-087"
+  },
+  "ab-fc143-117": {
+    "duplicateOf": "ab-v2335-088"
+  },
+  "ab-fc143-062": {
+    "section": "fundamentals",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "hierarchy as user.",
+        "to": "hierarchy as user C."
+      }
+    ],
+    "explanationEs": "Con Account en Private y los tres usuarios en el mismo role, el acceso del usuario que sí entra tiene que venir de una compartición explícita de ese registro: pertenecer al account team, que el propietario haya hecho un manual share o estar en un public group incluido en una sharing rule. Una diferencia de profile o un permission set adicional no explican por sí solos el acceso a un registro concreto, salvo que concedan View All o Modify All sobre Account, algo que el enunciado no indica.",
+    "explanationEn": "With Account set to Private and all three users in the same role, the access of the user who gets in must come from explicit sharing of that record: membership in the account team, a manual share by the owner, or membership in a public group targeted by a sharing rule. A difference in profile or an extra permission set does not by itself explain access to one specific record unless it grants View All or Modify All on Account, which the question does not state."
+  },
+  "ab-fc143-012": {
+    "duplicateOf": "ab-v2335-094"
+  },
+  "ab-fc143-026": {
+    "duplicateOf": "ab-v2335-095"
+  },
+  "ab-fc143-090": {
+    "duplicateOf": "ab-v2335-098"
+  },
+  "ab-fc143-003": {
+    "duplicateOf": "ab-v2335-099"
+  },
+  "ab-fc143-001": {
+    "section": "ui",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-100"
+    ],
+    "explanationEs": "El Highlights Panel muestra en la parte superior de la record page los campos clave del compact layout del objeto, y un compact layout admite hasta 10 campos, justo la cifra del enunciado. Path solo presenta las etapas de un campo de lista de selección, un Accordion agrupa componentes en secciones plegables y no es un panel superior de campos clave, y un Custom Lightning Web Component supone programar algo que ya existe de forma declarativa.",
+    "explanationEn": "The Highlights Panel shows the key fields from the object's compact layout at the top of the record page, and a compact layout supports up to 10 fields, exactly the figure in the stem. Path only presents the stages of a picklist field, an Accordion groups components into collapsible sections and is not a top panel of key fields, and a Custom Lightning Web Component means coding something that already exists declaratively."
+  },
+  "ab-fc143-118": {
+    "duplicateOf": "ab-v2335-102"
+  },
+  "ab-fc143-097": {
+    "duplicateOf": "ab-v2335-107"
+  },
+  "ab-fc143-081": {
+    "duplicateOf": "ab-v2335-110"
+  },
+  "ab-fc143-027": {
+    "duplicateOf": "ab-v2335-112"
+  },
+  "ab-fc143-004": {
+    "duplicateOf": "ab-v2335-117"
+  },
+  "ab-fc143-017": {
+    "duplicateOf": "ab-v2335-119"
+  },
+  "ab-fc143-010": {
+    "duplicateOf": "ab-v2335-122"
+  },
+  "ab-fc143-126": {
+    "duplicateOf": "ab-v2335-123"
+  },
+  "ab-fc143-098": {
+    "duplicateOf": "ab-v2335-126"
+  },
+  "ab-fc143-002": {
+    "duplicateOf": "ab-v2335-128"
+  },
+  "ab-fc143-050": {
+    "section": "logic",
+    "review": "corrected",
+    "reviewNote": "La fuente marca «Two-step Approval Process», pero un approval process, por muchos pasos que tenga, solo enruta la aprobación y no puede borrar el registro ni interceptar el borrado. Las tres votaciones ciegas coinciden en Approval Process con un Flow, que es el patrón declarativo real: la aprobación se pide y un flow borra la Opportunity una vez aprobada. La explicación de la fuente justifica la clave diciendo que el approval process «requiere dos niveles antes de borrar», algo que la plataforma no hace. Es una variante de la pregunta de V23.35 con otros distractores (Process Builder, Time-Dependent Workflow), por eso no se trata como duplicado.",
+    "correct": [
+      "B"
+    ],
+    "distinctFrom": [
+      "ab-v2335-132"
+    ],
+    "explanationEs": "Salesforce no permite poner una aprobación directamente sobre el borrado, así que se combina un approval process, con el que el manager aprueba la solicitud de borrado, con un Flow que elimina la Opportunity una vez aprobada. Un approval process de dos pasos solo enruta la aprobación y no borra nada por sí mismo. Process Builder y las acciones de workflow dependientes del tiempo están retirados para automatización nueva y, además, no pueden retener un borrado a la espera de aprobación.",
+    "explanationEn": "Salesforce cannot put an approval directly on a delete, so you combine an approval process, where the manager approves the deletion request, with a Flow that removes the Opportunity once it is approved. A two-step approval process only routes the approval and deletes nothing by itself. Process Builder and time-dependent workflow actions are retired for new automation and also cannot hold a delete pending approval."
+  },
+  "ab-fc143-142": {
+    "duplicateOf": "ab-v2335-140"
+  },
+  "ab-fc143-078": {
+    "duplicateOf": "ab-v2335-141"
+  },
+  "ab-fc143-032": {
+    "duplicateOf": "ab-v2335-145"
+  },
+  "ab-fc143-106": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "La fuente espera Process Builder (crear la Opportunity de renovación y enviar un email alert). Process Builder y Workflow Rules están retirados para automatización nueva; hoy la respuesta sería un record-triggered flow, que esta versión de la pregunta no ofrece. Es una pregunta distinta de la de V23.35 porque las opciones cambian.",
+    "explanationEs": "En su época la respuesta era Process Builder: podía crear la Opportunity de renovación al pasar a Closed Won y enviar un email alert al equipo de contratos. Hoy Process Builder está retirado y lo correcto sería un record-triggered flow. Workflow Rule nunca pudo crear registros, un Approval Process solo gestiona aprobaciones y una Validation Rule únicamente bloquea guardados.",
+    "explanationEn": "In its day the answer was Process Builder: it could create the renewal Opportunity when the record became Closed Won and send an email alert to the contracts team. Process Builder is now retired and the right choice today would be a record-triggered flow. A Workflow Rule could never create records, an Approval Process only handles approvals, and a Validation Rule only blocks saves.",
+    "distinctFrom": [
+      "ab-v2335-146"
+    ]
+  },
+  "ab-fc143-121": {
+    "duplicateOf": "ab-v2335-152"
+  },
+  "ab-fc143-064": {
+    "duplicateOf": "ab-v2335-154"
+  },
+  "ab-fc143-023": {
+    "section": "ui",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-157"
+    ],
+    "explanationEs": "Lightning App Builder y Setup, en Lightning Components, son los dos sitios donde se listan los componentes Lightning personalizados de la org. Los componentes de Visualforce están en Setup, pero son otra tecnología, y el Lightning component Generator es una herramienta de desarrollo para crear código, no un listado de los componentes de la org.",
+    "explanationEn": "Lightning App Builder and Setup, under Lightning Components, are the two places where the org's custom Lightning components are listed. Visualforce components are in Setup but use a different technology, and the Lightning component Generator is a developer tool for creating code, not a listing of the org's components."
+  },
+  "ab-fc143-107": {
+    "duplicateOf": "ab-v2335-159"
+  },
+  "ab-fc143-016": {
+    "exclude": "clave distinta en la fuente: marca que el texto se conserva completo, pero al convertir un Long Text Area a Text Area los valores se truncan a 255 caracteres (V23.35 y las tres votaciones coinciden); además el enunciado está corrupto"
+  },
+  "ab-fc143-055": {
+    "duplicateOf": "ab-v2335-161"
+  },
+  "ab-fc143-063": {
+    "section": "logic",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-163"
+    ],
+    "explanationEs": "Una validation rule que exige el campo para un record type concreto se ejecuta al guardar desde cualquier vía (interfaz, API, importaciones, Data Loader) y rechaza el registro si falta el dato. Marcar el campo como obligatorio en el page layout solo funciona en la interfaz y no cubre cargas masivas ni integraciones. Un campo de fórmula solo muestra un valor, y un workflow rule (herramienta retirada para automatización nueva) actúa después de guardar, por lo que ninguno de los dos puede impedir que se guarden datos incorrectos.",
+    "explanationEn": "A validation rule that requires the field for a specific record type runs on save from any entry point (UI, API, imports, Data Loader) and rejects the record when the value is missing. Making the field required on the page layout only works in the UI and does not cover bulk loads or integrations. A formula field only displays a value, and a workflow rule (a retired tool for new automation) acts after the record is saved, so neither can stop bad data from being saved."
+  },
+  "ab-fc143-140": {
+    "duplicateOf": "ab-v2335-166"
+  },
+  "ab-fc143-005": {
+    "section": "logic",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-169"
+    ],
+    "textFixes": [
+      {
+        "field": "option:B",
+        "from": "Account. Account_Region__c",
+        "to": "Account.Account_Region__c"
+      },
+      {
+        "field": "option:C",
+        "from": "Account. Account_Region__c",
+        "to": "Account.Account_Region__c"
+      }
+    ],
+    "explanationEs": "Un campo de fórmula en Contact con TEXT(Account.Account_Region__c) lee la región del Account padre en cada momento, así que siempre coincide con el valor actual sin automatizaciones adicionales. TEXT() es necesario porque el campo es un picklist y una fórmula no puede devolverlo tal cual. ISPICKVAL() solo devuelve verdadero o falso y no muestra la región. Un campo de texto o picklist en Contact que se actualiza con un workflow rule (herramienta retirada para automatización nueva) duplica el dato y necesita un mantenimiento aparte que la fórmula no requiere.",
+    "explanationEn": "A formula field on Contact with TEXT(Account.Account_Region__c) reads the parent Account's region at any moment, so it always matches the current value with no extra automation. TEXT() is needed because the field is a picklist and a formula cannot return it as is. ISPICKVAL() only returns true or false and does not show the region. A text or picklist field on Contact updated by a workflow rule (a retired tool for new automation) duplicates the data and needs separate upkeep that the formula does not."
+  },
+  "ab-fc143-065": {
+    "duplicateOf": "ab-v2335-170"
+  },
+  "ab-fc143-018": {
+    "duplicateOf": "ab-v2335-171"
+  },
+  "ab-fc143-036": {
+    "duplicateOf": "ab-v2335-172"
+  },
+  "ab-fc143-035": {
+    "duplicateOf": "ab-v2335-177"
+  },
+  "ab-fc143-129": {
+    "duplicateOf": "ab-v2335-177"
+  },
+  "ab-fc143-080": {
+    "duplicateOf": "ab-v2335-180"
+  },
+  "ab-fc143-071": {
+    "duplicateOf": "ab-v2335-188"
+  },
+  "ab-fc143-130": {
+    "duplicateOf": "ab-v2335-196"
+  },
+  "ab-fc143-053": {
+    "duplicateOf": "ab-v2335-199"
+  },
+  "ab-fc143-128": {
+    "duplicateOf": "ab-v2335-201"
+  },
+  "ab-fc143-103": {
+    "duplicateOf": "ab-v2335-204"
+  },
+  "ab-fc143-127": {
+    "duplicateOf": "ab-v2335-207"
+  },
+  "ab-fc143-066": {
+    "section": "ui",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-213"
+    ],
+    "explanationEs": "Un custom button que lanza un Flow (de tipo Screen Flow) abre la ventana emergente donde el usuario responde las preguntas y se rellenan los campos del registro. Process Builder está retirado y además se ejecuta en segundo plano sin interactuar con el usuario, así que no puede mostrar un popup, y combinarlo con un Lightning component o con un picklist custom tampoco crea esa ventana de preguntas.",
+    "explanationEn": "A custom button that launches a Flow (a Screen Flow) opens the popup where the user answers the questions and the record fields get filled in. Process Builder is retired and runs in the background without user interaction, so it cannot show a popup, and pairing it with a Lightning component or a custom picklist does not create that question window either."
+  },
+  "ab-fc143-137": {
+    "duplicateOf": "ab-v2335-223"
+  },
+  "ab-fc143-113": {
+    "section": "ui",
+    "review": "ok",
+    "explanationEs": "Dos condiciones bloquean la inline editing en una list view: que sea la list view Recently Viewed, que no admite edición en línea, y que contenga más de un record type, porque cada tipo puede tener campos y valores distintos. Las restricciones de sharing solo limitan qué filas ve el usuario, no la función de editar en línea, y un gráfico en la list view tampoco la impide.",
+    "explanationEn": "Two conditions block inline editing in a list view: the list view being Recently Viewed, which does not support inline editing, and the list view containing more than one record type, because each type can have different fields and values. Sharing restrictions only limit which rows the user can see, not the inline editing feature itself, and a chart on the list view does not block it either.",
+    "distinctFrom": [
+      "ab-v2335-227"
+    ]
+  },
+  "ab-fc143-101": {
+    "duplicateOf": "ab-v2335-235"
+  },
+  "ab-fc143-139": {
+    "duplicateOf": "ab-v2335-236"
+  },
+  "ab-fc143-094": {
+    "duplicateOf": "ab-v2335-237"
+  },
+  "ab-fc143-047": {
+    "duplicateOf": "ab-v2335-238"
+  },
+  "ab-fc143-143": {
+    "duplicateOf": "ab-v2335-239"
+  },
+  "ab-fc143-105": {
+    "duplicateOf": "ab-v2335-260"
+  },
+  "ab-fc143-034": {
+    "duplicateOf": "ab-v2335-242",
+    "reviewNote": "Esta fuente marca Public group, distinto de la clave de V23.35 (Queue). Ver la nota de la pregunta canónica: la clave está en disputa."
+  },
+  "ab-fc143-009": {
+    "duplicateOf": "ab-v2335-248"
+  },
+  "ab-fc143-068": {
+    "section": "logic",
+    "review": "ok",
+    "reviewNote": "Premisa dudosa en la práctica: un roll-up summary nativo exige una relación master-detail y Account-Opportunity es un lookup. La respuesta que pretende el examen (Sum) no cambia. Es una pregunta distinta de ab-v2335-251 porque las opciones no son las mismas.",
+    "distinctFrom": [
+      "ab-v2335-251"
+    ],
+    "textFixes": [
+      {
+        "field": "option:B",
+        "from": "Q Max",
+        "to": "Max"
+      }
+    ],
+    "explanationEs": "Para obtener el valor total de las oportunidades ganadas hay que usar un roll-up summary de tipo Sum sobre el campo Amount, con un filtro que deje solo las ganadas. Count únicamente cuenta registros, y Min y Max devuelven un solo valor (el menor o el mayor), no la suma. Matiz: un roll-up nativo necesita master-detail y Account-Opportunity es un lookup, así que en la práctica haría falta un flow u otra herramienta, pero el tipo que pide el examen es Sum.",
+    "explanationEn": "To get the total value of the won opportunities you use a roll-up summary of type Sum on the Amount field, with a filter that keeps only the won ones. Count only counts records, and Min and Max return a single value (the smallest or the largest), not the sum. Caveat: a native roll-up needs a master-detail relationship and Account-Opportunity is a lookup, so in practice a flow or another tool would be needed, but the type the exam expects is Sum."
+  },
+  "ab-fc143-024": {
+    "exclude": "duplicada de ab-v2335-261; se excluye porque su opción «Accordian» lleva una errata y la comprobación de duplicados no puede emparejarla con «Accordion» de la canónica (un duplicado no admite textFixes)"
+  },
+  "ab-fc143-052": {
+    "section": "logic",
+    "review": "ok",
+    "explanationEs": "En una fórmula de texto, el operador & concatena valores y BR() inserta un salto de línea, así que Street__c & BR() & City__c & \", \" & Planet__c & \" \" & Galaxy__c muestra la calle en una línea y \"City, Planet Galaxy\" en la siguiente. Las fórmulas deben usar los API names de los campos personalizados con el sufijo __c; sin él, la fórmula no se puede guardar. Las dos opciones que solo listan los nombres en líneas separadas no son fórmulas.",
+    "explanationEn": "In a text formula, the & operator concatenates values and BR() inserts a line break, so Street__c & BR() & City__c & \", \" & Planet__c & \" \" & Galaxy__c shows the street on one line and \"City, Planet Galaxy\" on the next. Formulas must use the API names of custom fields with the __c suffix; without it the formula cannot be saved. The two options that just list the names on separate lines are not formulas."
+  },
+  "ab-fc143-124": {
+    "duplicateOf": "ab-v2335-271"
+  },
+  "ab-fc143-040": {
+    "duplicateOf": "ab-v2335-273"
+  },
+  "ab-fc143-013": {
+    "exclude": "duplicada de ab-v2335-314 (mismos tipos de campo válidos: Number y Text); se excluye porque su opción «Test field» lleva una errata de «Text field» y la comprobación de duplicados no puede emparejarla con la canónica (un duplicado no admite textFixes)"
+  },
+  "ab-fc143-038": {
+    "exclude": "duplicada de ab-v2335-314 (misma respuesta: los tipos Number y Text); se excluye porque redacta las opciones como frases («An external ID field can be a number field») y la comprobación de duplicados no puede emparejarlas por texto con las de la canónica"
+  },
+  "ab-fc143-112": {
+    "duplicateOf": "ab-v2335-278"
+  },
+  "ab-fc143-102": {
+    "duplicateOf": "ab-v2335-279"
+  },
+  "ab-fc143-131": {
+    "duplicateOf": "ab-v2335-280"
+  },
+  "ab-fc143-079": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "Es una versión distinta de la pregunta de V23.35 (las opciones cambian: workflow rule y Process Builder en lugar de formula field y flow). El PDF oculta la clave. Las tres votaciones ciegas coinciden en un approval process con aprobación unánime más un Process Builder que envía el registro a aprobación. Esa segunda respuesta depende de Process Builder, que está retirado para automatización nueva; hoy se haría con un record-triggered flow, que esta versión no ofrece.",
+    "distinctFrom": [
+      "ab-v2335-289"
+    ],
+    "explanationEs": "Hacen falta dos soluciones: un approval process con aprobación unánime, para que el manager y el VP aprueben el cambio, y una automatización que envíe el registro a ese proceso cuando la fecha se retrase más de 60 días; en el examen era un Process Builder. Process Builder y las workflow rules están retirados para automatización nueva, y hoy esa parte se haría con un record-triggered flow que ejecute Submit for Approval. Una workflow rule con un email alert solo avisa sin pedir aprobación, y una validation rule solo bloquea el guardado.",
+    "explanationEn": "Two solutions are needed: an approval process with unanimous approval so that the manager and the VP of Sales both approve the change, and an automation that submits the record to that process when the date slips by more than 60 days; on the exam this was a Process Builder. Process Builder and workflow rules are retired for new automation, so today that part would be a record-triggered flow with a Submit for Approval action. A workflow rule with an email alert only notifies and asks for no approval, and a validation rule only blocks the save."
+  },
+  "ab-fc143-014": {
+    "section": "ui",
+    "review": "disputed",
+    "reviewNote": "Esta versión de FreeCram v14.3 tiene otras opciones (no incluye crear apps por perfil), así que cuenta como pregunta distinta de la de V23.35. Con sus opciones, la única que da menús distintos a ventas y marketing es crear menús de navegación móvil por perfil, y dos de los tres votos ciegos coinciden. Pero la versión de V23.35 de la misma pregunta responde con apps Lightning por perfil, por lo que esta redacción parece heredada de Salesforce1 y puede no reflejar el producto actual.",
+    "explanationEs": "Con las opciones de esta versión, la única que permite que ventas y marketing vean menús distintos en la app móvil es crear menús de navegación móvil y asignarlos a cada perfil. Los grupos públicos no sirven para asignar menús de navegación, una página de inicio por rol no cambia el menú de la app móvil, y crear perfiles con lectura sobre distintos objetos controla permisos, no la navegación. Hoy el menú móvil se define sobre todo con las apps Lightning asignadas a perfiles, de ahí la discrepancia con otras versiones de la pregunta.",
+    "explanationEn": "With the choices in this version, the only one that gives sales and marketing different menus in the mobile app is creating mobile navigation menus and assigning them to each profile. Public groups cannot be used to assign navigation menus, a home page per role does not change the mobile menu, and profiles with read access to different objects control permissions, not navigation. Today the mobile menu is mostly driven by Lightning apps assigned to profiles, which explains the mismatch with other versions of this question.",
+    "distinctFrom": [
+      "ab-v2335-301"
+    ],
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "navigation names in the salesforce1 mobile app",
+        "to": "navigation menus in the Salesforce1 mobile app"
+      }
+    ]
+  },
+  "ab-fc143-069": {
+    "duplicateOf": "ab-v2335-302"
+  },
+  "ab-fc143-020": {
+    "duplicateOf": "ab-v2335-307"
+  },
+  "ab-fc143-049": {
+    "duplicateOf": "ab-v2335-310"
+  },
+  "ab-fc143-110": {
+    "duplicateOf": "ab-v2335-311"
+  },
+  "ab-fc143-085": {
+    "section": "datamodel",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-311"
+    ],
+    "explanationEs": "Cuando el cliente aporta coordenadas, el tipo de campo adecuado es Geolocation, que almacena latitud y longitud juntas y permite usar funciones de distancia y mapas. Un Text field guardaría las coordenadas como texto sin validar ni poder calcular distancias, y un Number field solo contiene un valor, no un par de coordenadas. External Lookup relaciona con registros de un objeto externo y no es un tipo para datos de posición.",
+    "explanationEn": "When the customer supplies coordinates, the right field type is Geolocation, which stores latitude and longitude together and supports distance functions and maps. A Text field would keep the coordinates as unvalidated text with no distance calculation, and a Number field holds a single value rather than a coordinate pair. External Lookup relates to records of an external object and is not a type for position data."
+  },
+  "ab-fc143-057": {
+    "duplicateOf": "ab-v2335-315"
+  },
+  "ab-fc143-048": {
+    "duplicateOf": "ab-v2335-317"
+  },
+  "ab-fc143-114": {
+    "duplicateOf": "ab-v2335-319"
+  },
+  "ab-fc143-095": {
+    "duplicateOf": "ab-v2335-320"
+  },
+  "ab-fc143-138": {
+    "duplicateOf": "ab-v2335-323"
+  },
+  "ab-fc143-039": {
+    "section": "deployment",
+    "review": "ok",
+    "distinctFrom": [
+      "ab-v2335-324"
+    ],
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "to a change set was deployed",
+        "to": "to a change set. After the change set was deployed"
+      },
+      {
+        "field": "option:A",
+        "from": "Untried Public Reports",
+        "to": "Unfiled Public Reports"
+      }
+    ],
+    "explanationEs": "Los informes guardados en la carpeta Unfiled Public Reports no se pueden incluir en un change set. La solución es sacarlos de esa carpeta, a una carpeta de informes normal, y añadirlos (o añadir la carpeta) a un nuevo change set. Moverlos hacia Unfiled Public Reports empeora el problema, porque esa es justo la carpeta que bloquea el despliegue. Los informes sí se pueden desplegar con change sets, así que recrearlos a mano en producción es innecesario, y un unmanaged package no es la vía prevista para este caso.",
+    "explanationEn": "Reports stored in the Unfiled Public Reports folder cannot be included in a change set. The fix is to move them out of that folder into a regular report folder and add them (or the folder) to a new change set. Moving them into Unfiled Public Reports makes things worse, because that is exactly the folder that blocks deployment. Reports can be deployed with change sets, so recreating them by hand in production is unnecessary, and an unmanaged package is not the intended route here."
+  },
+  "ab-fc143-074": {
+    "duplicateOf": "ab-v2335-325"
+  },
+  "ab-fc143-134": {
+    "duplicateOf": "ab-v2335-326"
+  },
+  "ab-fc143-011": {
+    "section": "datamodel",
+    "review": "ok",
+    "explanationEs": "Para resumir registros hijos de forma declarativa hace falta un roll-up summary field, que exige una relación master-detail. Hay que tener en cuenta que un objeto admite hasta dos relaciones master-detail y que, antes de convertir un lookup en master-detail, todos los registros deben tener valor en ese campo lookup. Es falso que no se pueda convertir un lookup en master-detail (se puede si se cumple esa condición), y un trigger es una solución programática, no declarativa.",
+    "explanationEn": "Summarizing child records declaratively requires a roll-up summary field, which needs a master-detail relationship. Two points to evaluate are that an object can have up to two master-detail relationships and that, before converting a lookup to master-detail, every record must have a value in that lookup field. It is false that a lookup cannot be converted to master-detail (it can, once that condition is met), and a trigger is a programmatic solution, not a declarative one."
+  },
+  "ab-fc143-019": {
+    "section": "datamodel",
+    "review": "ok",
+    "explanationEs": "Al cambiar un campo de Date a Date/Time, Salesforce conserva la fecha de cada registro y le asigna una hora fija de 12:00 AM. Los datos históricos quedan entonces con una hora que no refleja el momento real del envío, y solo los registros nuevos tendrán la hora correcta. No se pierden datos y el nombre del campo no cambia. Tampoco es un simple cambio de etiqueta, porque los valores existentes se convierten.",
+    "explanationEn": "When a field is changed from Date to Date/Time, Salesforce keeps each record's date and gives it a fixed time of 12:00 AM. Historical data therefore ends up with a time that does not reflect when the shipment was actually sent, and only new records will carry the real time. No data is lost and the field name does not change. It is also not a mere label change, because the existing values are converted."
+  },
+  "ab-fc143-025": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "La pregunta trata de Process Builder, que está retirado: ya no se pueden crear procesos nuevos y hoy esta automatización se haría con un record-triggered flow. La clave (nodo sin criterios e invocable processes) es coherente con las buenas prácticas de Process Builder y con los tres resolvedores, pero solo sirve para entender procesos heredados.",
+    "explanationEs": "Con la opción avanzada que permite evaluar el registro varias veces, un process puede volver a dispararse a sí mismo. Hay que evitar el nodo de criterios con «No criteria—just execute the actions», que ejecuta las acciones en cada pasada, y los invocable processes, que pueden relanzar el proceso sobre el mismo registro. ISCHANGED y las sentencias IF sirven justo para limitar cuándo se cumplen los criterios, así que son la protección y no el riesgo. Process Builder está retirado y hoy esto se resolvería con un record-triggered flow.",
+    "explanationEn": "With the advanced option that lets a process evaluate the record multiple times, a process can trigger itself again. The app builder should avoid a criteria node set to \"No criteria—just execute the actions\", which runs its actions on every pass, and invocable processes, which can relaunch the process on the same record. ISCHANGED and IF statements exist precisely to limit when the criteria are met, so they are the safeguard rather than the risk. Process Builder is retired, and today this would be built with a record-triggered flow."
+  },
+  "ab-fc143-029": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "Las dos respuestas correctas dependen de funciones retiradas (Workflow Rules y Process Builder), por lo que ya no son la elección actual: hoy se usaría un record-triggered flow con una acción de Apex o External Services. Los tres resolvedores ciegos votaron «process + outbound message», pero Process Builder no ofrece la acción de outbound message (es exclusiva de las Workflow Rules), así que la clave decidida es «workflow rule + outbound message» y «process + Apex code». Coincide con lo que dice la propia explicación de la fuente, aunque su clave está oculta en el PDF.",
+    "explanationEs": "Una workflow rule puede enviar un outbound message al endpoint del servicio externo cuando la Opportunity pasa a Won, y un process puede invocar Apex para hacer la llamada al servicio web. Process Builder no tiene acción de outbound message (solo las Workflow Rules la tienen), por lo que «process + outbound message» no es posible, y la combinación con flow tampoco era válida cuando se redactó la pregunta. Workflow Rules y Process Builder están retirados: hoy se resolvería con un record-triggered flow que llame a Apex o use External Services.",
+    "explanationEn": "A workflow rule can send an outbound message to the external service's endpoint when the Opportunity becomes Won, and a process can invoke Apex to make the call to the web service. Process Builder has no outbound message action (only workflow rules do), so a process with an outbound message is not possible, and the flow combination was not valid when the question was written. Workflow Rules and Process Builder are retired: today this would be built with a record-triggered flow that calls Apex or uses External Services."
+  },
+  "ab-fc143-030": {
+    "section": "ui",
+    "review": "ok",
+    "explanationEs": "Cuando muchos clientes tienen nombres iguales o parecidos, el usuario necesita ver datos que los distingan. Añadir campos como ciudad o propietario a las columnas de los search results lo permite directamente en los resultados, y los search filter fields dejan acotar la búsqueda por esos mismos campos. Los ajustes de view filter y las columnas de la pestaña Accounts no influyen en cómo se busca ni en qué se muestra al buscar.",
+    "explanationEn": "When many customers have the same or similar names, users need to see data that tells them apart. Adding fields such as city or owner to the search results columns shows that data right in the results, and the search filter fields let users narrow the search by those same fields. The view filter settings and the columns of the Accounts tab do not affect how users search or what they see when they search."
+  },
+  "ab-fc143-037": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "La fuente no muestra la clave. Se decide enviar con un flow y con un process de Process Builder, porque un approval process no tiene ningún ajuste de envío automático: sus entry criteria solo definen qué registros pueden entrar cuando alguien los envía, y las initial submission actions se ejecutan después del envío. Dos de los tres solvers eligieron la variante de entry criteria y no coincido con ellos. Como la clave incluye Process Builder, que está retirado, hoy solo el flow sigue siendo una vía válida para esta automatización.",
+    "explanationEs": "Un approval process no se envía solo: sus entry criteria únicamente deciden qué registros son elegibles cuando alguien los envía, y las initial submission actions se ejecutan después de que el registro ya fue enviado, así que ninguno de esos dos ajustes activa un envío automático. Para enviar sin intervención los deals con más de un 40 % de descuento hace falta una automatización declarativa que ejecute la acción Submit for Approval: un flow que use esa acción o un process de Process Builder. Process Builder está retirado, así que hoy la vía recomendada es el flow.",
+    "explanationEn": "An approval process does not submit records on its own: its entry criteria only decide which records are eligible when someone submits them, and the initial submission actions run after the record has already been submitted, so neither setting triggers an automatic submission. To send deals with more than a 40% discount without any user action, you need declarative automation that runs the Submit for Approval action: a flow that uses that action or a Process Builder process. Process Builder is retired, so today the recommended route is the flow."
+  },
+  "ab-fc143-041": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "La fuente no muestra la clave. Los tres solvers coinciden en field-level security, validation rules y asignación de valores de picklist por record type. La pregunta describe el comportamiento de las field updates de workflow rules, que están retirados para automatización nueva; el comportamiento sigue siendo cierto para las field updates de los approval processes, pero hoy la pregunta ya no refleja la práctica recomendada.",
+    "explanationEs": "Las field updates de workflow rules y approval processes se aplican como una actualización del sistema: no respetan el field-level security (el campo se actualiza aunque el usuario no pueda editarlo), no vuelven a ejecutar las validation rules y pueden dejar en un picklist un valor que el record type no tiene asignado. Multiple currencies y los límites de decimales y de longitud sí se tienen en cuenta: el importe se convierte según la divisa del registro y el valor se redondea o se trunca al formato del campo. Los workflow rules están retirados y hoy esta lógica se construye con flows.",
+    "explanationEn": "Field updates from workflow rules and approval processes run as a system update: they do not respect field-level security (the field is updated even if the user cannot edit it), they do not re-run validation rules, and they can leave a picklist with a value the record type has not been assigned. Multiple currencies and the decimal and length limits are still taken into account: amounts are converted according to the record's currency and the value is rounded or truncated to the field format. Workflow rules are retired, and today this logic is built with flows."
+  },
+  "ab-fc143-042": {
+    "section": "ui",
+    "review": "disputed",
+    "reviewNote": "La fuente no muestra la clave y las opciones están mal redactadas. Se elige que Groups ya aparece dentro de la sección de Chatter del menú de navegación, por lo que no se ofrece como elemento independiente; es la lectura que explica el síntoma y la que apunta la explicación de la fuente. Dos de los tres solvers prefieren la opción de la «lista seleccionada», pero su redacción no explica por qué Groups no sale en el desplegable, así que la clave queda en duda.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "wanes to show",
+        "to": "wants to show"
+      },
+      {
+        "field": "stem",
+        "from": "(he app builder",
+        "to": "the app builder"
+      },
+      {
+        "field": "option:B",
+        "from": "included m the Smart Search items butunavailable",
+        "to": "included in the Smart Search items but unavailable"
+      }
+    ],
+    "explanationEs": "En el menú de navegación de la app móvil, Groups ya forma parte de la sección de Chatter, así que no se ofrece de nuevo como elemento independiente en la lista desplegable y no se puede colocar como último elemento. La sección Recent solo muestra objetos usados recientemente y Smart Search Items agrupa los objetos de búsqueda: ninguno de los dos impide elegir Groups. Que Groups no esté en la lista de elementos seleccionados es lo normal antes de añadirlo y tampoco explica el bloqueo.",
+    "explanationEn": "In the mobile app navigation menu, Groups is already part of the Chatter section, so it is not offered again as a standalone item in the dropdown and cannot be placed as the last menu item. The Recent section only shows recently used objects and Smart Search Items groups the searchable objects: neither of them prevents choosing Groups. Groups being absent from the selected list is normal before adding it and does not explain the block either."
+  },
+  "ab-fc143-046": {
+    "section": "datamodel",
+    "review": "ok",
+    "explanationEs": "Un custom picklist puede ser controlling o dependent, un multi-select picklist solo puede ser dependent (nunca controlling) y un checkbox solo puede ser controlling. Los standard picklists pueden ser controlling pero no dependent, así que no es cierto que cualquier picklist estándar admita ese papel. La Data Import Wizard tampoco valida la combinación entre controlling y dependent al importar, por lo que no impone que los valores coincidan con el campo controlador.",
+    "explanationEn": "A custom picklist can be either controlling or dependent, a multi-select picklist can only be dependent (never controlling), and a checkbox can only be controlling. Standard picklists can be controlling but not dependent, so it is not true that any standard picklist can take that role. The Data Import Wizard does not validate the controlling and dependent combination on import either, so it does not force values to match the controlling field."
+  },
+  "ab-fc143-054": {
+    "section": "deployment",
+    "review": "ok",
+    "explanationEs": "Un Developer Pro sandbox ofrece 1 GB de almacenamiento de datos y se puede refrescar una vez al día, así que cubre el medio gigabyte necesario y permite refrescar tras cada sprint de tres días. Un Developer sandbox solo tiene 200 MB. Un Partial Data sandbox solo puede refrescarse cada 5 días, por lo que no sirve para un sprint de tres días, y un Full Copy sandbox solo cada 29 días y es innecesariamente grande para este caso.",
+    "explanationEn": "A Developer Pro sandbox provides 1 GB of data storage and can be refreshed once a day, so it covers the half gigabyte needed and allows a refresh after every three-day sprint. A Developer sandbox only has 200 MB. A Partial Data sandbox can only be refreshed every 5 days, which does not fit a three-day sprint, and a Full Copy sandbox can only be refreshed every 29 days and is needlessly large for this case."
+  },
+  "ab-fc143-076": {
+    "section": "fundamentals",
+    "review": "ok",
+    "explanationEs": "Con el OWD de Account en Public Read Only no se puede ocultar ningún registro, porque las sharing rules solo amplían el acceso. Hay que cambiar el OWD de Account a Private, de modo que solo el propietario (y la jerarquía de roles) vea cada cuenta, y después crear una criteria-based sharing rule que comparta en solo lectura con todos los usuarios las cuentas que no son VIP. Un permission set no controla el acceso a nivel de registro y un Account Team da acceso adicional, no lo restringe.",
+    "explanationEn": "With the Account OWD set to Public Read Only no record can be hidden, because sharing rules can only widen access. You have to change the Account OWD to Private, so only the owner (and the role hierarchy) sees each account, and then create a criteria-based sharing rule that shares the non-VIP accounts with all users as read-only. A permission set does not control record-level access, and an Account Team grants extra access instead of restricting it."
+  },
+  "ab-fc143-083": {
+    "section": "deployment",
+    "review": "ok",
+    "explanationEs": "Poner el Email deliverability del sandbox en No access bloquea todos los correos salientes generados por Salesforce, que es exactamente lo que se quiere durante las pruebas. System email only sigue enviando correos del sistema, como los de restablecer contraseña o los de nuevos usuarios. La autenticación SMTP y el email relay sirven para enviar a través de un servidor externo y no impiden los envíos.",
+    "explanationEn": "Setting the sandbox Email deliverability to No access blocks all outbound email generated by Salesforce, which is exactly what is wanted during testing. System email only still sends system emails, such as password resets or new-user emails. SMTP authentication and email relay are for sending through an external server and do not stop emails from going out."
+  },
+  "ab-fc143-084": {
+    "section": "ui",
+    "review": "ok",
+    "explanationEs": "Las acciones de la sección Salesforce Mobile and Lightning Experience Actions del page layout se muestran en el Highlights panel de la Lightning record page y en el publisher del componente Chatter. El componente Path muestra las etapas de un proceso, no acciones, y el componente Activities tiene sus propias acciones de actividad (registrar llamada, crear tarea, enviar correo) que no se configuran como las acciones de esa sección.",
+    "explanationEn": "The actions from the Salesforce Mobile and Lightning Experience Actions section of the page layout are displayed in the Highlights panel of the Lightning record page and in the publisher of the Chatter component. The Path component shows the stages of a process, not actions, and the Activities component has its own activity actions (log a call, new task, send email) that are not configured like the actions in that section."
+  },
+  "ab-fc143-086": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "La fuente no muestra la clave. Los tres solvers coinciden en la recursividad entre workflows. La pregunta solo tiene sentido con workflow rules, que están retirados para automatización nueva; hoy el equivalente se resuelve con flows.",
+    "explanationEs": "Con Re-evaluate Workflow Rules After Field Change marcado, una field update vuelve a evaluar los workflow rules del objeto, así que dos workflows pueden dispararse mutuamente una y otra vez hasta superar los límites y provocar errores. Tener 20 workflows está muy por debajo del límite de workflow rules por objeto, por lo que el número de workflows no es la causa. Un problema de Apex no encaja, porque los errores vienen de los propios workflows. Los workflow rules están retirados y hoy esta lógica se construye con flows.",
+    "explanationEn": "With Re-evaluate Workflow Rules After Field Change checked, a field update evaluates the object's workflow rules again, so two workflows can trigger each other back and forth until they exceed the limits and raise errors. Having 20 workflows is far below the limit of workflow rules per object, so the number of workflows is not the cause. An Apex problem does not fit, because the errors come from the workflows themselves. Workflow rules are retired, and today this logic is built with flows."
+  },
+  "ab-fc143-087": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "La fuente no muestra la clave. Los tres solvers coinciden en el flow sobre User y en el process (Process Builder) que lanza un flow. Como la clave incluye Process Builder, que está retirado, hoy solo el flow sigue siendo una vía válida.",
+    "explanationEs": "Un record-triggered flow sobre el objeto User puede crear el registro de asignación del permission set cuando se crea un usuario, y un process de Process Builder sobre User puede lanzar un flow que haga lo mismo. Un approval process no tiene ninguna acción que asigne permission sets, y las acciones de un workflow rule (field update, email alert, task, outbound message) tampoco lo permiten. Process Builder y los workflow rules están retirados, así que hoy la vía correcta es el flow.",
+    "explanationEn": "A record-triggered flow on the User object can create the permission set assignment record when a user is created, and a Process Builder process on User can launch a flow that does the same. An approval process has no action that assigns permission sets, and the actions of a workflow rule (field update, email alert, task, outbound message) cannot do it either. Process Builder and workflow rules are retired, so today the right route is the flow."
+  },
+  "ab-fc143-088": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "La fuente no muestra la clave. Se decide Workflow rule (outbound message, que envía un mensaje SOAP), que es la respuesta de la época del examen y la que dan dos de los tres solvers; la explicación de la fuente apunta al after-save flow. Como la clave depende de Workflow rules, que están retirados, hoy la vía recomendada sería un after-save record-triggered flow con un callout (HTTP callout o acción de Apex).",
+    "explanationEs": "Un outbound message es una acción de Workflow rule que envía un mensaje SOAP a un endpoint externo cuando se cumplen los criterios, y eso encaja con un web service SOAP del sitio de CK que debe enterarse del cambio de inventario. Process Builder no tiene una acción de outbound message nativa, y un before-save record-triggered flow no puede hacer llamadas externas porque solo modifica el propio registro antes de guardarlo. Los Workflow rules están retirados: hoy se resolvería con un after-save record-triggered flow que lance un callout.",
+    "explanationEn": "An outbound message is a Workflow rule action that sends a SOAP message to an external endpoint when the criteria are met, which fits a SOAP web service on the CK website that must learn about the inventory change. Process Builder has no native outbound message action, and a before-save record-triggered flow cannot make external calls because it only changes the triggering record before it is saved. Workflow rules are retired: today this would be built with an after-save record-triggered flow that makes a callout."
+  },
+  "ab-fc143-093": {
+    "section": "datamodel",
+    "review": "disputed",
+    "reviewNote": "La fuente no muestra la clave. Dos de tres solvers eligen crear un record type y mostrar objetos en el lienzo; no coincido, porque Schema Builder crea objetos, campos y relaciones pero no record types (eso se hace en Object Manager). Mostrar solo los objetos seleccionados en el lienzo es seguro. Para la segunda respuesta la más defendible es la edición de custom settings (la explicación de la fuente también la incluye), pero el enunciado es débil y no puedo confirmarlo con certeza.",
+    "explanationEs": "Schema Builder permite elegir qué objetos se muestran en el lienzo, así que puedes ver solo los que te interesan, y la clave aceptada para esta pregunta incluye además la edición de custom settings. Crear un record type y abrir page layouts son tareas de Object Manager, no de Schema Builder, que se centra en crear y relacionar objetos y campos y en visualizar el esquema.",
+    "explanationEn": "Schema Builder lets you choose which objects appear on the canvas, so you can view only the ones you care about, and the accepted key for this question also includes editing custom settings. Creating a record type and opening page layouts are Object Manager tasks, not Schema Builder ones, since Schema Builder focuses on creating and relating objects and fields and on visualizing the schema."
+  },
+  "ab-fc143-096": {
+    "section": "datamodel",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "Invoice Number field, Before",
+        "to": "Invoice Number field. Before"
+      }
+    ],
+    "explanationEs": "Un Text field marcado como Unique External ID permite cargar los números de factura actuales tal cual en la migración y, después, garantiza que cada nueva factura tenga un valor único. Un AutoNumber field genera sus valores solo y no admite importar los antiguos, y un Text field no se puede convertir en AutoNumber después. Tener dos campos, uno de texto y otro AutoNumber, complica el modelo sin necesidad y no cumple que haya un único Invoice Number.",
+    "explanationEn": "A Text field marked as a Unique External ID lets you load the existing invoice numbers as they are during the migration and then guarantees that each new invoice has a unique value. An AutoNumber field generates its own values and cannot accept the old ones, and a Text field cannot be converted to AutoNumber afterwards. Keeping two fields, one Text and one AutoNumber, needlessly complicates the model and does not give a single Invoice Number."
+  },
+  "ab-fc143-104": {
+    "section": "datamodel",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "in one pi",
+        "to": "in one picture?"
+      }
+    ],
+    "explanationEs": "Schema Builder muestra en un solo lienzo los objetos y las relaciones entre ellos, y permite arrastrarlos y filtrarlos, por lo que da la vista de conjunto que necesita quien se familiariza con el modelo de datos. Lightning Object Creator sirve para crear una app a partir de una hoja de cálculo, Object Manager lista objetos y sus campos de uno en uno, y una Lightning Record Page solo personaliza cómo se ve un registro.",
+    "explanationEn": "Schema Builder shows objects and the relationships between them on a single canvas that you can drag and filter, giving the overview someone learning the data model needs. Lightning Object Creator builds an app from a spreadsheet, Object Manager lists objects and their fields one at a time, and a Lightning Record Page only customizes how a record looks."
+  },
+  "ab-fc143-108": {
+    "section": "ui",
+    "review": "outdated",
+    "reviewNote": "La fuente no muestra la clave. Los tres solvers coinciden en la combinación page layout, record types y field update de Process Builder, y es la que tiene sentido: la explicación de la fuente (custom button y validation rule) no resuelve el requisito. Como la clave depende de Process Builder, que está retirado, hoy el cambio de record type al llegar a Qualified se haría con un record-triggered flow.",
+    "explanationEs": "El botón Convert es un botón estándar que se añade o se quita en el page layout. Se crea un record type para los leads cualificados con un page layout que incluye Convert, y el resto de leads usa un layout sin él. Una field update de Process Builder cambia el record type cuando el Status pasa a Qualified. Una picklist dependency, un custom button o una quick action no controlan cuándo aparece el botón estándar, y Process Builder está retirado: hoy lo haría un record-triggered flow.",
+    "explanationEn": "The Convert button is a standard button that is added to or removed from the page layout. A record type is created for qualified leads with a page layout that includes Convert, while other leads use a layout without it. A Process Builder field update switches the record type when Status becomes Qualified. A picklist dependency, a custom button or a quick action do not control when the standard button appears, and Process Builder is retired: today a record-triggered flow would do it."
+  },
+  "ab-fc143-109": {
+    "section": "logic",
+    "review": "disputed",
+    "reviewNote": "La fuente no muestra la clave. Dos de tres solvers eligen el paso del director por importe y el aprobador determinado por el Manager; el tercero cambia este último por la validation rule. Decido el paso por importe y el aprobador por Manager porque Salesforce bloquea automáticamente el registro mientras está en aprobación, así que la validation rule es redundante y es la única respuesta que sobra. Queda como dudosa porque la fuente podría esperar la validation rule.",
+    "explanationEs": "Un approval process en Contract con un primer paso cuyo aprobador sale del Manager del usuario envía cada contrato al sales manager, y un segundo paso con el criterio Amount__c > 10,000 añade al director solo cuando corresponde. Mientras un registro espera aprobación, Salesforce lo bloquea automáticamente para los demás usuarios, así que no hace falta una validation rule para impedir los cambios. Un paso por cada sales manager con el director como aprobador mandaría todo al director sin filtrar por importe y obligaría a mantener un paso por manager.",
+    "explanationEn": "An approval process on Contract whose first step takes the approver from the user's Manager sends every contract to the sales manager, and a second step with the criteria Amount__c > 10,000 adds the director only when needed. While a record is waiting for approval, Salesforce locks it automatically for other users, so no validation rule is needed to block changes. One step per sales manager with the director as approver would send everything to the director regardless of amount and would require maintaining one step per manager."
+  },
+  "ab-fc143-115": {
+    "section": "fundamentals",
+    "review": "disputed",
+    "reviewNote": "La fuente no muestra la clave. Dos de tres solvers eligen el permiso View and Edit Converted Leads; el tercero duda y la explicación de la fuente propone un custom report type, lo que no tiene sentido porque ya existe el report type estándar Leads with Converted Lead Information. Decido el permiso, pero queda como dudosa porque el enunciado es ambiguo y no puedo confirmar con certeza qué espera el examen.",
+    "explanationEs": "Los leads convertidos quedan fuera del alcance normal de los usuarios, y el permiso View and Edit Converted Leads es el que les da acceso a ellos, de modo que los sales reps puedan verlos e informar sobre ellos. Preserve lead status solo conserva el valor del campo Status al convertir, no cambia quién ve los leads convertidos. Tener acceso de lectura a los leads originales no basta, y no hace falta un custom report type porque ya existe un report type estándar para leads convertidos.",
+    "explanationEn": "Converted leads fall outside users' normal reach, and the View and Edit Converted Leads permission is what gives them access, so sales reps can see them and report on them. Preserve lead status only keeps the Status field value at conversion and does not change who can see converted leads. Read access to the original lead records is not enough, and no custom report type is needed because a standard report type for converted leads already exists."
+  },
+  "ab-fc143-116": {
+    "section": "fundamentals",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "read arid write",
+        "to": "read and write"
+      },
+      {
+        "field": "stem",
+        "from": "regional structure A new",
+        "to": "regional structure. A new"
+      }
+    ],
+    "explanationEs": "Como el organization-wide default de Opportunity no se puede cambiar, el acceso extra se concede por otras vías: un criteria-based sharing rule que comparta todas las Opportunities con el public group de sales operations en read/write, o un permission set con View All y Modify All en Opportunity, que da ese acceso sin tocar el modelo de compartición. Los manual shares uno a uno no escalan ni se mantienen solos, y los sharing rules no usan un grupo privado: se comparten con public groups, roles o queues.",
+    "explanationEn": "Because the Opportunity organization-wide default cannot be changed, the extra access has to come from other places: a criteria-based sharing rule that shares all Opportunities with the sales operations public group at read/write, or a permission set with View All and Modify All on Opportunity, which grants that access without touching the sharing model. One-by-one manual shares do not scale and are not maintained automatically, and sharing rules do not target a private group: they share with public groups, roles or queues."
+  },
+  "ab-fc143-119": {
+    "section": "logic",
+    "review": "outdated",
+    "reviewNote": "La fuente no muestra la clave. Los tres solvers coinciden en evitar bucles infinitos y combinar acciones. La pregunta trata de migrar a Process Builder, que está retirado, y sus respuestas correctas son buenas prácticas de ese producto; hoy el mismo consejo se aplica a los record-triggered flows.",
+    "explanationEs": "Al sustituir workflow rules y Apex triggers por Process Builder hay que evitar bucles infinitos, porque un proceso que actualiza un registro puede volver a dispararse a sí mismo o disparar a otro proceso, y conviene combinar acciones en el mismo proceso en lugar de repetir criterios. Crear un proceso por cada workflow rule es justo lo que se desaconseja, y Apex y Flow no tienen un límite de SOQL distinto porque comparten los límites de la transacción. Process Builder está retirado: hoy el mismo consejo vale para los record-triggered flows.",
+    "explanationEn": "When replacing workflow rules and Apex triggers with Process Builder you must avoid infinite loops, because a process that updates a record can retrigger itself or fire another process, and you should combine actions in the same process instead of repeating criteria. Creating one process per workflow rule is exactly what is discouraged, and Apex and Flow do not have a different SOQL limit because they share the transaction limits. Process Builder is retired: today the same advice applies to record-triggered flows."
+  },
+  "ab-fc143-120": {
+    "section": "datamodel",
+    "review": "ok",
+    "explanationEs": "Cuando un campo está mapeado en lead conversion, cambiar su tipo de number a text obliga a revisar y volver a crear el mapeo de campos de la conversión para que el dato siga llegando a Account, Contact y Opportunity. Un cambio en una clase Apex queda fuera por el enunciado, que prohíbe tocar el código. Un external ID puede ser de tipo text o number, y un campo usado en un report no obliga a rehacer ninguna configuración manual al cambiar su tipo.",
+    "explanationEn": "When a field is mapped in lead conversion, changing its type from number to text means you must review and re-create the lead conversion field mapping so the data keeps flowing to Account, Contact and Opportunity. A change in an Apex class is ruled out by the stem, which forbids touching the code. An external ID can be of type text or number, and a field used in a report does not force you to redo any manual configuration when its type changes."
+  },
+  "ab-fc143-122": {
+    "section": "ui",
+    "review": "ok",
+    "explanationEs": "En una acción Create a Record específica de objeto, el app builder puede predefinir valores de campo en el objeto destino (por ejemplo, valores por defecto) y decidir qué campos y qué disposición tiene el formulario de la acción mediante su action layout. La redirección al registro recién creado la hace Salesforce automáticamente tras guardar y no es una opción configurable. Tampoco se deja elegir el record type al usuario final: el record type de la acción lo fija quien configura la acción.",
+    "explanationEn": "When defining an object-specific Create a Record action, the app builder can predefine field values on the target object (for example, default values) and decide which fields and layout the action form shows through its action layout. Redirecting to the newly created record is automatic behaviour after saving and is not a configurable option. Letting the end user choose the record type is not available either: the action's record type is set by whoever configures the action.",
+    "textFixes": [
+      {
+        "field": "option:D",
+        "from": "Allowingthe",
+        "to": "Allowing the"
+      }
+    ]
+  }
+}

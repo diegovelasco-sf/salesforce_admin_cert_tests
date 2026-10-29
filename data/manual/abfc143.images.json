@@ -1,0 +1,53 @@
+{
+  "10": {
+    "stem": "Universal Containers deployed an app in a large change set from a Developer Sandbox to a Developer Pro Sandbox used for testing. After testing, changes had to be made to several of the components in the change set. How should an app builder move the new changes to the Developer Pro Sandbox?"
+  },
+  "20": {
+    "stem": "Universal Containers has a requirement that an opportunity should have a field showing the value of its associated account's billing state. This value should be static after the opportunity has been created."
+  },
+  "30": {
+    "stem": "Universal Containers has a customer base where many customers have the same or similar company names. Which functionality should be configured to improve an end user's search experience? Choose 2 answers"
+  },
+  "40": {
+    "stem": "Service Agents are required to confirm a user's identity before providing support information over the phone. Which feature can an app builder use to help agents meet this requirement?"
+  },
+  "50": {
+    "stem": "Universal Containers wants sales reps to get permission from their managers before deleting Opportunities, What can be used to meet these requirements?"
+  },
+  "52": {
+    "stem": "Ursa Major Solar (UMS) has a custom object where they track Galactic Vendors. The object has four custom fields for the Galactic Vendor's location: Street (Street__c)\nCity (City__c)\nPlanet (Planet__c)\nGalaxy (Galaxy__c) The UMS's leadership wants these fields to be concatenated into a single formula field on two lines. Which formula fulfills this requirement?",
+    "options": {
+      "A": "Street & BR() &\nCity & \", \" & Planet & \" \" & Galaxy",
+      "B": "Street\nCity, Planet Galaxy",
+      "C": "Street__c & BR() &\nCity__c & \", \" & Planet__c & \" \" & Galaxy__c",
+      "D": "Street__c\nCity__c, Planet__c Galaxy__c"
+    }
+  },
+  "60": {
+    "stem": "Universal Containers uses a custom picklist called Account_Region__c on the Account object. The vice president of sales has asked that the value of this field is visible on Opportunities. How should an app builder create this solution?"
+  },
+  "70": {
+    "stem": "Universal Containers implemented an application process that uses custom objects Internships and Applications. The organization-wide default for Internships has been set to private and is the master in the master-detail relationship with Applications. The VP of HR wants to allow edit access to Applications to recruiters. How should an app builder configure the proper access?"
+  },
+  "80": {
+    "stem": "Universal Containers created a 'New Task' custom action on the Opportunity object. The action was added to all page layouts in the Mobile & Lightning Actions section. Which Lightning component should the app builder add to the layout to display the action?"
+  },
+  "90": {
+    "stem": "An app builder needs a custom solution and is considering using community. Ease of updates is the primary consideration. What should the app builder consider?"
+  },
+  "100": {
+    "stem": "An app builder wants to create a report to compare the number of Support cases in each status (New, In-progress, or Closed) and by priority (Critical, High, Medium, or Low). What solution should be used for the report?"
+  },
+  "110": {
+    "stem": "Universal Containers (UC) delivers purchased containers to remote construction sites. Customers supply UC with crossroads or location markers. Which field type should the app builder use to capture this information?"
+  },
+  "120": {
+    "stem": "The app builder needs to change the data types of new custom fields. The app builder is not able to delete and recreate any of the fields, nor modify any apex code. Which data type change will require the app builder to perform the additional steps in order to retain existing functionalities?"
+  },
+  "130": {
+    "stem": "At Universal Containers, the Account object has a Master-Detail relationship with an Invoice custom object. The App Builder would like to change to a lookup field, but is not able to do so. What could be causing this?"
+  },
+  "140": {
+    "stem": "Universal Containers wants to create a report to show job applications with or without resumes. What considerations should the app builder be aware of when creating the custom report type?"
+  }
+}

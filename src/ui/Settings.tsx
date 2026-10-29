@@ -1,22 +1,32 @@
-// Ajustes: qué preguntas entran en el simulacro, exportar/importar el progreso y borrarlo.
+// Ajustes: idioma, qué preguntas entran en el simulacro, exportar/importar el progreso y borrarlo.
 import { useState, type ChangeEvent, type Dispatch } from 'react'
-import { EXAM, OFFICIAL_SOURCES, SOURCE_LABELS } from '../domain/exam.ts'
+import { neededToPass } from '../domain/grading.ts'
+import { SOURCE_LABELS } from '../domain/exam.ts'
 import { filterPool, isDoubtful } from '../domain/sampling.ts'
 import { emptyProgress, exportProgress, parseProgress, type Progress } from '../domain/storage.ts'
-import { BANK } from './bank.ts'
+import type { SourceId } from '../domain/types.ts'
+import { useCert } from './cert.ts'
 import { ConfirmDialog } from './common.tsx'
-import { plural } from './format.ts'
+import { useI18n } from './lang.ts'
+import { certTexts, sourceLabel, type Lang } from './messages.ts'
 import type { Action } from './state.ts'
 
+const LANGS: Lang[] = ['es', 'en']
+
 export function Settings({ progress, dispatch }: { progress: Progress; dispatch: Dispatch<Action> }) {
+  const { cert, bank } = useCert()
+  const { t, lang, setLang } = useI18n()
+  const texts = certTexts(cert, lang)
+  const { exam: rules } = cert
+  const hasOfficial = cert.officialSources.length > 0
   const { settings } = progress
   const [pendingImport, setPendingImport] = useState<Progress | undefined>()
   const [importError, setImportError] = useState<string | undefined>()
   const [confirmReset, setConfirmReset] = useState(false)
 
-  const doubtful = BANK.questions.filter(isDoubtful).length
-  const official = BANK.questions.filter((q) => OFFICIAL_SOURCES.includes(q.source)).length
-  const examPool = filterPool(BANK.questions, settings).length
+  const doubtful = bank.questions.filter(isDoubtful).length
+  const official = bank.questions.filter((q) => cert.officialSources.includes(q.source)).length
+  const examPool = filterPool(bank.questions, cert, settings).length
   const update = (patch: Partial<Progress['settings']>) => dispatch({ type: 'settings/update', settings: patch })
 
   const download = () => {
@@ -24,7 +34,7 @@ export function Settings({ progress, dispatch }: { progress: Progress; dispatch:
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
-    link.download = `progreso-platform-admin-${new Date().toISOString().slice(0, 10)}.json`
+    link.download = t.settings.fileName(cert.slug, new Date().toISOString().slice(0, 10))
     link.click()
     URL.revokeObjectURL(url)
   }
@@ -35,98 +45,107 @@ export function Settings({ progress, dispatch }: { progress: Progress; dispatch:
     if (!file) return
     try {
       // Un simulacro a medias de otro momento puede no cuadrar con el banco actual: no se importa.
-      setPendingImport({ ...parseProgress(await file.text()), activeExam: undefined })
+      // Y un progreso de otra certificación se rechaza: cada una tiene el suyo.
+      setPendingImport({ ...parseProgress(await file.text(), cert.id), activeExam: undefined })
       setImportError(undefined)
     } catch (error) {
-      setImportError(`No se ha podido importar: ${(error as Error).message}`)
+      setImportError((error as Error).message)
     }
   }
 
-  const counts = Object.entries(SOURCE_LABELS).map(([source, label]) => `${label}: ${BANK.questions.filter((q) => q.source === source).length}`)
+  const counts = (Object.keys(SOURCE_LABELS) as SourceId[])
+    .map((source) => ({ label: sourceLabel(source, lang), n: bank.questions.filter((q) => q.source === source).length }))
+    .filter(({ n }) => n > 0)
+    .map(({ label, n }) => `${label}: ${n}`)
 
   return (
     <div className="settings">
-      <h1>Ajustes</h1>
+      <h1>{t.settings.title(cert.name)}</h1>
 
       <section className="card">
-        <h2>Simulacro</h2>
+        <h2>{t.settings.language}</h2>
+        <div className="segmented" role="radiogroup" aria-label={t.settings.language}>
+          {LANGS.map((option) => (
+            <label key={option} className={`segment${lang === option ? ' on' : ''}`}>
+              <input type="radio" name="lang" checked={lang === option} onChange={() => setLang(option)} />
+              {t.settings.languageName(option)}
+            </label>
+          ))}
+        </div>
+        <p className="muted">{t.settings.languageNote}</p>
+      </section>
+
+      <section className="card">
+        <h2>{t.settings.exam}</h2>
         <label className="check">
           <input type="checkbox" checked={settings.excludeDoubtful} onChange={() => update({ excludeDoubtful: !settings.excludeDoubtful })} />
-          Excluir las preguntas dudosas u obsoletas ({doubtful})
+          {t.settings.excludeDoubtful(doubtful)}
         </label>
-        <label className="check">
-          <input type="checkbox" checked={settings.officialOnly} onChange={() => update({ officialOnly: !settings.officialOnly })} />
-          Usar solo preguntas de fuentes oficiales ({official})
-        </label>
+        {hasOfficial && (
+          <label className="check">
+            <input type="checkbox" checked={settings.officialOnly} onChange={() => update({ officialOnly: !settings.officialOnly })} />
+            {t.settings.officialOnly(official)}
+          </label>
+        )}
         <p className="muted">
-          Con estos ajustes el simulacro elige entre {plural(examPool, 'pregunta', 'preguntas')}.
-          {examPool < EXAM.questionCount && ` No llegan a ${EXAM.questionCount}: el simulacro será más corto.`}
-          {settings.officialOnly && ' Las fuentes oficiales no tienen preguntas de Agentforce.'}
+          {t.settings.pool(examPool)}
+          {examPool < rules.questionCount && t.settings.tooShort(rules.questionCount)}
+          {hasOfficial && settings.officialOnly && texts.officialNote && ` ${texts.officialNote}`}
         </p>
       </section>
 
       <section className="card">
-        <h2>Tu progreso</h2>
-        <p className="muted">
-          Se guarda solo en este navegador. Exporta una copia de vez en cuando, o antes de cambiar de navegador o de borrar sus datos.
-        </p>
+        <h2>{t.settings.progress}</h2>
+        <p className="muted">{t.settings.progressText}</p>
         <div className="actions start">
           <button type="button" onClick={download}>
-            Exportar progreso (JSON)
+            {t.settings.export}
           </button>
           <label className="button">
-            Importar progreso…
+            {t.settings.import}
             <input type="file" accept="application/json,.json" className="sr-only" onChange={chooseFile} />
           </label>
           <button type="button" className="danger" onClick={() => setConfirmReset(true)}>
-            Borrar todo el progreso
+            {t.settings.reset}
           </button>
         </div>
-        {importError && <p className="status-bad">✗ {importError}</p>}
+        {importError && <p className="status-bad">✗ {t.settings.importFailed(importError)}</p>}
       </section>
 
       <section className="card">
-        <h2>Banco de preguntas</h2>
-        <p>
-          {BANK.questions.length} preguntas · {counts.join(' · ')}
-        </p>
+        <h2>{t.settings.bank}</h2>
+        <p>{t.settings.bankCount(bank.questions.length, counts)}</p>
         <p className="muted">
-          Versión {BANK.hash}. Examen: {EXAM.questionCount} preguntas, {EXAM.durationMinutes} minutos y aprobado con el{' '}
-          {EXAM.passPercent} % (guía oficial, CRT101). Las preguntas de FreeCram, Success4Exam y el Debrief no son oficiales, y algunas
-          claves se han corregido o marcado como dudosas. En el Debrief y en las tarjetas de Trailhead, la fuente solo da la respuesta: las
-          opciones incorrectas se han redactado aparte.
+          {t.settings.bankInfo(bank.hash, rules, neededToPass(rules.scoredCount, rules.passPercent), texts.guide, texts.sourcesNote)}
         </p>
       </section>
 
       <ConfirmDialog
         open={!!pendingImport}
-        title="¿Reemplazar tu progreso?"
-        confirmLabel="Reemplazar"
+        title={t.settings.importTitle}
+        confirmLabel={t.settings.importConfirm}
         danger
         onConfirm={() => {
-          if (pendingImport) dispatch({ type: 'progress/replace', progress: pendingImport, notice: 'Progreso importado.' })
+          if (pendingImport) dispatch({ type: 'progress/replace', progress: pendingImport, notice: { kind: 'imported' } })
           setPendingImport(undefined)
         }}
         onCancel={() => setPendingImport(undefined)}
       >
-        <p>
-          El archivo tiene {plural(Object.keys(pendingImport?.stats ?? {}).length, 'pregunta respondida', 'preguntas respondidas')} y{' '}
-          {plural(pendingImport?.history.length ?? 0, 'simulacro', 'simulacros')}. Sustituirá a tu progreso actual.
-        </p>
+        <p>{t.settings.importBody(Object.keys(pendingImport?.stats ?? {}).length, pendingImport?.history.length ?? 0)}</p>
       </ConfirmDialog>
 
       <ConfirmDialog
         open={confirmReset}
-        title="¿Borrar todo el progreso?"
-        confirmLabel="Borrar"
+        title={t.settings.resetTitle}
+        confirmLabel={t.settings.resetConfirm}
         danger
         onConfirm={() => {
           setConfirmReset(false)
-          dispatch({ type: 'progress/replace', progress: emptyProgress(), notice: 'Progreso borrado.' })
+          dispatch({ type: 'progress/replace', progress: emptyProgress(cert.id), notice: { kind: 'reset' } })
         }}
         onCancel={() => setConfirmReset(false)}
       >
-        <p>Se borrarán tus estadísticas, las marcas, el historial y el simulacro en curso. No se puede deshacer.</p>
+        <p>{t.settings.resetBody}</p>
       </ConfirmDialog>
     </div>
   )

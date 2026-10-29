@@ -5,11 +5,25 @@ import { goTo, isSubmitted, resumeExam, setAnswer, submit, toggleFlag, type Exam
 import { optionOrder } from '../domain/shuffle.ts'
 import { recordAnswer } from '../domain/stats.ts'
 import type { ExamRecord, Progress, Settings } from '../domain/storage.ts'
-import type { Bank, Question } from '../domain/types.ts'
+import type { Question, SectionKey } from '../domain/types.ts'
+import type { CertData } from './certdata.ts'
+
+/** Tipo de tanda de práctica. El texto se pone en el idioma activo al mostrarla. */
+export type RunKind = 'practice' | 'review' | 'failed' | 'exam-failed'
+
+/** Aviso de la app. Son datos, no texto: se traducen al mostrarlos (ver messages.ts). */
+export type Notice =
+  | { kind: 'backup'; key: string }
+  | { kind: 'expired' }
+  | { kind: 'bank-changed' }
+  | { kind: 'imported' }
+  | { kind: 'reset' }
+  | { kind: 'short-exam'; available: number }
+  | { kind: 'shortfall'; sections: SectionKey[] }
 
 /** Una tanda de práctica o repaso. No se guarda: cada respuesta comprobada va directa a las estadísticas. */
 export interface PracticeRun {
-  title: string
+  kind: RunKind
   questionIds: string[]
   optionOrder: Record<string, string[]>
   index: number
@@ -29,7 +43,7 @@ export type Screen =
 export interface AppState {
   progress: Progress
   screen: Screen
-  notices: string[]
+  notices: Notice[]
 }
 
 export type Action =
@@ -38,19 +52,19 @@ export type Action =
   | { type: 'practice/check'; id: string; now: number }
   | { type: 'practice/goto'; index: number }
   | { type: 'flag/toggle'; id: string }
-  | { type: 'exam/start'; session: ExamSession; notice?: string }
+  | { type: 'exam/start'; session: ExamSession; notices?: Notice[] }
   | { type: 'exam/answer'; id: string; keys: string[] }
   | { type: 'exam/flag'; id: string }
   | { type: 'exam/goto'; index: number }
   | { type: 'exam/submit'; now: number }
   | { type: 'exam/close'; next?: Screen }
   | { type: 'settings/update'; settings: Partial<Settings> }
-  | { type: 'progress/replace'; progress: Progress; notice?: string }
+  | { type: 'progress/replace'; progress: Progress; notice?: Notice }
   | { type: 'notice/dismiss'; index: number }
 
-export function makeRun(title: string, questions: readonly Question[], rng: Rng): PracticeRun {
+export function makeRun(kind: RunKind, questions: readonly Question[], rng: Rng): PracticeRun {
   return {
-    title,
+    kind,
     questionIds: questions.map((q) => q.id),
     optionOrder: Object.fromEntries(questions.map((q) => [q.id, optionOrder(q, rng)])),
     index: 0,
@@ -65,10 +79,10 @@ const union = (a: readonly string[], b: readonly string[]): string[] => [...new 
  * Cierra un simulacro recién entregado: lo añade al historial, pasa sus respuestas a las
  * estadísticas (las no contestadas no cuentan como vistas) y sus marcas a Repaso.
  */
-export function finalizeExam(progress: Progress, session: ExamSession, byId: ReadonlyMap<string, Question>): Progress {
+export function finalizeExam(progress: Progress, session: ExamSession, { cert, byId }: CertData): Progress {
   const at = session.submittedAt ?? session.deadline
   const questions = session.questionIds.flatMap((id) => byId.get(id) ?? [])
-  const score = grade(questions, session.answers)
+  const score = grade(questions, session.answers, { unscored: session.unscored, passPercent: cert.exam.passPercent })
   let stats = progress.stats
   for (const question of questions) {
     const answer = session.answers[question.id]
@@ -86,33 +100,28 @@ export function finalizeExam(progress: Progress, session: ExamSession, byId: Rea
 }
 
 /** Estado inicial: reanuda o entrega el simulacro guardado, o lo descarta si el banco cambió. */
-export function initState(
-  bank: Bank,
-  byId: ReadonlyMap<string, Question>,
-  loaded: { progress: Progress; backupKey?: string },
-  now: number,
-): AppState {
-  const notices: string[] = []
-  if (loaded.backupKey) {
-    notices.push(
-      `Los datos guardados estaban dañados o eran de otra versión. Se ha hecho una copia en localStorage («${loaded.backupKey}») y se ha empezado de cero.`,
-    )
-  }
+export function initState(data: CertData, loaded: { progress: Progress; backupKey?: string }, now: number): AppState {
+  const notices: Notice[] = []
+  if (loaded.backupKey) notices.push({ kind: 'backup', key: loaded.backupKey })
   let progress = loaded.progress
   let screen: Screen = { name: 'home' }
   const saved = progress.activeExam
   if (saved) {
-    const { session, notice } = resumeExam(saved, bank, now)
-    if (notice) notices.push(notice)
+    const { session } = resumeExam(saved, data.bank, now)
+    // Mismas condiciones que el aviso de resumeExam, pero como dato y no como texto.
+    const expired = !!session && !isSubmitted(saved) && isSubmitted(session)
+    if (!session) notices.push({ kind: 'bank-changed' })
+    if (expired) notices.push({ kind: 'expired' })
     if (!session) progress = { ...progress, activeExam: undefined }
-    else if (!isSubmitted(saved) && isSubmitted(session)) progress = finalizeExam(progress, session, byId)
+    else if (expired) progress = finalizeExam(progress, session, data)
     else progress = { ...progress, activeExam: session }
     if (session && isSubmitted(session)) screen = { name: 'results' }
   }
   return { progress, screen, notices }
 }
 
-export function createReducer(byId: ReadonlyMap<string, Question>) {
+export function createReducer(data: CertData) {
+  const { byId } = data
   return function reducer(state: AppState, action: Action): AppState {
     const { progress, screen } = state
     const exam = progress.activeExam
@@ -154,7 +163,7 @@ export function createReducer(byId: ReadonlyMap<string, Question>) {
           ...state,
           progress: { ...progress, activeExam: action.session },
           screen: { name: 'exam' },
-          notices: action.notice ? [...state.notices, action.notice] : state.notices,
+          notices: [...state.notices, ...(action.notices ?? [])],
         }
       case 'exam/answer':
         return exam ? withExam(setAnswer(exam, action.id, action.keys)) : state
@@ -164,7 +173,7 @@ export function createReducer(byId: ReadonlyMap<string, Question>) {
         return exam ? withExam(goTo(exam, action.index)) : state
       case 'exam/submit': {
         if (!exam || isSubmitted(exam)) return state
-        return { ...state, progress: finalizeExam(progress, submit(exam, action.now), byId), screen: { name: 'results' } }
+        return { ...state, progress: finalizeExam(progress, submit(exam, action.now), data), screen: { name: 'results' } }
       }
       case 'exam/close':
         return { ...state, progress: { ...progress, activeExam: undefined }, screen: action.next ?? { name: 'home' } }
