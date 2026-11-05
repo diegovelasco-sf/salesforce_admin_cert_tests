@@ -52,6 +52,7 @@ export function QuestionCard({ question, order, selected, onSelect, revealed, po
         <span className={`badge ${official ? 'badge-official' : 'badge-unofficial'}`}>
           {sourceLabel(question.source, lang)} · {question.ref}
         </span>
+        {question.review !== 'ok' && <span className="badge badge-unofficial">⚠ {t.card.review[question.review]}</span>}
         {onToggleFlag && (
           <button type="button" className={`flag-button${flagged ? ' on' : ''}`} aria-pressed={flagged} onClick={onToggleFlag}>
             {flagged ? t.card.flagOn(flagContext) : t.card.flagOff(flagContext)}

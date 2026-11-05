@@ -63,10 +63,10 @@ export const CERTS: Record<CertId, CertConfig> = {
     ],
     officialSources: [],
     officialNames: '',
-    footer: 'Uso personal. Preguntas de FreeCram y de la demo de Success4Exam, no oficiales. Tu progreso se guarda solo en este navegador.',
+    footer: 'Uso personal. Preguntas de FreeCram, no oficiales. Tu progreso se guarda solo en este navegador.',
     guide: "guía oficial de Platform App Builder, SU '26",
     sourcesNote:
-      'Son preguntas de FreeCram y de la demo de Success4Exam, no oficiales. Las repetidas entre fuentes se han unificado, y las claves corregidas o dudosas se indican en cada pregunta.',
+      'Son preguntas de FreeCram, no oficiales: la base es la V23.35 y se han añadido versiones posteriores. El banco es anterior a SU \'26, así que las preguntas que dependen de funciones retiradas (Process Builder, Workflow Rules) se marcan como obsoletas y el simulacro las excluye. Las repetidas entre fuentes se han unificado, y las claves corregidas o dudosas se indican en cada pregunta.',
     officialNote: '',
   },
 }

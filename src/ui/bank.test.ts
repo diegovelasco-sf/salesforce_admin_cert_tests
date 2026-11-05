@@ -20,6 +20,16 @@ describe.each(IDS)('banco de %s', (id) => {
     for (const q of bank.questions) expect(isAdminSource(q.source)).toBe(id === 'admin')
   })
 
+  it('ninguna pregunta repite el texto de dos opciones', () => {
+    const repeated = bank.questions.filter((q) => new Set(q.options.map((o) => o.text.trim())).size < q.options.length)
+    expect(repeated.map((q) => q.id)).toEqual([])
+  })
+
+  it('la clave de cada pregunta está formada por opciones que existen', () => {
+    const broken = bank.questions.filter((q) => q.correct.length === 0 || q.correct.some((k) => !q.options.some((o) => o.key === k)))
+    expect(broken.map((q) => q.id)).toEqual([])
+  })
+
   it('sus ids son únicos y están todos en el índice', () => {
     expect(new Set(bank.questions.map((q) => q.id)).size).toBe(bank.questions.length)
     expect(byId.size).toBe(bank.questions.length)

@@ -135,6 +135,7 @@
   "ab-v2335-011": {
     "section": "logic",
     "review": "ok",
+    "exclude": "opciones A y B idénticas tras reconstruir las fórmulas: la fuente solo las diferencia en «#», comillas y espacios, y no se puede recuperar sin inventar texto.",
     "textFixes": [
       {
         "field": "option:A",

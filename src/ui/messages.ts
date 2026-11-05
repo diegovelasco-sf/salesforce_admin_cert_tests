@@ -97,6 +97,7 @@ const es = {
     sources: 'Fuentes',
     officialOnly: (n: number, names: string) => `Solo oficiales (${n}: ${names})`,
     unseenOnly: 'Solo preguntas que aún no has visto',
+    excludeDoubtful: (n: number) => `Sin preguntas dudosas ni obsoletas (${n} en el banco)`,
     count: 'Número de preguntas',
     exactCount: 'Número exacto de preguntas',
     exactRange: (max: number) => `Entre 1 y ${max}`,
@@ -349,6 +350,7 @@ const en: Messages = {
     sources: 'Sources',
     officialOnly: (n, names) => `Official only (${n}: ${names})`,
     unseenOnly: 'Only questions you have not seen yet',
+    excludeDoubtful: (n) => `No doubtful or outdated questions (${n} in the bank)`,
     count: 'Number of questions',
     exactCount: 'Exact number of questions',
     exactRange: (max) => `Between 1 and ${max}`,
@@ -548,10 +550,10 @@ const CERT_TEXTS_EN: Record<CertConfig['id'], CertTexts> = {
   },
   appbuilder: {
     officialNames: '',
-    footer: 'Personal use. Questions from FreeCram and the Success4Exam demo, which are unofficial. Your progress is stored only in this browser.',
+    footer: 'Personal use. Unofficial questions from FreeCram. Your progress is stored only in this browser.',
     guide: "official Platform App Builder exam guide, SU '26",
     sourcesNote:
-      'These are unofficial questions from FreeCram and the Success4Exam demo. Questions repeated across sources have been merged, and corrected or doubtful keys are flagged on each question.',
+      'These are unofficial FreeCram questions: the base is V23.35, with later versions added. The bank predates SU \'26, so questions that depend on retired features (Process Builder, Workflow Rules) are flagged as outdated and excluded from the mock exam. Questions repeated across sources have been merged, and corrected or doubtful keys are flagged on each question.',
     officialNote: '',
   },
 }

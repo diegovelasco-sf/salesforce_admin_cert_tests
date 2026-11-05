@@ -2,7 +2,7 @@
 import { useState, type Dispatch } from 'react'
 import { isCorrect } from '../domain/grading.ts'
 import { mulberry32, randomSeed } from '../domain/rng.ts'
-import { filterPool, samplePractice } from '../domain/sampling.ts'
+import { filterPool, isDoubtful, samplePractice } from '../domain/sampling.ts'
 import { toggleSelection } from '../domain/selection.ts'
 import type { Progress } from '../domain/storage.ts'
 import type { SectionKey } from '../domain/types.ts'
@@ -24,12 +24,13 @@ export function PracticeSetup({ progress, dispatch }: { progress: Progress; disp
   const [sections, setSections] = useState<SectionKey[]>(cert.sections.map((s) => s.key))
   const [officialOnly, setOfficialOnly] = useState(hasOfficial && progress.settings.officialOnly)
   const [unseenOnly, setUnseenOnly] = useState(false)
+  const [excludeDoubtful, setExcludeDoubtful] = useState(progress.settings.excludeDoubtful)
   const [count, setCount] = useState<number>(20)
   const [exact, setExact] = useState(false)
   const [draft, setDraft] = useState('')
   const [focused, setFocused] = useState(false)
 
-  const base = filterPool(bank.questions, cert, { excludeDoubtful: false, officialOnly }).filter(
+  const base = filterPool(bank.questions, cert, { excludeDoubtful, officialOnly }).filter(
     (q) => !unseenOnly || !progress.stats[q.id],
   )
   const pool = base.filter((q) => sections.includes(q.section))
@@ -98,6 +99,10 @@ export function PracticeSetup({ progress, dispatch }: { progress: Progress; disp
         <label className="check">
           <input type="checkbox" checked={unseenOnly} onChange={() => setUnseenOnly(!unseenOnly)} />
           {t.practice.unseenOnly}
+        </label>
+        <label className="check">
+          <input type="checkbox" checked={excludeDoubtful} onChange={() => setExcludeDoubtful(!excludeDoubtful)} />
+          {t.practice.excludeDoubtful(bank.questions.filter(isDoubtful).length)}
         </label>
       </fieldset>
 

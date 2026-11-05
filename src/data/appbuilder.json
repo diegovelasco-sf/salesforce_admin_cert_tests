@@ -1,5 +1,5 @@
 {
-  "hash": "e0ce2613908d",
+  "hash": "7f7fada77a2f",
   "questions": [
     {
       "id": "ab-v2335-001",
@@ -330,40 +330,6 @@
       "review": "ok",
       "explanationEs": "La comprobación debe hacerse al guardar el Contact, porque el campo que falta es Region; una validation rule en Contact puede leer el Account padre y dar error cuando su Customer Status es High Priority y Region está vacío. Hacer Region obligatorio en Contact lo exigiría en todos los contactos, y una regla en Account o hacer obligatorio Customer Status no controlan lo que se guarda en los contactos.",
       "explanationEn": "The check has to run when the Contact is saved, because the missing field is Region; a validation rule on Contact can read the parent Account and raise an error when its Customer Status is High Priority and Region is blank. Making Region required on Contact would enforce it for every contact, and a rule on Account or making Customer Status required doesn't control what is saved on contacts.",
-      "learnMore": []
-    },
-    {
-      "id": "ab-v2335-011",
-      "source": "abv2335",
-      "ref": "NO.11",
-      "section": "logic",
-      "stem": "Cloud Kicks wants to make sure that users without the Marketing role are unable to update the Contact Retail Opt In picklist field to Yes. Which validation rule should an app builder use to prevent other users from making this update?",
-      "options": [
-        {
-          "key": "A",
-          "text": "AND $UserRole.Name <> \"Marketing\", Retail_Opt_In__c = \"Yes\" )"
-        },
-        {
-          "key": "B",
-          "text": "AND $UserRole.Name <> \"Marketing\", Retail_Opt_In__c = \"Yes\" )"
-        },
-        {
-          "key": "C",
-          "text": "AND $UserRole.Name <> \"Marketing\", ISCHANGED (Retail_Opt_In__c), ISPICKVAL (Retail_Opt_In__c, \"Yes\" ))"
-        },
-        {
-          "key": "D",
-          "text": "AND $UserRole.Name <> \"Marketing\", ISPICKVAL (Retail_Opt_In__c, \"Yes\" ))"
-        }
-      ],
-      "correct": [
-        "C"
-      ],
-      "shuffle": true,
-      "review": "ok",
-      "reviewNote": "El PDF pierde los operadores y los guiones bajos de las fórmulas (en la opción C aparece «=» donde debe ir «<>»). Se mantiene la clave C de la fuente, que es la única que combina rol distinto de Marketing, ISCHANGED e ISPICKVAL, y se reconstruye el texto de las cuatro fórmulas. La explicación de la fuente habla de visibilidad de componentes y no corresponde a esta pregunta.",
-      "explanationEs": "Una validation rule bloquea el guardado cuando su fórmula devuelve TRUE, así que debe combinar tres condiciones: que el rol del usuario no sea Marketing, ISCHANGED sobre el campo (para que solo actúe cuando alguien modifica el valor) e ISPICKVAL para comprobar que el nuevo valor del picklist es Yes. Las fórmulas que comparan el picklist directamente con un texto no son válidas, porque un picklist solo se evalúa con ISPICKVAL. La fórmula sin ISCHANGED bloquearía cualquier edición de un registro que ya tiene Yes, aunque el usuario no toque ese campo.",
-      "explanationEn": "A validation rule blocks the save when its formula returns TRUE, so it must combine three conditions: the user's role is not Marketing, ISCHANGED on the field (so it only fires when someone modifies the value), and ISPICKVAL to check that the new picklist value is Yes. Formulas that compare the picklist directly with a text string are invalid, because a picklist can only be evaluated with ISPICKVAL. The formula without ISCHANGED would block any edit to a record that already has Yes, even when the user does not touch that field.",
       "learnMore": []
     },
     {
