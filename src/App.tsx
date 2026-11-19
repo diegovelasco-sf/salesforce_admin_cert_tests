@@ -23,7 +23,7 @@ const CERT_KEY = 'sf-cert'
 const readSelectedCert = (): CertId => {
   try {
     const saved = window.localStorage.getItem(CERT_KEY)
-    return saved === 'appbuilder' ? 'appbuilder' : 'admin'
+    return saved === 'appbuilder' || saved === 'developer' ? saved : 'admin'
   } catch {
     return 'admin'
   }
@@ -32,6 +32,7 @@ const readSelectedCert = (): CertId => {
 const REDUCERS: Record<CertId, Reducer<AppState, Action>> = {
   admin: createReducer(CERT_DATA.admin),
   appbuilder: createReducer(CERT_DATA.appbuilder),
+  developer: createReducer(CERT_DATA.developer),
 }
 
 // En desarrollo, ?demo=… precarga un progreso de ejemplo (ver ui/demo.ts), solo en la certificación con la que se abre.
@@ -64,7 +65,7 @@ export default function App() {
   const data = CERT_DATA[certId]
   const t = MESSAGES[lang]
 
-  // El idioma es global: se guarda aparte del progreso, así que vale igual para las dos certificaciones.
+  // El idioma es global: se guarda aparte del progreso, así que vale igual para todas las certificaciones.
   const setLang = (next: Lang) => {
     saveLang(next)
     setLangState(next)

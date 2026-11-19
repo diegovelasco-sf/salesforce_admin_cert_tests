@@ -1210,3 +1210,12 @@ figure.chart {
     transition: none !important;
   }
 }
+
+/* Aviso dentro de una tarjeta (formato de examen provisional). */
+.notice-inline {
+  margin: 0.75rem 0 0;
+  padding: 0.6rem 0.9rem;
+  background: var(--brand-wash);
+  border: 1px solid var(--brand-border);
+  border-radius: 8px;
+}

@@ -1,5 +1,5 @@
 // Extrae el texto de cada página de un PDF con PDFKit (macOS), junto con sus enlaces,
-// y lo guarda como JSON [{ page, text, lines: [{ text, x, y }], links: [{ url, text, y }] }].
+// y lo guarda como JSON [{ page, text, lines: [{ text, x, y, w }], links: [{ url, text, y }] }].
 // text sigue el orden interno del PDF; lines, el orden visual (de arriba abajo y de izquierda a derecha).
 // Uso: osascript -l JavaScript scripts/jxa/pdf-text.js <pdf> <salida.json>
 ObjC.import('Foundation')
@@ -34,7 +34,12 @@ function pageLines(page) {
     const text = line.string
     if (text.isNil() || !text.js.trim()) continue
     const bounds = line.boundsForPage(page)
-    lines.push({ text: text.js, x: Math.round(bounds.origin.x * 10) / 10, y: Math.round(bounds.origin.y * 10) / 10 })
+    lines.push({
+      text: text.js,
+      x: Math.round(bounds.origin.x * 10) / 10,
+      y: Math.round(bounds.origin.y * 10) / 10,
+      w: Math.round(bounds.size.width * 10) / 10,
+    })
   }
   // Misma fila si la base difiere menos de 2 puntos.
   return lines.sort((a, b) => (Math.abs(a.y - b.y) < 2 ? a.x - b.x : b.y - a.y))

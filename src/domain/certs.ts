@@ -30,6 +30,8 @@ export interface CertConfig {
   sourcesNote: string
   /** Aviso que sale con el filtro «solo oficiales» y que explica un hueco de la fuente oficial. */
   officialNote: string
+  /** El formato del examen y las secciones aún no están confirmados con la guía oficial: la app lo avisa. */
+  provisional?: boolean
 }
 
 export const CERTS: Record<CertId, CertConfig> = {
@@ -66,8 +68,30 @@ export const CERTS: Record<CertId, CertConfig> = {
     footer: 'Uso personal. Preguntas de FreeCram, no oficiales. Tu progreso se guarda solo en este navegador.',
     guide: "guía oficial de Platform App Builder, SU '26",
     sourcesNote:
-      'Son preguntas de FreeCram, no oficiales: la base es la V23.35 y se han añadido versiones posteriores. El banco es anterior a SU \'26, así que las preguntas que dependen de funciones retiradas (Process Builder, Workflow Rules) se marcan como obsoletas y el simulacro las excluye. Las repetidas entre fuentes se han unificado, y las claves corregidas o dudosas se indican en cada pregunta.',
+      'Son preguntas de FreeCram, no oficiales: la base es la V23.35, en una versión revisada con erratas y claves corregidas, y se han añadido versiones posteriores. El banco es anterior a SU \'26, así que las preguntas que dependen de funciones retiradas (Process Builder, Workflow Rules) se marcan como obsoletas y el simulacro las excluye. Las repetidas entre fuentes se han unificado, y las claves corregidas o dudosas se indican en cada pregunta.',
     officialNote: '',
+  },
+  developer: {
+    id: 'developer',
+    name: 'Platform Developer I',
+    slug: 'platform-developer-1',
+    // PROVISIONAL: todavía no se ha confirmado con la guía oficial ni con las condiciones del examen real.
+    // Cuando se tengan, basta con corregir esta entrada (y quitar `provisional`): el reparto, el simulacro y
+    // la pantalla de «en preparación» se calculan a partir de ella.
+    exam: { questionCount: 65, scoredCount: 60, durationMinutes: 105, passPercent: 68 },
+    sections: [
+      { key: 'devfund', label: 'Fundamentos del desarrollador', labelEn: 'Developer Fundamentals', weight: 23 },
+      { key: 'devlogic', label: 'Automatización de procesos y lógica', labelEn: 'Process Automation and Logic', weight: 30 },
+      { key: 'devui', label: 'Interfaz de usuario', labelEn: 'User Interface', weight: 25 },
+      { key: 'devtest', label: 'Pruebas, depuración y despliegue', labelEn: 'Testing, Debugging, and Deployment', weight: 22 },
+    ],
+    officialSources: [],
+    officialNames: '',
+    footer: 'Uso personal. Tu progreso se guarda solo en este navegador.',
+    guide: 'guía oficial de Platform Developer I (por confirmar)',
+    sourcesNote: 'Todavía no hay preguntas: el banco está en preparación.',
+    officialNote: '',
+    provisional: true,
   },
 }
 

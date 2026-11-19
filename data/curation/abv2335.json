@@ -5,18 +5,18 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "custom object up prominently",
-        "to": "custom object show up prominently"
-      },
-      {
-        "field": "stem",
-        "from": "such As Asking Price__c",
-        "to": "such as Asking_Price__c"
-      },
-      {
-        "field": "stem",
         "from": "Real Estate Agent on",
         "to": "Real_Estate_Agent__c on"
+      },
+      {
+        "field": "stem",
+        "from": "Asking Price__c",
+        "to": "Asking_Price__c"
+      },
+      {
+        "field": "stem",
+        "from": "custom object prominently on Chatter",
+        "to": "custom object show up prominently on Chatter"
       }
     ],
     "explanationEs": "Feed Tracking se activa por objeto en Setup y permite elegir los campos (hasta 20) cuyos cambios de valor se publican automáticamente en el feed de Chatter del registro, que es justo lo que pide Dreamhouse para Asking_Price__c y Real_Estate_Agent__c. Topics solo etiqueta y agrupa publicaciones, Publisher Actions son acciones que el usuario lanza a mano desde el publicador y Pin Field no es una función de Chatter para registrar cambios de campos.",
@@ -55,13 +55,6 @@
   "ab-v2335-005": {
     "section": "logic",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "needs to be processe Which",
-        "to": "needs to be processed. Which"
-      }
-    ],
     "explanationEs": "El requisito decisivo es que el responsable apruebe las piezas gratuitas, y eso es lo que hace un Approval process: envía el registro al aprobador, lo bloquea y deja constancia de la decisión, que luego se puede analizar por comercial en informes. Quotes sirve para presentar precios y descuentos pero no gestiona la aprobación por sí solo, un Check box solo guarda un valor sin enrutar nada y High Velocity Sales es para cadencias de ventas.",
     "explanationEn": "The deciding requirement is the manager's sign-off on free parts, and that is what an Approval process does: it routes the record to the approver, locks it and records the decision, which can then be reported by sales rep. Quotes present pricing and discounts but don't handle approval on their own, a Check box only stores a value without routing anything, and High Velocity Sales is for sales cadences."
   },
@@ -104,6 +97,11 @@
         "field": "stem",
         "from": "Universal Container wants",
         "to": "Universal Containers wants"
+      },
+      {
+        "field": "stem",
+        "from": "website.What",
+        "to": "website. What"
       }
     ],
     "explanationEs": "Web-to-Case genera un formulario HTML que se inserta en la web pública y crea un Case en Salesforce cada vez que un visitante lo envía, sin que necesite usuario ni inicio de sesión. Email-to-Case crea casos a partir de correos, no de un formulario web; un Outbound message envía datos desde Salesforce a un sistema externo; y un Screen flow exigiría montar además un sitio de Experience Cloud con usuario invitado, así que no es la solución estándar.",
@@ -115,18 +113,18 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "Region field The data manager Wants",
+        "from": "' High Priority '",
+        "to": "'High Priority'"
+      },
+      {
+        "field": "stem",
+        "from": "Region field, the data manager wants",
         "to": "Region field. The data manager wants"
       },
       {
         "field": "stem",
-        "from": "Customer Status Field What can",
-        "to": "Customer Status field. What can"
-      },
-      {
-        "field": "stem",
-        "from": "' High Priority '",
-        "to": "'High Priority'"
+        "from": "Customer Status Field.",
+        "to": "Customer Status field."
       }
     ],
     "explanationEs": "La comprobación debe hacerse al guardar el Contact, porque el campo que falta es Region; una validation rule en Contact puede leer el Account padre y dar error cuando su Customer Status es High Priority y Region está vacío. Hacer Region obligatorio en Contact lo exigiría en todos los contactos, y una regla en Account o hacer obligatorio Customer Status no controlan lo que se guarda en los contactos.",
@@ -171,13 +169,6 @@
   "ab-v2335-013": {
     "section": "logic",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "is require An",
-        "to": "is required. An"
-      }
-    ],
     "explanationEs": "El fallo es que el envío depende de que los reps se acuerden, así que hay que enviar el registro desde automatización: hoy, un record-triggered flow que se dispara cuando la fecha de cierre se retrasa más de 30 días y usa la acción Submit for Approval. Cambiar los criterios de entrada del approval process solo decide qué registros pueden entrar, no los envía por sí mismo. Una validation rule con un email alert solo avisa al manager sin iniciar el proceso, y el permiso API Enabled no tiene relación con el envío automático. Process Builder está retirado para automatización nueva, por lo que no es la opción actual.",
     "explanationEn": "The weakness is that submission depends on reps remembering, so the record has to be submitted from automation: today, a record-triggered flow that fires when the close date is pushed more than 30 days and uses the Submit for Approval action. Changing the entry criteria of the approval process only decides which records may enter, it does not submit them by itself. A validation rule with an email alert merely notifies the manager without starting the process, and the API Enabled permission has nothing to do with automatic submission. Process Builder is retired for new automation, so it is no longer the current choice."
   },
@@ -231,15 +222,15 @@
   "ab-v2335-018": {
     "section": "logic",
     "review": "ok",
+    "explanationEs": "ISBLANK es la función adecuada para comprobar si un campo de texto está vacío, así que IF(NOT(ISBLANK(Nickname__c)), Nickname__c, FirstName) devuelve el apodo cuando existe y el nombre de pila en caso contrario. BLANKVALUE devuelve un valor, no un booleano, por lo que no puede ir dentro de NOT. ISNULL no se recomienda para campos de texto y, además, la versión mostrada tiene la lógica invertida; TEXT() convierte a texto en lugar de evaluar una condición.",
+    "explanationEn": "ISBLANK is the right function to check whether a text field is empty, so IF(NOT(ISBLANK(Nickname__c)), Nickname__c, FirstName) returns the nickname when it exists and the first name otherwise. BLANKVALUE returns a value, not a Boolean, so it cannot go inside NOT. ISNULL is not recommended for text fields and the version shown also has inverted logic; TEXT() converts to text instead of evaluating a condition.",
     "textFixes": [
       {
         "field": "option:B",
         "from": "Nickname _ C",
         "to": "Nickname__c"
       }
-    ],
-    "explanationEs": "ISBLANK es la función adecuada para comprobar si un campo de texto está vacío, así que IF(NOT(ISBLANK(Nickname__c)), Nickname__c, FirstName) devuelve el apodo cuando existe y el nombre de pila en caso contrario. BLANKVALUE devuelve un valor, no un booleano, por lo que no puede ir dentro de NOT. ISNULL no se recomienda para campos de texto y, además, la versión mostrada tiene la lógica invertida; TEXT() convierte a texto en lugar de evaluar una condición.",
-    "explanationEn": "ISBLANK is the right function to check whether a text field is empty, so IF(NOT(ISBLANK(Nickname__c)), Nickname__c, FirstName) returns the nickname when it exists and the first name otherwise. BLANKVALUE returns a value, not a Boolean, so it cannot go inside NOT. ISNULL is not recommended for text fields and the version shown also has inverted logic; TEXT() converts to text instead of evaluating a condition."
+    ]
   },
   "ab-v2335-019": {
     "section": "logic",
@@ -255,11 +246,6 @@
         "field": "option:A",
         "from": "e- mail",
         "to": "e-mail"
-      },
-      {
-        "field": "option:C",
-        "from": "Lead- to -Lead",
-        "to": "Lead-to-Lead"
       }
     ],
     "explanationEs": "Para no crear duplicados al cargar 400 leads se puede usar el Data Import Wizard con un matching type (por ejemplo por email), que evita insertar leads que ya existen, y completarlo con una matching rule de Lead y una duplicate rule que bloquee la creación de duplicados. La operación update de Data Loader solo modifica registros existentes (necesita el Id) y no inserta los leads nuevos, así que no resuelve la carga. Activar un escenario Lead-to-Lead en Data Management no es la forma de configurarlo: se hace con matching rules y duplicate rules.",
@@ -309,13 +295,10 @@
   },
   "ab-v2335-028": {
     "section": "fundamentals",
-    "review": "corrected",
-    "correct": [
-      "D"
-    ],
-    "reviewNote": "La fuente V23.35 marca el record-triggered flow que se ejecuta después de borrar la Task. Un record-triggered flow disparado por un borrado solo puede ejecutarse antes de eliminar el registro (before delete), así que ese flow posterior al borrado no existe. Las tres votaciones ciegas coinciden en el Apex trigger After Delete, que sí corre después del borrado y puede enviar el email al propietario del Case. No he podido contrastarlo con documentación en línea, solo con conocimiento propio de la plataforma.",
-    "explanationEs": "Un record-triggered flow disparado por un borrado solo puede ejecutarse antes de que se elimine el registro, así que no existe un flow que corra después de borrar la Task. Para reaccionar tras el borrado y avisar al propietario del Case hace falta un Apex trigger After Delete, que es un caso donde lo declarativo llega a su límite. Las assignment rules y las escalation rules gestionan la asignación y el escalado de Leads o Cases, no reaccionan a eliminaciones.",
-    "explanationEn": "A record-triggered flow fired by a delete can only run before the record is removed, so there is no flow that runs after the Task is deleted. To react after the deletion and notify the Case owner you need an After Delete Apex trigger, which is a case where declarative tools reach their limit. Assignment rules and escalation rules handle routing and escalation of Leads or Cases and do not respond to deletions."
+    "review": "disputed",
+    "reviewNote": "La clave del examen es el record-triggered flow (Flow es la herramienta declarativa para reaccionar a un borrado), y el PDF revisado la mantiene. Matiz técnico: en Salesforce un record-triggered flow disparado por un borrado solo se ejecuta antes de eliminar el registro (before delete); no existe un flow «after delete», y para ejecutar lógica literalmente después del borrado haría falta un Apex trigger After Delete. Se mantiene Flow porque es lo que espera el examen.",
+    "explanationEs": "Para reaccionar al borrado de un registro con herramientas declarativas se usa un record-triggered flow sobre la Task, que identifica el Case relacionado y envía el email a su propietario. Matiz: un flow disparado por borrado se ejecuta justo antes de eliminar el registro, no después; un Apex trigger After Delete sería la alternativa con código. Las assignment rules y las escalation rules gestionan asignación y escalado de Leads o Cases y no responden a eliminaciones.",
+    "explanationEn": "To react to a record deletion declaratively you use a record-triggered flow on Task, which finds the related Case and emails its owner. Caveat: a delete-triggered flow runs just before the record is removed, not after; an After Delete Apex trigger would be the code alternative. Assignment rules and escalation rules handle routing and escalation of Leads or Cases and do not respond to deletions."
   },
   "ab-v2335-029": {
     "section": "fundamentals",
@@ -344,6 +327,11 @@
         "field": "stem",
         "from": "Property_ record Which",
         "to": "Property__c record. Which"
+      },
+      {
+        "field": "stem",
+        "from": "DR 's needs",
+        "to": "DR's needs"
       }
     ],
     "explanationEs": "Un roll-up summary field con la función MAX en el objeto Property devuelve el mayor valor de Offer entre todos sus registros hijo. Es posible porque el enunciado dice que la relación es master-detail, y se calcula de forma declarativa y automática. Summary no es un tipo de campo de Salesforce, y Text Area (Long), Multi-select Picklist y Rich Text Area son campos de entrada de datos que no agregan valores de registros relacionados.",
@@ -403,11 +391,6 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "sol Which",
-        "to": "sold. Which"
-      },
-      {
-        "field": "stem",
         "from": "take to Component",
         "to": "take to display Component"
       }
@@ -437,13 +420,6 @@
     "section": "logic",
     "review": "outdated",
     "reviewNote": "La respuesta correcta describe limitaciones de Process Builder, que está retirado: la automatización nueva se hace con Flow. Las dos respuestas de la fuente (no transfiere registros hijos; falla con owners inactivos) se mantienen como válidas para procesos ya existentes.",
-    "textFixes": [
-      {
-        "field": "option:C",
-        "from": "fall om",
-        "to": "fail on"
-      }
-    ],
     "explanationEs": "En un proceso de Process Builder, cambiar el Owner no transfiere los registros hijos (hay que actualizar cada tipo relacionado por separado) y el proceso falla en registros cuyo owner es un usuario inactivo; ambas cosas pueden dejar a usuarios sin el acceso esperado. Si el Owner se actualiza varias veces, el proceso usa el último valor, no el primero, y se ejecuta la versión activa, que no tiene por qué ser la más reciente. Process Builder está retirado: hoy esto se haría con un record-triggered Flow.",
     "explanationEn": "In a Process Builder process, changing the Owner does not transfer child records (each related record type must be updated separately) and the process fails on records owned by inactive users; both can leave users without the expected access. If the Owner is updated several times, the process uses the last value, not the first, and the active version runs, which is not necessarily the most recent one. Process Builder is retired: today this would be built with a record-triggered Flow."
   },
@@ -463,18 +439,6 @@
   "ab-v2335-040": {
     "section": "fundamentals",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:B",
-        "from": "Subscriptions",
-        "to": "Subordinates"
-      },
-      {
-        "field": "option:D",
-        "from": "ID Users",
-        "to": "Users"
-      }
-    ],
     "explanationEs": "Con el OWD en Private, el manual sharing permite compartir un registro concreto con Users, Public Groups y Roles and Subordinates (también con roles y territorios). Permission Set Groups agrupan permisos pero no son destinatarios de sharing, y los Private Groups no son un destino de manual sharing.",
     "explanationEn": "With the OWD set to Private, manual sharing lets you share an individual record with Users, Public Groups and Roles and Subordinates (also roles and territories). Permission Set Groups bundle permissions but are not sharing targets, and Private Groups are not a manual sharing target."
   },
@@ -493,13 +457,6 @@
   "ab-v2335-042": {
     "section": "ui",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:C",
-        "from": "easy to fin",
-        "to": "easy to find"
-      }
-    ],
     "explanationEs": "Para la app móvil conviene reducir los campos de fórmula y de búsqueda, que retrasan la carga de la página, poner los campos clave en el compact layout para que se vean de inmediato y ofrecer Global Actions para las tareas habituales. Los valores predeterminados ayudan al usuario móvil y no hacen falta layouts distintos por sistema operativo, porque los layouts de Lightning son responsivos.",
     "explanationEn": "For the mobile app, the builder should reduce formula and lookup fields, which slow page loads, put the key fields in the compact layout so they show up first, and provide Global Actions for common tasks. Default values help mobile users, and separate layouts per operating system are unnecessary because Lightning layouts are responsive."
   },
@@ -507,14 +464,7 @@
     "section": "datamodel",
     "review": "ok",
     "explanationEs": "Rich Text Area es el tipo de campo que guarda texto con formato y admite imágenes y enlaces dentro del propio campo. Long Text Area solo admite texto plano, URL almacena una única dirección web y Lightning web component es un componente de interfaz, no un tipo de campo, así que ninguna de esas sirve.",
-    "explanationEn": "Rich Text Area is the field type that stores formatted text and supports images and links inside the field itself. Long Text Area holds plain text only, URL stores a single web address, and a Lightning web component is a UI component rather than a field type, so none of those fit.",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "can Include",
-        "to": "can include"
-      }
-    ]
+    "explanationEn": "Rich Text Area is the field type that stores formatted text and supports images and links inside the field itself. Long Text Area holds plain text only, URL stores a single web address, and a Lightning web component is a UI component rather than a field type, so none of those fit."
   },
   "ab-v2335-058": {
     "section": "datamodel",
@@ -551,19 +501,9 @@
     "review": "ok",
     "textFixes": [
       {
-        "field": "option:B",
-        "from": "Global Picklist Value Se",
-        "to": "Global Picklist Value Set"
-      },
-      {
         "field": "stem",
         "from": "three Separate",
         "to": "three separate"
-      },
-      {
-        "field": "stem",
-        "from": "field Across each",
-        "to": "field across each"
       }
     ],
     "explanationEs": "Un Global Picklist Value Set define una sola lista de valores que pueden usar campos picklist de varios objetos, así que los tres campos Status compartirían los mismos valores. Dependent picklist relaciona dos campos entre sí y no comparte listas entre objetos, y Shared Custom Field y Related Picklist no son funciones de Salesforce para esto.",
@@ -597,13 +537,6 @@
   "ab-v2335-049": {
     "section": "fundamentals",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:D",
-        "from": "Apps Trigger",
-        "to": "Apex Trigger"
-      }
-    ],
     "explanationEs": "Una regla de validación solo se evalúa al guardar, no al borrar, así que no puede bloquear la eliminación de una cuenta. Quitar el permiso Delete impediría todas las eliminaciones, no solo las de cuentas con oportunidades abiertas, y quitar el botón del layout solo oculta una vía de borrado sin distinguir casos. Para aplicar una condición sobre datos relacionados al borrar hace falta un Apex trigger before delete en Account que consulte las oportunidades abiertas y añada un error al registro cuando existan.",
     "explanationEn": "A validation rule runs only on save, not on delete, so it cannot block deleting an Account. Removing the Delete permission would stop every deletion, not only those of accounts with open opportunities, and removing the button from the layout hides just one way to delete without checking any condition. Enforcing a condition on related data at delete time calls for a before-delete Apex trigger on Account that queries open opportunities and adds an error to the record when any exist."
   },
@@ -644,23 +577,13 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "looking for While scrolling",
-        "to": "looking for while scrolling"
-      },
-      {
-        "field": "stem",
-        "from": "Chatter fee How",
-        "to": "Chatter feed. How"
-      },
-      {
-        "field": "stem",
         "from": "utilized to only posts",
         "to": "utilized to show only posts"
       },
       {
-        "field": "option:A",
-        "from": "Dookmarks",
-        "to": "bookmarks"
+        "field": "stem",
+        "from": "Chatter fee.",
+        "to": "Chatter feed."
       }
     ],
     "explanationEs": "Un Chatter stream es una vista del feed que combina los feeds de las personas, grupos y registros que el usuario elija. Así el rep ve solo las publicaciones de sus cuentas y oportunidades clave, y esa es la respuesta que espera el examen. Hoy es una función de Salesforce Classic, no de Lightning Experience. Los bookmarks solo guardan publicaciones concretas para verlas después, una notification avisa de actividad pero no filtra el feed, y un Chatter group es un espacio de colaboración, no un filtro por registros.",
@@ -670,13 +593,6 @@
   "ab-v2335-057": {
     "section": "logic",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:A",
-        "from": "Realty wants to import its property records ",
-        "to": ""
-      }
-    ],
     "explanationEs": "Las acciones que puede ejecutar un approval process al enviar, aprobar, rechazar o recuperar un registro son Task, Email Alert, Field Update y Outbound Message. Como Field Update no está entre las opciones, valen Task, Email Alert y Outbound Message. Decision es un elemento de Flow, no una acción de aprobación, e Invocable Flow no es un tipo de acción del approval process clásico.",
     "explanationEn": "The actions an approval process can run on submission, approval, rejection or recall are Task, Email Alert, Field Update and Outbound Message. Since Field Update is not listed, the valid choices are Task, Email Alert and Outbound Message. Decision is a Flow element, not an approval action, and Invocable Flow is not an action type of the classic approval process."
   },
@@ -704,13 +620,6 @@
   "ab-v2335-062": {
     "section": "logic",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:B",
-        "from": "custom fiel",
-        "to": "custom field"
-      }
-    ],
     "explanationEs": "Una validation rule puede comparar el valor nuevo con el anterior usando PRIORVALUE, por ejemplo Estimated_Hours__c > PRIORVALUE(Estimated_Hours__c) combinada con que el valor previo no esté vacío, y así bloquea los aumentos y deja bajar el número. ISCHANGED solo detecta que el campo cambió, no si subió o bajó. Un valor por defecto con fórmula solo se aplica al crear el registro, y PREVGROUPVAL es una función de fórmulas de informes, no de validation rules ni de formula fields.",
     "explanationEn": "A validation rule can compare the new value with the old one using PRIORVALUE, for example Estimated_Hours__c > PRIORVALUE(Estimated_Hours__c) combined with a check that the prior value is not blank, which blocks increases while still allowing decreases. ISCHANGED only detects that the field changed, not whether it went up or down. A formula default value only applies when the record is created, and PREVGROUPVAL is a report formula function, not available in validation rules or formula fields."
   },
@@ -718,16 +627,6 @@
     "section": "deployment",
     "review": "ok",
     "textFixes": [
-      {
-        "field": "option:B",
-        "from": "Apps test",
-        "to": "Apex test"
-      },
-      {
-        "field": "option:C",
-        "from": "must by 100%",
-        "to": "must be 100%"
-      },
       {
         "field": "option:D",
         "from": "Honestly activate",
@@ -746,20 +645,20 @@
   "ab-v2335-065": {
     "section": "logic",
     "review": "ok",
+    "explanationEs": "Un record-triggered Flow sobre Work Order puede detectar que una orden de mantenimiento pasa a cerrada y actualizar con una acción Update Records el campo de última fecha de mantenimiento del Asset relacionado, sin código. Un Roll-up Summary no sirve porque exige una relación master-detail y Work Order se relaciona con Asset mediante un lookup. Un Apex Trigger lo lograría pero es innecesario cuando Flow lo resuelve de forma declarativa, y Einstein Next Best Action solo recomienda acciones, no actualiza datos.",
+    "explanationEn": "A record-triggered Flow on Work Order can detect when a maintenance work order is closed and use an Update Records action to set the last maintenance date field on the related Asset, with no code. A Roll-up Summary does not work because it requires a master-detail relationship and Work Order relates to Asset through a lookup. An Apex Trigger could do it but is unnecessary when Flow solves it declaratively, and Einstein Next Best Action only recommends actions, it does not update data.",
     "textFixes": [
       {
         "field": "stem",
-        "from": "auto- populatedd",
+        "from": "auto- populated",
         "to": "auto-populated"
       },
       {
         "field": "stem",
-        "from": "gets close Which",
-        "to": "gets closed. Which"
+        "from": "gets close.",
+        "to": "gets closed."
       }
-    ],
-    "explanationEs": "Un record-triggered Flow sobre Work Order puede detectar que una orden de mantenimiento pasa a cerrada y actualizar con una acción Update Records el campo de última fecha de mantenimiento del Asset relacionado, sin código. Un Roll-up Summary no sirve porque exige una relación master-detail y Work Order se relaciona con Asset mediante un lookup. Un Apex Trigger lo lograría pero es innecesario cuando Flow lo resuelve de forma declarativa, y Einstein Next Best Action solo recomienda acciones, no actualiza datos.",
-    "explanationEn": "A record-triggered Flow on Work Order can detect when a maintenance work order is closed and use an Update Records action to set the last maintenance date field on the related Asset, with no code. A Roll-up Summary does not work because it requires a master-detail relationship and Work Order relates to Asset through a lookup. An Apex Trigger could do it but is unnecessary when Flow solves it declaratively, and Einstein Next Best Action only recommends actions, it does not update data."
+    ]
   },
   "ab-v2335-066": {
     "section": "logic",
@@ -786,13 +685,6 @@
   "ab-v2335-067": {
     "section": "fundamentals",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "Salesforce Classi DHR",
-        "to": "Salesforce Classic. DHR"
-      }
-    ],
     "explanationEs": "AppExchange (hoy también presentado junto a AgentExchange) es el marketplace de Salesforce donde se encuentran apps, componentes y recursos de adopción ya preparados, incluidos los que ayudan a pasar un org de Classic a Lightning Experience. Flow Builder es una herramienta de automatización, Lightning Object Creator crea objetos a partir de una hoja de cálculo e Import Wizard sirve para importar datos; ninguno es una fuente de recursos prediseñados de migración o adopción.",
     "explanationEn": "AppExchange (now also presented alongside AgentExchange) is the Salesforce marketplace where you find ready-made apps, components and adoption resources, including those that help move an org from Classic to Lightning Experience. Flow Builder is an automation tool, Lightning Object Creator builds objects from a spreadsheet and Import Wizard is for importing data; none of them is a source of prebuilt migration or adoption resources."
   },
@@ -819,11 +711,6 @@
         "to": "ISBLANK(Job_Accepted__c) || NOT(ISCHANGED(Hire_Date__c))"
       },
       {
-        "field": "option:B",
-        "from": "NOT (LABLANK (Job hocepted__c)) FRISCHANGED (Hire_Date",
-        "to": "NOT(ISBLANK(Job_Accepted__c)) && ISCHANGED(Hire_Date__c)"
-      },
-      {
         "field": "option:C",
         "from": "NOT (ISBLANK (Job_Accepted__c)) 11 ISCHANGED (Hire_Date c)",
         "to": "NOT(ISBLANK(Job_Accepted__c)) || ISCHANGED(Hire_Date__c)"
@@ -832,6 +719,11 @@
         "field": "option:D",
         "from": "(ISBLANK (Job_Accepted__c) NOT (ISCHANGED (Hire_Date_0})",
         "to": "ISBLANK(Job_Accepted__c) && NOT(ISCHANGED(Hire_Date__c))"
+      },
+      {
+        "field": "stem",
+        "from": "recruiter’s",
+        "to": "recruiter's"
       }
     ],
     "explanationEs": "Una validation rule bloquea el guardado cuando su fórmula devuelve TRUE, así que hay que describir la situación de error: la oferta ya está aceptada Y la fecha de contratación ha cambiado, es decir NOT(ISBLANK(Job_Accepted__c)) && ISCHANGED(Hire_Date__c). La variante con OR saltaría en cualquier edición una vez aceptada la oferta, aunque la fecha no cambie. Las fórmulas que parten de ISBLANK sin negar disparan justo cuando la oferta aún no se ha aceptado, lo contrario de lo pedido.",
@@ -891,9 +783,9 @@
     "explanationEn": "With a Private sharing model and the role hierarchy, the rep, their manager and the executives above them can see the evaluation record, and nobody else. To keep the rep from seeing the executive comments field you use field-level security, which hides the field at the profile or permission set level. Custom settings do not grant record access, and record types and page layouts only change what is displayed, they do not protect a field (it could still show up in reports or through the API).",
     "textFixes": [
       {
-        "field": "stem",
-        "from": "scorecar The",
-        "to": "scorecard. The"
+        "field": "option:B",
+        "from": "field- level",
+        "to": "field-level"
       }
     ]
   },
@@ -945,14 +837,7 @@
     "section": "logic",
     "review": "ok",
     "explanationEs": "Un formula field basado en la antigüedad del caso (por ejemplo con CreatedDate y TODAY() dentro de un IF o CASE) puede devolver con la función IMAGE un círculo verde, amarillo o rojo, sin escribir código. Un custom button o un quick action sirven para ejecutar una acción, no para mostrar un indicador de forma permanente, y un Lightning Web Component supone código cuando basta una solución declarativa.",
-    "explanationEn": "A formula field based on the age of the case (for example using CreatedDate and TODAY() inside an IF or CASE) can use the IMAGE function to return a green, yellow or red circle, with no code. A custom button or a quick action runs an action rather than showing a permanent indicator, and a Lightning Web Component means code when a declarative solution is enough.",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "Three d ay-old",
-        "to": "Three day-old"
-      }
-    ]
+    "explanationEn": "A formula field based on the age of the case (for example using CreatedDate and TODAY() inside an IF or CASE) can use the IMAGE function to return a green, yellow or red circle, with no code. A custom button or a quick action runs an action rather than showing a permanent indicator, and a Lightning Web Component means code when a declarative solution is enough."
   },
   "ab-v2335-084": {
     "section": "ui",
@@ -983,11 +868,6 @@
     "review": "ok",
     "reviewNote": "Las opciones de esta pregunta están mezcladas en la fuente (restos de una versión con Lightning Web Component). Se conserva la clave: la opción correcta es la única que combina Rich Text con component visibility según el support level de la cuenta. La versión limpia está en ab-fc143-117.",
     "textFixes": [
-      {
-        "field": "stem",
-        "from": "wants to a text",
-        "to": "wants to show a text"
-      },
       {
         "field": "option:B",
         "from": "Lightning page Set",
@@ -1042,41 +922,12 @@
   "ab-v2335-093": {
     "section": "ui",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "checkedd.",
-        "to": "checked."
-      },
-      {
-        "field": "option:A",
-        "from": "checkedd.",
-        "to": "checked."
-      },
-      {
-        "field": "option:C",
-        "from": "checkedd.",
-        "to": "checked."
-      }
-    ],
     "explanationEs": "Es un requisito de visibilidad condicional de un campo, y Dynamic Forms lo cubre con una regla de visibilidad en Lightning App Builder: el campo numérico aparece solo cuando el checkbox es true. Una field dependency solo permite que el campo dependiente sea un picklist, no un número. Dos page layouts no cambian según el valor de un campo (se asignan por perfil y record type), y Visualforce añade código cuando la solución es declarativa.",
     "explanationEn": "This is a conditional field visibility requirement, and Dynamic Forms covers it with a visibility rule in Lightning App Builder: the number field shows only when the checkbox is true. A field dependency only allows the dependent field to be a picklist, not a number. Two page layouts do not switch based on a field value (they are assigned by profile and record type), and Visualforce adds code when a declarative solution exists."
   },
   "ab-v2335-094": {
     "section": "ui",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:B",
-        "from": "custom fields for the Galactic Vendors's location: ",
-        "to": ""
-      },
-      {
-        "field": "option:C",
-        "from": "Rich tex",
-        "to": "Rich text"
-      }
-    ],
     "explanationEs": "Recent Items, Filter List y Rich Text son componentes estándar que se arrastran desde la lista de componentes de Lightning App Builder. «Plain text» no existe como componente (el estándar para texto es Rich Text) y «Report details» tampoco: el componente estándar para informes es Report Chart.",
     "explanationEn": "Recent Items, Filter List and Rich Text are standard components you drag from the component list in Lightning App Builder. Plain text does not exist as a component (the standard one for text is Rich Text) and neither does Report details: the standard report component is Report Chart."
   },
@@ -1158,13 +1009,6 @@
   "ab-v2335-103": {
     "section": "ui",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:A",
-        "from": "# Build",
-        "to": "Build"
-      }
-    ],
     "explanationEs": "Un global action de tipo Create a Record para Contact, con un layout que incluya solo los campos imprescindibles, aparece en el menú de acciones de la app móvil y permite crear un contacto en segundos. Después el representante completa el resto de la información. Path guía las etapas de un registro que ya existe, personalizar el menú móvil solo cambia la posición de Contacts sin simplificar la creación, y un compact layout define qué campos de resumen se muestran, no cómo se crea un registro.",
     "explanationEn": "A Create a Record global action for Contact, with a layout that includes only the essential fields, appears in the mobile app's action menu and lets reps create a contact in seconds. They complete the remaining information afterwards. Path guides the stages of a record that already exists, customizing the mobile menu only moves Contacts up without simplifying creation, and a compact layout defines which summary fields are shown, not how a record is created."
   },
@@ -1184,23 +1028,6 @@
   "ab-v2335-106": {
     "section": "ui",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "7 of 65. Universal",
-        "to": "Universal"
-      },
-      {
-        "field": "stem",
-        "from": "until it is close The sales",
-        "to": "until it is closed. The sales"
-      },
-      {
-        "field": "stem",
-        "from": "is close After",
-        "to": "is closed. After"
-      }
-    ],
     "explanationEs": "Se combinan record types con un page layout distinto para cada uno: las oportunidades abiertas usan el layout editable y las cerradas pasan a un record type cuyo layout deja los campos en solo lectura, salvo los dos de seguimiento posterior al cierre, que Sales Operations puede editar. Un solo layout, o marcar los campos como solo lectura en el perfil Sales, se aplica igual en cualquier etapa y no distingue entre oportunidades abiertas y cerradas. Los field sets agrupan campos para mostrarlos en otros componentes y no controlan si un campo se puede editar. El texto de la opción es impreciso al hablar de «field-level security on page layouts», pero lo que cambia según la etapa es la asignación de layouts por record type.",
     "explanationEn": "Record types are combined with a different page layout for each one: open opportunities use the editable layout, and closed ones move to a record type whose layout makes the fields read-only except the two post-close follow-up fields, which Sales Operations can edit. A single layout, or marking the fields read-only on the Sales profile, applies the same way at every stage and cannot tell open opportunities from closed ones. Field sets group fields for display in other components and do not control whether a field is editable. The option wording about field-level security on page layouts is loose, but what changes by stage is the layout assignment per record type."
   },
@@ -1238,11 +1065,6 @@
         "field": "option:A",
         "from": "Park record to the total",
         "to": "Park record to show the total"
-      },
-      {
-        "field": "option:B",
-        "from": "-Use a roll-up summary field on the Park record to the total",
-        "to": "Use a roll-up summary field on the Park record to show the total"
       }
     ],
     "explanationEs": "Un roll-up summary field en Park puede contar los registros hijos de Trail sin escribir código, pero solo existe cuando la relación entre ambos objetos es master-detail con Park como master. Una relación lookup no admite roll-up summary de forma nativa, y un formula field no puede contar ni agregar registros hijos, solo lee campos del propio registro o de registros padre.",
@@ -1254,13 +1076,6 @@
   "ab-v2335-112": {
     "section": "ui",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "a Number of fields pre-populate Which",
-        "to": "a number of fields pre-populated. Which"
-      }
-    ],
     "explanationEs": "Una quick action de tipo Create a Record en el objeto Account permite crear la Opportunity desde la cuenta y rellenar de antemano varios campos con valores predefinidos. Un custom button o un custom link tendrían que construir una URL con los valores y no son la opción declarativa y adaptada a móvil. Default action no es una función de Salesforce que sirva para esto.",
     "explanationEn": "A Create a Record quick action on the Account object lets reps create the Opportunity from the account with several fields pre-filled through predefined values. A custom button or custom link would have to build a URL carrying the values and is not the declarative, mobile-friendly choice. Default action is not a Salesforce feature that fits this need."
   },
@@ -1274,15 +1089,15 @@
   "ab-v2335-114": {
     "section": "datamodel",
     "review": "ok",
+    "explanationEs": "Cada Realtor nuevo se relaciona con un único mentor, y un mentor puede tener varios Realtors nuevos, así que es una relación uno a muchos entre registros del mismo objeto, que se resuelve con un lookup (obligatorio) hacia el propio objeto Realtor. Un master-detail no se puede definir de un objeto hacia sí mismo y además impone herencia de propietario y borrado en cascada que no se piden. Many-to-many exigiría un junction object y no encaja, porque cada nuevo Realtor tiene un solo mentor. Indirect lookup sirve para external objects.",
+    "explanationEn": "Each new Realtor is tied to a single mentor, and a mentor can have several new Realtors, so this is a one-to-many relationship between records of the same object, solved with a (required) lookup from the Realtor object to itself. A master-detail cannot be defined from an object to itself, and it also brings owner inheritance and cascade delete that nobody asked for. Many-to-many would need a junction object and does not fit, because each new Realtor has only one mentor. Indirect lookup is meant for external objects.",
     "textFixes": [
       {
         "field": "stem",
-        "from": "probationary Perio Which",
-        "to": "probationary period. Which"
+        "from": "probationary Period",
+        "to": "probationary period"
       }
-    ],
-    "explanationEs": "Cada Realtor nuevo se relaciona con un único mentor, y un mentor puede tener varios Realtors nuevos, así que es una relación uno a muchos entre registros del mismo objeto, que se resuelve con un lookup (obligatorio) hacia el propio objeto Realtor. Un master-detail no se puede definir de un objeto hacia sí mismo y además impone herencia de propietario y borrado en cascada que no se piden. Many-to-many exigiría un junction object y no encaja, porque cada nuevo Realtor tiene un solo mentor. Indirect lookup sirve para external objects.",
-    "explanationEn": "Each new Realtor is tied to a single mentor, and a mentor can have several new Realtors, so this is a one-to-many relationship between records of the same object, solved with a (required) lookup from the Realtor object to itself. A master-detail cannot be defined from an object to itself, and it also brings owner inheritance and cascade delete that nobody asked for. Many-to-many would need a junction object and does not fit, because each new Realtor has only one mentor. Indirect lookup is meant for external objects."
+    ]
   },
   "ab-v2335-115": {
     "section": "logic",
@@ -1322,11 +1137,6 @@
       },
       {
         "field": "stem",
-        "from": "and Would like",
-        "to": "and would like"
-      },
-      {
-        "field": "stem",
         "from": "assigned to The Account",
         "to": "assigned to the Account"
       }
@@ -1336,7 +1146,19 @@
     "section": "logic",
     "review": "ok",
     "explanationEs": "Un roll-up summary field solo se puede crear en el objeto maestro de una relación master-detail, así que con una relación lookup hay que convertirla primero a master-detail. Un campo de fórmula no puede agregar ni contar registros hijos, y no existe un roll-up summary con filtro que funcione sobre una lookup, de modo que las demás soluciones propuestas no logran el recuento.",
-    "explanationEn": "A roll-up summary field can only be created on the master object of a master-detail relationship, so with a lookup relationship it has to be converted to master-detail first. A formula field cannot aggregate or count child records, and a roll-up summary with a filter does not work on a lookup, so the other proposed solutions cannot produce the count."
+    "explanationEn": "A roll-up summary field can only be created on the master object of a master-detail relationship, so with a lookup relationship it has to be converted to master-detail first. A formula field cannot aggregate or count child records, and a roll-up summary with a filter does not work on a lookup, so the other proposed solutions cannot produce the count.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "‘delay_cobject and a custom ‘Size__c object",
+        "to": "delay__c object and a custom Size__c object"
+      },
+      {
+        "field": "stem",
+        "from": "‘Size__c’ records related to each ‘delay__c` record",
+        "to": "Size__c records related to each delay__c record"
+      }
+    ]
   },
   "ab-v2335-299": {
     "duplicateOf": "ab-v2335-120"
@@ -1361,8 +1183,13 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "related to That account",
-        "to": "related to that account"
+        "from": "'Past-Customer '",
+        "to": "'Past-Customer'"
+      },
+      {
+        "field": "stem",
+        "from": "' Re-Market '",
+        "to": "'Re-Market'"
       }
     ]
   },
@@ -1444,23 +1271,8 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "the Lea Campaign members are required to Have",
-        "to": "the Lead. Campaign members are required to have"
-      },
-      {
-        "field": "option:A",
-        "from": "AND ( 18BLANK (Loa Owner.Id))",
-        "to": "AND(ISBLANK(Lead.Owner.Id))"
-      },
-      {
-        "field": "option:B",
-        "from": "NOT( ISBLANK (La Own: Quum.Id))",
-        "to": "NOT(ISBLANK(Lead.Owner:Queue.Id))"
-      },
-      {
-        "field": "option:C",
-        "from": "AND (ISNER(), TSBLANK (Lea Owner:ter.Id))",
-        "to": "AND(ISNEW(), ISBLANK(Lead.Owner:User.Id))"
+        "from": "of the Lead Campaign members are required to Have a sales owner",
+        "to": "of the Lead. Campaign members are required to have a sales owner"
       }
     ]
   },
@@ -1475,7 +1287,14 @@
     "review": "disputed",
     "reviewNote": "Dos de las cuatro opciones (la de «Account Upstream Agent Closets» y la de «Today as a guide from in line size») están ilegibles por el OCR. Las claves de V23.35 y FreeCram v3.5 marcan la opción de Today y la de la custom app page, y la explicación de la fuente reinterpreta el texto roto como «incluir Today como elemento de navegación». Las tres votaciones ciegas, en cambio, eligen la custom app page y las configuraciones de menú móvil distintas por tipo de usuario, porque la opción de Today no se puede leer. Esta última también es una función real de Salesforce, y no puedo comprobar qué decía la opción de Today en el original. Se mantiene la clave de la fuente y se marca como dudosa.",
     "explanationEs": "Crear una custom app page con Lightning App Builder y asignarla al menú de navegación móvil es una forma real de dar a los reps una experiencia pensada para el móvil. La clave de la fuente marca además la opción que incluye Today, una función estándar de la app móvil, aunque su texto está ilegible y no se puede verificar. Configurar menús móviles distintos según el tipo de usuario también es posible en Salesforce, así que la pregunta es dudosa. La opción sobre «Account Upstream Agent Closets» es texto roto sin sentido y no se puede aceptar.",
-    "explanationEn": "Creating a custom app page with Lightning App Builder and assigning it to the mobile navigation menu is a real way to give reps an experience designed for mobile. The source key also marks the option that includes Today, a standard feature of the mobile app, but its text is unreadable and cannot be verified. Setting up different mobile menus per type of user is also possible in Salesforce, which is why this question is disputed. The option about \"Account Upstream Agent Closets\" is garbled text with no meaning and cannot be accepted."
+    "explanationEn": "Creating a custom app page with Lightning App Builder and assigning it to the mobile navigation menu is a real way to give reps an experience designed for mobile. The source key also marks the option that includes Today, a standard feature of the mobile app, but its text is unreadable and cannot be verified. Setting up different mobile menus per type of user is also possible in Salesforce, which is why this question is disputed. The option about \"Account Upstream Agent Closets\" is garbled text with no meaning and cannot be accepted.",
+    "textFixes": [
+      {
+        "field": "option:B",
+        "from": "in the app..",
+        "to": "in the app."
+      }
+    ]
   },
   "ab-v2335-137": {
     "section": "logic",
@@ -1494,11 +1313,6 @@
         "field": "stem",
         "from": "onThe Account",
         "to": "on the Account"
-      },
-      {
-        "field": "option:B",
-        "from": "Management enable",
-        "to": "Management enabled"
       }
     ]
   },
@@ -1587,13 +1401,27 @@
     "section": "logic",
     "review": "ok",
     "explanationEs": "Screen Flow es el tipo de flow interactivo: muestra pantallas con instrucciones y preguntas, guarda las respuestas del agente en cada paso y puede crear al final el Case de seguimiento con un elemento Create Records. Los schedule-triggered flow, los record-triggered flow y los platform event-triggered flow se ejecutan en segundo plano sin interfaz para el usuario, así que no pueden guiar al agente por el guion.",
-    "explanationEn": "A Screen Flow is the interactive flow type: it shows screens with instructions and questions, stores the agent's answers at each step, and can create the follow-up Case at the end with a Create Records element. Schedule-triggered, record-triggered and platform event-triggered flows run in the background with no user interface, so they cannot walk a rep through a script."
+    "explanationEn": "A Screen Flow is the interactive flow type: it shows screens with instructions and questions, stores the agent's answers at each step, and can create the follow-up Case at the end with a Create Records element. Schedule-triggered, record-triggered and platform event-triggered flows run in the background with no user interface, so they cannot walk a rep through a script.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "follow- up",
+        "to": "follow-up"
+      }
+    ]
   },
   "ab-v2335-156": {
     "section": "logic",
     "review": "ok",
     "explanationEs": "Flow Trigger Explorer permite fijar el Trigger Order de cada record-triggered flow sobre el mismo objeto y evento, así que el flow de cálculo puede ejecutarse antes que el de notificación manteniendo cada flow separado. Juntar la lógica en un único flow rompe la separación de responsabilidades que se exige. Un scheduled path con cero minutos o ejecutar el flow de notificación de forma asíncrona no garantiza el orden frente a los demás record-triggered flows.",
-    "explanationEn": "Flow Trigger Explorer lets you set the Trigger Order of each record-triggered flow on the same object and event, so the discount calculation can run before the notification while each flow stays separate. Merging the logic into a single flow breaks the required ownership separation. A zero-minute scheduled path or running the notification asynchronously does not guarantee the order against the other record-triggered flows."
+    "explanationEn": "Flow Trigger Explorer lets you set the Trigger Order of each record-triggered flow on the same object and event, so the discount calculation can run before the notification while each flow stays separate. Merging the logic into a single flow breaks the required ownership separation. A zero-minute scheduled path or running the notification asynchronously does not guarantee the order against the other record-triggered flows.",
+    "textFixes": [
+      {
+        "field": "option:A",
+        "from": "record- triggered",
+        "to": "record-triggered"
+      }
+    ]
   },
   "ab-v2335-157": {
     "section": "ui",
@@ -1623,13 +1451,6 @@
   "ab-v2335-160": {
     "section": "datamodel",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:B",
-        "from": "Master-detials",
-        "to": "Master-detail"
-      }
-    ],
     "explanationEs": "Una master-detail relationship hace que Gift Card sea hijo de Account: el Account puede llevar roll-up summary fields que cuenten las gift cards abiertas y emitidas, y cada tarjeta queda ligada a su padre desde su creación, sin poder moverse a otra cuenta mientras no se permita el reparenting. Una lookup no admite roll-up summary sobre el padre, y un roll-up summary o una fórmula no pueden guardar el vínculo entre los dos registros, así que cada alternativa incumple algún requisito.",
     "explanationEn": "A master-detail relationship makes Gift Card a child of Account: the Account can carry roll-up summary fields that count its gift cards opened and issued, and each card stays tied to its parent from creation and cannot be moved to another account unless reparenting is allowed. A lookup relationship does not support roll-up summary fields on the parent, and a roll-up summary or formula field cannot store the link between the two records. Each of the other choices therefore fails one of the requirements."
   },
@@ -1641,11 +1462,6 @@
         "field": "option:B",
         "from": "is create",
         "to": "is created"
-      },
-      {
-        "field": "option:C",
-        "from": "ofline",
-        "to": "offline"
       }
     ],
     "explanationEs": "Permitir que Salesforce importe contactos desde la lista de contactos del dispositivo trae a la org los contactos que los reps ya guardan en el teléfono, así que el dato termina en Salesforce. Activar offline create, edit and delete solo permite crear o editar registros dentro de la app sin conexión y no recoge los contactos ya guardados en el móvil. Las notificaciones en la app y poder relacionar un contacto con varias cuentas no hacen que esos contactos lleguen a Salesforce.",
@@ -1655,18 +1471,18 @@
     "section": "fundamentals",
     "review": "ok",
     "explanationEs": "El Organization-Wide Default de Account debe ser Private para que el equipo de field sales solo vea las cuentas que posee; desde ahí se abre acceso solo donde hace falta. Los criteria-based sharing rules comparten las cuentas de cada región con el equipo de marketing correspondiente, y un profile de Inside Sales con el permiso de objeto \"View All\" en Accounts le da visibilidad de todas las cuentas sin tocar el OWD. Con OWD Public todos verían todas las cuentas, y los permission sets o un rol en lo alto de la jerarquía por sí solos no comparten cuentas por región.",
-    "explanationEn": "The Account Organization-Wide Default must be Private so that field sales only sees the accounts it owns, and access is then opened only where needed. Criteria-based sharing rules share each region's accounts with the matching marketing team, and an Inside Sales profile with the \"View All\" object permission on Accounts gives that team visibility of every account without touching the OWD. With a Public OWD everyone would see every account, and permission sets or a role at the top of the hierarchy do not share accounts by region on their own."
+    "explanationEn": "The Account Organization-Wide Default must be Private so that field sales only sees the accounts it owns, and access is then opened only where needed. Criteria-based sharing rules share each region's accounts with the matching marketing team, and an Inside Sales profile with the \"View All\" object permission on Accounts gives that team visibility of every account without touching the OWD. With a Public OWD everyone would see every account, and permission sets or a role at the top of the hierarchy do not share accounts by region on their own.",
+    "textFixes": [
+      {
+        "field": "option:A",
+        "from": "team,and",
+        "to": "team, and"
+      }
+    ]
   },
   "ab-v2335-163": {
     "section": "logic",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "entere What",
-        "to": "entered. What"
-      }
-    ],
     "explanationEs": "Una validation rule que exige el campo para un record type concreto se ejecuta al guardar desde cualquier vía (interfaz, API, importaciones, Data Loader) y bloquea los datos incompletos, que es lo que significa aceptar datos limpios. Marcar el campo como obligatorio en el page layout solo actúa en la interfaz y no cubre integraciones ni cargas masivas. Un Flow que limpia los datos después no impide que entren mal, y un campo de fórmula solo muestra un valor calculado: no puede rechazar un guardado.",
     "explanationEn": "A validation rule that requires the field for a specific record type runs on save from any entry point (UI, API, imports, Data Loader) and blocks incomplete data, which is what accepting clean data means. Making the field required on the page layout only works in the UI and does not cover integrations or bulk loads. A Flow that cleans data afterwards does not stop bad data from coming in, and a formula field only displays a calculated value: it cannot reject a save."
   },
@@ -1679,13 +1495,6 @@
   "ab-v2335-165": {
     "section": "logic",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "is delete Which",
-        "to": "is deleted. Which"
-      }
-    ],
     "explanationEs": "Un record-triggered flow sobre el objeto hijo, configurado para ejecutarse cuando se elimina un registro, puede localizar el registro padre y actualizar su campo sin intervención del usuario. Una validation rule solo bloquea guardados y no actualiza otros registros. Un autolaunched flow no tiene disparador propio y necesita que otra automatización o un usuario lo invoque, y una quick action exige que alguien la ejecute a mano, así que ninguno reacciona por sí solo al borrado.",
     "explanationEn": "A record-triggered flow on the child object, configured to run when a record is deleted, can find the parent record and update its field with no user involvement. A validation rule only blocks saves and does not update other records. An autolaunched flow has no trigger of its own and needs another automation or a user to call it, and a quick action requires someone to run it manually, so neither reacts to the deletion by itself."
   },
@@ -1704,13 +1513,6 @@
   "ab-v2335-168": {
     "section": "ui",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:D",
-        "from": "is not ing up",
-        "to": "is not showing up"
-      }
-    ],
     "explanationEs": "Hay dos causas posibles. El componente puede estar expuesto solo para páginas de registro y no para la Home page (el destino lightning__HomePage), por lo que no aparece en la paleta de Lightning App Builder al editar la página de inicio. Además, My Domain debe estar desplegado para poder usar componentes Lightning personalizados en Lightning App Builder. No hace falta crear una custom tab, que sirve para la navegación y no para colocar componentes en una página, ni un permiso de desarrollador especial para añadir el componente.",
     "explanationEn": "There are two possible causes. The component may be exposed only for record pages and not for the Home page (the lightning__HomePage target), so it does not show up in the Lightning App Builder palette when editing the home page. In addition, My Domain must be deployed to use custom Lightning components in Lightning App Builder. A custom tab is not needed, since tabs are for navigation and not for placing components on a page, and no special developer permission is required to add the component."
   },
@@ -1724,18 +1526,18 @@
         "to": "is changed"
       },
       {
-        "field": "option:B",
-        "from": "Account. Account_Region_o",
-        "to": "Account.Account_Region__c"
-      },
-      {
         "field": "option:C",
         "from": "is change",
         "to": "is changed"
       },
       {
+        "field": "option:B",
+        "from": "Account. Account_Region__c",
+        "to": "Account.Account_Region__c"
+      },
+      {
         "field": "option:D",
-        "from": "Account.Account Region_e",
+        "from": "Account.Account Region__c",
         "to": "Account.Account_Region__c"
       }
     ],
@@ -1752,7 +1554,14 @@
     "section": "datamodel",
     "review": "ok",
     "explanationEs": "Schema Builder muestra de forma gráfica los objetos estándar y personalizados y las relaciones entre ellos, lo que ayuda a entender el modelo de datos de un vistazo. Object Manager y Fields & Relationships se centran en configurar un solo objeto cada vez y no dibujan el mapa de relaciones. Lightning App Builder sirve para construir páginas, no para ver el modelo de datos.",
-    "explanationEn": "Schema Builder graphically shows standard and custom objects and the relationships between them, which helps you understand the data model at a glance. Object Manager and Fields & Relationships focus on configuring one object at a time and do not draw a relationship map. Lightning App Builder is for building pages, not for viewing the data model."
+    "explanationEn": "Schema Builder graphically shows standard and custom objects and the relationships between them, which helps you understand the data model at a glance. Object Manager and Fields & Relationships focus on configuring one object at a time and do not draw a relationship map. Lightning App Builder is for building pages, not for viewing the data model.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "appbuilder",
+        "to": "app builder"
+      }
+    ]
   },
   "ab-v2335-172": {
     "section": "ui",
@@ -1793,11 +1602,6 @@
     "review": "ok",
     "textFixes": [
       {
-        "field": "option:C",
-        "from": "status of Deploye",
-        "to": "status of Deployed"
-      },
-      {
         "field": "option:D",
         "from": "is disable",
         "to": "is disabled"
@@ -1822,7 +1626,14 @@
     "section": "datamodel",
     "review": "ok",
     "explanationEs": "Como se factura por separado a cada cliente y a cada dealer, ambos deben ser Accounts distintas. El representante de cada uno se guarda como Contact en su propia cuenta, y la account hierarchy (campo Parent Account) refleja la relación entre las entidades. Un único Account con un objeto personalizado de dealers no permite facturar por separado, y las Account Teams son usuarios internos de Salesforce que trabajan una cuenta, no representantes externos del cliente o del dealer.",
-    "explanationEn": "Because each customer and each dealer is billed separately, both must be separate Accounts. Each one's representative is stored as a Contact on its own account, and the account hierarchy (Parent Account field) shows how the entities relate. A single Account plus a custom dealer object cannot support separate billing, and Account Teams are internal Salesforce users working an account, not external customer or dealer representatives."
+    "explanationEn": "Because each customer and each dealer is billed separately, both must be separate Accounts. Each one's representative is stored as a Contact on its own account, and the account hierarchy (Parent Account field) shows how the entities relate. A single Account plus a custom dealer object cannot support separate billing, and Account Teams are internal Salesforce users working an account, not external customer or dealer representatives.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "appbuilder",
+        "to": "app builder"
+      }
+    ]
   },
   "ab-v2335-190": {
     "duplicateOf": "ab-v2335-177"
@@ -1831,13 +1642,6 @@
     "section": "logic",
     "review": "outdated",
     "reviewNote": "Process Builder está retirado: ya no se pueden crear procesos nuevos y hoy esta automatización se haría con un record-triggered flow en Flow Builder. La clave de la fuente (crear registro hijo, actualizar registro relacionado y enviar alerta de email) coincide con las acciones reales de Process Builder y con los tres resolvedores. La pregunta solo sirve para entender procesos heredados.",
-    "textFixes": [
-      {
-        "field": "option:D",
-        "from": "email alerts",
-        "to": "email alert"
-      }
-    ],
     "explanationEs": "Process Builder (hoy retirado en favor de Flow) podía crear un registro hijo, actualizar un registro relacionado y enviar una email alert, que son las capacidades que mejoraban la productividad del equipo de ventas. No existe ninguna acción llamada «Start an additional message» y Process Builder no tenía acción para borrar registros relacionados. Para automatizaciones nuevas hay que usar un record-triggered flow.",
     "explanationEn": "Process Builder (now retired in favor of Flow) could create a child record, update a related record and send an email alert, which are the capabilities that boosted the sales team's productivity. There is no action called 'Start an additional message', and Process Builder had no action to delete related records. New automation should be built with a record-triggered flow."
   },
@@ -1880,13 +1684,6 @@
     "section": "deployment",
     "review": "disputed",
     "reviewNote": "V23.35 marca que el permission set desplegado solo contiene los cambios relacionados con el change set, mientras que las tres votaciones ciegas eligieron que se sobrescribe por completo. Mantengo la clave de V23.35 porque, por lo que sé de la plataforma, el permission set que viaja en un change set solo lleva los permisos de los componentes incluidos, y no tengo una fuente que confirme que el de producción se reemplace entero. Aun así, la opción de que se fusione con el existente también es defendible y no he podido contrastarlo con la documentación en línea, por eso queda como dudosa.",
-    "textFixes": [
-      {
-        "field": "option:C",
-        "from": "not be applie",
-        "to": "not be applied"
-      }
-    ],
     "explanationEs": "Al desplegar un permission set con un change set, solo viajan los permisos que se refieren a los componentes incluidos en ese change set (por ejemplo los objetos, campos o clases que van dentro), así que el permission set desplegado no es una copia completa del de sandbox. El field-level security sí se despliega cuando el campo forma parte del change set, por lo que no es cierto que no se aplique. Las opciones de sobrescritura total y de fusión describen otro comportamiento, y en la práctica conviene revisar el permission set de producción tras el despliegue. Para que un cambio llegue a producción, el componente al que afecta tiene que ir en el change set.",
     "explanationEn": "When a permission set is deployed through a change set, only the permissions that refer to components included in that change set travel with it (for example the objects, fields or classes that are part of it), so the deployed permission set is not a full copy of the sandbox one. Field-level security is deployed when the field is part of the change set, so it is not true that it is not applied. The total-overwrite and merge options describe different behavior, and in practice it is wise to review the production permission set after deploying. For a change to reach production, the component it affects has to be in the change set."
   },
@@ -1931,8 +1728,8 @@
       },
       {
         "field": "stem",
-        "from": "Weeken Which",
-        "to": "weekend. Which"
+        "from": "every Weekend",
+        "to": "every weekend"
       }
     ],
     "explanationEs": "Partial Copy es el tipo que combina un subconjunto de datos de producción (definido con una sandbox template y con un límite de 5 GB) y un intervalo de refresco de 5 días, así que se puede refrescar cada fin de semana. Full Copy copia todos los datos de producción, sin el límite de 5 GB, y solo se puede refrescar cada 29 días. Developer y Developer Pro solo copian metadatos, sin datos de producción, por lo que no sirven para probar código con un subconjunto de datos reales.",
@@ -1982,11 +1779,6 @@
         "field": "option:C",
         "from": "Testimonial To Contact",
         "to": "Testimonial to Contact"
-      },
-      {
-        "field": "option:D",
-        "from": "Testimonial_cto Contact",
-        "to": "Testimonial to Contact"
       }
     ],
     "explanationEs": "Un master-detail hacia Account hace que, al borrar la cuenta, se borren en cascada sus Testimonial__c. Un lookup hacia Contact no crea esa dependencia: si se borra el contacto, el testimonio se conserva y el campo se limpia. Si se invierten los dos tipos de relación, el borrado del Contact eliminaría los testimonios y el del Account no. Un junction object con dos master-detail borra el registro cuando se borra cualquiera de los dos padres, y dos lookups, aunque sean obligatorios, nunca borran en cascada.",
@@ -2005,13 +1797,6 @@
   "ab-v2335-194": {
     "section": "logic",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "checkedd Which",
-        "to": "checked. Which"
-      }
-    ],
     "explanationEs": "Para borrar el teléfono automáticamente cuando se marca Do Not Call hace falta una automatización que modifique datos: un Flow disparado por registro (record-triggered) sobre Contact puede comprobar el checkbox y dejar el campo Phone en blanco. Una validation rule solo puede bloquear el guardado, no cambiar valores. Una quick action es manual, así que no cumple una política que debe aplicarse siempre. «If-then rule» no es una herramienta de automatización de Salesforce.",
     "explanationEn": "Clearing the phone number automatically when Do Not Call is checked needs automation that changes data: a record-triggered Flow on Contact can check the checkbox and set the Phone field to blank. A validation rule can only block a save, not change values. A quick action is manual, so it cannot enforce a policy that must always apply. An \"if-then rule\" is not a Salesforce automation tool."
   },
@@ -2142,18 +1927,8 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "globalworkforce",
-        "to": "global workforce"
-      },
-      {
-        "field": "stem",
         "from": "gathering feed from",
         "to": "gathering feedback from"
-      },
-      {
-        "field": "stem",
-        "from": "respon Which",
-        "to": "respond. Which"
       }
     ],
     "explanationEs": "Los Polls permiten lanzar una encuesta rápida en Chatter al equipo clave y recoger sus opiniones, y Out of Office indica quién no está disponible para responder. Streams solo combina varios feeds en una vista, pero no recoge comentarios ni muestra disponibilidad, y Topics solo etiqueta y agrupa publicaciones.",
@@ -2163,7 +1938,14 @@
     "section": "logic",
     "review": "ok",
     "explanationEs": "Los roll-up summary fields solo se pueden crear en el objeto master de una relación master-detail, así que solo el objeto custom en master-detail puede resumirse en Account sin código, y cada objeto admite 25 roll-ups por defecto (hay que tenerlo en cuenta con 15 campos por objeto). AVG no existe: solo hay COUNT, SUM, MIN y MAX. El límite de 20 referencias a objetos no corresponde a ningún límite real de roll-ups.",
-    "explanationEn": "Roll-up summary fields can only be created on the master object of a master-detail relationship, so only the custom object in master-detail can be summarized on Account without code, and each object allows 25 roll-up summaries by default (relevant with 15 fields per object). AVG does not exist: the only functions are COUNT, SUM, MIN and MAX. The 20 object references limit is not a real roll-up limit."
+    "explanationEn": "Roll-up summary fields can only be created on the master object of a master-detail relationship, so only the custom object in master-detail can be summarized on Account without code, and each object allows 25 roll-up summaries by default (relevant with 15 fields per object). AVG does not exist: the only functions are COUNT, SUM, MIN and MAX. The 20 object references limit is not a real roll-up limit.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "master-Detail",
+        "to": "master-detail"
+      }
+    ]
   },
   "ab-v2335-209": {
     "section": "fundamentals",
@@ -2187,7 +1969,14 @@
     "section": "fundamentals",
     "review": "ok",
     "explanationEs": "En un objeto de unión con dos master-detail, el acceso lo controlan los padres. Con sharing rules owner-based que dan Read sobre los dos objetos master al grupo, y con el Sharing Setting de ambos campos master-detail en Read Only (basta Read en el master para crear, editar y borrar detalles), ese grupo puede editar el objeto de unión. Un objeto detail no admite sharing rules propias, y los lookup filters no son un mecanismo de seguridad.",
-    "explanationEn": "On a junction object with two master-detail relationships, access is controlled by the parents. With owner-based sharing rules that give the group Read on both master objects, and the Sharing Setting on both master-detail fields set to Read Only (Read on the master is enough to create, edit and delete detail records), that group can edit the junction object. A detail object cannot have its own sharing rules, and lookup filters are not a security mechanism."
+    "explanationEn": "On a junction object with two master-detail relationships, access is controlled by the parents. With owner-based sharing rules that give the group Read on both master objects, and the Sharing Setting on both master-detail fields set to Read Only (Read on the master is enough to create, edit and delete detail records), that group can edit the junction object. A detail object cannot have its own sharing rules, and lookup filters are not a security mechanism.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "Attendees.Organization-wide",
+        "to": "Attendees. Organization-wide"
+      }
+    ]
   },
   "ab-v2335-213": {
     "section": "ui",
@@ -2228,17 +2017,17 @@
         "to": "access Case_Issue__c"
       },
       {
-        "field": "option:B",
-        "from": "Case Issue_e",
-        "to": "Case_Issue__c"
-      },
-      {
         "field": "option:C",
         "from": "Case Issue__c",
         "to": "Case_Issue__c"
       },
       {
         "field": "option:D",
+        "from": "Case Issue__c",
+        "to": "Case_Issue__c"
+      },
+      {
+        "field": "option:B",
         "from": "Case Issue__c",
         "to": "Case_Issue__c"
       }
@@ -2271,11 +2060,6 @@
     "textFixes": [
       {
         "field": "option:A",
-        "from": "ISPICKVAL (Priority",
-        "to": "ISPICKVAL(Priority"
-      },
-      {
-        "field": "option:A",
         "from": "/img /samples/flag_re gif",
         "to": "/img/samples/flag_red.gif"
       },
@@ -2296,13 +2080,28 @@
       },
       {
         "field": "option:D",
-        "from": "flag_yellow. gif",
-        "to": "flag_yellow.gif"
+        "from": "flag_re gif",
+        "to": "flag_red.gif"
+      },
+      {
+        "field": "option:A",
+        "from": "ISPICKVAL (Priority",
+        "to": "ISPICKVAL(Priority"
+      },
+      {
+        "field": "stem",
+        "from": "low- priority",
+        "to": "low-priority"
+      },
+      {
+        "field": "stem",
+        "from": "flagged Yellow",
+        "to": "flagged yellow"
       },
       {
         "field": "option:D",
-        "from": "flag_re gif",
-        "to": "flag_red.gif"
+        "from": "samples/ flag_yellow.gif",
+        "to": "samples/flag_yellow.gif"
       }
     ],
     "explanationEs": "Para mostrar una bandera hay que devolver una imagen, no una ruta: IMAGE() recibe la URL de la imagen y su texto alternativo. Tanto los IF anidados con ISPICKVAL como un CASE sobre el picklist Priority eligen la bandera verde, amarilla o roja y se la pasan a IMAGE(). Las dos fórmulas sin IMAGE() solo devuelven el texto de la ruta, de modo que el campo mostraría una URL en lugar de la bandera. En sintaxis estricta el CASE sobre un picklist necesitaría TEXT(Priority), pero la intención de la opción es clara.",
@@ -2341,13 +2140,6 @@
   "ab-v2335-223": {
     "section": "datamodel",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "when the Opportunities close Which",
-        "to": "when the Opportunities close. Which"
-      }
-    ],
     "explanationEs": "Un Checkbox guarda verdadero o falso, justo lo que hace falta para contar las Opportunities con contrato enviado frente a las que no lo tienen: se filtra y se agrupa en informes sin esfuerzo, y una validation rule puede exigir que esté marcado al pasar a Closed Won. Text y Text Area dejan escribir valores distintos y hacen inviable un recuento fiable. Un picklist también serviría, pero añade valores y mantenimiento para un simple sí o no.",
     "explanationEn": "A Checkbox stores true or false, exactly what is needed to count Opportunities with a sent contract against those without one: it is easy to filter and group in reports, and a validation rule can require it to be checked when moving to Closed Won. Text and Text Area let users type different values and make a reliable count impossible. A picklist could also work, but it adds values and maintenance for a simple yes or no."
   },
@@ -2367,14 +2159,7 @@
     "section": "logic",
     "review": "ok",
     "explanationEs": "Un Approval Process define los criterios (por ejemplo, un descuento del 20 % al 30 %), los pasos y los aprobadores, así que aporta el visto bueno formal del sales manager. Dynamic Actions permite mostrar en la página de registro de la Opportunity las acciones de aprobar o rechazar solo cuando se cumple la condición, para que el manager firme rápido desde ahí. Schema Builder sirve para diseñar el modelo de datos y una Validation Rule solo impide guardar datos inválidos; ninguna de las dos ofrece un sign-off.",
-    "explanationEn": "An Approval Process defines the entry criteria (for example a 20% to 30% discount), the steps and the approvers, so it provides the sales manager's formal sign-off. Dynamic Actions lets you show approve or reject actions on the Opportunity record page only when the condition is met, so the manager can sign off quickly from there. Schema Builder is for designing the data model and a Validation Rule only blocks invalid data from being saved; neither gives a sign-off.",
-    "textFixes": [
-      {
-        "field": "option:B",
-        "from": "Schema Builde",
-        "to": "Schema Builder"
-      }
-    ]
+    "explanationEn": "An Approval Process defines the entry criteria (for example a 20% to 30% discount), the steps and the approvers, so it provides the sales manager's formal sign-off. Dynamic Actions lets you show approve or reject actions on the Opportunity record page only when the condition is met, so the manager can sign off quickly from there. Schema Builder is for designing the data model and a Validation Rule only blocks invalid data from being saved; neither gives a sign-off."
   },
   "ab-v2335-227": {
     "section": "ui",
@@ -2386,19 +2171,7 @@
     "section": "logic",
     "review": "ok",
     "explanationEs": "Flow es la herramienta actual para automatizar esto: un record-triggered flow puede marcar el checkbox To Be Installed y, con un scheduled path, ejecutar al día siguiente la acción de Outbound Message hacia el sistema externo. Approval process solo gestiona aprobaciones, Validation rule solo impide guardar datos inválidos y Assignment rule asigna propietarios de leads o cases; ninguna programa acciones diferidas ni notifica a sistemas externos.",
-    "explanationEn": "Flow is the current tool for this: a record-triggered flow can check the To Be Installed checkbox and, using a scheduled path, run the Outbound Message action the next day to notify the external system. An approval process only handles approvals, a validation rule only blocks invalid data, and an assignment rule assigns owners of leads or cases; none of them schedules delayed actions or notifies external systems.",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "checkedd",
-        "to": "checked"
-      },
-      {
-        "field": "stem",
-        "from": "sol Which",
-        "to": "sold. Which"
-      }
-    ]
+    "explanationEn": "Flow is the current tool for this: a record-triggered flow can check the To Be Installed checkbox and, using a scheduled path, run the Outbound Message action the next day to notify the external system. An approval process only handles approvals, a validation rule only blocks invalid data, and an assignment rule assigns owners of leads or cases; none of them schedules delayed actions or notifies external systems."
   },
   "ab-v2335-230": {
     "section": "ui",
@@ -2416,14 +2189,7 @@
     "section": "deployment",
     "review": "ok",
     "explanationEs": "Un partial sandbox solo copia los datos de los objetos que se seleccionan en su sandbox template, y como mucho 10.000 registros por objeto. Si el objeto custom Shipping no se incluyó en el template, llega vacío aunque producción tenga dos millones de filas. Un refresh demasiado temprano o un sandbox que sigue poblándose no explicarían que falte justo un objeto, y el límite de capacidad no deja un objeto seleccionado en cero.",
-    "explanationEn": "A partial sandbox only copies data for the objects selected in its sandbox template, and at most 10,000 records per object. If the custom Shipping object was not included in the template, it arrives empty even though production holds two million rows. A refresh done too early or a sandbox that is still populating would not explain why one specific object is missing, and a capacity limit would not leave a selected object at zero.",
-    "textFixes": [
-      {
-        "field": "option:B",
-        "from": "populating dat",
-        "to": "populating data"
-      }
-    ]
+    "explanationEn": "A partial sandbox only copies data for the objects selected in its sandbox template, and at most 10,000 records per object. If the custom Shipping object was not included in the template, it arrives empty even though production holds two million rows. A refresh done too early or a sandbox that is still populating would not explain why one specific object is missing, and a capacity limit would not leave a selected object at zero."
   },
   "ab-v2335-234": {
     "section": "logic",
@@ -2494,28 +2260,8 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "(Open_Position c)",
-        "to": "(Open_Position__c)"
-      },
-      {
-        "field": "stem",
         "from": "record UMS also",
         "to": "record. UMS also"
-      },
-      {
-        "field": "option:B",
-        "from": "Application = to Job Candidate",
-        "to": "Application to Job Candidate"
-      },
-      {
-        "field": "option:C",
-        "from": "master detail relationship on open_Posision to application_",
-        "to": "master-detail relationship field on Open Position to Application"
-      },
-      {
-        "field": "option:D",
-        "from": "Job candidate to Application_o.",
-        "to": "Job Candidate to Application"
       }
     ],
     "explanationEs": "Es una relación many-to-many entre Job Candidate y Open Position, que se modela con Application como junction object: dos campos master-detail creados en Application, uno hacia Job Candidate y otro hacia Open Position. Así cada candidato ve sus applications en una related list y cada position ve las suyas. Los campos creados en Open Position o en Job Candidate apuntando a Application invierten la dirección y harían que esos objetos fueran hijos de Application, con lo que no se obtiene el modelo pedido.",
@@ -2525,30 +2271,20 @@
     "section": "logic",
     "review": "disputed",
     "reviewNote": "V23.35 marca Queue; FreeCram v14.3 marca Public group y los tres resolutores ciegos votaron Public group. En un approval process una queue es un tipo de aprobador válido (cualquier miembro puede aprobar), mientras que usar un public group directamente como aprobador no está claro: las aprobaciones clásicas ofrecen user, queue y related user, y los grupos solo aparecen en los Flow Approvals más recientes. Se mantiene la clave de V23.35 por prudencia; conviene revisarla.",
+    "explanationEs": "En un approval process la solicitud puede asignarse a una queue: les llega a todos los miembros del departamento y cualquiera de ellos puede aprobarla, que es lo que pide el enunciado. Role y Hierarchy field no representan a un departamento, sino que resuelven un aprobador según la estructura de roles o un campo de usuario como el manager. Public group es la alternativa que otras fuentes proponen; el tipo de aprobador habitual en un paso de aprobación es user, queue o related user, por eso aquí se mantiene la queue, aunque el punto es discutible.",
+    "explanationEn": "In an approval process the request can be assigned to a queue: it reaches all the members of the department and any one of them can approve it, which is what the stem asks for. Role and Hierarchy field do not represent a department; they resolve an approver from the role structure or from a user field such as the manager. Public group is the alternative that other sources propose; the usual approver type in an approval step is user, queue or related user, so the queue is kept here, although the point is debatable.",
     "textFixes": [
       {
-        "field": "option:B",
-        "from": "Queve",
-        "to": "Queue"
-      },
-      {
-        "field": "option:C",
-        "from": "Hierarchy fiele",
-        "to": "Hierarchy field"
+        "field": "stem",
+        "from": "CK' s app builder",
+        "to": "CK's app builder"
       }
-    ],
-    "explanationEs": "En un approval process la solicitud puede asignarse a una queue: les llega a todos los miembros del departamento y cualquiera de ellos puede aprobarla, que es lo que pide el enunciado. Role y Hierarchy field no representan a un departamento, sino que resuelven un aprobador según la estructura de roles o un campo de usuario como el manager. Public group es la alternativa que otras fuentes proponen; el tipo de aprobador habitual en un paso de aprobación es user, queue o related user, por eso aquí se mantiene la queue, aunque el punto es discutible.",
-    "explanationEn": "In an approval process the request can be assigned to a queue: it reaches all the members of the department and any one of them can approve it, which is what the stem asks for. Role and Hierarchy field do not represent a department; they resolve an approver from the role structure or from a user field such as the manager. Public group is the alternative that other sources propose; the usual approver type in an approval step is user, queue or related user, so the queue is kept here, although the point is debatable."
+    ]
   },
   "ab-v2335-243": {
     "section": "logic",
     "review": "ok",
     "textFixes": [
-      {
-        "field": "stem",
-        "from": "Pricing_Tier _ Which",
-        "to": "Pricing_Tier__c. Which"
-      },
       {
         "field": "option:A",
         "from": "Sales Organization__c, ' Canada ' ), ISBLANK (TEXT (Pricing_Tier",
@@ -2563,6 +2299,16 @@
         "field": "option:D",
         "from": "Sales Organization__c",
         "to": "Sales_Organization__c"
+      },
+      {
+        "field": "stem",
+        "from": "Pricing_Tier _c.",
+        "to": "Pricing_Tier__c."
+      },
+      {
+        "field": "option:A",
+        "from": "ISBLANK (TEXT (Pricing_Tier__c))))",
+        "to": "ISBLANK (TEXT (Pricing_Tier__c)))"
       }
     ],
     "explanationEs": "Una validation rule bloquea el guardado cuando su fórmula devuelve TRUE, así que debe dispararse solo cuando la organización es Canada y el Pricing Tier está vacío. AND combina las dos condiciones, ISPICKVAL compara el picklist y ISBLANK(TEXT(...)) comprueba si el otro picklist está vacío. OR se activaría con cualquier registro de Canada o con cualquier tier vacío. ISNULL no sirve con un picklist, y la fórmula con IF y la comparación directa del picklist con un texto no son válidas.",
@@ -2571,13 +2317,6 @@
   "ab-v2335-244": {
     "section": "ui",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "stem",
-        "from": "Ready to Syn What",
-        "to": "Ready to Sync. What"
-      }
-    ],
     "explanationEs": "Las Dynamic Actions de la Lightning record page permiten añadir una acción (por ejemplo una quick action que lance un Lightning Web Component) y mostrarla solo cuando el campo Status vale Ready to Sync, mediante un filtro de visibilidad. Un Custom link no puede lanzar un LWC con esa visibilidad condicional. Un Formula field no es un botón, y un producto de AppExchange es innecesario para algo que se resuelve de forma declarativa.",
     "explanationEn": "Dynamic Actions on the Lightning record page let you add an action (for example a quick action that launches a Lightning Web Component) and show it only when the Status field equals Ready to Sync, using a visibility filter. A Custom link cannot launch an LWC with that conditional visibility. A Formula field is not a button, and an AppExchange product is unnecessary for something that can be solved declaratively."
   },
@@ -2635,13 +2374,6 @@
   "ab-v2335-252": {
     "section": "deployment",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:D",
-        "from": "NOT deploye",
-        "to": "NOT deployed"
-      }
-    ],
     "explanationEs": "Un custom tab desplegado con un change set sin profiles ni permission sets no lleva ningún ajuste de visibilidad, así que ningún usuario lo ve: queda oculto (Tab Hidden) hasta que se configure en un profile o permission set. Default On y Default Off son valores de visibilidad que viven en esos profiles o permission sets, por lo que no se aplican solos. La opción de que los tabs no se despliegan es falsa: el tab sí llega a Production, lo que falta es el acceso.",
     "explanationEn": "A custom tab deployed through a change set without profiles or permission sets carries no visibility setting, so no user sees it: it stays hidden (Tab Hidden) until visibility is configured in a profile or permission set. Default On and Default Off are visibility values that live in those profiles or permission sets, so they are not applied on their own. The claim that the tabs are not deployed is false: the tab does reach Production, what is missing is the access."
   },
@@ -2668,7 +2400,14 @@
     "section": "ui",
     "review": "ok",
     "explanationEs": "Una custom action (una quick action específica del objeto, de tipo Update a Record) que muestre los campos Status y la fecha de vencimiento personalizada, añadida al publisher del registro, permite editarlos rápido desde el feed en la app móvil de Salesforce. Un custom button no es una acción del feed móvil y un campo de fórmula con URL solo muestra un valor calculado, sin actualizar nada. Un custom quick access link no es la función de Salesforce adecuada para este caso.",
-    "explanationEn": "A custom action (an object-specific quick action of type Update a Record) that exposes the Status field and the custom due date field, added to the record's publisher, lets the user edit them quickly from the feed in the Salesforce mobile app. A custom button is not an action available in the mobile feed, and a URL formula field only shows a calculated value without updating anything. A custom quick access link is not the right Salesforce feature for this case."
+    "explanationEn": "A custom action (an object-specific quick action of type Update a Record) that exposes the Status field and the custom due date field, added to the record's publisher, lets the user edit them quickly from the feed in the Salesforce mobile app. A custom button is not an action available in the mobile feed, and a URL formula field only shows a calculated value without updating anything. A custom quick access link is not the right Salesforce feature for this case.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "record' s feed",
+        "to": "record's feed"
+      }
+    ]
   },
   "ab-v2335-258": {
     "section": "deployment",
@@ -2740,11 +2479,6 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "was acquire DR executives Want",
-        "to": "was acquired. DR executives want"
-      },
-      {
-        "field": "stem",
         "from": "submission travel request",
         "to": "submission of travel request"
       }
@@ -2754,7 +2488,14 @@
     "section": "logic",
     "review": "ok",
     "explanationEs": "Agentforce proporciona agentes de IA autónomos que entienden la intención del cliente, consultan datos de Salesforce y ejecutan acciones sin que una persona intervenga en cada paso. Einstein Bots sigue diálogos guiados y con script, y deriva a un humano cuando se sale de ellos. Case Assignment Rules solo enrutan casos a un propietario o una queue, y Live Chat conecta al cliente con agentes humanos.",
-    "explanationEn": "Agentforce provides autonomous AI agents that understand customer intent, query Salesforce data and take action without a person stepping in at each stage. Einstein Bots follow scripted, guided dialogs and hand off to a human when the conversation leaves the script. Case Assignment Rules only route cases to an owner or queue, and Live Chat connects customers with human agents."
+    "explanationEn": "Agentforce provides autonomous AI agents that understand customer intent, query Salesforce data and take action without a person stepping in at each stage. Einstein Bots follow scripted, guided dialogs and hand off to a human when the conversation leaves the script. Case Assignment Rules only route cases to an owner or queue, and Live Chat connects customers with human agents.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "end- to-end",
+        "to": "end-to-end"
+      }
+    ]
   },
   "ab-v2335-268": {
     "exclude": "opciones y enunciado corrompidos por la transcripción (fórmulas ilegibles) y las dos fuentes que la contienen marcan letras distintas para el mismo texto, así que no se puede recuperar la fórmula correcta; en el banco queda la versión legible ab-fc143-052, que tiene opciones propias"
@@ -2803,13 +2544,27 @@
       "ab-v2335-274"
     ],
     "explanationEs": "Solo los campos personalizados de tipo Text, Number, Email y Auto Number pueden marcarse como External ID. De las opciones ofrecidas, Text y Number son válidos, mientras que Phone y URL no son tipos admitidos para un External ID.",
-    "explanationEn": "Only custom fields of type Text, Number, Email and Auto Number can be marked as External ID. Of the choices offered, Text and Number are valid, while Phone and URL are not supported types for an external ID."
+    "explanationEn": "Only custom fields of type Text, Number, Email and Auto Number can be marked as External ID. Of the choices offered, Text and Number are valid, while Phone and URL are not supported types for an external ID.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "externalSystem",
+        "to": "external system"
+      }
+    ]
   },
   "ab-v2335-275": {
     "section": "logic",
     "review": "ok",
     "explanationEs": "Para ver las ventas totales de cada Account hace falta un roll-up summary en Account que haga SUM del Amount de las Opportunities, con un filtro por Stage para contar solo las Closed Won. Sin el filtro se sumarían también las Opportunities abiertas y perdidas, y un COUNT da el número de registros, no el importe vendido. El roll-up debe estar en Account, que es donde se quiere el resultado, no en Opportunity, porque un roll-up solo resume registros hijos en el objeto padre. Nota: Account y Opportunity se relacionan por un lookup, así que en una org real este roll-up nativo no existe y se resolvería con un record-triggered flow; el examen da por buena esta configuración.",
-    "explanationEn": "To show total sales per Account you need a roll-up summary on Account that does a SUM of the Opportunity Amount, with a filter on Stage so only Closed Won records count. Without the filter, open and lost Opportunities would be added too, and a COUNT returns the number of records rather than the amount sold. The roll-up must live on Account, where the result is needed, not on Opportunity, because a roll-up only summarizes child records on the parent object. Note: Account and Opportunity are related by a lookup, so in a real org this native roll-up does not exist and a record-triggered flow would be used instead; the exam treats this setup as valid."
+    "explanationEn": "To show total sales per Account you need a roll-up summary on Account that does a SUM of the Opportunity Amount, with a filter on Stage so only Closed Won records count. Without the filter, open and lost Opportunities would be added too, and a COUNT returns the number of records rather than the amount sold. The roll-up must live on Account, where the result is needed, not on Opportunity, because a roll-up only summarizes child records on the parent object. Note: Account and Opportunity are related by a lookup, so in a real org this native roll-up does not exist and a record-triggered flow would be used instead; the exam treats this setup as valid.",
+    "textFixes": [
+      {
+        "field": "stem",
+        "from": "Opportunities.How",
+        "to": "Opportunities. How"
+      }
+    ]
   },
   "ab-v2335-276": {
     "section": "logic",
@@ -2848,15 +2603,15 @@
   "ab-v2335-278": {
     "section": "logic",
     "review": "ok",
+    "explanationEs": "Un formula field en Case con TEXT(Account.Support_Level__c) lee el valor del Account padre en tiempo real; TEXT es necesario porque el campo es un picklist. Un formula field en Account no aparece en los Cases, y ISPICKVAL solo devuelve TRUE o FALSE al comparar el picklist con un valor, no muestra el valor. Un roll-up summary solo funciona de hijos a padre y no admite picklists. Un field update con Process Builder copiaría el valor una vez, sin ser en tiempo real, y Process Builder está retirado para automatizaciones nuevas.",
+    "explanationEn": "A formula field on Case with TEXT(Account.Support_Level__c) reads the value from the parent Account in real time; TEXT is required because the field is a picklist. A formula field on Account does not appear on Cases, and ISPICKVAL only returns TRUE or FALSE when comparing the picklist to a value, it does not display it. A roll-up summary only works from children up to the master and does not support picklists. A Process Builder field update would copy the value once rather than stay real time, and Process Builder is retired for new automation.",
     "textFixes": [
       {
         "field": "stem",
-        "from": "like to the real-time",
-        "to": "like to show the real-time"
+        "from": "would like the real-time value",
+        "to": "would like to see the real-time value"
       }
-    ],
-    "explanationEs": "Un formula field en Case con TEXT(Account.Support_Level__c) lee el valor del Account padre en tiempo real; TEXT es necesario porque el campo es un picklist. Un formula field en Account no aparece en los Cases, y ISPICKVAL solo devuelve TRUE o FALSE al comparar el picklist con un valor, no muestra el valor. Un roll-up summary solo funciona de hijos a padre y no admite picklists. Un field update con Process Builder copiaría el valor una vez, sin ser en tiempo real, y Process Builder está retirado para automatizaciones nuevas.",
-    "explanationEn": "A formula field on Case with TEXT(Account.Support_Level__c) reads the value from the parent Account in real time; TEXT is required because the field is a picklist. A formula field on Account does not appear on Cases, and ISPICKVAL only returns TRUE or FALSE when comparing the picklist to a value, it does not display it. A roll-up summary only works from children up to the master and does not support picklists. A Process Builder field update would copy the value once rather than stay real time, and Process Builder is retired for new automation."
+    ]
   },
   "ab-v2335-279": {
     "section": "datamodel",
@@ -2899,29 +2654,29 @@
         "to": "before setting"
       },
       {
+        "field": "option:C",
+        "from": "Stage Name",
+        "to": "StageName"
+      },
+      {
+        "field": "option:C",
+        "from": "& &",
+        "to": "&&"
+      },
+      {
+        "field": "option:D",
+        "from": "Stage Name",
+        "to": "StageName"
+      },
+      {
+        "field": "option:D",
+        "from": "& &",
+        "to": "&&"
+      },
+      {
         "field": "option:A",
         "from": "Scheduled_Ship_Date c",
         "to": "Scheduled_Ship_Date__c"
-      },
-      {
-        "field": "option:C",
-        "from": "Stage Name",
-        "to": "StageName"
-      },
-      {
-        "field": "option:C",
-        "from": "& &",
-        "to": "&&"
-      },
-      {
-        "field": "option:D",
-        "from": "Stage Name",
-        "to": "StageName"
-      },
-      {
-        "field": "option:D",
-        "from": "& &",
-        "to": "&&"
       },
       {
         "field": "option:D",
@@ -2947,13 +2702,6 @@
   "ab-v2335-289": {
     "section": "logic",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:B",
-        "from": "opportunity recor",
-        "to": "opportunity record"
-      }
-    ],
     "explanationEs": "Se pide que el manager y el VP de Sales revisen el cambio, y eso es un flujo de aprobación. Un approval process con aprobación unánime obliga a que ambos aprueben, y un flow que ejecuta Submit for Approval envía el registro a ese proceso cuando la fecha se retrasa. Una validation rule solo bloquea el guardado y no pide revisión a nadie, y una formula field con un email alert no puede enviar correos ni obtiene ninguna aprobación.",
     "explanationEn": "The requirement is for the manager and the VP of Sales to review the change, which is an approval flow. An approval process with unanimous approval forces both of them to approve, and a flow with a Submit for Approval action sends the record into that process when the close date is pushed back. A validation rule only blocks the save and asks nobody to review, and a formula field with an email alert cannot send email and gets no approval."
   },
@@ -2984,13 +2732,6 @@
   "ab-v2335-295": {
     "section": "ui",
     "review": "ok",
-    "textFixes": [
-      {
-        "field": "option:A",
-        "from": "single-specific action in Account",
-        "to": "object-specific action on Account"
-      }
-    ],
     "explanationEs": "Una acción específica del objeto Account (object-specific quick action) se ejecuta en el contexto de la cuenta, crea el Feedback como registro hijo ya relacionado con ella y aparece en la barra de acciones del móvil. Dar valores predefinidos a la mayoría de los campos reduce lo que el usuario tiene que teclear. Hacer que Feedback sea padre de Account invierte la relación, y una global action no tiene contexto de la cuenta, así que el Feedback no quedaría relacionado con ella.",
     "explanationEn": "An object-specific quick action on Account runs in the context of the account, creates the Feedback as a child record already related to it, and shows up in the mobile action bar. Predefined values for most fields cut down what the user has to type. Making Feedback a parent of Account reverses the relationship, and a global action has no account context, so the Feedback would not be related to the account."
   },
@@ -3020,11 +2761,6 @@
         "field": "stem",
         "from": "this field However,",
         "to": "this field. However,"
-      },
-      {
-        "field": "option:C",
-        "from": "to the fiel",
-        "to": "to the field"
       }
     ]
   },
@@ -3045,24 +2781,7 @@
     "section": "datamodel",
     "review": "ok",
     "explanationEs": "Un service plan que debe tener siempre un contacto y que los usuarios no pueden cambiar después apunta a una relación master-detail en la que la casilla Allow reparenting está desmarcada. Con ella desmarcada, el detalle queda fijo al padre con el que se creó. Los ajustes de compartición de lectura o de lectura/escritura del padre controlan quién crea o edita detalles, no si se puede cambiar el padre, y tener Allow reparenting marcada sería justo lo contrario del problema.",
-    "explanationEn": "A service plan that must always have a contact and that users cannot change afterwards points to a master-detail relationship where the Allow reparenting checkbox is unchecked. With it unchecked, the detail record stays tied to the parent it was created with. The read-only and read/write sharing settings on the parent control who can create or edit detail records, not whether the parent can be changed, and having Allow reparenting checked would be the opposite of the problem.",
-    "textFixes": [
-      {
-        "field": "option:A",
-        "from": "is selecte",
-        "to": "is selected"
-      },
-      {
-        "field": "option:B",
-        "from": "uncheckedd",
-        "to": "unchecked"
-      },
-      {
-        "field": "option:C",
-        "from": "is selecte",
-        "to": "is selected"
-      }
-    ]
+    "explanationEn": "A service plan that must always have a contact and that users cannot change afterwards points to a master-detail relationship where the Allow reparenting checkbox is unchecked. With it unchecked, the detail record stays tied to the parent it was created with. The read-only and read/write sharing settings on the parent control who can create or edit detail records, not whether the parent can be changed, and having Allow reparenting checked would be the opposite of the problem."
   },
   "ab-v2335-307": {
     "section": "logic",
@@ -3072,13 +2791,13 @@
     "textFixes": [
       {
         "field": "stem",
-        "from": "field ing the value",
-        "to": "field showing the value"
+        "from": "should have a field in the value",
+        "to": "should have a field showing the value"
       },
       {
         "field": "stem",
-        "from": "After the opportunity has been create What",
-        "to": "after the opportunity has been created. What"
+        "from": "static After the opportunity has been created What",
+        "to": "static after the opportunity has been created. What"
       }
     ]
   },
@@ -3102,11 +2821,6 @@
         "field": "option:B",
         "from": "*Negotiation/Review",
         "to": "' Negotiation/Review"
-      },
-      {
-        "field": "option:B",
-        "from": "CloneDate - 7 TODAY ()",
-        "to": "CloseDate - 7 < TODAY ()"
       }
     ]
   },

@@ -47,12 +47,31 @@ describe('banco de Platform App Builder', () => {
   })
 })
 
+describe('banco de Platform Developer I', () => {
+  const { bank, errors } = buildBank({ cert: 'developer', strict: true })
+
+  it('pasa todas las validaciones (o está en preparación, sin curación)', () => {
+    expect(errors).toEqual([])
+  })
+
+  it('src/data/developer.json está al día', () => {
+    expect(readBank('developer')).toEqual(bank)
+  })
+
+  it('mientras no tiene curación, es un banco vacío «en preparación»', () => {
+    if (isPending('developer')) expect(bank).toEqual(PENDING_BANK)
+    else expect(bank.questions.length).toBeGreaterThan(0)
+  })
+})
+
 describe('independencia de los bancos', () => {
-  it('ningún id ni ninguna fuente aparece en los dos', () => {
-    const admin = buildBank({ cert: 'admin' }).bank.questions
-    const appbuilder = buildBank({ cert: 'appbuilder' }).bank.questions
-    const ids = new Set(admin.map((q) => q.id))
-    const sources = new Set(admin.map((q) => q.source))
-    expect(appbuilder.filter((q) => ids.has(q.id) || sources.has(q.source))).toEqual([])
+  it('ningún id ni ninguna fuente aparece en dos certificaciones', () => {
+    const banks = (['admin', 'appbuilder', 'developer'] as const).map((cert) => buildBank({ cert }).bank.questions)
+    const ids = banks.flatMap((questions) => questions.map((q) => q.id))
+    expect(new Set(ids).size).toBe(ids.length)
+    // cada fuente pertenece a un solo banco
+    const owners = new Map<string, number>()
+    banks.forEach((questions, i) => questions.forEach((q) => owners.set(q.source, Math.min(owners.get(q.source) ?? i, i))))
+    banks.forEach((questions, i) => questions.forEach((q) => expect(owners.get(q.source)).toBe(i)))
   })
 })

@@ -219,11 +219,19 @@ function checkDuplicate(p: ParsedQuestion, entry: CurationEntry, included: Map<s
 
   const matched = new Set<string>()
   for (const answer of p.options.filter((o) => p.correct.includes(o.key))) {
-    const answerWords = words(answer.text)
+    // El duplicado no entra en el banco, pero se compara ya con sus propias correcciones de texto
+    // (una opción ilegible por el OCR que la otra fuente trae limpia).
+    let answerText = answer.text
+    for (const fix of entry.textFixes ?? []) {
+      if (fix.field !== `option:${answer.key}`) continue
+      if (answerText.split(fix.from).length - 1 !== 1) return fail(`textFix "${fix.from}": no aparece exactamente una vez en ${fix.field}`)
+      answerText = answerText.replace(fix.from, fix.to)
+    }
+    const answerWords = words(answerText)
     const [best] = target.options
       .map((o) => ({ key: o.key, score: jaccard(answerWords, words(o.text)) }))
       .sort((a, b) => b.score - a.score)
-    if (best.score < SAME_ANSWER) return fail(`la respuesta "${answer.text}" no se parece a ninguna opción de ${target.id}`)
+    if (best.score < SAME_ANSWER) return fail(`la respuesta "${answerText}" no se parece a ninguna opción de ${target.id}`)
     matched.add(best.key)
   }
   const agrees = matched.size === target.correct.length && target.correct.every((key) => matched.has(key))

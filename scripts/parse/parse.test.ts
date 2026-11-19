@@ -290,6 +290,50 @@ describe('FreeCram v2 (NEW QUESTION y NO.N con pies)', () => {
     expect(qs.map((q) => [q.id, q.stem, q.correct])).toEqual([['ab-v2335-001', 'Pick one', ['B']]])
   })
 
+  describe('layout doc (documento revisado)', () => {
+    const doc = { source: 'abv2335', prefix: 'ab-v2335', layout: 'doc' } as const
+    /** Fragmento visual: x y w en puntos; un hueco de ~3 es un espacio y uno de ~0, parte de la misma palabra. */
+    const frag = (text: string, x: number, w: number, y: number): RawLine => ({ text, x, y, w })
+    const docPage = (lines: RawLine[]): RawPage => ({ page: 1, text: lines.map((l) => l.text).join('\n'), lines, links: [] })
+
+    it('recompone la fila con los fragmentos pegados (guion bajo) o separados por un espacio según el hueco', () => {
+      const page = docPage([
+        frag('Platform App Builder Exam Questions', 170, 200, 720),
+        frag('NO.1 Track Asking Price', 72, 100, 700),
+        frag('_', 172, 5, 700),
+        frag('c and the', 177, 40, 700),
+        frag('Real', 220, 20, 700),
+        frag('A. One', 72, 30, 680),
+        frag('B. Two', 72, 30, 660),
+        frag('C. Three', 72, 30, 640),
+        frag('Answer: B', 72, 40, 620),
+      ])
+      const [q] = parseFreecram2([page], doc)
+      // 217 = 177 + 40 → hueco 3 antes de «Real»; 172 = 72 + 100 → sin hueco antes de «_»
+      expect(q.stem).toBe('Track Asking Price__c and the Real')
+      expect(q.correct).toEqual(['B'])
+    })
+
+    it('acepta «No. 2», «No.3» y opciones sin espacio tras la letra', () => {
+      const rows = (n: string, y: number): RawLine[] => [
+        frag(`${n} Pick one`, 72, 60, y),
+        frag('A.Alpha', 72, 30, y - 20),
+        frag('B.Beta', 72, 30, y - 40),
+        frag('C. Gamma', 72, 30, y - 60),
+        frag('Answer: A', 72, 40, y - 80),
+      ]
+      const page = docPage([...rows('NO.1', 700), ...rows('No. 2', 600), ...rows('No.3', 500)])
+      const qs = parseFreecram2([page], doc)
+      expect(qs.map((q) => q.ref)).toEqual(['NO.1', 'NO.2', 'NO.3'])
+      expect(qs[0].options.map((o) => o.text)).toEqual(['Alpha', 'Beta', 'Gamma'])
+    })
+
+    it('falla si la extracción no trae la anchura de los fragmentos', () => {
+      const page: RawPage = { page: 1, text: 'NO.1 x', lines: [{ text: 'NO.1 x', x: 72, y: 700 }], links: [] }
+      expect(() => parseFreecram2([page], doc)).toThrow(/anchura de los fragmentos/)
+    })
+  })
+
   it('tidy arregla apóstrofos, comillas, puntuación y __c sin tocar lo que no es ruido', () => {
     expect(tidy("The manager ' s sign-off isn ' t needed")).toBe("The manager's sign-off isn't needed")
     expect(tidy('status changes to " Critical " . The flow')).toBe('status changes to "Critical". The flow')

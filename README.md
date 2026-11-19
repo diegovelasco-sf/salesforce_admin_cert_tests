@@ -55,6 +55,51 @@ pregunta.
 En las preguntas de varias respuestas, la app indica cuántas hay que elegir («Elige 2») y no deja marcar
 más. La corrección es de todo o nada, como en el examen.
 
+## Certificaciones
+
+La app tiene tres certificaciones independientes: cada una con su banco, su formato de examen, sus secciones
+y su progreso (una clave de `localStorage` propia). Se cambia de una a otra con el selector de la cabecera.
+
+| Certificación | Estado | Banco |
+|---|---|---|
+| Platform Administrator | Completa | `src/data/questions.json` |
+| Platform App Builder | Completa; formato de la guía SU '26 (65 preguntas, 105 min, 73 %) | `src/data/appbuilder.json` |
+| Platform Developer I | **En preparación**: sin preguntas todavía y con un formato provisional | `src/data/developer.json` (vacío) |
+
+Las secciones de las demás certificaciones se describen en cada tabla; esta README detalla sobre todo
+Administrator, que es la primera que se construyó.
+
+### App Builder: fuente revisada
+
+La fuente principal (`abv2335`) es el documento «Platform App Builder Exam Questions», que es la V23.35 de
+FreeCram con las erratas del OCR corregidas y las claves y explicaciones revisadas a mano. Mantiene los ids
+`ab-v2335-001…326` de la versión anterior, así que el progreso guardado no se pierde. Se lee con el layout
+`doc` de `scripts/parse/freecram2.ts`: ese PDF parte cada línea en fragmentos cuando cambia la fuente
+tipográfica (los guiones bajos de `Asking_Price__c`, las fórmulas), y el parser los recompone midiendo el hueco
+entre fragmentos, que por eso la extracción guarda ahora también la anchura (`w`). Tras una extracción nueva,
+las correcciones de texto de `data/curation/abv2335.json` solo hacen falta donde el documento sigue teniendo
+erratas.
+
+Las claves se contrastaron con seis revisiones independientes hechas a ciegas, sin ver la clave. De las 297
+preguntas del banco coincidieron 265; las otras 32 se adjudicaron una a una y la clave solo cambió en una
+(la 28, ver su nota de revisión). Las dudosas siguen marcadas como `disputed` y fuera del simulacro por defecto.
+
+### Completar Platform Developer I
+
+La configuración está en `src/domain/certs.ts` (`CERTS.developer`) y es **provisional**: 65 preguntas (60 puntúan),
+105 minutos, 68 % y cuatro secciones (`devfund`, `devlogic`, `devui`, `devtest`) con los pesos de la guía de
+Platform Developer I que se conocen, sin confirmar. Mientras `provisional` sea `true`, la pantalla «en
+preparación» lo avisa. Cuando tengas las condiciones reales y las preguntas:
+
+1. Corrige `CERTS.developer` (preguntas, duración, nota de corte, secciones y pesos) y quita `provisional`. Los
+   tests de `src/domain/certs.test.ts` validan que los pesos sumen 100 y que el reparto cuadre.
+2. Si cambias las claves de sección, actualiza `SectionKey` en `src/domain/types.ts`; no pueden repetirse con las
+   de otra certificación.
+3. Añade las fuentes siguiendo [Añadir una fuente nueva](#añadir-una-fuente-nueva), con `"cert": "developer"` en
+   `data/sources.json`. En cuanto una fuente tenga curación, el banco deja de ser «en preparación» y se valida
+   entero con `npm run bank`.
+4. Añade el formato de sus ids al test de `scripts/bank.test.ts`.
+
 ## Formato del examen
 
 El formato sale de la guía oficial CRT101 (SU26): 65 preguntas, 105 minutos y aprobado con el 68 %. En el
@@ -354,7 +399,7 @@ Los textos se muestran con `white-space: pre-line`; nunca se inserta HTML.
 
 ### Tests
 
-Hay 61 tests repartidos en 10 ficheros:
+Hay más de 140 tests repartidos en 12 ficheros:
 
 - **Dominio.** El reparto de 65 preguntas da 10/10/7/6/6/11/10/5 y el muestreo no repite preguntas y es
   determinista con la misma semilla. 44/65 suspende y 45/65 aprueba. Un simulacro vencido se entrega al

@@ -1,6 +1,8 @@
 // Parser de los PDF de FreeCram de Platform App Builder, en dos formatos:
 //  · "new": bloques "NEW QUESTION: N" (q143 y q108). Entre preguntas hay anuncios de EduDump y separadores "---".
 //  · "numbered": bloques "NO.N" con pie de página en cada hoja (Platform-App-Builder.pdf).
+//  · "doc": bloques "NO.N" de un documento exportado a PDF, sin pies ni anuncios. Cada cambio de fuente
+//    (los guiones bajos de los campos, las fórmulas) parte la línea en fragmentos, que se recomponen por su posición.
 // Las claves ocultas ("Answer: (SHOW ANSWER)") no están en el PDF: vienen de `keys`, transcritas a partir de
 // la explicación. Si falta alguna, la pregunta sale sin clave y build-bank la rechaza.
 import type { Option, ParsedQuestion, SourceId } from '../../src/domain/types.ts'
@@ -12,7 +14,7 @@ export interface FreecramFormat {
   source: SourceId
   /** Prefijo de los ids: ab-fc143 da ab-fc143-001. */
   prefix: string
-  layout: 'new' | 'numbered'
+  layout: 'new' | 'numbered' | 'doc'
   /** Claves que el PDF oculta, por número de pregunta. */
   keys?: Record<string, string[]>
   /** Transcripción de las imágenes del PDF (enunciados con captura u opciones que son imagen), por número. */
@@ -33,12 +35,13 @@ const NOISE: RegExp[] = [
   /^https:\/\/www\.freecram\.net\//,
 ]
 /** Portada antes de la primera pregunta: nombre del examen, versión, visitas y URL. La de V23.35 trae el título partido en dos líneas. */
-const COVER = /^(Salesforce\.Platform|Exam Code:|Exam Name:|Certification Provider:|Free Question Number:|Version:|# of |Exam :|Title :|Vendor :|Version :|App Builder$)/
+const COVER = /^(Platform App Builder Exam Questions$|Salesforce\.Platform|Exam Code:|Exam Name:|Certification Provider:|Free Question Number:|Version:|# of |Exam :|Title :|Vendor :|Version :|App Builder$)/
 /** Anuncio de EduDump intercalado entre preguntas: empieza y acaba con una línea conocida. */
 const AD_START = /^Valid Platform-App-Builder Dumps shared by EduDump/
 const AD_END = /35%OFF Special Discount Code: freecram\)/
 const SEPARATOR = '---'
-const START = { new: /^NEW QUESTION:\s*(\d+)\s*(.*)$/, numbered: /^NO\.(\d+)\s*(.*)$/ } as const
+// En el documento revisado alguna cabecera va como "No. 233" o "No.189".
+const START = { new: /^NEW QUESTION:\s*(\d+)\s*(.*)$/, numbered: /^NO\.(\d+)\s*(.*)$/, doc: /^NO\.\s*(\d+)\s*(.*)$/i } as const
 
 interface Block {
   n: number
@@ -46,7 +49,7 @@ interface Block {
 }
 
 export function parseFreecram2(pages: RawPage[], format: FreecramFormat): ParsedQuestion[] {
-  const blocks = splitBlocks(contentLines(pages), START[format.layout], format.source)
+  const blocks = splitBlocks(contentLines(pages, format.layout), START[format.layout], format.source)
   const questions = blocks.map((block) => parseBlock(block, format))
   // Todas juntas, para que una sola pasada diga qué hay que transcribir.
   const pending = questions.filter((q) => !q.stem || q.options.some((o) => !o.text)).map((q) => q.ref)
@@ -57,11 +60,12 @@ export function parseFreecram2(pages: RawPage[], format: FreecramFormat): Parsed
 }
 
 /** Líneas con contenido de todas las páginas, sin pies, anuncios ni separadores. */
-function contentLines(pages: RawPage[]): string[] {
+function contentLines(pages: RawPage[], layout: FreecramFormat['layout']): string[] {
   const out: string[] = []
   let inAd = false
   for (const page of pages) {
-    for (const raw of normalizeText(page.text).split('\n')) {
+    const rows = layout === 'doc' ? visualRows(page) : normalizeText(page.text).split('\n')
+    for (const raw of rows) {
       const line = raw.trim()
       if (inAd) {
         if (AD_END.test(line)) inAd = false
@@ -77,6 +81,32 @@ function contentLines(pages: RawPage[]): string[] {
   }
   if (inAd) fail('FreeCram: anuncio de EduDump sin cerrar')
   return out
+}
+
+/** Hueco máximo, en puntos, entre dos fragmentos de una misma línea para tratarlos como una sola palabra: pegados, ~0; con un espacio, ~3. */
+const GLUE_GAP = 1.5
+
+/**
+ * Filas de la página recompuestas a partir de sus fragmentos visuales. El texto interno del PDF pone cada
+ * fragmento en su propia línea ("Asking Price", "_", "c and…"), lo que partiría los nombres de campo y las
+ * fórmulas; aquí se unen los de una misma fila, con un espacio solo si hay hueco entre ellos.
+ */
+function visualRows(page: RawPage): string[] {
+  const rows: string[] = []
+  let current: { text: string; end: number; y: number } | undefined
+  for (const piece of page.lines ?? []) {
+    if (piece.w === undefined) fail(`FreeCram: la página ${page.page} no trae la anchura de los fragmentos; vuelve a ejecutar npm run extract`)
+    // lines llega ordenado por filas (misma fila si la base difiere menos de 2 puntos) y, dentro de la fila, de izquierda a derecha.
+    if (current && Math.abs(current.y - piece.y) < 2) {
+      current.text += (piece.x - current.end > GLUE_GAP ? ' ' : '') + piece.text
+      current.end = piece.x + piece.w
+    } else {
+      if (current) rows.push(normalizeText(current.text))
+      current = { text: piece.text, end: piece.x + piece.w, y: piece.y }
+    }
+  }
+  if (current) rows.push(normalizeText(current.text))
+  return rows
 }
 
 /**
@@ -146,8 +176,9 @@ function parseBlock({ n, lines }: Block, { source, prefix, layout, keys = {}, im
   const optionLines: { key: string; lines: string[] }[] = []
   let expected = 'A'
   for (const line of lines.slice(0, answerAt)) {
-    // "A." suelto: la opción es una imagen y su texto llega por `images`.
-    const option = /^([A-F])\.(?:\s+(.*))?$/.exec(line)
+    // "A." suelto: la opción es una imagen y su texto llega por `images`. En el documento revisado alguna opción
+    // va sin espacio tras la letra ("A.Street__c").
+    const option = (layout === 'doc' ? /^([A-F])\.(?:\s*(.*))?$/ : /^([A-F])\.(?:\s+(.*))?$/).exec(line)
     if (option && option[1] === expected) {
       optionLines.push({ key: option[1], lines: [option[2] ?? ''] })
       expected = nextLetter(expected)

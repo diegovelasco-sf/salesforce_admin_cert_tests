@@ -34,6 +34,7 @@ export interface Progress {
 export const STORAGE_KEYS: Record<CertId, string> = {
   admin: 'sf-platform-admin-quiz',
   appbuilder: 'sf-platform-app-builder-quiz',
+  developer: 'sf-platform-developer-quiz',
 }
 
 export const emptyProgress = (cert: CertId): Progress => ({

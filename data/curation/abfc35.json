@@ -45,7 +45,14 @@
     "duplicateOf": "ab-v2335-114"
   },
   "ab-fc35-033": {
-    "duplicateOf": "ab-v2335-136"
+    "duplicateOf": "ab-v2335-136",
+    "textFixes": [
+      {
+        "field": "option:B",
+        "from": "Include Today as a guide from in line size.",
+        "to": "Include Today as a navigation item in the app."
+      }
+    ]
   },
   "ab-fc35-007": {
     "duplicateOf": "ab-v2335-146"

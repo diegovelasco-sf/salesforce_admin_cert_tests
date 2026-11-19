@@ -40,7 +40,7 @@ export const SOURCE_LABELS: Record<SourceId, string> = {
   freecram: 'FreeCram (no oficial)',
   success4exam: 'Success4Exam (no oficial)',
   debrief: 'Debrief (no oficial)',
-  abv2335: 'FreeCram V23.35 (no oficial)',
+  abv2335: 'FreeCram V23.35 revisada (no oficial)',
   abs4e: 'Success4Exam demo (no oficial)',
   abfc143: 'FreeCram v2026-06-30 (no oficial)',
   abfc108: 'FreeCram v2026-09-05 (no oficial)',

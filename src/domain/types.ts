@@ -13,11 +13,16 @@ export type SectionKey =
   | 'logic'
   | 'ui'
   | 'deployment'
+  // Platform Developer I
+  | 'devfund'
+  | 'devlogic'
+  | 'devui'
+  | 'devtest'
 
 /** Certificación a la que pertenece una pregunta: cada una tiene su banco, su examen y su progreso. */
-export type CertId = 'admin' | 'appbuilder'
+export type CertId = 'admin' | 'appbuilder' | 'developer'
 
-/** abv2335: FreeCram V23.35, la fuente principal de App Builder · abs4e: demo de Success4Exam · abfc143 y abfc108: FreeCram v2026-06-30 y v2026-09-05 · abfc35: FreeCram sin fecha. */
+/** abv2335: FreeCram V23.35 en la versión revisada a mano (documento «Platform App Builder Exam Questions»), la fuente principal de App Builder · abs4e: demo de Success4Exam · abfc143 y abfc108: FreeCram v2026-06-30 y v2026-09-05 · abfc35: FreeCram sin fecha. */
 export type SourceId =
   | 'freecram'
   | 'crt101'

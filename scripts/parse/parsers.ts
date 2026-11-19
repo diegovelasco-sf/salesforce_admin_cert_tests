@@ -31,7 +31,7 @@ export const parsers: Record<SourceId, (pages: RawPage[]) => ParsedQuestion[]> =
   success4exam: parseSuccess4exam,
   trailhead: (pages) => parseTrailhead(pages, manual<TrailheadManual>('trailhead')),
   debrief: (pages) => manualQuestions('debrief', pages, manual<{ questions: ManualQuestion[] }>('debrief').questions),
-  abv2335: (pages) => parseFreecram2(pages, { source: 'abv2335', prefix: 'ab-v2335', layout: 'numbered', images: imageFixes('abv2335') }),
+  abv2335: (pages) => parseFreecram2(pages, { source: 'abv2335', prefix: 'ab-v2335', layout: 'doc', images: imageFixes('abv2335') }),
   abs4e: (pages) => parseSuccess4exam(pages, APP_BUILDER_S4E),
   abfc143: (pages) =>
     parseFreecram2(pages, { source: 'abfc143', prefix: 'ab-fc143', layout: 'new', keys: hiddenKeys('abfc143'), images: imageFixes('abfc143') }),

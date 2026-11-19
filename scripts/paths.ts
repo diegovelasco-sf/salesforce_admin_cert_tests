@@ -26,6 +26,8 @@ export interface RawLine {
   text: string
   x: number
   y: number
+  /** Anchura del fragmento. Solo las extracciones recientes la traen. */
+  w?: number
 }
 
 export interface RawPage {
@@ -43,6 +45,7 @@ export const curationPath = (id: SourceId) => join(DATA, 'curation', `${id}.json
 export const BANK_PATHS: Record<CertId, string> = {
   admin: join(ROOT, 'src', 'data', 'questions.json'),
   appbuilder: join(ROOT, 'src', 'data', 'appbuilder.json'),
+  developer: join(ROOT, 'src', 'data', 'developer.json'),
 }
 
 export const readJson = <T>(path: string): T => JSON.parse(readFileSync(path, 'utf8')) as T

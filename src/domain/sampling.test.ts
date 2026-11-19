@@ -20,7 +20,7 @@ describe('apportion', () => {
   })
 
   it('suma siempre el total', () => {
-    for (const cert of [admin, appbuilder]) {
+    for (const cert of Object.values(CERTS)) {
       const weights = cert.sections.map((s) => s.weight)
       for (let n = 0; n <= 100; n++) expect(apportion(n, weights).reduce((a, b) => a + b, 0)).toBe(n)
     }

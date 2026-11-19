@@ -1,5 +1,5 @@
 {
-  "hash": "7f7fada77a2f",
+  "hash": "7e8955948967",
   "questions": [
     {
       "id": "ab-v2335-001",
@@ -43,7 +43,7 @@
       "options": [
         {
           "key": "A",
-          "text": "Create a new date field called First Order Date, then create roll-up summary to update the field using Type MIN."
+          "text": "Create a new date field called First Order Date, then create a roll-up summary to update the field using Type MIN."
         },
         {
           "key": "B",
@@ -138,7 +138,7 @@
       "source": "abv2335",
       "ref": "NO.5",
       "section": "logic",
-      "stem": "The marketing director is concerned that too many car parts were given away for free last year. They want to track discounts, samples, and Giveaways by Sales Rep. The manager's sign-off on free parts also needs to be processed. Which functionality should an app builder use to meet these requirements?",
+      "stem": "The marketing director is concerned that too many car parts were given away for free last year. They want to track discounts, samples, and giveaways by Sales Rep. The manager's sign-off on free parts also needs to be processed. Which functionality should an app builder use to meet these requirements?",
       "options": [
         {
           "key": "A",
@@ -304,7 +304,7 @@
       "source": "abv2335",
       "ref": "NO.10",
       "section": "logic",
-      "stem": "The Universal Containers data manager has been complaining about the lack of data integrity on Contact records. Sales reps have not been filling out the Region field. The data manager wants the Region field filled out only for Contacts that are associated to Accounts that have been marked as 'High Priority' on the Customer Status field. What can the app builder do to fulfil this requirement?",
+      "stem": "The Universal Containers data manager has been complaining about the lack of data integrity on Contact records. Sales reps have not been filling out the Region field. The data manager wants the Region field filled out only for Contacts that are associated with Accounts that have been marked as 'High Priority' on the Customer Status field. What can the app builder do to fulfill this requirement?",
       "options": [
         {
           "key": "A",
@@ -337,7 +337,7 @@
       "source": "abv2335",
       "ref": "NO.12",
       "section": "fundamentals",
-      "stem": "Universal Containers has the Account object's Organization-Wide Default set to Private. The marketing team owns Accounts; however, they also Need to be able to see the sales team's Accounts. Both the sales and marketing teams are in completely different branches of the role hierarchy. Which feature should be used to enable marketing to see sales-owned accounts?",
+      "stem": "Universal Containers has the Account object's Organization-Wide Default set to Private. The marketing team owns Accounts; however, they also need to be able to see the sales team's Accounts. Both the sales and marketing teams are in completely different branches of the role hierarchy. Which feature should be used to enable marketing to see sales-owned accounts?",
       "options": [
         {
           "key": "A",
@@ -436,7 +436,7 @@
       "source": "abv2335",
       "ref": "NO.15",
       "section": "ui",
-      "stem": "Universal Containers wants to improve the process to create Opportunity records related to an Account. Many fields can be populated Based on the Account record. Some fields require input from the user. What should an app builder configure to meet the requirement?",
+      "stem": "Universal Containers wants to improve the process to create Opportunity records related to an Account. Many fields can be populated based on the Account record. Some fields require input from the user. What should an app builder configure to meet the requirement?",
       "options": [
         {
           "key": "A",
@@ -503,7 +503,7 @@
       "source": "abv2335",
       "ref": "NO.17",
       "section": "ui",
-      "stem": "The brokers at DreamHouse Realty (DR) are having an issue When using the Salesforce mobile app on their iPhones. There are several Key fields on the contact record they need access to at a glance. Because of the small screen, they currently have to scroll down the page to view the Information. What should the app builder at DR use to configure the Salesforce mobile app to show these key fields at the top of the screen?",
+      "stem": "The brokers at DreamHouse Realty (DR) are having an issue when using the Salesforce mobile app on their iPhones. There are several Key fields on the contact record they need access to at a glance. Because of the small screen, they currently have to scroll down the page to view the information. What should the app builder at DR use to configure the Salesforce mobile app to show these key fields at the top of the screen?",
       "options": [
         {
           "key": "A",
@@ -606,7 +606,7 @@
       "options": [
         {
           "key": "A",
-          "text": "Use Data Loader's update function to import leads and match to existing Records based on e-mail address."
+          "text": "Use Data Loader's update function to import leads and match to existing Records based on e-mail addresses."
         },
         {
           "key": "B",
@@ -802,7 +802,7 @@
       "source": "abv2335",
       "ref": "NO.26",
       "section": "datamodel",
-      "stem": "Universal Containers (UC) has several picklist fields on the Account object whose values are routinely modified to meet changing business requirements. Due to These revolving changes, UC has a high number of inactive picklist values that are Impacting system performance and user experience. What can the app builder do to alleviate this issue?",
+      "stem": "Universal Containers (UC) has several picklist fields on the Account object whose values are routinely modified to meet changing business requirements. Due to these revolving changes, UC has a high number of inactive picklist values that are affecting system performance and user experience. What can the app builder do to alleviate this issue?",
       "options": [
         {
           "key": "A",
@@ -889,16 +889,13 @@
         }
       ],
       "correct": [
-        "D"
-      ],
-      "sourceCorrect": [
         "C"
       ],
       "shuffle": true,
-      "review": "corrected",
-      "reviewNote": "La fuente V23.35 marca el record-triggered flow que se ejecuta después de borrar la Task. Un record-triggered flow disparado por un borrado solo puede ejecutarse antes de eliminar el registro (before delete), así que ese flow posterior al borrado no existe. Las tres votaciones ciegas coinciden en el Apex trigger After Delete, que sí corre después del borrado y puede enviar el email al propietario del Case. No he podido contrastarlo con documentación en línea, solo con conocimiento propio de la plataforma.",
-      "explanationEs": "Un record-triggered flow disparado por un borrado solo puede ejecutarse antes de que se elimine el registro, así que no existe un flow que corra después de borrar la Task. Para reaccionar tras el borrado y avisar al propietario del Case hace falta un Apex trigger After Delete, que es un caso donde lo declarativo llega a su límite. Las assignment rules y las escalation rules gestionan la asignación y el escalado de Leads o Cases, no reaccionan a eliminaciones.",
-      "explanationEn": "A record-triggered flow fired by a delete can only run before the record is removed, so there is no flow that runs after the Task is deleted. To react after the deletion and notify the Case owner you need an After Delete Apex trigger, which is a case where declarative tools reach their limit. Assignment rules and escalation rules handle routing and escalation of Leads or Cases and do not respond to deletions.",
+      "review": "disputed",
+      "reviewNote": "La clave del examen es el record-triggered flow (Flow es la herramienta declarativa para reaccionar a un borrado), y el PDF revisado la mantiene. Matiz técnico: en Salesforce un record-triggered flow disparado por un borrado solo se ejecuta antes de eliminar el registro (before delete); no existe un flow «after delete», y para ejecutar lógica literalmente después del borrado haría falta un Apex trigger After Delete. Se mantiene Flow porque es lo que espera el examen.",
+      "explanationEs": "Para reaccionar al borrado de un registro con herramientas declarativas se usa un record-triggered flow sobre la Task, que identifica el Case relacionado y envía el email a su propietario. Matiz: un flow disparado por borrado se ejecuta justo antes de eliminar el registro, no después; un Apex trigger After Delete sería la alternativa con código. Las assignment rules y las escalation rules gestionan asignación y escalado de Leads o Cases y no responden a eliminaciones.",
+      "explanationEn": "To react to a record deletion declaratively you use a record-triggered flow on Task, which finds the related Case and emails its owner. Caveat: a delete-triggered flow runs just before the record is removed, not after; an After Delete Apex trigger would be the code alternative. Assignment rules and escalation rules handle routing and escalation of Leads or Cases and do not respond to deletions.",
       "learnMore": []
     },
     {
@@ -1076,7 +1073,7 @@
       "source": "abv2335",
       "ref": "NO.34",
       "section": "logic",
-      "stem": "Cloud Kicks wants to summarize the number of open Cases related to an Account, as well as the number of closed Cases to indicate whether customer support utilization is high, medium, or Low. Two number fields have been created: NUM_open_Cases__c and NUM_Closed_Cases__c. Which two solutions meet these business requirements? Choose 2 answers",
+      "stem": "Cloud Kicks wants to summarize the number of open Cases related to an Account, as well as the number of closed Cases to indicate whether customer support utilization is high, medium, or low. Two number fields have been created: NUM_open_Cases__c and NUM_Closed_Cases__c. Which two solutions meet these business requirements? Choose 2 answers",
       "options": [
         {
           "key": "A",
@@ -1353,7 +1350,7 @@
       "source": "abv2335",
       "ref": "NO.42",
       "section": "ui",
-      "stem": "The appraisal team at DreamHouse Realty wants to leverage Salesforce Mobile app. What are three things an app builder should do to optimize mobile experience? Choose 3 answers",
+      "stem": "The appraisal team at DreamHouse Realty wants to leverage the Salesforce Mobile app. What are three things an app builder should do to optimize mobile experience? Choose 3 answers",
       "options": [
         {
           "key": "A",
@@ -1794,7 +1791,7 @@
       "options": [
         {
           "key": "A",
-          "text": "Create Chatter bookmarks."
+          "text": "Create Chatter Bookmarks."
         },
         {
           "key": "B",
@@ -1963,7 +1960,7 @@
       "source": "abv2335",
       "ref": "NO.61",
       "section": "datamodel",
-      "stem": "Universal Containers uses the Asset object to track products that are installed at customer locations. A new object, Asset Inventory, has Been created to capture details about the asset. Which approach should the app builder take to display Asset Inventory as a Related list on Asset?",
+      "stem": "Universal Containers uses the Asset object to track products that are installed at customer locations. A new object, Asset Inventory, has been created to capture details about the asset. Which approach should the app builder take to display Asset Inventory as a Related list on Asset?",
       "options": [
         {
           "key": "A",
@@ -1996,7 +1993,7 @@
       "source": "abv2335",
       "ref": "NO.62",
       "section": "logic",
-      "stem": "Universal Containers uses a custom object called Projects. When managers Assign projects, they set a custom field on the Project record called Estimated Hours. Once set, users should be able to decrease but not increase the value. How can an app builder meet this requirement?",
+      "stem": "Universal Containers uses a custom object called Projects. When managers assign projects, they set a custom field on the Project record called Estimated Hours. Once set, users should be able to decrease but not increase the value. How can an app builder meet this requirement?",
       "options": [
         {
           "key": "A",
@@ -2141,7 +2138,7 @@
         },
         {
           "key": "C",
-          "text": "Use an approval process to check field criteria are met."
+          "text": "Use an approval process to check if field criteria are met."
         },
         {
           "key": "D",
@@ -2162,7 +2159,7 @@
       "source": "abv2335",
       "ref": "NO.67",
       "section": "fundamentals",
-      "stem": "DreamHouse Realty (DHR) recently acquired Cloud Kicks (CK), a company That is still on Salesforce Classic. DHR is keeping the CK Salesforce org; however, it Will migrate this org to Lightning Experience. Where should the app builder find prebuilt resources to help with this project and Overall adoption?",
+      "stem": "DreamHouse Realty (DHR) recently acquired Cloud Kicks (CK), a company that is still on Salesforce Classic. DHR is keeping the CK Salesforce org; however, it will migrate this org to Lightning Experience. Where should the app builder find prebuilt resources to help with this project and overall adoption?",
       "options": [
         {
           "key": "A",
@@ -2195,7 +2192,7 @@
       "source": "abv2335",
       "ref": "NO.68",
       "section": "datamodel",
-      "stem": "Universal Containers (UC) has a custom Invoice object and a custom Invoice Line Item Object. The Invoice Line Item object has a lookup relationship to the Invoice. UC would like to Convert the lookup relationship to a master-detail relationship but is unable to do so. Which two reasons could be preventing this relationship conversion? Choose 2 answers",
+      "stem": "Universal Containers (UC) has a custom Invoice object and a custom Invoice Line Item Object. The Invoice Line Item object has a lookup relationship to the Invoice. UC would like to convert the lookup relationship to a master-detail relationship but is unable to do so. Which two reasons could be preventing this relationship conversion? Choose 2 answers",
       "options": [
         {
           "key": "A",
@@ -2468,7 +2465,7 @@
       "source": "abv2335",
       "ref": "NO.77",
       "section": "deployment",
-      "stem": "Cloud Kicks (CK) increased its Salesforce development efforts so That it now has multiple custom development efforts happening in parallel. CK's developers and admins perform the customizations and have Complained that working in one sandbox has led to many problems. They Requested a solution in which they can work in at least 20 different Sandboxes at once, that all start with the same base configuration and data. What should an app builder use to solve the problem?",
+      "stem": "Cloud Kicks (CK) increased its Salesforce development efforts so That it now has multiple custom development efforts happening in parallel. CK's developers and admins perform the customizations and have complained that working in one sandbox has led to many problems. They Requested a solution in which they can work in at least 20 different Sandboxes at once, that all start with the same base configuration and data. What should an app builder use to solve the problem?",
       "options": [
         {
           "key": "A",
@@ -2668,7 +2665,7 @@
       "source": "abv2335",
       "ref": "NO.84",
       "section": "ui",
-      "stem": "An app builder wants to limit the amount of fields users see When creating a new Opportunity. Once they fill out the required fields and Save, the full record page with additional fields relevant to the Opportunity Type becomes available. How could this be accomplished?",
+      "stem": "An app builder wants to limit the amount of fields users see when creating a new Opportunity. Once they fill out the required fields and Save, the full record page with additional fields relevant to the Opportunity Type becomes available. How could this be accomplished?",
       "options": [
         {
           "key": "A",
@@ -2767,7 +2764,7 @@
       "source": "abv2335",
       "ref": "NO.87",
       "section": "ui",
-      "stem": "Ursa Major Solar wants to provide sales console users with an incredible experience, with the most-used components easily accessible at all Times. Which solution can enable reps to see and access these components from anywhere within the app without leaving the page where the team is working?",
+      "stem": "Ursa Major Solar wants to provide sales console users with an incredible experience, with the most-used components easily accessible at all times. Which solution can enable reps to see and access these components from anywhere within the app without leaving the page where the team is working?",
       "options": [
         {
           "key": "A",
@@ -2800,7 +2797,7 @@
       "source": "abv2335",
       "ref": "NO.88",
       "section": "ui",
-      "stem": "Cloud Kicks (CK) tracks the support level of its customers on the account Record page. CK wants to show a text notification on a case record page when the Related account is a platinum-level customer. How can an app builder meet this requirement?",
+      "stem": "Cloud Kicks (CK) tracks the support level of its customers on the account Record page. CK wants a text notification on a case record page when the Related account is a platinum-level customer. How can an app builder meet this requirement?",
       "options": [
         {
           "key": "A",
@@ -2816,7 +2813,7 @@
         },
         {
           "key": "D",
-          "text": "Drag the custom Lightning Web Component into the page, and assign the layout to platinum cases."
+          "text": "Drag the custom Lightning Web Component into the page, and assign the layout to platinum Cases."
         }
       ],
       "correct": [
@@ -2867,7 +2864,7 @@
       "source": "abv2335",
       "ref": "NO.90",
       "section": "logic",
-      "stem": "The Dream House Realty (DR) service manager asks for some Improvements in case management. They want to enforce compliance so That cases are unable to be reverted to an earlier case status, and to Ensure that certain fields are required when specific case criteria are met. Which solution should an app builder implement to meet these Requirements?",
+      "stem": "The Dream House Realty (DR) service manager asks for some Improvements in case management. They want to enforce compliance so that cases are unable to be reverted to an earlier case status, and to ensure that certain fields are required when specific case criteria are met. Which solution should an app builder implement to meet these Requirements?",
       "options": [
         {
           "key": "A",
@@ -3013,7 +3010,7 @@
         },
         {
           "key": "B",
-          "text": "Filter list"
+          "text": "Filter list/List view"
         },
         {
           "key": "C",
@@ -3044,7 +3041,7 @@
       "source": "abv2335",
       "ref": "NO.95",
       "section": "logic",
-      "stem": "The finance manager at Universal Containers wants to receive a new Business notification email each time a new client is won. The sales manager wants to Receive a task letting them know to onboard the new client unless it is a top-tier Client. Which automation tool should an app builder use to best address all these requests?",
+      "stem": "The finance manager at Universal Containers wants to receive a new Business notification email each time a new client is won. The sales manager wants to receive a task letting them know to onboard the new client unless it is a top-tier Client. Which automation tool should an app builder use to best address all these requests?",
       "options": [
         {
           "key": "A",
@@ -3308,7 +3305,7 @@
       "source": "abv2335",
       "ref": "NO.103",
       "section": "ui",
-      "stem": "Sales reps at Universal Containers use Salesforce on their mobile devices. They want a way to add new contacts quickly and then follow up later to complete the Additional information necessary. Which mobile solution should an app builder recommend to create the new contact?",
+      "stem": "Sales reps at Universal Containers use Salesforce on their mobile devices. They want a way to add new contacts quickly and then follow up later to complete the additional information necessary. Which mobile solution should an app builder recommend to create the new contact?",
       "options": [
         {
           "key": "A",
@@ -3550,7 +3547,7 @@
         },
         {
           "key": "B",
-          "text": "Use a roll-up summary field on the Park record to show the total number of Trails."
+          "text": "Use a roll-up summary field on the Park record to the total number of Trails."
         },
         {
           "key": "C",
@@ -3710,7 +3707,7 @@
       "source": "abv2335",
       "ref": "NO.116",
       "section": "fundamentals",
-      "stem": "AW Computing uses a private sharing model for opportunities. Whenever An opportunity with a type of Service Agreement is created, all users in the Service Manager role should be able to view the opportunity. Which tool should AW Computing use to accomplish this?",
+      "stem": "AW Computing uses a private sharing model for opportunities. Whenever an opportunity with a type of Service Agreement is created, all users in the Service Manager role should be able to view the opportunity. Which tool should AW Computing use to accomplish this?",
       "options": [
         {
           "key": "A",
@@ -3849,7 +3846,7 @@
       "source": "abv2335",
       "ref": "NO.120",
       "section": "logic",
-      "stem": "Ursa Major Solar has a lookup relationship between a custom delay_ object and a custom Size_ object. An app builder wants to create a roll-up summary field that counts the total number of Size_ records related to each delay_ record. How would the current configuration impact the ability to achieve the desired result?",
+      "stem": "Ursa Major Solar has a lookup relationship between a custom delay__c object and a custom Size__c object. An app builder wants to create a roll-up summary field that counts the total number of Size__c records related to each delay__c record. How would the current configuration impact the ability to achieve the desired result?",
       "options": [
         {
           "key": "A",
@@ -3948,7 +3945,7 @@
       "source": "abv2335",
       "ref": "NO.123",
       "section": "logic",
-      "stem": "Universal Containers asked the app builder to ensure when an Account type changes to ' Past-Customer ' the contacts directly related to that account get an updated status of ' Re-Market '. Which automation should the app builder use to accomplish this task?",
+      "stem": "Universal Containers asked the app builder to ensure when an Account type changes to 'Past-Customer' the contacts directly related to that account get an updated status of 'Re-Market'. Which automation should the app builder use to accomplish this task?",
       "options": [
         {
           "key": "A",
@@ -4262,7 +4259,7 @@
         },
         {
           "key": "D",
-          "text": "NOT (INE) ISBLANK (Lea Owner: Cueue.Id))"
+          "text": "AND(NOT(ISNEW()), ISBLANK(Lead.Owner:Queue.Id))"
         }
       ],
       "correct": [
@@ -4321,7 +4318,7 @@
         },
         {
           "key": "B",
-          "text": "Include Today as a guide from in line size."
+          "text": "Include Today as a navigation item in the app."
         },
         {
           "key": "C",
@@ -4389,7 +4386,7 @@
         },
         {
           "key": "B",
-          "text": "The organization has Advanced Currency Management enabled"
+          "text": "The organization has Advanced Currency Management enabled."
         },
         {
           "key": "C",
@@ -4488,7 +4485,7 @@
       "source": "abv2335",
       "ref": "NO.142",
       "section": "deployment",
-      "stem": "An app builder needs to deploy a new account detail page layout from Sandbox to production. Which three components should an app builder include in the Change Set to ensure it Deploys successfully and visually as expected? Choose 3 answers",
+      "stem": "An app builder needs to deploy a new account detail page layout from Sandbox to production. Which three components should an app builder include in the Change Set to ensure it deploys successfully and visually as expected? Choose 3 answers",
       "options": [
         {
           "key": "A",
@@ -4593,7 +4590,7 @@
       "source": "abv2335",
       "ref": "NO.146",
       "section": "logic",
-      "stem": "Cloud Kicks works on an annual subscription model. When a sales rep marks An opportunity as closed won, a new opportunity should automatically be created for The renewal. The contracts team works outside of Salesforce but also needs to be Notified about closed deals in order to initiate the contract process with the customer. Which automation solution would meet these requirements?",
+      "stem": "Cloud Kicks works on an annual subscription model. When a sales rep marks an opportunity as closed won, a new opportunity should automatically be created for The renewal. The contracts team works outside of Salesforce but also needs to be Notified about closed deals in order to initiate the contract process with the customer. Which automation solution would meet these requirements?",
       "options": [
         {
           "key": "A",
@@ -4857,7 +4854,7 @@
       "source": "abv2335",
       "ref": "NO.155",
       "section": "logic",
-      "stem": "Universal Containers ' 24/7 support requires a guided wizard to step customer service reps through a standardized troubleshooting script. The process must capture user input at various stages and create a follow- up Case record upon completion. Which type of flow should the Platform App Builder build to provide this interactive user interface?",
+      "stem": "Universal Containers ' 24/7 support requires a guided wizard to step customer service reps through a standardized troubleshooting script. The process must capture user input at various stages and create a follow-up Case record upon completion. Which type of flow should the Platform App Builder build to provide this interactive user interface?",
       "options": [
         {
           "key": "A",
@@ -4894,7 +4891,7 @@
       "options": [
         {
           "key": "A",
-          "text": "Configure the notification flow to run asynchronously after the save so it executes after other record- triggered flows on Opportunity."
+          "text": "Configure the notification flow to run asynchronously after the save so it executes after other record-triggered flows on Opportunity."
         },
         {
           "key": "B",
@@ -4902,7 +4899,7 @@
         },
         {
           "key": "C",
-          "text": "Move both flows ' logic into a single before-save record-triggered flow on Opportunity to control execution order natively."
+          "text": "Move both flows' logic into a single before-save record-triggered flow on Opportunity to control execution order natively."
         },
         {
           "key": "D",
@@ -5089,7 +5086,7 @@
       "source": "abv2335",
       "ref": "NO.162",
       "section": "fundamentals",
-      "stem": "Northern Trail Outfitters wants the field sales team to only see the accounts that they Own. Separate North American and European marketing teams should only see Accounts in their respective regions. The inside sales team needs to see all accounts In Salesforce. How can this be accomplished?",
+      "stem": "Northern Trail Outfitters wants the field sales team to only see the accounts that they own. Separate North American and European marketing teams should only see Accounts in their respective regions. The inside sales team needs to see all accounts in Salesforce. How can this be accomplished?",
       "options": [
         {
           "key": "A",
@@ -5134,7 +5131,7 @@
         },
         {
           "key": "C",
-          "text": "Configure a validation to require a field for a specific record type."
+          "text": "Configure a validation rule to require a field for a specific record type."
         },
         {
           "key": "D",
@@ -5155,7 +5152,7 @@
       "source": "abv2335",
       "ref": "NO.164",
       "section": "ui",
-      "stem": "Universal Containers has a single Contact Lightning record page. A component takes up a lot of room on the page and is NOT needed by users With a Marketing profile. What should the app builder use to solve this issue?",
+      "stem": "Universal Containers has a single Contact Lightning record page. A component takes up a lot of room on the page and is NOT needed by users with a Marketing profile. What should the app builder use to solve this issue?",
       "options": [
         {
           "key": "A",
@@ -5188,7 +5185,7 @@
       "source": "abv2335",
       "ref": "NO.165",
       "section": "logic",
-      "stem": "An app builder wants to update a field on the parent record When a child record connected via lookup is deleted. Which automation should the app builder use?",
+      "stem": "An app builder wants to update a field on the parent record when a child record connected via lookup is deleted. Which automation should the app builder use?",
       "options": [
         {
           "key": "A",
@@ -5287,7 +5284,7 @@
       "source": "abv2335",
       "ref": "NO.168",
       "section": "ui",
-      "stem": "An app builder has downloaded a component from the AppExchange successfully; however, they are unable to add it to the Lightning home page. Which two reasons can be preventing the app builder from being able to add the Custom component? Choose 2 answers",
+      "stem": "An app builder has downloaded a component from the AppExchange successfully; however, they are unable to add it to the Lightning home page. Which two reasons can prevent the app builder from being able to add the Custom component? Choose 2 answers",
       "options": [
         {
           "key": "A",
@@ -5303,7 +5300,7 @@
         },
         {
           "key": "D",
-          "text": "The component is tagged for record pages instead of home pages and is not showing up in The App Builder."
+          "text": "The component is tagged for record pages instead of home pages."
         }
       ],
       "correct": [
@@ -5321,7 +5318,7 @@
       "source": "abv2335",
       "ref": "NO.169",
       "section": "logic",
-      "stem": "Universal Containers uses a custom picklist field Account Region on the Account record. They want this region to be reflected on all related contact records And stay in sync if the value of this field changes on the Account. How should an app builder meet this requirement?",
+      "stem": "Universal Containers uses a custom picklist field Account Region on the Account record. They want this region to be reflected on all related contact records and stay in sync if the value of this field changes on the Account. How should an app builder meet this requirement?",
       "options": [
         {
           "key": "A",
@@ -5354,7 +5351,7 @@
       "source": "abv2335",
       "ref": "NO.170",
       "section": "deployment",
-      "stem": "Properly installing managed packages helps prevent conflicts With customizations made by customers and partners. Which functionality should be used to set up packages?",
+      "stem": "Properly installing managed packages helps prevent conflicts with customizations made by customers and partners. Which functionality should be used to set up packages?",
       "options": [
         {
           "key": "A",
@@ -5487,7 +5484,7 @@
       "source": "abv2335",
       "ref": "NO.174",
       "section": "fundamentals",
-      "stem": "An app builder has created a new report type but users are unable to select It from the Report Type list when making a new report for records they own. What could be causing this issue?",
+      "stem": "An app builder has created a new report type but users are unable to select it from the Report Type list when making a new report for records they own. What could be causing this issue?",
       "options": [
         {
           "key": "A",
@@ -5692,7 +5689,7 @@
       "source": "abv2335",
       "ref": "NO.180",
       "section": "ui",
-      "stem": "Universal Containers created a ' New Task ' custom action on the Opportunity object. The action was added to all page layouts in the Mobile & Lightning Actions section. Which Lightning component should the app builder add to the layout to Display the action?",
+      "stem": "Universal Containers created a ' New Task ' custom action on the Opportunity object. The action was added to all page layouts in the Mobile & Lightning Actions section. Which Lightning component should the app builder add to the layout to display the action?",
       "options": [
         {
           "key": "A",
@@ -5725,7 +5722,7 @@
       "source": "abv2335",
       "ref": "NO.181",
       "section": "logic",
-      "stem": "Cloud Kicks is building a Field Generation prompt template in Prompt Builder that populates a custom field on the Contact record page with a paragraph summarizing the Contact's most recent Orders. To ground the prompt in the Contact's related Order data, the Platform App Builder needs to build a flow. Which type of flow should the app builder use?",
+      "stem": "Cloud Kicks is building a Field Generation prompt template in Prompt Builder that populates a custom field on the Contact record page with a paragraph summarizing the Contact's most recent orders. To ground the prompt in the Contact's related Order data, the Platform App Builder needs to build a flow. Which type of flow should the app builder use?",
       "options": [
         {
           "key": "A",
@@ -6040,7 +6037,7 @@
         },
         {
           "key": "D",
-          "text": "Make both the Contact and Account fields required on the Testimonial object and create lookup relationships from Testimonial to Contact and to Account."
+          "text": "Make both the Contact and Account fields required on the Testimonial object and create lookup relationships from Testimonial__c to Contact and to Account."
         }
       ],
       "correct": [
@@ -6460,7 +6457,7 @@
       "source": "abv2335",
       "ref": "NO.207",
       "section": "fundamentals",
-      "stem": "Cloud Kicks (CK) switched to Lightning Experience and started using Chatter across its global workforce to support its fast-paced sales cycle. CK Loves Chatter but struggle with gathering feedback from core team members, including understanding who is available to respond. Which two ways could CK use Chatter to solve this problem? Choose 2 answers",
+      "stem": "Cloud Kicks (CK) switched to Lightning Experience and started using Chatter across its global workforce to support its fast-paced sales cycle. CK Loves Chatter but struggles with gathering feedback from core team members, including understanding who is available to respond. Which two ways could CK use Chatter to solve this problem? Choose 2 answers",
       "options": [
         {
           "key": "A",
@@ -6499,7 +6496,7 @@
       "source": "abv2335",
       "ref": "NO.208",
       "section": "logic",
-      "stem": "To increase adoption, Universal Containers is proposing changes to its Salesforce data model to allow easier visibility for sales reps into key metrics. The Proposal has three custom objects related to the Account object, one with a master- Detail, and two that are not. Each of these objects has 15 fields they would like to Summarize on the Account object. What are two considerations for this proposal? Choose 2 answers",
+      "stem": "To increase adoption, Universal Containers is proposing changes to its Salesforce data model to allow easier visibility for sales reps into key metrics. The Proposal has three custom objects related to the Account object, one with a master-detail, and two that are not. Each of these objects has 15 fields they would like to Summarize on the Account object. What are two considerations for this proposal? Choose 2 answers",
       "options": [
         {
           "key": "A",
@@ -6533,7 +6530,7 @@
       "source": "abv2335",
       "ref": "NO.209",
       "section": "fundamentals",
-      "stem": "The app builder at Northern Trail Outfitters created a report type for opportunities with or without shipments. The operations team wants to See the account rating information on the report. What should the app builder do to fulfill this request?",
+      "stem": "The app builder at Northern Trail Outfitters created a report type for opportunities with or without shipments. The operations team wants to see the account rating information on the report. What should the app builder do to fulfill this request?",
       "options": [
         {
           "key": "A",
@@ -6900,7 +6897,7 @@
       "source": "abv2335",
       "ref": "NO.220",
       "section": "logic",
-      "stem": "At Universal Containers, the VP of Service has requested a visual indicator flag on each case, based on the case priority. High-priority cases should be flagged red, medium-priority should be flagged Yellow, and low- priority cases should be flagged green. Which two formulas will accomplish this requirement? Choose 2 answers",
+      "stem": "At Universal Containers, the VP of Service has requested a visual indicator flag on each case, based on the case priority. High-priority cases should be flagged red, medium-priority should be flagged yellow, and low-priority cases should be flagged green. Which two formulas will accomplish this requirement? Choose 2 answers",
       "options": [
         {
           "key": "A",
@@ -6912,7 +6909,7 @@
         },
         {
           "key": "C",
-          "text": "IF(ISPICKVAL(Priority, \"Low\" ), \"/img/samples/flag_green.gif\", IF(ISPICKVAL(Priority, \"Medium\" ), \"/img/samples/flag_yellow.gif\", IF(ISPICKVAL(Priority, \"High\" ), \"/img/samples/flag_red.gif\", \"/s.gif\" )))"
+          "text": "IF(ISPICKVAL(Priority, \"Low\" ), \"/img/samples/flag_green.gif\", IF(ISPICKVAL(Priority, \"Medium\"), \"/img/samples/flag_yellow.gif\", IF(ISPICKVAL(Priority, \"High\" ), \"/img/samples/flag_red.gif\", \"/s.gif\" )))"
         },
         {
           "key": "D",
@@ -6968,7 +6965,7 @@
       "source": "abv2335",
       "ref": "NO.222",
       "section": "deployment",
-      "stem": "DreamHouse Realty is rethinking its sandbox utilization strategy after acquiring Cloud Kicks. The Salesforce COE already utilizes a partial and a Full sandbox, which it refreshes on their own regular schedules. Teams are expanding and have to begin each of their small projects in a sandbox before Committing to the larger pool for collaborative testing while still keeping costs down. Which sandbox type should be considered first?",
+      "stem": "DreamHouse Realty is rethinking its sandbox utilization strategy after acquiring Cloud Kicks. The Salesforce COE already utilizes a partial and a Full sandbox, which it refreshes on their own regular schedules. Teams are expanding and have to begin each of their small projects in a sandbox before committing to the larger pool for collaborative testing while still keeping costs down. Which sandbox type should be considered first?",
       "options": [
         {
           "key": "A",
@@ -7266,7 +7263,7 @@
       "source": "abv2335",
       "ref": "NO.233",
       "section": "deployment",
-      "stem": "A recently refreshed partial sandbox at Cloud Kicks has no data in The custom object Shipping. Checking in production, there are two million Rows of data in the object. What could be the reason the data is missing?",
+      "stem": "A recently refreshed partial sandbox at Cloud Kicks has no data in the custom object Shipping. Checking in production, there are two million rows of data in the object. What could be the reason the data is missing?",
       "options": [
         {
           "key": "A",
@@ -7274,11 +7271,11 @@
         },
         {
           "key": "B",
-          "text": "The sandbox is still populating data"
+          "text": "The sandbox is still populating data."
         },
         {
           "key": "C",
-          "text": "The selected objects in the sandbox template."
+          "text": "The object was not included in the sandbox template."
         },
         {
           "key": "D",
@@ -7598,7 +7595,7 @@
       "source": "abv2335",
       "ref": "NO.243",
       "section": "logic",
-      "stem": "Universal Containers (UC) utilizes two custom picklist fields Called sales_Organization__c and Pricing_Tier__c. Which validation rule should an app builder use to ensure Pricing Tier__c is required for customers with a Sales Organization__c value of Canada?",
+      "stem": "Universal Containers (UC) utilizes two custom picklist fields Called Sales_Organization__c and Pricing_Tier__c. Which validation rule should an app builder use to ensure Pricing_Tier__c is required for customers with a Sales_Organization__c value of Canada?",
       "options": [
         {
           "key": "A",
@@ -7606,7 +7603,7 @@
         },
         {
           "key": "B",
-          "text": "IF (ISNULL(Sales_Organization__c= ' Canada ', ISBLANK (TEXT (Pricing_Tier__c)), TRUI"
+          "text": "IF (ISNULL(Sales_Organization__c= ' Canada ', ISBLANK (TEXT (Pricing_Tier__c)), TRUE"
         },
         {
           "key": "C",
@@ -7631,7 +7628,7 @@
       "source": "abv2335",
       "ref": "NO.244",
       "section": "ui",
-      "stem": "An app builder wants to create a custom Sync button on Account that will Call a Lightning Web Component that connects with an external system. This action Should only be available if the custom Status field is set to Ready to Sync. What should an app builder use to add this functionality to an Account record page?",
+      "stem": "An app builder wants to create a custom Sync button on Account that will Call a Lightning Web Component that connects with an external system. This action should only be available if the custom Status field is set to Ready to Sync. What should an app builder use to add this functionality to an Account record page?",
       "options": [
         {
           "key": "A",
@@ -8101,7 +8098,7 @@
       "options": [
         {
           "key": "A",
-          "text": "Create a master-detail relationship field on Application to open_Position"
+          "text": "Create a master-detail relationship field on Application to Open_Position__c."
         },
         {
           "key": "B",
@@ -8109,11 +8106,11 @@
         },
         {
           "key": "C",
-          "text": "Create a master-detail relationship field on Open Position to Application"
+          "text": "Create a master detail relationship on Open_Position__c to Application"
         },
         {
           "key": "D",
-          "text": "Create a master-detail relationship field on Job Candidate to Application"
+          "text": "Create a master-detail relationship field on Job Candidate to Application."
         }
       ],
       "correct": [
@@ -8297,7 +8294,7 @@
       "source": "abv2335",
       "ref": "NO.267",
       "section": "logic",
-      "stem": "A Platform App Builder needs to implement a solution where a virtual assistant can independently handle end- to-end customer service interactions-understanding intent, querying Salesforce data, and taking action- without requiring a human to intervene at each step. Which feature supports this requirement?",
+      "stem": "A Platform App Builder needs to implement a solution where a virtual assistant can independently handle end-to-end customer service interactions-understanding intent, querying Salesforce data, and taking action- without requiring a human to intervene at each step. Which feature supports this requirement?",
       "options": [
         {
           "key": "A",
@@ -8334,7 +8331,7 @@
       "options": [
         {
           "key": "A",
-          "text": "Create an unmanaged package in UMS's Developer sandbox and install it in UMS Logistics ' production org using the install URL."
+          "text": "Create an unmanaged package in UMS's Developer sandbox and install it in UMS Logistics' production org using the install URL."
         },
         {
           "key": "B",
@@ -8629,7 +8626,7 @@
       "source": "abv2335",
       "ref": "NO.278",
       "section": "logic",
-      "stem": "Universal Containers has a custom picklist called Support Level on the Account object. They would like to show the real-time value of Support Level on all case records. How should an app builder implement this requirement?",
+      "stem": "Universal Containers has a custom picklist called Support Level on the Account object. They would like to see the real-time value of Support Level on all case records. How should an app builder implement this requirement?",
       "options": [
         {
           "key": "A",
@@ -8802,15 +8799,15 @@
         },
         {
           "key": "B",
-          "text": "CASESAFEID (Id)"
+          "text": "CASESAFEID (ID)"
         },
         {
           "key": "C",
-          "text": "TEXT (Id)"
+          "text": "TEXT (ID)"
         },
         {
           "key": "D",
-          "text": "ISNUMBER (Id)"
+          "text": "ISNUMBER (ID)"
         }
       ],
       "correct": [
@@ -8835,7 +8832,7 @@
         },
         {
           "key": "B",
-          "text": "ISPICKVAL ( StageName= \"Closed Won\" ) & (Close Date-Scheduled_Ship_Date___ =) > 14"
+          "text": "ISPICKVAL ( StageName= \"Closed Won\" ) & (Close Date-Scheduled_Ship_Date___ =) >14"
         },
         {
           "key": "C",
@@ -8843,7 +8840,7 @@
         },
         {
           "key": "D",
-          "text": "OR (ISPICKVAL ( StageName, \"Closed Won\" ) && (Scheduled_Ship_Date__c-CloseDate) > 14, ISBLANK (Scheduled_Ship_Date__c))"
+          "text": "OR (ISPICKVAL ( StageName, \"Closed Won\" ) && (Scheduled_Ship_Date__c-CloseDate) >14, ISBLANK (Scheduled_Ship_Date__c))"
         }
       ],
       "correct": [
@@ -8872,7 +8869,7 @@
         },
         {
           "key": "C",
-          "text": "Sharing rules on Request Inventory object."
+          "text": "Sharing rules on Request Inventory objects."
         },
         {
           "key": "D",
@@ -8944,7 +8941,7 @@
         },
         {
           "key": "C",
-          "text": "Create a formula field that calculates if the close date is less than 60 days and then send An email alert."
+          "text": "Create a formula field that calculates if the close date is less than 60 days and then send an email alert."
         },
         {
           "key": "D",
@@ -8999,7 +8996,7 @@
       "source": "abv2335",
       "ref": "NO.291",
       "section": "logic",
-      "stem": "The marketing director is concerned that too many car parts were given Away for free last year. Which functionality should be used to ensure all free parts receive the marketing Directors ' sign-off?",
+      "stem": "The marketing director is concerned that too many car parts were given Away for free last year. Which functionality should be used to ensure all free parts receive the marketing Directors' sign-off?",
       "options": [
         {
           "key": "A",
@@ -9102,7 +9099,7 @@
       "options": [
         {
           "key": "A",
-          "text": "Create a object-specific action on Account"
+          "text": "Create an object-specific action on Account"
         },
         {
           "key": "B",
@@ -9212,7 +9209,7 @@
         },
         {
           "key": "C",
-          "text": "Update the custom field's field level security in setup to allow the agent read-only access to the field"
+          "text": "Update the custom field's field level security in setup to allow the agent read-only access to the field."
         },
         {
           "key": "D",
@@ -9233,7 +9230,7 @@
       "source": "abv2335",
       "ref": "NO.303",
       "section": "fundamentals",
-      "stem": "An app builder just added a lookup field to Account from the Existing custom object, Box. Which report type is automatically created?",
+      "stem": "An app builder just added a lookup field to Account from the existing custom object, Box. Which report type is automatically created?",
       "options": [
         {
           "key": "A",
@@ -9301,7 +9298,7 @@
       "source": "abv2335",
       "ref": "NO.305",
       "section": "datamodel",
-      "stem": "AW Computing has a custom object for service plans. A service plan needs to be associated to one and only one contact. The support manager noticed if the wrong contact is associated, the reps are unable to Change the contact. The app builder already confirmed the user has correct access to the field and there are no validations associated with the service Plans. What could be causing the issue?",
+      "stem": "AW Computing has a custom object for service plans. A service plan needs to be associated with one and only one contact. The support manager noticed if the wrong contact is associated, the reps are unable to Change the contact. The app builder already confirmed the user has correct access to the field and there are no validations associated with the service Plans. What could be causing the issue?",
       "options": [
         {
           "key": "A",
@@ -9375,7 +9372,7 @@
         },
         {
           "key": "B",
-          "text": "AND (ISPICKVAL (StageName, ' Negotiation/Review ' ), CloseDate - 7 < TODAY () )"
+          "text": "AND (ISPICKVAL (StageName, ' Negotiation/Review ' ), CloseDate - 7 < TODAY())"
         },
         {
           "key": "C",
@@ -9404,7 +9401,7 @@
       "options": [
         {
           "key": "A",
-          "text": "Utilize the AppExchange to download a third-party application that can roll up the sales dollars with The appropriate filter."
+          "text": "Utilize the AppExchange to download a third-party application that can roll up the sales dollars with the appropriate filter."
         },
         {
           "key": "B",
@@ -9412,7 +9409,7 @@
         },
         {
           "key": "C",
-          "text": "Create a master detail relationship between the parent and child object with a roll up summary field That filters on the status field"
+          "text": "Create a master detail relationship between the parent and child object with a roll up summary field that filters on the status field"
         },
         {
           "key": "D",
@@ -9565,7 +9562,7 @@
       "source": "abv2335",
       "ref": "NO.314",
       "section": "datamodel",
-      "stem": "DreamHouse Realty wants to import its property records from an external system into Salesforce. The app builder will use an external ID field to house the property ID from the external System. Which two field types are allowed as an external ID? Choose 2 answers",
+      "stem": "DreamHouse Realty wants to import its property records from an external system into Salesforce. The app builder will use an external ID field to house the property ID from the external system. Which two field types are allowed as an external ID? Choose 2 answers",
       "options": [
         {
           "key": "A",
@@ -9698,7 +9695,7 @@
       "source": "abv2335",
       "ref": "NO.319",
       "section": "datamodel",
-      "stem": "Shipments at Cloud Kicks (CK) are created and updated by the warehouse staff in a Shipping application. The information needs to be pushed into Salesforce on a regular Basis. CK's app builder creates a custom object called Delivery__c to track the Information. How can the app builder prevent creating duplicate delivery records and update the Correct existing records when migrating data from the shipping application?",
+      "stem": "Shipments at Cloud Kicks (CK) are created and updated by the warehouse staff in a Shipping application. The information needs to be pushed into Salesforce on a regular basis. CK's app builder creates a custom object called Delivery__c to track the Information. How can the app builder prevent creating duplicate delivery records and update the Correct existing records when migrating data from the shipping application?",
       "options": [
         {
           "key": "A",
@@ -9739,7 +9736,7 @@
         },
         {
           "key": "B",
-          "text": "Users will be unable to view Account records that have a related Account Interest record."
+          "text": "Users will be unable to view Account records that have a related Account Interest record.d"
         },
         {
           "key": "C",
@@ -9747,7 +9744,7 @@
         },
         {
           "key": "D",
-          "text": "Users will be able to view the Account Interest record, but unable to view the field or any Information relating to the Interest record."
+          "text": "Users will be able to view the Account Interest record, but unable to view the field or any information relating to the Interest record.d"
         }
       ],
       "correct": [
@@ -9848,7 +9845,7 @@
         },
         {
           "key": "C",
-          "text": "A Galaxy__c with Star__c report type will be automatically created."
+          "text": "A Galaxy__c with Star__c report type will be automatically created.d"
         },
         {
           "key": "D",

@@ -230,7 +230,7 @@ const es = {
     language: 'Idioma',
     languageName: (lang: Lang): string => (lang === 'es' ? 'Inglés / español' : 'Todo en inglés'),
     languageNote:
-      '«Inglés / español»: interfaz en español, preguntas en inglés y explicaciones en español. «Todo en inglés»: también las explicaciones en inglés; las que aún no tienen versión en inglés aparecen como pendientes. Se aplica a las dos certificaciones.',
+      '«Inglés / español»: interfaz en español, preguntas en inglés y explicaciones en español. «Todo en inglés»: también las explicaciones en inglés; las que aún no tienen versión en inglés aparecen como pendientes. Se aplica a todas las certificaciones.',
     exam: 'Simulacro',
     excludeDoubtful: (n: number) => `Excluir las preguntas dudosas u obsoletas (${n})`,
     officialOnly: (n: number) => `Usar solo preguntas de fuentes oficiales (${n})`,
@@ -261,6 +261,8 @@ const es = {
     exam: (rules: ExamConfig, needed: number, sections: string[]) =>
       `El examen tendrá ${rules.questionCount} preguntas (${rules.scoredCount} puntúan), ${rules.durationMinutes} minutos y se aprueba con el ${rules.passPercent} % (${needed} de ${rules.scoredCount}), repartidas en ${sections.length} secciones: ${sections.join(', ')}.`,
     independent: 'Sus preguntas y su progreso son independientes de los de las demás certificaciones.',
+    provisional:
+      'Aviso: este formato (número de preguntas, duración, nota de corte y secciones) es provisional y todavía no se ha confirmado con la guía oficial del examen.',
   },
 }
 
@@ -477,7 +479,7 @@ const en: Messages = {
     language: 'Language',
     languageName: (lang) => (lang === 'es' ? 'English / Spanish' : 'All in English'),
     languageNote:
-      '«English / Spanish»: Spanish interface, questions in English and explanations in Spanish. «All in English»: explanations in English too; questions without an English explanation show as pending. Applies to both certifications.',
+      '«English / Spanish»: Spanish interface, questions in English and explanations in Spanish. «All in English»: explanations in English too; questions without an English explanation show as pending. Applies to all certifications.',
     exam: 'Mock exam',
     excludeDoubtful: (n) => `Exclude doubtful or outdated questions (${n})`,
     officialOnly: (n) => `Use only questions from official sources (${n})`,
@@ -508,6 +510,8 @@ const en: Messages = {
     exam: (rules, needed, sections) =>
       `The exam will have ${rules.questionCount} questions (${rules.scoredCount} scored), ${rules.durationMinutes} minutes and a pass mark of ${rules.passPercent}% (${needed} of ${rules.scoredCount}), spread over ${sections.length} sections: ${sections.join(', ')}.`,
     independent: 'Its questions and its progress are independent from those of the other certifications.',
+    provisional:
+      'Note: this format (number of questions, duration, pass mark and sections) is provisional and has not been confirmed against the official exam guide yet.',
   },
 }
 
@@ -553,7 +557,14 @@ const CERT_TEXTS_EN: Record<CertConfig['id'], CertTexts> = {
     footer: 'Personal use. Unofficial questions from FreeCram. Your progress is stored only in this browser.',
     guide: "official Platform App Builder exam guide, SU '26",
     sourcesNote:
-      'These are unofficial FreeCram questions: the base is V23.35, with later versions added. The bank predates SU \'26, so questions that depend on retired features (Process Builder, Workflow Rules) are flagged as outdated and excluded from the mock exam. Questions repeated across sources have been merged, and corrected or doubtful keys are flagged on each question.',
+      'These are unofficial FreeCram questions: the base is V23.35, in a revised version with typos and keys corrected, with later versions added. The bank predates SU \'26, so questions that depend on retired features (Process Builder, Workflow Rules) are flagged as outdated and excluded from the mock exam. Questions repeated across sources have been merged, and corrected or doubtful keys are flagged on each question.',
+    officialNote: '',
+  },
+  developer: {
+    officialNames: '',
+    footer: 'Personal use. Your progress is stored only in this browser.',
+    guide: 'official Platform Developer I exam guide (to be confirmed)',
+    sourcesNote: 'There are no questions yet: the bank is being prepared.',
     officialNote: '',
   },
 }
@@ -565,7 +576,7 @@ const SOURCE_LABELS_EN: Record<SourceId, string> = {
   freecram: 'FreeCram (unofficial)',
   success4exam: 'Success4Exam (unofficial)',
   debrief: 'Debrief (unofficial)',
-  abv2335: 'FreeCram V23.35 (unofficial)',
+  abv2335: 'FreeCram V23.35 revised (unofficial)',
   abs4e: 'Success4Exam demo (unofficial)',
   abfc143: 'FreeCram v2026-06-30 (unofficial)',
   abfc108: 'FreeCram v2026-09-05 (unofficial)',

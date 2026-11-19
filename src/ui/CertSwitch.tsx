@@ -3,7 +3,7 @@ import { CERTS } from '../domain/certs.ts'
 import type { CertId } from '../domain/types.ts'
 import { useI18n } from './lang.ts'
 
-const ORDER: CertId[] = ['admin', 'appbuilder']
+const ORDER: CertId[] = ['admin', 'appbuilder', 'developer']
 
 export function CertSwitch({ value, onChange }: { value: CertId; onChange: (cert: CertId) => void }) {
   const { t } = useI18n()

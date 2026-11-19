@@ -19,6 +19,7 @@ export function Preparing() {
           sections.map((s) => `${sectionText(s, lang)} (${t.pct(s.weight)})`),
         )}
       </p>
+      {cert.provisional && <p className="notice-inline">{t.preparing.provisional}</p>}
       <p className="muted">{t.preparing.independent}</p>
     </section>
   )
