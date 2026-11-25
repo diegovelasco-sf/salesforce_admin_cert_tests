@@ -66,6 +66,22 @@ const es = {
     string
   >,
 
+  tracker: {
+    label: 'Progreso de la tanda',
+    progress: (answered: number, total: number) => `${answered} de ${total} respondidas`,
+    right: (n: number) => `✓ ${n}`,
+    wrong: (n: number) => `✗ ${n}`,
+    hide: 'Ocultar preguntas',
+    show: 'Ver preguntas',
+    gridLabel: 'Preguntas de la tanda',
+    item: (n: number, state: 'right' | 'wrong' | 'pending'): string =>
+      `Pregunta ${n}: ${{ right: 'acertada', wrong: 'fallada', pending: 'sin responder' }[state]}`,
+    legendRight: 'acertada',
+    legendWrong: 'fallada',
+    legendPending: 'sin responder',
+    legendCurrent: 'actual',
+  },
+
   sources: {
     officialOnly: 'Solo oficiales',
     total: (n: number) => `${plural(n, 'pregunta', 'preguntas')} con estas fuentes`,
@@ -131,7 +147,6 @@ const es = {
     hits: 'Aciertos',
     unanswered: 'Sin responder',
     repeatFailed: (n: number) => `Repetir las ${plural(n, 'fallada', 'falladas')}`,
-    progress: (checked: number, total: number, correct: number) => `${checked} de ${total} respondidas · ${plural(correct, 'acierto', 'aciertos')}`,
     finish: 'Terminar',
     srRight: 'Correcto',
     srWrong: 'Incorrecto',
@@ -420,6 +435,21 @@ const en: Messages = {
 
   runTitle: { practice: 'Practice', review: 'Review', failed: 'Failed questions', 'exam-failed': 'Failed in the mock exam', study: 'Study' },
 
+  tracker: {
+    label: 'Run progress',
+    progress: (answered, total) => `${answered} of ${total} answered`,
+    right: (n) => `✓ ${n}`,
+    wrong: (n) => `✗ ${n}`,
+    hide: 'Hide questions',
+    show: 'Show questions',
+    gridLabel: 'Questions in this run',
+    item: (n, state) => `Question ${n}: ${{ right: 'correct', wrong: 'wrong', pending: 'not answered' }[state]}`,
+    legendRight: 'correct',
+    legendWrong: 'wrong',
+    legendPending: 'not answered',
+    legendCurrent: 'current',
+  },
+
   sources: {
     officialOnly: 'Official only',
     total: (n) => `${plural(n, 'question', 'questions')} with these sources`,
@@ -485,7 +515,6 @@ const en: Messages = {
     hits: 'Correct',
     unanswered: 'Unanswered',
     repeatFailed: (n) => `Retry the ${plural(n, 'failed question', 'failed questions')}`,
-    progress: (checked, total, correct) => `${checked} of ${total} answered · ${plural(correct, 'correct', 'correct')}`,
     finish: 'Finish',
     srRight: 'Correct',
     srWrong: 'Incorrect',

@@ -37,6 +37,9 @@ Regenerar el banco desde los PDF solo funciona en macOS, porque la extracción u
 - **Práctica.** Eliges las secciones, las fuentes, si quieres solo preguntas que no has visto y cuántas (10,
   20, 40, 60, todas o un número exacto). Compruebas cada respuesta y ves al momento la explicación, la fuente
   y, si la hay, la nota de revisión.
+- **Seguimiento de la tanda.** En práctica, repaso y estudio, una barra de progreso, el número de aciertos y
+  fallos, y una cuadrícula con cada pregunta de la tanda (acertada, fallada, sin responder y la actual) para
+  saltar a cualquiera. La cuadrícula se oculta con «Ocultar preguntas» y la app recuerda la preferencia.
 - **Simulacro.** 65 preguntas repartidas por sección según los pesos de la guía oficial, con 105 minutos.
   Puedes marcar preguntas para revisarlas y moverte por ellas con la paleta. La corrección llega al
   entregar o al acabarse el tiempo. Si recargas o cierras la página, el simulacro se reanuda donde lo
@@ -407,6 +410,7 @@ mismo simulacro se puede reconstruir.
 | `History.tsx` | Progreso: resumen, secciones flojas, acierto acumulado por sección e historial de simulacros |
 | `ScoreTrend.tsx` | Evolución de la nota de los simulacros, con la línea de aprobado y vista de tabla |
 | `Study.tsx` | Modo estudio: creación de los paquetes y lista con su dominio |
+| `RunTracker.tsx` | Barra de progreso y cuadrícula de aciertos y fallos de la tanda, ocultable |
 | `Browse.tsx` | Banco: buscador y consulta de las preguntas |
 | `SourcePicker.tsx`, `modes.ts` | Elección de fuentes de cada modo y arranque de los paquetes |
 | `Settings.tsx` | Ajustes, tema y gestión del progreso |

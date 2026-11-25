@@ -12,6 +12,7 @@ import { percent } from './format.ts'
 import { useI18n } from './lang.ts'
 import { sectionText } from './messages.ts'
 import { QuestionCard } from './QuestionCard.tsx'
+import { RunTracker, type TrackState } from './RunTracker.tsx'
 import { SourcePicker } from './SourcePicker.tsx'
 import { makeRun, type Action, type PracticeRun } from './state.ts'
 import { packQuestions } from '../domain/study.ts'
@@ -263,13 +264,12 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
 
   return (
     <div className="runner">
-      <div className="run-header">
-        <h1>{title}</h1>
-        <span className="muted">{t.practice.progress(run.checked.length, total, correctIds.length)}</span>
-        <button type="button" className="link-button" onClick={() => setSummary(true)}>
-          {t.practice.finish}
-        </button>
-      </div>
+      <RunTracker
+        title={title}
+        states={run.questionIds.map((qid): TrackState => (!run.checked.includes(qid) ? 'pending' : correctIds.includes(qid) ? 'right' : 'wrong'))}
+        current={run.index}
+        onGo={go}
+      />
 
       <QuestionCard
         question={current}
@@ -305,7 +305,12 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
           </button>
         )}
       </div>
-      <p className="hint">{t.practice.hint}</p>
+      <div className="run-footer">
+        <p className="hint">{t.practice.hint}</p>
+        <button type="button" className="link-button" onClick={() => setSummary(true)}>
+          {t.practice.finish}
+        </button>
+      </div>
     </div>
   )
 }
