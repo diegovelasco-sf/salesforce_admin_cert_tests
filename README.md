@@ -39,7 +39,9 @@ Regenerar el banco desde los PDF solo funciona en macOS, porque la extracción u
   y, si la hay, la nota de revisión.
 - **Seguimiento de la tanda.** En práctica, repaso y estudio, una barra de progreso, el número de aciertos y
   fallos, y una cuadrícula con cada pregunta de la tanda (acertada, fallada, sin responder y la actual) para
-  saltar a cualquiera. La cuadrícula se oculta con «Ocultar preguntas» y la app recuerda la preferencia.
+  saltar a cualquiera. Debajo, el porcentaje de acierto sobre las respondidas, que se actualiza con cada
+  respuesta y se compara con la nota de corte de la certificación. La cuadrícula y el porcentaje se ocultan
+  por separado («Ocultar preguntas», «Ocultar acierto») y la app recuerda la preferencia.
 - **Simulacro.** 65 preguntas repartidas por sección según los pesos de la guía oficial, con 105 minutos.
   Puedes marcar preguntas para revisarlas y moverte por ellas con la paleta. La corrección llega al
   entregar o al acabarse el tiempo. Si recargas o cierras la página, el simulacro se reanuda donde lo

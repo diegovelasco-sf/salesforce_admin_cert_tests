@@ -1651,6 +1651,64 @@ button.track-item.current.track-wrong {
   border-color: var(--btn-bg);
 }
 
+/* Porcentaje de acierto: una sola serie sobre su pista, con la línea del aprobado como en las barras por sección. */
+.track-toggles {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 0.75rem;
+}
+
+.track-hit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  align-items: center;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.track-hit-label {
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+
+.track-hit-value {
+  min-width: 3.5rem;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.track-hit-meter {
+  position: relative;
+  flex: 1 1 10rem;
+  max-width: 22rem;
+  height: 8px;
+  background: var(--track);
+  border-radius: 4px;
+}
+
+.track-hit-fill {
+  display: block;
+  height: 100%;
+  background: var(--series);
+  border-radius: 4px;
+  transition: width 0.2s ease;
+}
+
+.track-hit-pass {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  background: var(--ink);
+  transform: translateX(-1px);
+}
+
+.track-hit-detail {
+  font-size: 0.85rem;
+}
+
 .run-footer {
   display: flex;
   flex-wrap: wrap;
