@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState, type RefObject } from 'react'
 import { toggleSelection } from '../domain/selection.ts'
 import { displayLetter } from '../domain/shuffle.ts'
 import type { Question } from '../domain/types.ts'
@@ -19,11 +20,31 @@ interface Props {
   onToggleFlag?: () => void
   /** Qué hace la marca: se revisa en el simulacro (como en el examen real) y se repasa en la práctica. */
   flagContext?: 'exam' | 'practice'
+  /** Nota propia. Sin onNote no se puede editar (en el simulacro no se muestra, para no dar pistas). */
+  note?: string
+  onNote?: (text: string) => void
+  /** Editor de la nota abierto: lo controla el padre para poder abrirlo con la tecla N. */
+  editingNote?: boolean
+  onEditingNote?: (open: boolean) => void
 }
 
 type OptionState = 'idle' | 'selected' | 'right' | 'missed' | 'wrong' | 'neutral'
 
-export function QuestionCard({ question, order, selected, onSelect, revealed, position, flagged, onToggleFlag, flagContext = 'practice' }: Props) {
+export function QuestionCard({
+  question,
+  order,
+  selected,
+  onSelect,
+  revealed,
+  position,
+  flagged,
+  onToggleFlag,
+  flagContext = 'practice',
+  note,
+  onNote,
+  editingNote,
+  onEditingNote,
+}: Props) {
   const { cert } = useCert()
   const { t, lang } = useI18n()
   const verdicts: Partial<Record<OptionState, string>> = {
@@ -109,7 +130,88 @@ export function QuestionCard({ question, order, selected, onSelect, revealed, po
       </fieldset>
 
       {revealed && <Explanation question={question} />}
+      {onNote && <NoteBox key={question.id} note={note} onSave={onNote} open={!!editingNote} onOpen={(o) => onEditingNote?.(o)} />}
     </article>
+  )
+}
+
+/** Nota propia de la pregunta: se ve siempre que existe y se edita en el sitio. */
+function NoteBox({ note, onSave, open, onOpen }: { note?: string; onSave: (text: string) => void; open: boolean; onOpen: (open: boolean) => void }) {
+  const { t } = useI18n()
+  // El borrador nace con la nota cada vez que se abre el editor (el editor se monta de nuevo).
+  const area = useRef<HTMLTextAreaElement>(null)
+  useEffect(() => {
+    if (open) area.current?.focus()
+  }, [open])
+
+  if (!open) {
+    return (
+      <section className="note" aria-label={t.card.note}>
+        {note && <p className="note-text">{note}</p>}
+        <button type="button" className="link-button" onClick={() => onOpen(true)}>
+          {note ? t.card.noteEdit : t.card.noteAdd}
+        </button>
+      </section>
+    )
+  }
+  return <NoteEditor note={note} onSave={onSave} onClose={() => onOpen(false)} area={area} />
+}
+
+function NoteEditor({
+  note,
+  onSave,
+  onClose,
+  area,
+}: {
+  note?: string
+  onSave: (text: string) => void
+  onClose: () => void
+  area: RefObject<HTMLTextAreaElement | null>
+}) {
+  const { t } = useI18n()
+  const [draft, setDraft] = useState(note ?? '')
+  const save = () => {
+    onSave(draft)
+    onClose()
+  }
+  return (
+    <section className="note note-editing" aria-label={t.card.note}>
+      <label className="note-label" htmlFor="note-area">
+        {t.card.note}
+      </label>
+      <textarea
+        id="note-area"
+        ref={area}
+        rows={3}
+        value={draft}
+        placeholder={t.card.notePlaceholder}
+        onChange={(e) => setDraft(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onClose()
+          if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) save()
+        }}
+      />
+      <div className="actions start">
+        <button type="button" className="primary" onClick={save}>
+          {t.card.noteSave}
+        </button>
+        <button type="button" onClick={onClose}>
+          {t.cancel}
+        </button>
+        {note && (
+          <button
+            type="button"
+            className="link-button"
+            onClick={() => {
+              onSave('')
+              onClose()
+            }}
+          >
+            {t.card.noteDelete}
+          </button>
+        )}
+      </div>
+    </section>
   )
 }
 
@@ -127,6 +229,16 @@ function Explanation({ question }: { question: Question }) {
           <strong>⚠ {t.card.review[question.review]}.</strong> {question.reviewNote}
           {sourceAnswer && <span className="source-answer">{t.card.sourceGave(sourceAnswer)}</span>}
         </p>
+      )}
+      {question.conflicts?.map((c) => (
+        <p key={`${c.source}-${c.ref}`} className="review-note review-conflict">
+          <strong>≠ {t.card.conflictTitle(`${sourceLabel(c.source, lang)} ${c.ref}`)}</strong>{' '}
+          {t.card.conflictGave(c.answer.join(' / '), question.correct.map((k) => question.options.find((o) => o.key === k)?.text ?? k).join(' / '))}{' '}
+          {lang === 'en' ? (c.noteEn ?? c.note) : c.note}
+        </p>
+      ))}
+      {question.alsoIn && question.alsoIn.length > 0 && (
+        <p className="muted also-in">{t.card.alsoIn(question.alsoIn.map((s) => `${sourceLabel(s.source, lang)} ${s.ref}`).join(' · '))}</p>
       )}
       {question.authoredOptions && (
         <p className="authored-note muted">{t.card.authored}</p>

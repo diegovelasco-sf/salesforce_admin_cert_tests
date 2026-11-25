@@ -1,41 +1,661 @@
 {
-  "ab-s4e-005": {
-    "duplicateOf": "ab-v2335-004"
+  "ab-s4e-001": {
+    "duplicateOf": "ab-v2335-194"
   },
-  "ab-s4e-009": {
-    "duplicateOf": "ab-v2335-031"
-  },
-  "ab-s4e-007": {
-    "duplicateOf": "ab-v2335-062"
+  "ab-s4e-002": {
+    "duplicateOf": "ab-v2335-317"
   },
   "ab-s4e-003": {
     "duplicateOf": "ab-v2335-132"
   },
-  "ab-s4e-010": {
-    "duplicateOf": "ab-v2335-142"
-  },
   "ab-s4e-004": {
     "duplicateOf": "ab-v2335-162"
   },
-  "ab-s4e-001": {
-    "duplicateOf": "ab-v2335-194"
-  },
-  "ab-s4e-012": {
-    "duplicateOf": "ab-v2335-208"
-  },
-  "ab-s4e-008": {
-    "duplicateOf": "ab-v2335-211"
+  "ab-s4e-005": {
+    "duplicateOf": "ab-v2335-004"
   },
   "ab-s4e-006": {
     "duplicateOf": "ab-v2335-244"
   },
+  "ab-s4e-007": {
+    "duplicateOf": "ab-v2335-062"
+  },
+  "ab-s4e-008": {
+    "duplicateOf": "ab-v2335-211"
+  },
+  "ab-s4e-009": {
+    "duplicateOf": "ab-v2335-031"
+  },
+  "ab-s4e-010": {
+    "duplicateOf": "ab-v2335-142"
+  },
   "ab-s4e-011": {
     "duplicateOf": "ab-v2335-288"
+  },
+  "ab-s4e-012": {
+    "duplicateOf": "ab-v2335-208"
   },
   "ab-s4e-013": {
     "duplicateOf": "ab-v2335-307"
   },
-  "ab-s4e-002": {
-    "duplicateOf": "ab-v2335-317"
+  "ab-s4e-014": {
+    "duplicateOf": "ab-v2335-038",
+    "conflictNote": "Un formula field no puede devolver Rich Text: sus tipos de retorno son Checkbox, Currency, Date, Date/Time, Number, Percent, Text y Time, así que no puede poner negritas con HTML. Sí puede recorrer Opportunity Product → Opportunity → Account y crear un enlace con HYPERLINK(), que es la respuesta del banco.",
+    "conflictNoteEn": "A formula field cannot return Rich Text: its return types are Checkbox, Currency, Date, Date/Time, Number, Percent, Text and Time, so it cannot bold text with HTML. It can traverse Opportunity Product → Opportunity → Account and build a link with HYPERLINK(), which is the bank's answer."
+  },
+  "ab-s4e-015": {
+    "duplicateOf": "ab-v2335-067"
+  },
+  "ab-s4e-016": {
+    "duplicateOf": "ab-v2335-169"
+  },
+  "ab-s4e-017": {
+    "duplicateOf": "ab-v2335-228"
+  },
+  "ab-s4e-018": {
+    "duplicateOf": "ab-v2335-071"
+  },
+  "ab-s4e-019": {
+    "duplicateOf": "ab-v2335-279"
+  },
+  "ab-s4e-020": {
+    "duplicateOf": "ab-v2335-261",
+    "textFixes": [
+      {
+        "field": "option:D",
+        "from": "Accordian",
+        "to": "Accordion"
+      }
+    ]
+  },
+  "ab-s4e-021": {
+    "duplicateOf": "ab-v2335-215"
+  },
+  "ab-s4e-022": {
+    "duplicateOf": "ab-v2335-319"
+  },
+  "ab-s4e-023": {
+    "duplicateOf": "ab-v2335-001"
+  },
+  "ab-s4e-024": {
+    "duplicateOf": "ab-v2335-246"
+  },
+  "ab-s4e-025": {
+    "duplicateOf": "ab-v2335-236"
+  },
+  "ab-s4e-026": {
+    "duplicateOf": "ab-v2335-191"
+  },
+  "ab-s4e-027": {
+    "duplicateOf": "ab-v2335-081",
+    "conflictNote": "En Lightning, el botón Sharing Hierarchy muestra qué usuarios tienen acceso al registro y el motivo de cada uno, que es justo lo que pide la pregunta; el botón Sharing sirve sobre todo para compartir el registro a mano. Como Success4Exam y los resolvedores a ciegas eligen Sharing, la pregunta sigue marcada como dudosa.",
+    "conflictNoteEn": "In Lightning, the Sharing Hierarchy button shows which users have access to the record and why, which is exactly what the question asks; the Sharing button is mainly for sharing the record manually. Because Success4Exam and the blind reviewers choose Sharing, the question stays flagged as doubtful."
+  },
+  "ab-s4e-028": {
+    "duplicateOf": "ab-v2335-310"
+  },
+  "ab-s4e-029": {
+    "duplicateOf": "ab-v2335-103"
+  },
+  "ab-s4e-030": {
+    "duplicateOf": "ab-v2335-260"
+  },
+  "ab-s4e-031": {
+    "duplicateOf": "ab-v2335-045"
+  },
+  "ab-s4e-032": {
+    "duplicateOf": "ab-v2335-213"
+  },
+  "ab-s4e-033": {
+    "duplicateOf": "ab-v2335-095"
+  },
+  "ab-s4e-034": {
+    "duplicateOf": "ab-v2335-183"
+  },
+  "ab-s4e-035": {
+    "duplicateOf": "ab-v2335-154"
+  },
+  "ab-s4e-036": {
+    "duplicateOf": "ab-v2335-174"
+  },
+  "ab-s4e-037": {
+    "duplicateOf": "ab-v2335-042"
+  },
+  "ab-s4e-038": {
+    "duplicateOf": "ab-v2335-308",
+    "conflictNote": "Las dos fórmulas usan ISPICKVAL, como exige un picklist, pero «a menos de una semana» es estrictamente menos de 7 días. CloseDate - 7 < TODAY() equivale a CloseDate - TODAY() < 7; la de Success4Exam, con <= 7, también da verdadero cuando falta justo una semana.",
+    "conflictNoteEn": "Both formulas use ISPICKVAL, as a picklist requires, but \"less than 1 week away\" means strictly fewer than 7 days. CloseDate - 7 < TODAY() is the same as CloseDate - TODAY() < 7; Success4Exam's version, with <= 7, is also true when exactly one week is left."
+  },
+  "ab-s4e-039": {
+    "duplicateOf": "ab-v2335-168"
+  },
+  "ab-s4e-040": {
+    "duplicateOf": "ab-v2335-309"
+  },
+  "ab-s4e-041": {
+    "duplicateOf": "ab-v2335-289"
+  },
+  "ab-s4e-042": {
+    "duplicateOf": "ab-v2335-311"
+  },
+  "ab-s4e-043": {
+    "duplicateOf": "ab-v2335-238"
+  },
+  "ab-s4e-044": {
+    "duplicateOf": "ab-v2335-304"
+  },
+  "ab-s4e-045": {
+    "duplicateOf": "ab-v2335-043"
+  },
+  "ab-s4e-046": {
+    "duplicateOf": "ab-v2335-145"
+  },
+  "ab-s4e-047": {
+    "duplicateOf": "ab-v2335-206"
+  },
+  "ab-s4e-048": {
+    "duplicateOf": "ab-v2335-259"
+  },
+  "ab-s4e-049": {
+    "duplicateOf": "ab-v2335-070"
+  },
+  "ab-s4e-050": {
+    "duplicateOf": "ab-v2335-088"
+  },
+  "ab-s4e-051": {
+    "duplicateOf": "ab-v2335-116"
+  },
+  "ab-s4e-052": {
+    "duplicateOf": "ab-v2335-201"
+  },
+  "ab-s4e-053": {
+    "duplicateOf": "ab-v2335-104"
+  },
+  "ab-s4e-054": {
+    "duplicateOf": "ab-v2335-250"
+  },
+  "ab-s4e-055": {
+    "duplicateOf": "ab-v2335-026",
+    "conflictNote": "Picklist Settings tiene la opción «Establish upper bound on existing picklists», que limita los valores inactivos que puede acumular cada picklist y obliga a borrar los que sobran: eso es lo que alivia el problema. Un global value set sirve para compartir los mismos valores entre varios campos, pero no elimina los inactivos que ya existen.",
+    "conflictNoteEn": "Picklist Settings has the \"Establish upper bound on existing picklists\" option, which caps the inactive values each picklist can keep and forces the extra ones to be deleted: that is what relieves the problem. A global value set shares the same values across fields, but it does not remove the inactive values that already exist."
+  },
+  "ab-s4e-056": {
+    "duplicateOf": "ab-v2335-069"
+  },
+  "ab-s4e-057": {
+    "duplicateOf": "ab-v2335-312"
+  },
+  "ab-s4e-058": {
+    "duplicateOf": "ab-v2335-146"
+  },
+  "ab-s4e-059": {
+    "duplicateOf": "ab-v2335-075"
+  },
+  "ab-s4e-060": {
+    "duplicateOf": "ab-v2335-135"
+  },
+  "ab-s4e-061": {
+    "duplicateOf": "ab-v2335-171"
+  },
+  "ab-s4e-062": {
+    "duplicateOf": "ab-v2335-291"
+  },
+  "ab-s4e-063": {
+    "duplicateOf": "ab-v2335-280",
+    "conflictNote": "Un change set solo se valida en la org que lo recibe: se valida el inbound change set en producción y, si pasa, se despliega después con un quick deploy, sin necesitar al desarrollador. Un outbound change set no tiene opción de validar; solo se sube.",
+    "conflictNoteEn": "A change set can only be validated in the org that receives it: you validate the inbound change set in production and, if it passes, deploy it later with a quick deploy, without the developer. An outbound change set has no validate option; it is only uploaded."
+  },
+  "ab-s4e-064": {
+    "duplicateOf": "ab-v2335-133"
+  },
+  "ab-s4e-065": {
+    "duplicateOf": "ab-v2335-320"
+  },
+  "ab-s4e-066": {
+    "duplicateOf": "ab-v2335-015"
+  },
+  "ab-s4e-067": {
+    "duplicateOf": "ab-v2335-315"
+  },
+  "ab-s4e-068": {
+    "duplicateOf": "ab-v2335-094",
+    "conflictNote": "Recent Items, Filter List y Rich Text son componentes estándar de Lightning App Builder. «Report details» no existe como componente: el estándar para informes es Report Chart. En Success4Exam la opción de Filter List aparece corrupta («custom fields for the Galactic Vendors's location: Filter list»), y por eso marca Report details en su lugar.",
+    "conflictNoteEn": "Recent Items, Filter List and Rich Text are standard Lightning App Builder components. \"Report details\" is not a component: the standard one for reports is Report Chart. In Success4Exam the Filter List option is garbled (\"custom fields for the Galactic Vendors's location: Filter list\"), which is why it marks Report details instead."
+  },
+  "ab-s4e-069": {
+    "duplicateOf": "ab-v2335-048",
+    "conflictNote": "Schema Builder sí crea formula fields y lookups, y muestra las relaciones existentes. Su limitación es que un campo creado allí no se añade a ningún page layout: hay que añadirlo después en el editor de layouts.",
+    "conflictNoteEn": "Schema Builder can create formula fields and lookups, and it shows existing relationships. Its limitation is that a field created there is not added to any page layout: you have to add it afterwards in the layout editor."
+  },
+  "ab-s4e-070": {
+    "duplicateOf": "ab-v2335-226"
+  },
+  "ab-s4e-071": {
+    "duplicateOf": "ab-v2335-023"
+  },
+  "ab-s4e-072": {
+    "duplicateOf": "ab-v2335-278"
+  },
+  "ab-s4e-073": {
+    "duplicateOf": "ab-v2335-223"
+  },
+  "ab-s4e-074": {
+    "duplicateOf": "ab-v2335-285"
+  },
+  "ab-s4e-075": {
+    "duplicateOf": "ab-v2335-270"
+  },
+  "ab-s4e-076": {
+    "duplicateOf": "ab-v2335-123"
+  },
+  "ab-s4e-077": {
+    "duplicateOf": "ab-v2335-161"
+  },
+  "ab-s4e-078": {
+    "duplicateOf": "ab-v2335-016",
+    "conflictNote": "En la app móvil, el manager recibe la solicitud de aprobación como notificación in-app y la tiene en el elemento Approval Requests del menú de navegación, desde donde la aprueba o la rechaza. La página de detalle del registro no es un canal por el que llegue la solicitud.",
+    "conflictNoteEn": "In the mobile app, the manager gets the approval request as an in-app notification and finds it in the Approval Requests item of the navigation menu, where it can be approved or rejected. The record detail page is not a channel that delivers the request."
+  },
+  "ab-s4e-079": {
+    "duplicateOf": "ab-v2335-020"
+  },
+  "ab-s4e-080": {
+    "duplicateOf": "ab-v2335-143"
+  },
+  "ab-s4e-081": {
+    "duplicateOf": "ab-v2335-029"
+  },
+  "ab-s4e-082": {
+    "duplicateOf": "ab-v2335-068"
+  },
+  "ab-s4e-083": {
+    "duplicateOf": "ab-v2335-092"
+  },
+  "ab-s4e-084": {
+    "duplicateOf": "ab-v2335-172"
+  },
+  "ab-s4e-085": {
+    "duplicateOf": "ab-v2335-034"
+  },
+  "ab-s4e-086": {
+    "duplicateOf": "ab-v2335-173"
+  },
+  "ab-s4e-087": {
+    "duplicateOf": "ab-v2335-032"
+  },
+  "ab-s4e-088": {
+    "duplicateOf": "ab-v2335-061"
+  },
+  "ab-s4e-089": {
+    "duplicateOf": "ab-v2335-114"
+  },
+  "ab-s4e-090": {
+    "duplicateOf": "ab-v2335-072",
+    "conflictNote": "Un roll-up summary resume campos Number, Currency y Percent (SUM, MIN, MAX) y Date o Date/Time (MIN, MAX). Un Checkbox no se puede agregar: solo sirve como criterio de filtro de un COUNT. Time no es un tipo admitido.",
+    "conflictNoteEn": "A roll-up summary aggregates Number, Currency and Percent fields (SUM, MIN, MAX) and Date or Date/Time fields (MIN, MAX). A Checkbox cannot be aggregated: it can only be a filter criterion for a COUNT. Time is not a supported type."
+  },
+  "ab-s4e-091": {
+    "duplicateOf": "ab-v2335-165"
+  },
+  "ab-s4e-092": {
+    "duplicateOf": "ab-v2335-099"
+  },
+  "ab-s4e-093": {
+    "duplicateOf": "ab-v2335-010"
+  },
+  "ab-s4e-094": {
+    "duplicateOf": "ab-v2335-271"
+  },
+  "ab-s4e-095": {
+    "duplicateOf": "ab-v2335-217",
+    "conflictNote": "El acceso a un registro de un objeto de unión depende del acceso a sus dos registros master: sin poder leer el Case relacionado no se ve el Case_Issue__c, aunque se tenga acceso a Issue__c. Por eso hace falta Read en Case y en Issue__c; la respuesta de Success4Exam deja fuera Case.",
+    "conflictNoteEn": "Access to a junction object record depends on access to both master records: without read access to the related Case you cannot see the Case_Issue__c record, even with access to Issue__c. That is why Read on Case and Issue__c is needed; Success4Exam's answer leaves out Case."
+  },
+  "ab-s4e-096": {
+    "duplicateOf": "ab-v2335-294"
+  },
+  "ab-s4e-097": {
+    "duplicateOf": "ab-v2335-196"
+  },
+  "ab-s4e-098": {
+    "duplicateOf": "ab-v2335-180",
+    "conflictNote": "Ver la nota de revisión: la acción sale en el Highlights panel salvo que Lightning la trate como acción de actividad, que es lo que supone Success4Exam.",
+    "conflictNoteEn": "See the review note: the action shows in the Highlights panel unless Lightning treats it as an activity action, which is what Success4Exam assumes."
+  },
+  "ab-s4e-099": {
+    "duplicateOf": "ab-v2335-170"
+  },
+  "ab-s4e-100": {
+    "duplicateOf": "ab-v2335-119"
+  },
+  "ab-s4e-101": {
+    "duplicateOf": "ab-v2335-209"
+  },
+  "ab-s4e-102": {
+    "duplicateOf": "ab-v2335-009"
+  },
+  "ab-s4e-103": {
+    "duplicateOf": "ab-fc143-052"
+  },
+  "ab-s4e-104": {
+    "duplicateOf": "ab-v2335-105"
+  },
+  "ab-s4e-105": {
+    "duplicateOf": "ab-v2335-077",
+    "conflictNote": "Sandbox cloning crea sandboxes a partir de otro sandbox, así que los 20 parten de la misma configuración y de los mismos datos. Un Partial Copy se crea desde producción con una plantilla y una muestra de datos, así que no garantiza una base idéntica para todos.",
+    "conflictNoteEn": "Sandbox cloning creates sandboxes from another sandbox, so all 20 start from the same configuration and data. A Partial Copy is created from production with a template and a data sample, so it does not guarantee an identical base for everyone."
+  },
+  "ab-s4e-106": {
+    "duplicateOf": "ab-v2335-084"
+  },
+  "ab-s4e-107": {
+    "duplicateOf": "ab-v2335-220",
+    "conflictNote": "Para que se vea una bandera hay que devolver una imagen: IMAGE() recibe la URL de la imagen y el texto alternativo. Las dos fórmulas con IMAGE() (con IF anidados y con CASE) cumplen el requisito; un CASE sin IMAGE() solo devuelve la ruta como texto. Además, la versión con IMAGE() de Success4Exam tiene comillas sin cerrar.",
+    "conflictNoteEn": "To show a flag the formula must return an image: IMAGE() takes the image URL and the alternative text. Both formulas with IMAGE() (with nested IFs and with CASE) meet the requirement; a CASE without IMAGE() only returns the path as text. Success4Exam's IMAGE() version also has unclosed quotes."
+  },
+  "ab-s4e-108": {
+    "duplicateOf": "ab-v2335-014"
+  },
+  "ab-s4e-109": {
+    "duplicateOf": "ab-v2335-017"
+  },
+  "ab-s4e-110": {
+    "duplicateOf": "ab-v2335-056"
+  },
+  "ab-s4e-111": {
+    "duplicateOf": "ab-v2335-113"
+  },
+  "ab-s4e-112": {
+    "duplicateOf": "ab-v2335-157"
+  },
+  "ab-s4e-113": {
+    "duplicateOf": "ab-v2335-018"
+  },
+  "ab-s4e-114": {
+    "duplicateOf": "ab-v2335-182"
+  },
+  "ab-s4e-115": {
+    "duplicateOf": "ab-v2335-257"
+  },
+  "ab-s4e-116": {
+    "duplicateOf": "ab-v2335-060"
+  },
+  "ab-s4e-117": {
+    "duplicateOf": "ab-v2335-243"
+  },
+  "ab-s4e-118": {
+    "duplicateOf": "ab-v2335-090"
+  },
+  "ab-s4e-119": {
+    "duplicateOf": "ab-v2335-022"
+  },
+  "ab-s4e-120": {
+    "duplicateOf": "ab-v2335-233",
+    "textFixes": [
+      {
+        "field": "option:C",
+        "from": "The selected objects in the sandbox template.",
+        "to": "The object was not included in the sandbox template."
+      }
+    ]
+  },
+  "ab-s4e-121": {
+    "duplicateOf": "ab-v2335-128"
+  },
+  "ab-s4e-122": {
+    "duplicateOf": "ab-v2335-179",
+    "conflictNote": "Data Export Service solo se programa como mucho cada semana (o cada mes, según la edición), no a diario. Para una copia de seguridad automática diaria hace falta una solución de AppExchange o Backup and Restore de Salesforce.",
+    "conflictNoteEn": "Data Export Service can be scheduled at most weekly (or monthly, depending on the edition), not daily. An automatic daily backup needs an AppExchange solution or Salesforce Backup and Restore."
+  },
+  "ab-s4e-123": {
+    "duplicateOf": "ab-v2335-122"
+  },
+  "ab-s4e-124": {
+    "duplicateOf": "ab-v2335-303"
+  },
+  "ab-s4e-125": {
+    "duplicateOf": "ab-v2335-197",
+    "conflictNote": "Un permission set solo concede permisos: no puede quitar el Delete que ya da el perfil, así que la opción de Success4Exam no sirve tal como está redactada. Ver también la nota de revisión, que explica por qué la pregunta sigue como dudosa.",
+    "conflictNoteEn": "A permission set only grants permissions: it cannot remove the Delete the profile already grants, so Success4Exam's option does not work as written. See also the review note, which explains why the question stays doubtful."
+  },
+  "ab-s4e-126": {
+    "duplicateOf": "ab-v2335-314"
+  },
+  "ab-s4e-127": {
+    "duplicateOf": "ab-v2335-110"
+  },
+  "ab-s4e-128": {
+    "duplicateOf": "ab-v2335-066"
+  },
+  "ab-s4e-129": {
+    "duplicateOf": "ab-v2335-007"
+  },
+  "ab-s4e-130": {
+    "duplicateOf": "ab-v2335-248"
+  },
+  "ab-s4e-131": {
+    "duplicateOf": "ab-v2335-235"
+  },
+  "ab-s4e-132": {
+    "duplicateOf": "ab-v2335-057"
+  },
+  "ab-s4e-133": {
+    "duplicateOf": "ab-v2335-192"
+  },
+  "ab-s4e-134": {
+    "duplicateOf": "ab-v2335-163"
+  },
+  "ab-s4e-135": {
+    "duplicateOf": "ab-v2335-126"
+  },
+  "ab-s4e-136": {
+    "duplicateOf": "ab-v2335-252",
+    "conflictNote": "Un custom tab desplegado con un change set sin profiles ni permission sets no lleva ajustes de visibilidad, así que queda oculto (Tab Hidden) para todos hasta que se configure. Default On y Default Off son valores que solo existen dentro de un profile o un permission set.",
+    "conflictNoteEn": "A custom tab deployed with a change set without profiles or permission sets carries no visibility settings, so it stays hidden (Tab Hidden) for everyone until it is configured. Default On and Default Off are values that only exist inside a profile or permission set."
+  },
+  "ab-s4e-137": {
+    "duplicateOf": "ab-v2335-313"
+  },
+  "ab-s4e-138": {
+    "duplicateOf": "ab-v2335-047"
+  },
+  "ab-s4e-139": {
+    "duplicateOf": "ab-v2335-124"
+  },
+  "ab-s4e-140": {
+    "duplicateOf": "ab-v2335-100"
+  },
+  "ab-s4e-141": {
+    "duplicateOf": "ab-v2335-005"
+  },
+  "ab-s4e-142": {
+    "duplicateOf": "ab-v2335-101"
+  },
+  "ab-s4e-143": {
+    "duplicateOf": "ab-v2335-164"
+  },
+  "ab-s4e-144": {
+    "duplicateOf": "ab-v2335-117"
+  },
+  "ab-s4e-145": {
+    "duplicateOf": "ab-v2335-159"
+  },
+  "ab-s4e-146": {
+    "duplicateOf": "ab-v2335-098"
+  },
+  "ab-s4e-147": {
+    "duplicateOf": "ab-v2335-302"
+  },
+  "ab-s4e-148": {
+    "section": "logic",
+    "review": "ok",
+    "textFixes": [
+      {
+        "field": "option:A",
+        "from": "Retail_Opt_In_c",
+        "to": "Retail_Opt_In__c"
+      },
+      {
+        "field": "option:B",
+        "from": "Retail_Opt_In_c",
+        "to": "Retail_Opt_In__c"
+      },
+      {
+        "field": "option:C",
+        "from": "ISPICRYVAL(Retail_Opt_In_c",
+        "to": "ISPICKVAL(Retail_Opt_In__c"
+      },
+      {
+        "field": "option:D",
+        "from": "ISCHANDED(Retail_Opt_In_c)",
+        "to": "ISCHANGED(Retail_Opt_In__c)"
+      },
+      {
+        "field": "option:D",
+        "from": "ISPICRYVAL(Retail_Opt_In_c",
+        "to": "ISPICKVAL(Retail_Opt_In__c"
+      }
+    ],
+    "explanationEs": "Una validation rule bloquea el guardado cuando su fórmula devuelve TRUE, así que debe ser verdadera justo en el caso prohibido: el usuario no tiene el rol Marketing, el campo se está cambiando y el nuevo valor es Yes. Como Retail Opt In es un picklist, su valor se compara con ISPICKVAL y no con un signo igual, e ISCHANGED evita bloquear ediciones de registros que ya estaban en Yes. Las fórmulas que comprueban el rol Marketing con igualdad bloquearían precisamente a quienes sí pueden hacer el cambio, y las que comparan el picklist con = ni siquiera son válidas."
+  },
+  "ab-s4e-149": {
+    "duplicateOf": "ab-v2335-239",
+    "conflictNote": "Case se relaciona con Account por lookup, así que no admite un roll-up summary nativo, y menos aún para sumar también los casos de la cuenta padre. Un Flow puede contar los casos abiertos y guardar el resultado en la cuenta.",
+    "conflictNoteEn": "Case relates to Account through a lookup, so a native roll-up summary is not possible, let alone one that also counts the parent account's cases. A Flow can count the open cases and store the result on the account."
+  },
+  "ab-s4e-150": {
+    "duplicateOf": "ab-v2335-051",
+    "conflictNote": "El requisito combina poco tiempo con personalización completa. Un paquete unmanaged de AppExchange llega ya construido y todo su código y su metadata se pueden editar, así que cumple las dos cosas. Construir la encuesta en Flow desde cero no cumple el plazo.",
+    "conflictNoteEn": "The requirement combines little time with full customization. An unmanaged AppExchange package arrives already built and all its code and metadata can be edited, so it meets both. Building the survey in Flow from scratch does not meet the deadline."
+  },
+  "ab-s4e-151": {
+    "duplicateOf": "ab-v2335-140"
+  },
+  "ab-s4e-152": {
+    "duplicateOf": "ab-v2335-012"
+  },
+  "ab-s4e-153": {
+    "duplicateOf": "ab-v2335-274"
+  },
+  "ab-s4e-154": {
+    "duplicateOf": "ab-v2335-112"
+  },
+  "ab-s4e-155": {
+    "duplicateOf": "ab-v2335-091",
+    "conflictNote": "Si se quita Read en Review a los perfiles que no son de RR. HH., los empleados ya no podrían crear ni ver sus propias reviews. Lo correcto es OWD Private (cada uno ve las suyas), desactivar Grant Access Using Hierarchies (para que no las vean sus managers) y una sharing rule por criterios para RR. HH.",
+    "conflictNoteEn": "Removing Read on Review from non-HR profiles would stop employees from creating or seeing their own reviews. The right setup is a Private OWD (each employee sees their own), disabling Grant Access Using Hierarchies (so managers cannot see them) and a criteria-based sharing rule for HR."
+  },
+  "ab-s4e-156": {
+    "duplicateOf": "ab-v2335-152"
+  },
+  "ab-s4e-157": {
+    "duplicateOf": "ab-fc143-052"
+  },
+  "ab-s4e-158": {
+    "duplicateOf": "ab-v2335-021"
+  },
+  "ab-s4e-159": {
+    "duplicateOf": "ab-v2335-227"
+  },
+  "ab-s4e-160": {
+    "duplicateOf": "ab-v2335-107",
+    "conflictNote": "Una global action no tiene el contexto del registro desde el que se lanza, así que no puede rellenar campos con los valores de la cuenta padre. Una acción específica de Account de tipo Create a Record sí puede predefinir esos campos a partir del registro padre.",
+    "conflictNoteEn": "A global action has no context of the record it is launched from, so it cannot fill fields with the parent account's values. An Account-specific Create a Record action can predefine those fields from the parent record."
+  },
+  "ab-s4e-161": {
+    "duplicateOf": "ab-v2335-287"
+  },
+  "ab-s4e-162": {
+    "duplicateOf": "ab-v2335-013"
+  },
+  "ab-s4e-163": {
+    "duplicateOf": "ab-v2335-273",
+    "conflictNote": "Un Guided Action Flow (un screen flow en Actions & Recommendations) puede pedir y registrar las preguntas de verificación paso a paso; Path solo muestra etapas y consejos. Como Success4Exam y los resolvedores a ciegas eligen Path, la pregunta sigue marcada como dudosa.",
+    "conflictNoteEn": "A Guided Action Flow (a screen flow in Actions & Recommendations) can ask and record the verification questions step by step; Path only shows stages and guidance. Because Success4Exam and the blind reviewers choose Path, the question stays flagged as doubtful."
+  },
+  "ab-s4e-164": {
+    "duplicateOf": "ab-v2335-263"
+  },
+  "ab-s4e-165": {
+    "duplicateOf": "ab-v2335-284",
+    "conflictNote": "El ID de 18 caracteres, que Excel no confunde, se obtiene con CASESAFEID(Id). En Success4Exam las opciones están corruptas («CAREBAFFIELD (14)» es CASESAFEID mal leído) y su clave, TEXT(14), solo devolvería el número 14 como texto.",
+    "conflictNoteEn": "The 18-character ID, which Excel does not confuse, comes from CASESAFEID(Id). In Success4Exam the options are garbled (\"CAREBAFFIELD (14)\" is a misread CASESAFEID) and its key, TEXT(14), would only return the number 14 as text."
+  },
+  "ab-s4e-166": {
+    "duplicateOf": "ab-v2335-027"
+  },
+  "ab-s4e-167": {
+    "duplicateOf": "ab-v2335-065",
+    "conflictNote": "Work Order se relaciona con Asset por lookup, así que no se puede crear un roll-up summary. Un record-triggered Flow sobre Work Order detecta que se cierra una orden de mantenimiento y actualiza la fecha en el Asset, sin código.",
+    "conflictNoteEn": "Work Order relates to Asset through a lookup, so a roll-up summary cannot be created. A record-triggered Flow on Work Order detects that a maintenance order is closed and updates the date on the Asset, with no code."
+  },
+  "ab-s4e-168": {
+    "duplicateOf": "ab-v2335-237"
+  },
+  "ab-s4e-169": {
+    "duplicateOf": "ab-v2335-251"
+  },
+  "ab-s4e-170": {
+    "duplicateOf": "ab-v2335-293"
+  },
+  "ab-s4e-171": {
+    "duplicateOf": "ab-v2335-064",
+    "conflictNote": "Las escalation rules respetan las business hours y pueden enviar la notificación. Flow Builder cubre lo mismo sin código, con un record-triggered flow y un scheduled path. Scheduled Apex también podría, pero exige código, y en App Builder se prefiere la solución declarativa.",
+    "conflictNoteEn": "Escalation rules respect business hours and can send the notification. Flow Builder covers the same with no code, using a record-triggered flow with a scheduled path. Scheduled Apex could also work, but it requires code, and App Builder favors the declarative solution."
+  },
+  "ab-s4e-172": {
+    "duplicateOf": "ab-v2335-222"
+  },
+  "ab-s4e-173": {
+    "duplicateOf": "ab-v2335-323"
+  },
+  "ab-s4e-174": {
+    "duplicateOf": "ab-v2335-301"
+  },
+  "ab-s4e-175": {
+    "duplicateOf": "ab-v2335-158",
+    "conflictNote": "Con una sola página, el componente se limita a los usuarios de la app móvil con un component visibility filter por Form Factor. La elección de form factor de Lightning App Builder es de la página entera (al activarla) o la declara el componente personalizado; no se configura para un componente estándar concreto.",
+    "conflictNoteEn": "With a single page, the component is limited to mobile app users with a component visibility filter on Form Factor. The form factor choice in Lightning App Builder applies to the whole page (on activation) or is declared by a custom component; it is not set for a specific standard component."
+  },
+  "ab-s4e-176": {
+    "duplicateOf": "ab-v2335-296"
+  },
+  "ab-s4e-177": {
+    "duplicateOf": "ab-v2335-078",
+    "conflictNote": "Los record types no controlan el acceso a campos: para ocultar los comentarios del ejecutivo se usa field-level security. El acceso al registro lo da el sharing model Private con Grant Access Using Hierarchies, que deja ver la evaluación al rep, a su manager y a los ejecutivos.",
+    "conflictNoteEn": "Record types do not control field access: field-level security hides the executive comments. Record access comes from a Private sharing model with Grant Access Using Hierarchies, which lets the rep, their manager and the executives see the scorecard."
+  },
+  "ab-s4e-178": {
+    "duplicateOf": "ab-v2335-207"
+  },
+  "ab-s4e-179": {
+    "duplicateOf": "ab-v2335-265"
+  },
+  "ab-s4e-180": {
+    "duplicateOf": "ab-v2335-008"
+  },
+  "ab-s4e-181": {
+    "duplicateOf": "ab-v2335-036"
+  },
+  "ab-s4e-182": {
+    "duplicateOf": "ab-v2335-188"
+  },
+  "ab-s4e-183": {
+    "duplicateOf": "ab-v2335-305"
+  },
+  "ab-s4e-184": {
+    "duplicateOf": "ab-v2335-276"
+  },
+  "ab-s4e-185": {
+    "duplicateOf": "ab-v2335-198"
+  },
+  "ab-s4e-186": {
+    "duplicateOf": "ab-v2335-325"
+  },
+  "ab-s4e-187": {
+    "duplicateOf": "ab-v2335-141"
+  },
+  "ab-s4e-188": {
+    "duplicateOf": "ab-v2335-106"
   }
 }

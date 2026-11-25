@@ -260,7 +260,7 @@
       "correct": ["A"],
       "quotes": [
         "UC has been using a queue with their support team to manage tasks. Now, the support team will also be working on cases. What two actions should the administrator do?",
-        "Use assignment rules to assign cases to the queue b. Add cases to the existing queue c. create a new queue and add cases as an object d. use a workflow rule"
+        "Use assignment rules to assign cases to the queue", "Add cases to the existing queue", "create a new queue and add cases as an object", "use a workflow rule"
       ]
     },
     {

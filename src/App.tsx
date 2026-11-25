@@ -6,6 +6,7 @@ import { CERT_DATA } from './ui/bank.ts'
 import { CertContext } from './ui/cert.ts'
 import type { CertData } from './ui/certdata.ts'
 import { CertSwitch } from './ui/CertSwitch.tsx'
+import { Browse } from './ui/Browse.tsx'
 import { Exam } from './ui/Exam.tsx'
 import { History } from './ui/History.tsx'
 import { Home } from './ui/Home.tsx'
@@ -15,6 +16,7 @@ import { PracticeRunner, PracticeSetup } from './ui/Practice.tsx'
 import { Preparing } from './ui/Preparing.tsx'
 import { Results } from './ui/Results.tsx'
 import { Settings } from './ui/Settings.tsx'
+import { Study } from './ui/Study.tsx'
 import { seedDemo } from './ui/demo.ts'
 import { createReducer, initState, type Action, type AppState, type Screen } from './ui/state.ts'
 
@@ -124,8 +126,9 @@ function CertApp({ data, onChooseCert }: { data: CertData; onChooseCert: (cert: 
 
   const exam = progress.activeExam
   const preparing = data.bank.questions.length === 0
-  const nav: { screen: 'home' | 'history' | 'settings'; label: string }[] = [
+  const nav: { screen: 'home' | 'browse' | 'history' | 'settings'; label: string }[] = [
     { screen: 'home', label: t.app.nav.home },
+    { screen: 'browse', label: t.app.nav.browse },
     { screen: 'history', label: t.app.nav.history },
     { screen: 'settings', label: t.app.nav.settings },
   ]
@@ -138,7 +141,7 @@ function CertApp({ data, onChooseCert }: { data: CertData; onChooseCert: (cert: 
         content = <Home progress={progress} notices={state.notices} dispatch={dispatch} />
         break
       case 'practice-setup':
-        content = <PracticeSetup progress={progress} dispatch={dispatch} />
+        content = <PracticeSetup key={screen.sections?.join() ?? 'all'} progress={progress} dispatch={dispatch} initialSections={screen.sections} />
         break
       case 'practice':
         content = <PracticeRunner run={screen.run} progress={progress} dispatch={dispatch} />
@@ -157,10 +160,16 @@ function CertApp({ data, onChooseCert }: { data: CertData; onChooseCert: (cert: 
         content = exam ? <Results session={exam} dispatch={dispatch} /> : <Home progress={progress} notices={state.notices} dispatch={dispatch} />
         break
       case 'history':
-        content = <History progress={progress} />
+        content = <History progress={progress} dispatch={dispatch} />
         break
       case 'settings':
         content = <Settings progress={progress} dispatch={dispatch} />
+        break
+      case 'study':
+        content = <Study progress={progress} dispatch={dispatch} />
+        break
+      case 'browse':
+        content = <Browse progress={progress} dispatch={dispatch} />
         break
     }
   }

@@ -100,7 +100,14 @@
     "duplicateOf": "ab-v2335-290"
   },
   "ab-fc35-024": {
-    "duplicateOf": "ab-v2335-308"
+    "duplicateOf": "ab-v2335-308",
+    "textFixes": [
+      {
+        "field": "option:B",
+        "from": "AND (ISPICKVAL (StageName, *Negotiation/Review ' ), CloneDate - 7 TODAY () )",
+        "to": "AND(ISPICKVAL(StageName, \"Negotiation/Review\"), CloseDate - 7 < TODAY())"
+      }
+    ]
   },
   "ab-fc35-028": {
     "duplicateOf": "ab-v2335-324"

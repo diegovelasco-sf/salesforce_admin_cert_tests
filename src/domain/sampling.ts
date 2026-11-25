@@ -1,7 +1,7 @@
 import type { CertConfig } from './certs.ts'
 import type { Rng } from './rng.ts'
 import { shuffle } from './shuffle.ts'
-import type { Question, SectionKey } from './types.ts'
+import type { Question, SectionKey, SourceId } from './types.ts'
 
 /**
  * Reparte `total` en proporción a `weights` (enteros) por restos mayores; los empates se
@@ -26,19 +26,25 @@ export function apportion(total: number, weights: readonly number[]): number[] {
 export interface PoolFilter {
   /** Deja fuera las preguntas dudosas u obsoletas. */
   excludeDoubtful: boolean
-  /** Solo fuentes oficiales. Una certificación sin fuentes oficiales no tiene este filtro. */
-  officialOnly: boolean
+  /** Fuentes elegidas; sin indicar, todas. */
+  sources?: readonly SourceId[]
   sections?: readonly SectionKey[]
 }
 
 export const isDoubtful = (q: Question): boolean => q.review === 'disputed' || q.review === 'outdated'
 
-export function filterPool(questions: readonly Question[], cert: CertConfig, filter: PoolFilter): Question[] {
-  const officialOnly = filter.officialOnly && cert.officialSources.length > 0
+/** Fuentes en las que aparece una pregunta: la suya y las de sus duplicados unificados. */
+export const questionSources = (q: Question): SourceId[] => [q.source, ...(q.alsoIn ?? []).map((s) => s.source)]
+
+/** Una pregunta entra si alguna de sus fuentes está elegida: una repetida en otra fuente también es de esa fuente. */
+export const inSources = (q: Question, sources: readonly SourceId[] | undefined): boolean =>
+  !sources || questionSources(q).some((source) => sources.includes(source))
+
+export function filterPool(questions: readonly Question[], filter: PoolFilter): Question[] {
   return questions.filter(
     (q) =>
       (!filter.excludeDoubtful || !isDoubtful(q)) &&
-      (!officialOnly || cert.officialSources.includes(q.source)) &&
+      inSources(q, filter.sources) &&
       (!filter.sections || filter.sections.includes(q.section)),
   )
 }

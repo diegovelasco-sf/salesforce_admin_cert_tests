@@ -65,10 +65,10 @@ export const CERTS: Record<CertId, CertConfig> = {
     ],
     officialSources: [],
     officialNames: '',
-    footer: 'Uso personal. Preguntas de FreeCram, no oficiales. Tu progreso se guarda solo en este navegador.',
+    footer: 'Uso personal. Preguntas de FreeCram y Success4Exam, no oficiales. Tu progreso se guarda solo en este navegador.',
     guide: "guía oficial de Platform App Builder, SU '26",
     sourcesNote:
-      'Son preguntas de FreeCram, no oficiales: la base es la V23.35, en una versión revisada con erratas y claves corregidas, y se han añadido versiones posteriores. El banco es anterior a SU \'26, así que las preguntas que dependen de funciones retiradas (Process Builder, Workflow Rules) se marcan como obsoletas y el simulacro las excluye. Las repetidas entre fuentes se han unificado, y las claves corregidas o dudosas se indican en cada pregunta.',
+      'Son preguntas de FreeCram y Success4Exam, no oficiales: la base es la V23.35 de FreeCram, en una versión revisada con erratas y claves corregidas, y se han añadido versiones posteriores. El Practice Test de Success4Exam 2026 casi solo repite preguntas de la V23.35: se ha unificado con ellas, y las que dan otra clave están en revisión. El banco es anterior a SU \'26, así que las preguntas que dependen de funciones retiradas (Process Builder, Workflow Rules) se marcan como obsoletas y el simulacro las excluye. Las repetidas entre fuentes se han unificado, y las claves corregidas o dudosas se indican en cada pregunta.',
     officialNote: '',
   },
   developer: {

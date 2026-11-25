@@ -34,9 +34,9 @@ Regenerar el banco desde los PDF solo funciona en macOS, porque la extracción u
 
 ## Qué puedes hacer
 
-- **Práctica.** Eliges las secciones, las fuentes (todas o solo las oficiales), si quieres solo preguntas
-  que no has visto y cuántas (10, 20, 40 o todas). Compruebas cada respuesta y ves al momento la
-  explicación, la fuente y, si la hay, la nota de revisión.
+- **Práctica.** Eliges las secciones, las fuentes, si quieres solo preguntas que no has visto y cuántas (10,
+  20, 40, 60, todas o un número exacto). Compruebas cada respuesta y ves al momento la explicación, la fuente
+  y, si la hay, la nota de revisión.
 - **Simulacro.** 65 preguntas repartidas por sección según los pesos de la guía oficial, con 105 minutos.
   Puedes marcar preguntas para revisarlas y moverte por ellas con la paleta. La corrección llega al
   entregar o al acabarse el tiempo. Si recargas o cierras la página, el simulacro se reanuda donde lo
@@ -45,12 +45,45 @@ Regenerar el banco desde los PDF solo funciona en macOS, porque la extracción u
   a pregunta, con filtros para ver solo las falladas o las marcadas.
 - **Repaso.** Las preguntas que has fallado alguna vez y las que has marcado, también en un simulacro. Una
   pregunta fallada sale de Repaso cuando la aciertas dos veces seguidas.
-- **Historial.** Tus simulacros y el porcentaje de acierto acumulado en cada sección.
-- **Ajustes.** Excluir del simulacro las preguntas dudosas u obsoletas (activado por defecto), usar solo
-  fuentes oficiales y exportar, importar o borrar el progreso.
+- **Estudio.** El banco se reparte una vez en paquetes fijos de unas 30 o 60 preguntas (ver abajo). Cada
+  paquete se repite entero, solo con sus falladas o solo con sus marcadas, hasta dominarlo.
+- **Banco.** Buscador de todas las preguntas por texto o id, con filtros por sección, fuente y estado
+  (marcadas, en repaso, con nota, sin ver, dudosas). Cada pregunta se abre con su respuesta y explicación, y
+  se puede marcar, anotar o practicar junto con las demás encontradas.
+- **Notas.** Cada pregunta admite una nota propia (un truco, un enlace), que aparece siempre que sale en la
+  práctica, el estudio o el banco. En el simulacro no se muestra.
+- **Progreso.** Preguntas vistas, dominadas y en repaso, paquetes dominados, la evolución de la nota de los
+  simulacros, las tres secciones más flojas con un acceso directo para practicarlas, el acierto acumulado por
+  sección y el historial de simulacros.
+- **Ajustes.** Idioma, tema (automático, claro u oscuro), las fuentes del simulacro y del repaso, excluir del
+  simulacro las preguntas dudosas u obsoletas (activado por defecto) y exportar, importar o borrar el
+  progreso.
 
-Atajos de teclado: `1`-`5` marcan opciones, `Enter` comprueba o avanza, `←`/`→` navegan y `M` marca la
-pregunta.
+**Fuentes en cada modo.** Práctica, simulacro, repaso y estudio tienen cada uno su propia elección de
+fuentes, con el número de preguntas que aporta cada una. Una pregunta que aparece en varias fuentes está
+unificada en el banco, pero cuenta para todas ellas: si eliges solo Success4Exam, salen todas las preguntas
+que trae Success4Exam aunque en el banco figuren con la redacción de FreeCram. La tarjeta de cada pregunta
+indica en qué otras fuentes aparece.
+
+### Modo estudio
+
+Los paquetes se crean una vez por certificación, con el tamaño (30 o 60) y las fuentes que elijas, y se
+guardan con el progreso. Cada sección se baraja y se reparte por turnos entre todos los paquetes, así que
+cada pregunta está en un solo paquete, todos llevan la misma mezcla de secciones (la del banco, que se parece a
+la del examen) y sus tamaños difieren como mucho en una pregunta: 302 preguntas en paquetes de 30 son 10
+paquetes de 30 o 31.
+
+Cada paquete lleva su propio dominio, separado de las estadísticas generales (que también cuentan lo que
+respondes en él). Una pregunta está **dominada** si nunca la has fallado en el estudio o si, tras fallarla, la
+aciertas dos veces seguidas; las **falladas** de un paquete son las que has fallado y aún no dominas. Al
+acabar una tanda puedes repetir sus falladas o pasar al siguiente paquete.
+
+Si el banco cambia, los paquetes no se rehacen: las preguntas retiradas salen y las nuevas van al último
+paquete (o a uno nuevo), con un aviso. «Rehacer los paquetes» los reparte de nuevo y borra su dominio, sin
+tocar las estadísticas generales, las marcas ni las notas.
+
+Atajos de teclado: `1`-`5` marcan opciones, `Enter` comprueba o avanza, `←`/`→` navegan, `M` marca la
+pregunta y `N` abre su nota (`Ctrl`/`⌘`+`Enter` la guarda, `Esc` la cierra).
 
 En las preguntas de varias respuestas, la app indica cuántas hay que elegir («Elige 2») y no deja marcar
 más. La corrección es de todo o nada, como en el examen.
@@ -83,6 +116,24 @@ erratas.
 Las claves se contrastaron con seis revisiones independientes hechas a ciegas, sin ver la clave. De las 297
 preguntas del banco coincidieron 265; las otras 32 se adjudicaron una a una y la clave solo cambió en una
 (la 28, ver su nota de revisión). Las dudosas siguen marcadas como `disputed` y fuera del simulacro por defecto.
+
+### App Builder: Success4Exam 2026
+
+`abs4e` es ahora el Practice Test completo de Success4Exam 2026 (`App Builder -Practice Test.pdf`, 188
+preguntas), en lugar de la demo de 13. Conserva los ids `ab-s4e-001…`, y las 13 de la demo son las mismas.
+Casi todas repiten preguntas de la V23.35, así que se unifican con ellas (`duplicateOf`) y solo una entra como
+nueva (`ab-s4e-148`, con sus erratas corregidas).
+
+En 27 Success4Exam da otra respuesta que el banco. Se revisaron una a una y se mantiene la que se considera
+correcta: en 26 la del banco, y en la Q53 la de Success4Exam, que corrige la clave de `ab-v2335-104`. Cuando se
+mantiene la del banco, el duplicado lleva un `conflictNote` (y `conflictNoteEn`) con el motivo, y la pregunta del
+banco muestra al corregirla qué responde la otra fuente y por qué no se acepta. La validación comprueba que un
+duplicado con `conflictNote` de verdad da otra respuesta. El resumen, con las dos respuestas y el motivo de cada
+una, está en `data/review/abs4e-conflictos.md`.
+
+Para emparejar las respuestas de un duplicado con las opciones del destino, la validación ya no mira solo las
+palabras, sino también su orden y los operadores de las fórmulas: «Accounts with Boxes» no es «Boxes with
+Accounts», ni una fórmula con `&&` la misma que con `||`.
 
 ### Completar Platform Developer I
 
@@ -250,6 +301,7 @@ ficheros, así que cualquier cambio de un parser se ve en el diff.
 | `explanationEs` | Explicación en español |
 | `textFixes` | Correcciones de texto en el enunciado (`stem`) o en una opción (`option:B`) |
 | `duplicateOf` | La pregunta ya está en el banco con otro id |
+| `conflictNote`, `conflictNoteEn` | En un duplicado cuya fuente da otra respuesta: por qué se mantiene la del banco |
 | `exclude` | Motivo por el que la pregunta no entra |
 | `distinctFrom` | Preguntas parecidas que se han revisado y son distintas |
 | `learnMore` | Enlaces de documentación |
@@ -334,7 +386,9 @@ mismo simulacro se puede reconstruir.
 | `exam.ts` | Formato del examen, secciones con su peso y etiquetas de las fuentes |
 | `rng.ts` | Generador pseudoaleatorio con semilla (mulberry32) |
 | `shuffle.ts` | Barajado Fisher-Yates y orden de las opciones; las fijadas, como «All of the above», van al final |
-| `sampling.ts` | Reparto por restos mayores, filtros del pool y muestreo estratificado del simulacro |
+| `sampling.ts` | Reparto por restos mayores, filtros del pool (también por fuentes) y muestreo estratificado del simulacro |
+| `study.ts` | Paquetes del modo estudio: reparto, puesta al día con el banco y dominio de cada paquete |
+| `search.ts` | Texto en forma comparable para el buscador del banco |
 | `grading.ts` | Corrección de todo o nada y cálculo del aprobado |
 | `selection.ts` | Selección de opciones con el límite de «Elige N» |
 | `session.ts` | Simulacro: crear, responder, marcar, entregar y reanudar |
@@ -350,9 +404,14 @@ mismo simulacro se puede reconstruir.
 | `Practice.tsx` | Configuración de la práctica y tanda de preguntas con corrección inmediata |
 | `Exam.tsx` | Simulacro: temporizador, paleta de preguntas, marcas y entrega |
 | `Results.tsx` | Nota, KPIs, acierto por sección y corrección pregunta a pregunta |
-| `History.tsx` | Historial de simulacros y acierto acumulado por sección |
-| `Settings.tsx` | Ajustes y gestión del progreso |
-| `QuestionCard.tsx` | Enunciado, opciones, notas de revisión y explicación |
+| `History.tsx` | Progreso: resumen, secciones flojas, acierto acumulado por sección e historial de simulacros |
+| `ScoreTrend.tsx` | Evolución de la nota de los simulacros, con la línea de aprobado y vista de tabla |
+| `Study.tsx` | Modo estudio: creación de los paquetes y lista con su dominio |
+| `Browse.tsx` | Banco: buscador y consulta de las preguntas |
+| `SourcePicker.tsx`, `modes.ts` | Elección de fuentes de cada modo y arranque de los paquetes |
+| `Settings.tsx` | Ajustes, tema y gestión del progreso |
+| `theme.ts` | Tema automático, claro u oscuro (global, como el idioma) |
+| `QuestionCard.tsx` | Enunciado, opciones, notas de revisión, explicación y nota propia |
 | `SectionBars.tsx` | Barras de acierto por sección con la línea del 68 % y vista de tabla |
 | `common.tsx`, `format.ts` | Diálogo de confirmación, fichas de KPI y formatos de fecha, duración y porcentaje |
 | `useShortcuts.ts`, `useNow.ts` | Atajos de teclado y reloj del temporizador |
@@ -362,8 +421,12 @@ Los textos se muestran con `white-space: pre-line`; nunca se inserta HTML.
 
 ### Progreso guardado
 
-- Todo va en una sola clave de `localStorage` (`sf-platform-admin-quiz`) con `schemaVersion: 1`: las
-  estadísticas por pregunta, las marcas, el historial de simulacros, los ajustes y el simulacro en curso.
+- Cada certificación usa su propia clave de `localStorage` (la de Administrator es `sf-platform-admin-quiz`)
+  con `schemaVersion: 1`: las estadísticas por pregunta, las marcas, las notas, el historial de simulacros,
+  los ajustes (con las fuentes de cada modo), los paquetes de estudio y el simulacro en curso. El idioma y el
+  tema son globales y van aparte.
+- Los progresos guardados antes de las fuentes por modo se leen igual: el antiguo «solo oficiales» pasa a ser
+  la elección de fuentes del simulacro.
 - Las respuestas se guardan por la letra original de la opción, no por la posición en que se mostró, así
   que barajar no les afecta.
 - El simulacro guarda una hora límite absoluta y el tiempo restante se recalcula a partir de ella, también

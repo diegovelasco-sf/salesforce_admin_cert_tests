@@ -1014,10 +1014,14 @@
   },
   "ab-v2335-104": {
     "section": "datamodel",
-    "review": "disputed",
-    "reviewNote": "V23.35 marca como correctas la limitación del formula field y la de Text Area (Long) a Text. Los tres solvers ciegos coinciden en la del formula field, pero ninguno acepta Text Area (Long) a Text: uno cree que se permite truncando el texto, dos añaden External ID de Number a Text y uno las referencias en Apex. No he podido contrastarlo en la ayuda de Salesforce («Notes on Changing Custom Field Types»), así que se mantiene la clave de la fuente y se marca como dudosa.",
-    "explanationEs": "La limitación segura es que un formula field no se puede convertir a ningún otro tipo de dato, porque su valor se calcula: hay que crear un campo nuevo y migrar los datos. La fuente cita además el paso de Text Area (Long) a Text, que obliga a reducir la longitud y puede perder datos. Las otras dos opciones (campos referenciados en Apex y External ID de Number a Text) son restricciones que también aparecen en la ayuda sobre cambio de tipos, pero con matices, y conviene revisarlas en «Notes on Changing Custom Field Types» antes de cambiar el tipo. Como la clave de la fuente no está confirmada, la pregunta queda marcada como dudosa.",
-    "explanationEn": "The safe limitation is that a formula field cannot be converted to any other data type, because its value is calculated: you must create a new field and migrate the data. The source also lists moving from Text Area (Long) to Text, which forces a shorter length and can lose data. The other two options (fields referenced in Apex and External ID from Number to Text) are restrictions that also appear in the Help on changing field types, but with caveats, and should be checked in \"Notes on Changing Custom Field Types\" before changing the type. Because the source key is not confirmed, the question is flagged as disputed."
+    "review": "corrected",
+    "reviewNote": "La V23.35 marcaba la limitación del formula field y el paso de Text Area (Long) a Text. Success4Exam marca la del formula field y la de los campos referenciados en Apex, y es la que coincide con la ayuda de Salesforce («Notes on Changing Custom Field Types»): un campo referenciado en Apex no puede cambiar de tipo, mientras que Text Area (Long) a Text sí se permite (el texto que no cabe se trunca). Se corrige la clave.",
+    "explanationEs": "Un formula field no se puede convertir a ningún otro tipo de dato, porque su valor se calcula: hay que crear un campo nuevo y migrar los datos. Y la ayuda de Salesforce indica que no se puede cambiar el tipo de un campo al que hace referencia código Apex, porque el código dejaría de compilar. En cambio, un Text Area (Long) sí se puede convertir a Text (se trunca lo que no cabe), y un External ID numérico se puede pasar a Text.",
+    "explanationEn": "A formula field cannot be converted to any other data type, because its value is calculated: you must create a new field and migrate the data. Salesforce Help also says you cannot change the type of a field referenced by Apex code, because the code would stop compiling. A Text Area (Long) field, on the other hand, can be converted to Text (whatever does not fit is truncated), and a numeric External ID can be changed to Text.",
+    "correct": [
+      "A",
+      "B"
+    ]
   },
   "ab-v2335-105": {
     "section": "fundamentals",
@@ -1670,9 +1674,10 @@
   },
   "ab-v2335-180": {
     "section": "ui",
-    "review": "ok",
+    "review": "disputed",
     "explanationEs": "Los botones de acción de un registro Lightning, incluidas las acciones personalizadas de la sección Mobile & Lightning Actions del page layout, se muestran en el componente Highlights panel de la página de registro. Por eso hay que añadir ese componente para que aparezca New Task. El componente Activities solo ofrece las acciones estándar de actividad dentro de su propio publicador, y Related lists y Related record muestran registros relacionados, no la barra de acciones.",
-    "explanationEn": "The action buttons of a Lightning record, including custom actions from the Mobile & Lightning Actions section of the page layout, are shown in the Highlights panel component of the record page. That is why this component must be added for New Task to appear. The Activities component only offers the standard activity actions in its own composer, and Related lists and Related record show related records, not the actions bar."
+    "explanationEn": "The action buttons of a Lightning record, including custom actions from the Mobile & Lightning Actions section of the page layout, are shown in the Highlights panel component of the record page. That is why this component must be added for New Task to appear. The Activities component only offers the standard activity actions in its own composer, and Related lists and Related record show related records, not the actions bar.",
+    "reviewNote": "Success4Exam marca Activities. Las acciones de la sección Mobile & Lightning Actions se muestran en el Highlights panel, que es la clave del banco, pero Lightning muestra las acciones de crear Task o Event en el composer del componente Activities; si «New Task» es una acción de ese tipo, la respuesta de Success4Exam también sería defendible. Se mantiene Highlights panel y se marca como dudosa."
   },
   "ab-v2335-181": {
     "section": "logic",
@@ -2804,8 +2809,8 @@
   "ab-v2335-308": {
     "section": "logic",
     "review": "ok",
-    "explanationEs": "Un campo de fórmula checkbox necesita un AND que combine las dos condiciones. Como StageName es un picklist, la comparación debe hacerse con ISPICKVAL y no con un signo igual, y la fecha se compara con TODAY(): CloseDate menos 7 menor que TODAY() equivale a que falte menos de una semana. Las demás fórmulas no usan ISPICKVAL sobre el picklist o tienen una sintaxis de fecha inválida (DAY(7), TODAY(1)). Las opciones de la fuente vienen muy dañadas, por eso se ha reparado la correcta.",
-    "explanationEn": "A checkbox formula field needs an AND that combines both conditions. Because StageName is a picklist, the comparison must use ISPICKVAL rather than an equals sign, and the date is compared against TODAY(): CloseDate minus 7 less than TODAY() means the close date is less than a week away. The other formulas either do not use ISPICKVAL on the picklist or have invalid date syntax (DAY(7), TODAY(1)). The source options are heavily damaged, so the correct one has been repaired.",
+    "explanationEs": "Un campo de fórmula checkbox necesita un AND que combine las dos condiciones. Como StageName es un picklist, la comparación debe hacerse con ISPICKVAL y no con un signo igual, y la fecha se compara con TODAY(): CloseDate - 7 < TODAY() equivale a que falte menos de una semana para el cierre. La versión con CloseDate - TODAY() <= 7 también da verdadero cuando falta justo una semana, y las demás no usan ISPICKVAL o tienen una sintaxis de fecha inválida (DAY(7)). Las opciones de la V23.35 venían muy dañadas: se muestran con el texto de Success4Exam, que es la misma pregunta.",
+    "explanationEn": "A checkbox formula field needs an AND that combines both conditions. Because StageName is a picklist, the comparison must use ISPICKVAL rather than an equals sign, and the date is compared against TODAY(): CloseDate - 7 < TODAY() means the close date is less than a week away. The version with CloseDate - TODAY() <= 7 is also true when exactly one week is left, and the others do not use ISPICKVAL or have invalid date syntax (DAY(7)). The V23.35 options were heavily damaged: they are shown with the Success4Exam text, which is the same question.",
     "textFixes": [
       {
         "field": "stem",
@@ -2818,9 +2823,24 @@
         "to": "away. Which"
       },
       {
+        "field": "option:A",
+        "from": "AND (StageName Negotiation/Review \", closeDate -DAY (7) TODAY!)}",
+        "to": "AND(StageName Negotiation/Review\", CloseDate - DAY(7) < TODAY())"
+      },
+      {
         "field": "option:B",
-        "from": "*Negotiation/Review",
-        "to": "' Negotiation/Review"
+        "from": "AND (ISPICKVAL (StageName, *Negotiation/Review ' ), CloseDate - 7 < TODAY())",
+        "to": "AND(ISPICKVAL(StageName, \"Negotiation/Review\"), CloseDate - 7 < TODAY())"
+      },
+      {
+        "field": "option:C",
+        "from": "AND (StageName = ' Negotiation/Review, CloseDate TODAY (1)",
+        "to": "AND (StageName = 'Negotiation/Review', CloseDate - 7 < TODAY ())"
+      },
+      {
+        "field": "option:D",
+        "from": "AND (ISPICKVAL (StageName, Negotiation/Review ' ). CloseDate DAY (7) TODAY (1)",
+        "to": "AND(ISPICKVAL(StageName, \"Negotiation/Review\"), CloseDate - TODAY() <= 7)"
       }
     ]
   },

@@ -86,9 +86,27 @@ describe('certificaciones independientes', () => {
 
 describe('parseProgress', () => {
   it('completa los ajustes que falten y la exportación se puede volver a importar', () => {
-    const progress = parseProgress(JSON.stringify({ schemaVersion: 1, settings: { officialOnly: true } }), 'admin')
-    expect(progress.settings).toEqual({ excludeDoubtful: true, officialOnly: true })
+    const progress = parseProgress(JSON.stringify({ schemaVersion: 1, settings: { sources: { practice: ['crt101'] } } }), 'admin')
+    expect(progress.settings).toEqual({ excludeDoubtful: true, sources: { practice: ['crt101'] } })
+    expect(progress.notes).toEqual({})
+    expect(progress.study).toBeUndefined()
     expect(parseProgress(exportProgress(progress), 'admin')).toEqual(progress)
+  })
+
+  it('el antiguo «solo oficiales» pasa a ser la elección de fuentes del simulacro', () => {
+    const progress = parseProgress(JSON.stringify({ schemaVersion: 1, settings: { excludeDoubtful: false, officialOnly: true } }), 'admin')
+    expect(progress.settings).toEqual({ excludeDoubtful: false, sources: { exam: ['crt101', 'adx201', 'trailhead'] } })
+    // App Builder no tiene fuentes oficiales: el ajuste antiguo no deja el simulacro vacío.
+    expect(parseProgress(JSON.stringify({ schemaVersion: 1, cert: 'appbuilder', settings: { officialOnly: true } }), 'appbuilder').settings.sources).toEqual({})
+  })
+
+  it('conserva las notas y el plan de estudio, y descarta los que están dañados', () => {
+    const study = { size: 30, excludeDoubtful: true, packs: [['a', 'b'], ['c']], stats: {}, createdAt: 5 }
+    const progress = parseProgress(JSON.stringify({ schemaVersion: 1, notes: { a: 'truco', b: '  ', c: 3 }, study }), 'admin')
+    expect(progress.notes).toEqual({ a: 'truco' })
+    expect(progress.study).toEqual(study)
+    expect(parseProgress(JSON.stringify({ schemaVersion: 1, study: { size: 45, packs: [] } }), 'admin').study).toBeUndefined()
+    expect(parseProgress(JSON.stringify({ schemaVersion: 1, study: { size: 30, packs: [[1]] } }), 'admin').study).toBeUndefined()
   })
 
   it('rechaza lo que no es un progreso de la app', () => {

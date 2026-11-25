@@ -7,6 +7,8 @@ export interface Shortcuts {
   enter?: () => void
   /** M: marcar para repasar. */
   flag?: () => void
+  /** N: escribir una nota. */
+  note?: () => void
   prev?: () => void
   next?: () => void
 }
@@ -30,6 +32,7 @@ export function useShortcuts(shortcuts: Shortcuts, enabled = true): void {
       if (/^[1-5]$/.test(event.key) && s.option) s.option(Number(event.key) - 1)
       else if (event.key === 'Enter' && s.enter && !target?.closest('button, a, summary')) s.enter()
       else if (event.key.toLowerCase() === 'm' && s.flag) s.flag()
+      else if (event.key.toLowerCase() === 'n' && s.note) s.note()
       // Sobre un radio las flechas cambian la opción: ahí no se usan para navegar.
       else if (event.key === 'ArrowLeft' && s.prev && !onInput) s.prev()
       else if (event.key === 'ArrowRight' && s.next && !onInput) s.next()

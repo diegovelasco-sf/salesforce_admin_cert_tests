@@ -3,13 +3,15 @@ import { grade, isCorrect } from '../domain/grading.ts'
 import type { Rng } from '../domain/rng.ts'
 import { goTo, isSubmitted, resumeExam, setAnswer, submit, toggleFlag, type ExamSession } from '../domain/session.ts'
 import { optionOrder } from '../domain/shuffle.ts'
+import { filterPool } from '../domain/sampling.ts'
 import { recordAnswer } from '../domain/stats.ts'
 import type { ExamRecord, Progress, Settings } from '../domain/storage.ts'
+import { syncPlan, type StudyPlan } from '../domain/study.ts'
 import type { Question, SectionKey } from '../domain/types.ts'
 import type { CertData } from './certdata.ts'
 
 /** Tipo de tanda de práctica. El texto se pone en el idioma activo al mostrarla. */
-export type RunKind = 'practice' | 'review' | 'failed' | 'exam-failed'
+export type RunKind = 'practice' | 'review' | 'failed' | 'exam-failed' | 'study'
 
 /** Aviso de la app. Son datos, no texto: se traducen al mostrarlos (ver messages.ts). */
 export type Notice =
@@ -20,6 +22,7 @@ export type Notice =
   | { kind: 'reset' }
   | { kind: 'short-exam'; available: number }
   | { kind: 'shortfall'; sections: SectionKey[] }
+  | { kind: 'study-synced'; added: number; removed: number }
 
 /** Una tanda de práctica o repaso. No se guarda: cada respuesta comprobada va directa a las estadísticas. */
 export interface PracticeRun {
@@ -29,16 +32,20 @@ export interface PracticeRun {
   index: number
   selected: Record<string, string[]>
   checked: string[]
+  /** Paquete del modo estudio (índice en el plan): sus respuestas cuentan también para el dominio del paquete. */
+  pack?: number
 }
 
 export type Screen =
   | { name: 'home' }
-  | { name: 'practice-setup' }
+  | { name: 'practice-setup'; sections?: SectionKey[] }
   | { name: 'practice'; run: PracticeRun }
   | { name: 'exam' }
   | { name: 'results' }
   | { name: 'history' }
   | { name: 'settings' }
+  | { name: 'study' }
+  | { name: 'browse' }
 
 export interface AppState {
   progress: Progress
@@ -59,12 +66,15 @@ export type Action =
   | { type: 'exam/submit'; now: number }
   | { type: 'exam/close'; next?: Screen }
   | { type: 'settings/update'; settings: Partial<Settings> }
+  | { type: 'study/plan'; plan: StudyPlan | undefined }
+  | { type: 'note/set'; id: string; text: string }
   | { type: 'progress/replace'; progress: Progress; notice?: Notice }
   | { type: 'notice/dismiss'; index: number }
 
-export function makeRun(kind: RunKind, questions: readonly Question[], rng: Rng): PracticeRun {
+export function makeRun(kind: RunKind, questions: readonly Question[], rng: Rng, pack?: number): PracticeRun {
   return {
     kind,
+    ...(pack !== undefined ? { pack } : {}),
     questionIds: questions.map((q) => q.id),
     optionOrder: Object.fromEntries(questions.map((q) => [q.id, optionOrder(q, rng)])),
     index: 0,
@@ -105,6 +115,19 @@ export function initState(data: CertData, loaded: { progress: Progress; backupKe
   if (loaded.backupKey) notices.push({ kind: 'backup', key: loaded.backupKey })
   let progress = loaded.progress
   let screen: Screen = { name: 'home' }
+  // Los paquetes siguen al banco sin moverse: las preguntas retiradas salen y las nuevas van al final.
+  if (progress.study) {
+    const plan = progress.study
+    const synced = syncPlan(plan, filterPool(data.bank.questions, { excludeDoubtful: plan.excludeDoubtful, sources: plan.sources }))
+    if (synced !== plan) {
+      const before = new Set(plan.packs.flat())
+      const after = new Set(synced.packs.flat())
+      const added = [...after].filter((id) => !before.has(id)).length
+      const removed = [...before].filter((id) => !after.has(id)).length
+      if (added || removed) notices.push({ kind: 'study-synced', added, removed })
+      progress = { ...progress, study: synced }
+    }
+  }
   const saved = progress.activeExam
   if (saved) {
     const { session } = resumeExam(saved, data.bank, now)
@@ -140,9 +163,13 @@ export function createReducer(data: CertData) {
         const question = byId.get(action.id)
         if (screen.name !== 'practice' || !question || screen.run.checked.includes(action.id)) return state
         const ok = isCorrect(question, screen.run.selected[action.id])
+        const study =
+          screen.run.kind === 'study' && progress.study
+            ? { ...progress.study, stats: recordAnswer(progress.study.stats, action.id, ok, action.now) }
+            : progress.study
         return {
           ...state,
-          progress: { ...progress, stats: recordAnswer(progress.stats, action.id, ok, action.now) },
+          progress: { ...progress, stats: recordAnswer(progress.stats, action.id, ok, action.now), ...(study ? { study } : {}) },
           screen: { name: 'practice', run: { ...screen.run, checked: [...screen.run.checked, action.id] } },
         }
       }
@@ -180,6 +207,15 @@ export function createReducer(data: CertData) {
 
       case 'settings/update':
         return { ...state, progress: { ...progress, settings: { ...progress.settings, ...action.settings } } }
+      case 'study/plan': {
+        const { study: _old, ...rest } = progress
+        return { ...state, progress: action.plan ? { ...rest, study: action.plan } : rest }
+      }
+      case 'note/set': {
+        const { [action.id]: _old, ...notes } = progress.notes
+        const text = action.text.trim()
+        return { ...state, progress: { ...progress, notes: text ? { ...notes, [action.id]: action.text } : notes } }
+      }
       case 'progress/replace':
         return {
           progress: action.progress,

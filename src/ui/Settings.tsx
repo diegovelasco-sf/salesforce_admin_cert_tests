@@ -2,13 +2,15 @@
 import { useState, type ChangeEvent, type Dispatch } from 'react'
 import { neededToPass } from '../domain/grading.ts'
 import { SOURCE_LABELS } from '../domain/exam.ts'
-import { filterPool, isDoubtful } from '../domain/sampling.ts'
-import { emptyProgress, exportProgress, parseProgress, type Progress } from '../domain/storage.ts'
+import { filterPool, isDoubtful, questionSources } from '../domain/sampling.ts'
+import { emptyProgress, exportProgress, parseProgress, type Progress, type SourceMode } from '../domain/storage.ts'
 import type { SourceId } from '../domain/types.ts'
 import { useCert } from './cert.ts'
 import { ConfirmDialog } from './common.tsx'
 import { useI18n } from './lang.ts'
 import { certTexts, sourceLabel, type Lang } from './messages.ts'
+import { SourcePicker } from './SourcePicker.tsx'
+import { THEMES, readTheme, saveTheme, type Theme } from './theme.ts'
 import type { Action } from './state.ts'
 
 const LANGS: Lang[] = ['es', 'en']
@@ -18,16 +20,22 @@ export function Settings({ progress, dispatch }: { progress: Progress; dispatch:
   const { t, lang, setLang } = useI18n()
   const texts = certTexts(cert, lang)
   const { exam: rules } = cert
-  const hasOfficial = cert.officialSources.length > 0
   const { settings } = progress
   const [pendingImport, setPendingImport] = useState<Progress | undefined>()
   const [importError, setImportError] = useState<string | undefined>()
   const [confirmReset, setConfirmReset] = useState(false)
+  const [theme, setTheme] = useState<Theme>(readTheme)
 
   const doubtful = bank.questions.filter(isDoubtful).length
-  const official = bank.questions.filter((q) => cert.officialSources.includes(q.source)).length
-  const examPool = filterPool(bank.questions, cert, settings).length
+  const examSources = settings.sources.exam
+  const examPool = filterPool(bank.questions, { excludeDoubtful: settings.excludeDoubtful, sources: examSources }).length
   const update = (patch: Partial<Progress['settings']>) => dispatch({ type: 'settings/update', settings: patch })
+  const setSources = (mode: SourceMode, sources: SourceId[] | undefined) => {
+    const { [mode]: _old, ...rest } = settings.sources
+    update({ sources: sources ? { ...rest, [mode]: sources } : rest })
+  }
+  // Solo avisa de la falta de Agentforce (u otro hueco) si el simulacro se queda solo con fuentes oficiales.
+  const officialOnly = !!examSources?.length && examSources.every((s) => cert.officialSources.includes(s))
 
   const download = () => {
     const blob = new Blob([exportProgress(progress)], { type: 'application/json' })
@@ -54,7 +62,7 @@ export function Settings({ progress, dispatch }: { progress: Progress; dispatch:
   }
 
   const counts = (Object.keys(SOURCE_LABELS) as SourceId[])
-    .map((source) => ({ label: sourceLabel(source, lang), n: bank.questions.filter((q) => q.source === source).length }))
+    .map((source) => ({ label: sourceLabel(source, lang), n: bank.questions.filter((q) => questionSources(q).includes(source)).length }))
     .filter(({ n }) => n > 0)
     .map(({ label, n }) => `${label}: ${n}`)
 
@@ -76,22 +84,54 @@ export function Settings({ progress, dispatch }: { progress: Progress; dispatch:
       </section>
 
       <section className="card">
+        <h2>{t.settings.theme}</h2>
+        <div className="segmented" role="radiogroup" aria-label={t.settings.theme}>
+          {THEMES.map((option) => (
+            <label key={option} className={`segment${theme === option ? ' on' : ''}`}>
+              <input
+                type="radio"
+                name="theme"
+                checked={theme === option}
+                onChange={() => {
+                  saveTheme(option)
+                  setTheme(option)
+                }}
+              />
+              {t.settings.themeName(option)}
+            </label>
+          ))}
+        </div>
+      </section>
+
+      <section className="card">
         <h2>{t.settings.exam}</h2>
         <label className="check">
           <input type="checkbox" checked={settings.excludeDoubtful} onChange={() => update({ excludeDoubtful: !settings.excludeDoubtful })} />
           {t.settings.excludeDoubtful(doubtful)}
         </label>
-        {hasOfficial && (
-          <label className="check">
-            <input type="checkbox" checked={settings.officialOnly} onChange={() => update({ officialOnly: !settings.officialOnly })} />
-            {t.settings.officialOnly(official)}
-          </label>
-        )}
+        <h3 className="subhead">{t.settings.examSources}</h3>
+        <SourcePicker
+          value={examSources}
+          onChange={(sources) => setSources('exam', sources)}
+          questions={filterPool(bank.questions, { excludeDoubtful: settings.excludeDoubtful })}
+          name={t.settings.examSources}
+        />
         <p className="muted">
           {t.settings.pool(examPool)}
           {examPool < rules.questionCount && t.settings.tooShort(rules.questionCount)}
-          {hasOfficial && settings.officialOnly && texts.officialNote && ` ${texts.officialNote}`}
+          {officialOnly && texts.officialNote && ` ${texts.officialNote}`}
         </p>
+      </section>
+
+      <section className="card">
+        <h2>{t.settings.reviewSources}</h2>
+        <SourcePicker
+          value={settings.sources.review}
+          onChange={(sources) => setSources('review', sources)}
+          questions={bank.questions}
+          name={t.settings.reviewSources}
+        />
+        <p className="muted">{t.settings.reviewSourcesNote}</p>
       </section>
 
       <section className="card">

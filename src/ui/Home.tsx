@@ -1,8 +1,8 @@
-// Inicio: avisos, simulacro a medias, los tres modos y un resumen del progreso.
+// Inicio: avisos, simulacro a medias, los cuatro modos y un resumen del progreso.
 import { useState, type Dispatch } from 'react'
 import { neededToPass } from '../domain/grading.ts'
 import { mulberry32, randomSeed } from '../domain/rng.ts'
-import { filterPool } from '../domain/sampling.ts'
+import { filterPool, inSources } from '../domain/sampling.ts'
 import { createExamSession, isSubmitted, remainingMs } from '../domain/session.ts'
 import { inReview } from '../domain/stats.ts'
 import type { Progress } from '../domain/storage.ts'
@@ -27,7 +27,10 @@ export function Home({ progress, notices, dispatch }: { progress: Progress; noti
   const [confirmDiscard, setConfirmDiscard] = useState(false)
   const now = useNow()
   const exam = progress.activeExam && !isSubmitted(progress.activeExam) ? progress.activeExam : undefined
-  const reviewQuestions = bank.questions.filter((q) => inReview(progress.stats[q.id], progress.flagged.includes(q.id)))
+  const reviewSources = progress.settings.sources.review
+  const allReview = bank.questions.filter((q) => inReview(progress.stats[q.id], progress.flagged.includes(q.id)))
+  const reviewQuestions = allReview.filter((q) => inSources(q, reviewSources))
+  const plan = progress.study
   const seen = bank.questions.filter((q) => progress.stats[q.id]).length
   const totals = Object.values(progress.stats).reduce((acc, s) => ({ correct: acc.correct + s.correct, seen: acc.seen + s.seen }), {
     correct: 0,
@@ -38,7 +41,7 @@ export function Home({ progress, notices, dispatch }: { progress: Progress; noti
 
   const startExam = () => {
     const seed = randomSeed()
-    const pool = filterPool(bank.questions, cert, progress.settings)
+    const pool = filterPool(bank.questions, { excludeDoubtful: progress.settings.excludeDoubtful, sources: progress.settings.sources.exam })
     const { session, shortfall } = createExamSession(bank, cert, pool, {
       now: Date.now(),
       seed,
@@ -101,9 +104,16 @@ export function Home({ progress, notices, dispatch }: { progress: Progress; noti
         </section>
         <section className="card mode">
           <h2>{t.home.reviewTitle}</h2>
-          <p>{t.home.reviewText(reviewQuestions.length)}</p>
+          <p>{allReview.length && !reviewQuestions.length ? t.home.reviewEmptySources : t.home.reviewText(reviewQuestions.length)}</p>
           <button type="button" className="primary" disabled={!reviewQuestions.length} onClick={startReview}>
             {t.home.reviewButton}
+          </button>
+        </section>
+        <section className="card mode">
+          <h2>{t.home.studyTitle}</h2>
+          <p>{t.home.studyText(plan?.packs.length ?? 0, plan?.size ?? 30)}</p>
+          <button type="button" className="primary" onClick={() => dispatch({ type: 'navigate', screen: { name: 'study' } })}>
+            {t.home.studyButton(!!plan)}
           </button>
         </section>
       </div>

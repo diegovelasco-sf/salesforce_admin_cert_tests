@@ -10,8 +10,12 @@ import { SOURCE_LABELS, type Section } from '../domain/exam.ts'
 import type { ReviewStatus, SectionKey, SourceId } from '../domain/types.ts'
 import { plural } from './format.ts'
 import type { Notice, RunKind } from './state.ts'
+import type { Theme } from './theme.ts'
 
 export type Lang = 'es' | 'en'
+
+/** Quita el punto final de una opción citada entre comillas, para no acabar en «….». */
+const trimDot = (text: string): string => text.replace(/\.$/, '')
 
 const es = {
   locale: 'es-ES',
@@ -32,7 +36,7 @@ const es = {
     brandSub: 'simulador',
     docTitle: (cert: string) => `${cert} · Simulador`,
     navLabel: 'Principal',
-    nav: { home: 'Inicio', history: 'Historial', settings: 'Ajustes' },
+    nav: { home: 'Inicio', browse: 'Banco', history: 'Progreso', settings: 'Ajustes' },
     certSwitchLabel: 'Certificación',
   },
 
@@ -52,10 +56,20 @@ const es = {
         return `Con tus ajustes solo hay ${n.available} preguntas disponibles, así que el simulacro es más corto que el real.`
       case 'shortfall':
         return `No hay preguntas suficientes de ${n.sections.map(sectionName).join(', ')}: su hueco se ha cubierto con otras secciones.`
+      case 'study-synced':
+        return es.study.synced(n.added, n.removed)
     }
   },
 
-  runTitle: { practice: 'Práctica', review: 'Repaso', failed: 'Falladas', 'exam-failed': 'Falladas del simulacro' } satisfies Record<RunKind, string>,
+  runTitle: { practice: 'Práctica', review: 'Repaso', failed: 'Falladas', 'exam-failed': 'Falladas del simulacro', study: 'Estudio' } satisfies Record<
+    RunKind,
+    string
+  >,
+
+  sources: {
+    officialOnly: 'Solo oficiales',
+    total: (n: number) => `${plural(n, 'pregunta', 'preguntas')} con estas fuentes`,
+  },
 
   home: {
     resumeLabel: 'Simulacro a medias',
@@ -78,6 +92,13 @@ const es = {
         ? `${plural(n, 'pregunta pendiente', 'preguntas pendientes')}: las que has fallado y las que has marcado. Salen al acertarlas dos veces seguidas.`
         : 'Aquí aparecerán las preguntas que falles o marques, hasta que las aciertes dos veces seguidas.',
     reviewButton: 'Repasar',
+    reviewEmptySources: 'Con las fuentes elegidas no tienes preguntas en repaso.',
+    studyTitle: 'Estudio',
+    studyText: (packs: number, size: number) =>
+      packs
+        ? `${plural(packs, 'paquete fijo', 'paquetes fijos')} de unas ${size} preguntas con la mezcla de secciones del examen. Repítelos enteros, solo las falladas o solo las marcadas hasta dominarlos.`
+        : 'Divide el banco en paquetes fijos de 30 o 60 preguntas, con la mezcla de secciones del examen, para repetirlos hasta memorizarlos.',
+    studyButton: (hasPlan: boolean): string => (hasPlan ? 'Estudiar' : 'Crear paquetes'),
     progressLabel: 'Tu progreso',
     seen: 'Preguntas vistas',
     globalHit: 'Acierto global',
@@ -95,7 +116,7 @@ const es = {
     intro: 'Respondes, compruebas y ves la explicación al momento. Cada respuesta cuenta para tus estadísticas.',
     sections: 'Secciones',
     sources: 'Fuentes',
-    officialOnly: (n: number, names: string) => `Solo oficiales (${n}: ${names})`,
+    filters: 'Filtros',
     unseenOnly: 'Solo preguntas que aún no has visto',
     excludeDoubtful: (n: number) => `Sin preguntas dudosas ni obsoletas (${n} en el banco)`,
     count: 'Número de preguntas',
@@ -119,7 +140,9 @@ const es = {
     check: 'Comprobar',
     pickToCheck: (n: number) => `Elige ${n} para comprobar`,
     summaryButton: 'Ver resumen',
-    hint: 'Atajos: 1-5 marcan opciones · Enter comprueba y avanza · ← anterior · M marca para repasar',
+    hint: 'Atajos: 1-5 marcan opciones · Enter comprueba y avanza · ← anterior · → siguiente · M marca para repasar · N escribe una nota',
+    nextPack: 'Siguiente paquete',
+    backToStudy: 'Volver a los paquetes',
   },
 
   exam: {
@@ -163,6 +186,72 @@ const es = {
     authored: 'La fuente solo traía la pregunta y su respuesta: las opciones incorrectas se han redactado aparte para poder practicarla.',
     pending: 'Explicación pendiente: todavía no está redactada para esta pregunta.',
     learnMore: 'Para saber más',
+    alsoIn: (refs: string) => `También en: ${refs}`,
+    conflictTitle: (source: string) => `${source} da otra respuesta.`,
+    conflictGave: (theirs: string, ours: string) => `Esa fuente da por correcta «${trimDot(theirs)}»; aquí se mantiene «${trimDot(ours)}».`,
+    note: 'Tu nota',
+    noteAdd: '✎ Añadir nota',
+    noteEdit: '✎ Editar nota',
+    notePlaceholder: 'Un truco para recordarla, un enlace a la documentación…',
+    noteSave: 'Guardar',
+    noteDelete: 'Borrar nota',
+  },
+
+  study: {
+    title: 'Estudio',
+    intro:
+      'El banco se reparte en paquetes fijos que no se solapan: cada pregunta está en un solo paquete y todos llevan la misma mezcla de secciones, la del banco, parecida a la del examen. Repite cada paquete hasta dominarlo: una pregunta está dominada si nunca la has fallado en el estudio o si, tras fallarla, la aciertas dos veces seguidas.',
+    setupTitle: 'Crear los paquetes',
+    size: 'Tamaño de cada paquete',
+    sizeOption: (n: number) => `${n} preguntas`,
+    sources: 'Fuentes',
+    excludeDoubtful: (n: number) => `Sin preguntas dudosas ni obsoletas (${n} en el banco)`,
+    preview: (questions: number, packs: number) =>
+      questions ? `${plural(questions, 'pregunta', 'preguntas')} en ${plural(packs, 'paquete', 'paquetes')}.` : 'No hay preguntas con estas fuentes.',
+    create: 'Crear paquetes',
+    recreate: 'Rehacer los paquetes',
+    recreateTitle: '¿Rehacer los paquetes?',
+    recreateBody:
+      'Se repartirán de nuevo las preguntas y se borrará el dominio de cada paquete. Tus estadísticas generales, las marcas y las notas no cambian.',
+    recreateConfirm: 'Rehacer',
+    planInfo: (questions: number, packs: number, size: number, sources: string) =>
+      `${plural(questions, 'pregunta', 'preguntas')} en ${plural(packs, 'paquete', 'paquetes')} de ${size} · Fuentes: ${sources}.`,
+    allSources: 'todas',
+    synced: (added: number, removed: number) =>
+      `El banco ha cambiado: ${[added ? plural(added, 'pregunta nueva', 'preguntas nuevas') + ' en los últimos paquetes' : '', removed ? plural(removed, 'pregunta retirada', 'preguntas retiradas') : ''].filter(Boolean).join(' y ')}. El resto sigue en su paquete.`,
+    pack: (n: number) => `Paquete ${n}`,
+    packMeter: (mastered: number, total: number) => `${mastered} de ${total} dominadas`,
+    packCounts: (fresh: number, learning: number) => `${fresh} sin ver · ${plural(learning, 'fallada', 'falladas')} por dominar`,
+    packDone: '✓ Dominado',
+    flaggedCount: (n: number) => plural(n, 'marcada', 'marcadas'),
+    repeatAll: (n: number) => `Todas (${n})`,
+    repeatFailed: (n: number) => `Falladas (${n})`,
+    repeatFlagged: (n: number) => `Marcadas (${n})`,
+    sections: (parts: string) => `Secciones: ${parts}`,
+    totalMastered: (mastered: number, total: number) => `${mastered} de ${total} preguntas dominadas`,
+  },
+
+  browse: {
+    title: 'Banco de preguntas',
+    intro: 'Busca y consulta cualquier pregunta con su respuesta y su explicación. Desde aquí también puedes marcarla o escribirle una nota.',
+    search: 'Buscar',
+    searchPlaceholder: 'Texto del enunciado o de las opciones, o id (ab-v2335-012)',
+    section: 'Sección',
+    allSections: 'Todas las secciones',
+    source: 'Fuente',
+    allSources: 'Todas las fuentes',
+    status: 'Estado',
+    statusAll: 'Todas',
+    statusFlagged: 'Marcadas',
+    statusFailed: 'En repaso',
+    statusNoted: 'Con nota',
+    statusUnseen: 'Sin ver',
+    statusDoubtful: 'Dudosas u obsoletas',
+    results: (n: number, total: number) => `${plural(n, 'pregunta', 'preguntas')} de ${total}`,
+    showMore: (n: number) => `Ver ${n} más`,
+    empty: 'Ninguna pregunta coincide con la búsqueda.',
+    practiceThese: (n: number) => (n === 1 ? 'Practicar esta pregunta' : `Practicar estas ${n} preguntas`),
+    seenStat: (seen: number, correct: number) => (seen ? `Vista ${seen} ${seen === 1 ? 'vez' : 'veces'} · ${correct} ${correct === 1 ? 'acierto' : 'aciertos'}` : 'Sin ver'),
   },
 
   results: {
@@ -193,8 +282,21 @@ const es = {
   },
 
   history: {
-    title: 'Historial',
+    title: 'Progreso',
     exams: 'Simulacros',
+    overview: 'Resumen',
+    seen: 'Preguntas vistas',
+    mastered: 'Dominadas',
+    masteredDetail: 'acertadas y sin fallos pendientes',
+    inReview: 'En repaso',
+    studyPacks: 'Paquetes dominados',
+    trendTitle: 'Nota de los simulacros',
+    trendCaption: (passPercent: number) => `Cada punto es un simulacro, del más antiguo al más reciente. La línea discontinua marca el aprobado (${passPercent} %).`,
+    trendPoint: (n: number, date: string, score: string, passed: boolean) => `Simulacro ${n}, ${date}: ${score}, ${passed ? 'aprobado' : 'suspendido'}`,
+    weakTitle: 'Dónde flojeas',
+    weakText: 'Secciones con menos acierto acumulado. Practícalas para subir la media.',
+    weakEmpty: 'Responde algunas preguntas para ver qué secciones te cuestan más.',
+    practiceSection: 'Practicar',
     passed: 'Aprobados',
     best: 'Mejor nota',
     recent: 'Media reciente',
@@ -231,9 +333,13 @@ const es = {
     languageName: (lang: Lang): string => (lang === 'es' ? 'Inglés / español' : 'Todo en inglés'),
     languageNote:
       '«Inglés / español»: interfaz en español, preguntas en inglés y explicaciones en español. «Todo en inglés»: también las explicaciones en inglés; las que aún no tienen versión en inglés aparecen como pendientes. Se aplica a todas las certificaciones.',
+    theme: 'Tema',
+    themeName: (theme: Theme): string => ({ auto: 'Automático (el del sistema)', light: 'Claro', dark: 'Oscuro' })[theme],
     exam: 'Simulacro',
     excludeDoubtful: (n: number) => `Excluir las preguntas dudosas u obsoletas (${n})`,
-    officialOnly: (n: number) => `Usar solo preguntas de fuentes oficiales (${n})`,
+    examSources: 'Fuentes del simulacro',
+    reviewSources: 'Fuentes del repaso',
+    reviewSourcesNote: 'Repaso solo incluye las preguntas falladas o marcadas de estas fuentes.',
     pool: (n: number) => `Con estos ajustes el simulacro elige entre ${plural(n, 'pregunta', 'preguntas')}.`,
     tooShort: (questionCount: number) => ` No llegan a ${questionCount}: el simulacro será más corto.`,
     progress: 'Tu progreso',
@@ -287,7 +393,7 @@ const en: Messages = {
     brandSub: 'simulator',
     docTitle: (cert) => `${cert} · Simulator`,
     navLabel: 'Main',
-    nav: { home: 'Home', history: 'History', settings: 'Settings' },
+    nav: { home: 'Home', browse: 'Bank', history: 'Progress', settings: 'Settings' },
     certSwitchLabel: 'Certification',
   },
 
@@ -307,10 +413,17 @@ const en: Messages = {
         return `With your settings only ${n.available} questions are available, so the mock exam is shorter than the real one.`
       case 'shortfall':
         return `There are not enough ${n.sections.map(sectionName).join(', ')} questions, so that gap was filled with other sections.`
+      case 'study-synced':
+        return en.study.synced(n.added, n.removed)
     }
   },
 
-  runTitle: { practice: 'Practice', review: 'Review', failed: 'Failed questions', 'exam-failed': 'Failed in the mock exam' },
+  runTitle: { practice: 'Practice', review: 'Review', failed: 'Failed questions', 'exam-failed': 'Failed in the mock exam', study: 'Study' },
+
+  sources: {
+    officialOnly: 'Official only',
+    total: (n) => `${plural(n, 'question', 'questions')} with these sources`,
+  },
 
   home: {
     resumeLabel: 'Mock exam in progress',
@@ -333,6 +446,13 @@ const en: Messages = {
         ? `${plural(n, 'question to review', 'questions to review')}: the ones you got wrong and the ones you flagged. They leave after two correct answers in a row.`
         : 'Questions you get wrong or flag will show up here until you answer them correctly twice in a row.',
     reviewButton: 'Review',
+    reviewEmptySources: 'With the chosen sources you have no questions in review.',
+    studyTitle: 'Study',
+    studyText: (packs, size) =>
+      packs
+        ? `${plural(packs, 'fixed pack', 'fixed packs')} of about ${size} questions with the exam's section mix. Repeat them in full, only the failed ones or only the flagged ones until you master them.`
+        : 'Split the bank into fixed packs of 30 or 60 questions, with the exam\'s section mix, to repeat them until you memorize them.',
+    studyButton: (hasPlan) => (hasPlan ? 'Study' : 'Create packs'),
     progressLabel: 'Your progress',
     seen: 'Questions seen',
     globalHit: 'Overall accuracy',
@@ -350,7 +470,7 @@ const en: Messages = {
     intro: 'Answer, check and read the explanation right away. Every answer counts towards your statistics.',
     sections: 'Sections',
     sources: 'Sources',
-    officialOnly: (n, names) => `Official only (${n}: ${names})`,
+    filters: 'Filters',
     unseenOnly: 'Only questions you have not seen yet',
     excludeDoubtful: (n) => `No doubtful or outdated questions (${n} in the bank)`,
     count: 'Number of questions',
@@ -374,7 +494,9 @@ const en: Messages = {
     check: 'Check',
     pickToCheck: (n) => `Pick ${n} to check`,
     summaryButton: 'See summary',
-    hint: 'Shortcuts: 1-5 select options · Enter checks and moves on · ← previous · M flags for review',
+    hint: 'Shortcuts: 1-5 select options · Enter checks and moves on · ← previous · → next · M flags for review · N writes a note',
+    nextPack: 'Next pack',
+    backToStudy: 'Back to the packs',
   },
 
   exam: {
@@ -414,6 +536,71 @@ const en: Messages = {
     authored: 'The source only had the question and its answer, so the incorrect options were written separately to make it practicable.',
     pending: 'No English explanation is available for this question yet.',
     learnMore: 'Learn more',
+    alsoIn: (refs) => `Also in: ${refs}`,
+    conflictTitle: (source) => `${source} gives a different answer.`,
+    conflictGave: (theirs, ours) => `That source marks «${trimDot(theirs)}» as correct; this bank keeps «${trimDot(ours)}».`,
+    note: 'Your note',
+    noteAdd: '✎ Add note',
+    noteEdit: '✎ Edit note',
+    notePlaceholder: 'A trick to remember it, a link to the docs…',
+    noteSave: 'Save',
+    noteDelete: 'Delete note',
+  },
+
+  study: {
+    title: 'Study',
+    intro:
+      'The bank is split into fixed packs that do not overlap: each question is in a single pack and every pack has the same section mix, the bank\'s, close to the exam\'s. Repeat each pack until you master it: a question is mastered if you have never failed it while studying or if, after failing it, you get it right twice in a row.',
+    setupTitle: 'Create the packs',
+    size: 'Size of each pack',
+    sizeOption: (n) => `${n} questions`,
+    sources: 'Sources',
+    excludeDoubtful: (n) => `No doubtful or outdated questions (${n} in the bank)`,
+    preview: (questions, packs) =>
+      questions ? `${plural(questions, 'question', 'questions')} in ${plural(packs, 'pack', 'packs')}.` : 'There are no questions with these sources.',
+    create: 'Create packs',
+    recreate: 'Rebuild the packs',
+    recreateTitle: 'Rebuild the packs?',
+    recreateBody: 'The questions will be split again and the mastery of each pack will be cleared. Your overall stats, flags and notes do not change.',
+    recreateConfirm: 'Rebuild',
+    planInfo: (questions, packs, size, sources) =>
+      `${plural(questions, 'question', 'questions')} in ${plural(packs, 'pack', 'packs')} of ${size} · Sources: ${sources}.`,
+    allSources: 'all',
+    synced: (added, removed) =>
+      `The bank has changed: ${[added ? plural(added, 'new question', 'new questions') + ' in the last packs' : '', removed ? plural(removed, 'question removed', 'questions removed') : ''].filter(Boolean).join(' and ')}. The rest stay in their pack.`,
+    pack: (n) => `Pack ${n}`,
+    packMeter: (mastered, total) => `${mastered} of ${total} mastered`,
+    packCounts: (fresh, learning) => `${fresh} not seen · ${plural(learning, 'failed', 'failed')} to master`,
+    packDone: '✓ Mastered',
+    flaggedCount: (n) => `${n} flagged`,
+    repeatAll: (n) => `All (${n})`,
+    repeatFailed: (n) => `Failed (${n})`,
+    repeatFlagged: (n) => `Flagged (${n})`,
+    sections: (parts) => `Sections: ${parts}`,
+    totalMastered: (mastered, total) => `${mastered} of ${total} questions mastered`,
+  },
+
+  browse: {
+    title: 'Question bank',
+    intro: 'Search and read any question with its answer and explanation. You can also flag it or write a note from here.',
+    search: 'Search',
+    searchPlaceholder: 'Text of the question or options, or id (ab-v2335-012)',
+    section: 'Section',
+    allSections: 'All sections',
+    source: 'Source',
+    allSources: 'All sources',
+    status: 'Status',
+    statusAll: 'All',
+    statusFlagged: 'Flagged',
+    statusFailed: 'In review',
+    statusNoted: 'With a note',
+    statusUnseen: 'Not seen',
+    statusDoubtful: 'Doubtful or outdated',
+    results: (n, total) => `${plural(n, 'question', 'questions')} of ${total}`,
+    showMore: (n) => `Show ${n} more`,
+    empty: 'No question matches the search.',
+    practiceThese: (n) => (n === 1 ? 'Practice this question' : `Practice these ${n} questions`),
+    seenStat: (seen, correct) => (seen ? `Seen ${seen} ${seen === 1 ? 'time' : 'times'} · ${correct} correct` : 'Not seen'),
   },
 
   results: {
@@ -443,8 +630,21 @@ const en: Messages = {
   },
 
   history: {
-    title: 'History',
+    title: 'Progress',
     exams: 'Mock exams',
+    overview: 'Overview',
+    seen: 'Questions seen',
+    mastered: 'Mastered',
+    masteredDetail: 'answered right, no pending misses',
+    inReview: 'In review',
+    studyPacks: 'Packs mastered',
+    trendTitle: 'Mock exam scores',
+    trendCaption: (passPercent) => `Each point is a mock exam, from oldest to newest. The dashed line marks the pass mark (${passPercent}%).`,
+    trendPoint: (n, date, score, passed) => `Mock exam ${n}, ${date}: ${score}, ${passed ? 'passed' : 'failed'}`,
+    weakTitle: 'Where you struggle',
+    weakText: 'Sections with the lowest overall hit rate. Practice them to raise your average.',
+    weakEmpty: 'Answer some questions to see which sections are hardest for you.',
+    practiceSection: 'Practice',
     passed: 'Passed',
     best: 'Best score',
     recent: 'Recent average',
@@ -480,9 +680,13 @@ const en: Messages = {
     languageName: (lang) => (lang === 'es' ? 'English / Spanish' : 'All in English'),
     languageNote:
       '«English / Spanish»: Spanish interface, questions in English and explanations in Spanish. «All in English»: explanations in English too; questions without an English explanation show as pending. Applies to all certifications.',
+    theme: 'Theme',
+    themeName: (theme) => ({ auto: 'Automatic (system)', light: 'Light', dark: 'Dark' })[theme],
     exam: 'Mock exam',
     excludeDoubtful: (n) => `Exclude doubtful or outdated questions (${n})`,
-    officialOnly: (n) => `Use only questions from official sources (${n})`,
+    examSources: 'Mock exam sources',
+    reviewSources: 'Review sources',
+    reviewSourcesNote: 'Review only includes failed or flagged questions from these sources.',
     pool: (n) => `With these settings the mock exam picks from ${plural(n, 'question', 'questions')}.`,
     tooShort: (questionCount) => ` That is fewer than ${questionCount}, so the mock exam will be shorter.`,
     progress: 'Your progress',
@@ -554,10 +758,10 @@ const CERT_TEXTS_EN: Record<CertConfig['id'], CertTexts> = {
   },
   appbuilder: {
     officialNames: '',
-    footer: 'Personal use. Unofficial questions from FreeCram. Your progress is stored only in this browser.',
+    footer: 'Personal use. Unofficial questions from FreeCram and Success4Exam. Your progress is stored only in this browser.',
     guide: "official Platform App Builder exam guide, SU '26",
     sourcesNote:
-      'These are unofficial FreeCram questions: the base is V23.35, in a revised version with typos and keys corrected, with later versions added. The bank predates SU \'26, so questions that depend on retired features (Process Builder, Workflow Rules) are flagged as outdated and excluded from the mock exam. Questions repeated across sources have been merged, and corrected or doubtful keys are flagged on each question.',
+      'These are unofficial FreeCram and Success4Exam questions: the base is FreeCram V23.35, in a revised version with typos and keys corrected, with later versions added. The Success4Exam 2026 Practice Test almost only repeats V23.35 questions: it has been merged with them, and the ones with a different key are under review. The bank predates SU \'26, so questions that depend on retired features (Process Builder, Workflow Rules) are flagged as outdated and excluded from the mock exam. Questions repeated across sources have been merged, and corrected or doubtful keys are flagged on each question.',
     officialNote: '',
   },
   developer: {
@@ -577,7 +781,7 @@ const SOURCE_LABELS_EN: Record<SourceId, string> = {
   success4exam: 'Success4Exam (unofficial)',
   debrief: 'Debrief (unofficial)',
   abv2335: 'FreeCram V23.35 revised (unofficial)',
-  abs4e: 'Success4Exam demo (unofficial)',
+  abs4e: 'Success4Exam 2026 (unofficial)',
   abfc143: 'FreeCram v2026-06-30 (unofficial)',
   abfc108: 'FreeCram v2026-09-05 (unofficial)',
   abfc35: 'FreeCram undated (unofficial)',

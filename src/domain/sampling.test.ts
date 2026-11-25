@@ -83,16 +83,19 @@ describe('filterPool', () => {
   const ids = (list: { id: string }[]) => list.map((q) => q.id)
 
   it('excluye dudosas y obsoletas si se pide', () => {
-    expect(ids(filterPool(pool, admin, { excludeDoubtful: true, officialOnly: false }))).toEqual(['ok', 'corrected', 'official'])
-    expect(filterPool(pool, admin, { excludeDoubtful: false, officialOnly: false })).toHaveLength(5)
+    expect(ids(filterPool(pool, { excludeDoubtful: true }))).toEqual(['ok', 'corrected', 'official'])
+    expect(filterPool(pool, { excludeDoubtful: false })).toHaveLength(5)
   })
 
-  it('filtra por fuente oficial y por sección', () => {
-    expect(ids(filterPool(pool, admin, { excludeDoubtful: false, officialOnly: true }))).toEqual(['official'])
-    expect(ids(filterPool(pool, admin, { excludeDoubtful: false, officialOnly: false, sections: ['data'] }))).toEqual(['outdated', 'official'])
+  it('filtra por fuentes y por sección', () => {
+    expect(ids(filterPool(pool, { excludeDoubtful: false, sources: ['crt101'] }))).toEqual(['official'])
+    expect(filterPool(pool, { excludeDoubtful: false, sources: [] })).toEqual([])
+    expect(ids(filterPool(pool, { excludeDoubtful: false, sections: ['data'] }))).toEqual(['outdated', 'official'])
   })
 
-  it('una certificación sin fuentes oficiales ignora «solo oficiales» en vez de dejar el banco vacío', () => {
-    expect(filterPool(pool, appbuilder, { excludeDoubtful: false, officialOnly: true })).toHaveLength(5)
+  it('una pregunta unificada con un duplicado de otra fuente también es de esa fuente', () => {
+    const merged = makeQuestion('merged', 'config', { alsoIn: [{ source: 'success4exam', ref: 'Q9' }] })
+    expect(ids(filterPool([merged, ...pool], { excludeDoubtful: false, sources: ['success4exam'] }))).toEqual(['merged'])
+    expect(ids(filterPool([merged, ...pool], { excludeDoubtful: false, sources: ['crt101'] }))).toEqual(['official'])
   })
 })

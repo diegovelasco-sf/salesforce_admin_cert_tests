@@ -98,6 +98,25 @@ export function assemble(
   const included = new Map(questions.map((q) => [q.id, q]))
   for (const [p, entry] of duplicates) checkDuplicate(p, entry, included, errors)
   checkNearDuplicates(questions, curation, errors)
+  // Cada pregunta recuerda en qué otras fuentes aparece, para que el filtro por fuente la encuentre, y qué
+  // fuentes dan otra respuesta.
+  for (const [p, entry] of duplicates) {
+    const target = included.get(entry.duplicateOf!)
+    if (!target) continue
+    if (entry.conflictNote) {
+      const answer = p.correct.map((key) => answerText(p, entry, key))
+      target.conflicts = [
+        ...(target.conflicts ?? []),
+        { source: p.source, ref: p.ref, answer, note: entry.conflictNote, ...(entry.conflictNoteEn ? { noteEn: entry.conflictNoteEn } : {}) },
+      ]
+    }
+    if (target.source === p.source || target.alsoIn?.some((s) => s.source === p.source)) continue
+    target.alsoIn = [...(target.alsoIn ?? []), { source: p.source, ref: p.ref }]
+  }
+  for (const q of questions) {
+    q.alsoIn?.sort((a, b) => a.source.localeCompare(b.source))
+    q.conflicts?.sort((a, b) => a.source.localeCompare(b.source) || a.ref.localeCompare(b.ref))
+  }
   return questions
 }
 
@@ -212,29 +231,64 @@ function validate(q: Question, entry: CurationEntry, strict: boolean, errors: st
  * parecida del destino. Si no salen justo sus correctas, solo se acepta con el destino marcado como
  * "corrected" o "disputed" y un reviewNote en el duplicado que explique la diferencia.
  */
+/** Texto de una opción del duplicado con sus propias correcciones de texto aplicadas. */
+function answerText(p: ParsedQuestion, entry: CurationEntry, key: string): string {
+  let text = p.options.find((o) => o.key === key)?.text ?? ''
+  for (const fix of entry.textFixes ?? []) if (fix.field === `option:${key}` && text.split(fix.from).length - 1 === 1) text = text.replace(fix.from, fix.to)
+  return text
+}
+
 function checkDuplicate(p: ParsedQuestion, entry: CurationEntry, included: Map<string, Question>, errors: string[]): void {
   const fail = (message: string): void => void errors.push(`${p.id}: ${message}`)
   const target = included.get(entry.duplicateOf!)
   if (!target) return fail(`duplicateOf apunta a ${entry.duplicateOf}, que no está en el banco`)
+  if (entry.conflictNote !== undefined) {
+    if (!entry.conflictNote.trim()) return fail('conflictNote vacía')
+    for (const pattern of LETTER_REFERENCES) {
+      const match = pattern.exec(entry.conflictNote)
+      if (match) return fail(`conflictNote nombra una opción por su letra o posición: "${match[0]}"`)
+    }
+    for (const pattern of EN_LETTER_REFERENCES) {
+      const match = entry.conflictNoteEn && pattern.exec(entry.conflictNoteEn)
+      if (match) return fail(`conflictNoteEn nombra una opción por su letra o posición: "${match[0]}"`)
+    }
+  } else if (entry.conflictNoteEn) return fail('conflictNoteEn sin conflictNote')
 
   const matched = new Set<string>()
   for (const answer of p.options.filter((o) => p.correct.includes(o.key))) {
     // El duplicado no entra en el banco, pero se compara ya con sus propias correcciones de texto
     // (una opción ilegible por el OCR que la otra fuente trae limpia).
-    let answerText = answer.text
     for (const fix of entry.textFixes ?? []) {
       if (fix.field !== `option:${answer.key}`) continue
-      if (answerText.split(fix.from).length - 1 !== 1) return fail(`textFix "${fix.from}": no aparece exactamente una vez en ${fix.field}`)
-      answerText = answerText.replace(fix.from, fix.to)
+      if (answer.text.split(fix.from).length - 1 !== 1) return fail(`textFix "${fix.from}": no aparece exactamente una vez en ${fix.field}`)
     }
-    const answerWords = words(answerText)
+    const text = answerText(p, entry, answer.key)
+    // Las palabras sueltas deciden si la respuesta está entre las opciones; el orden de las palabras y
+    // los operadores desempatan entre opciones con las mismas palabras («Accounts with Boxes» frente a
+    // «Boxes with Accounts», o la misma fórmula con && o con ||).
+    const answerWords = words(text)
+    const answerSequence = sequence(text)
     const [best] = target.options
-      .map((o) => ({ key: o.key, score: jaccard(answerWords, words(o.text)) }))
-      .sort((a, b) => b.score - a.score)
-    if (best.score < SAME_ANSWER) return fail(`la respuesta "${answerText}" no se parece a ninguna opción de ${target.id}`)
+      .map((o) => ({ key: o.key, score: jaccard(answerWords, words(o.text)), order: orderSimilarity(answerSequence, sequence(o.text)) }))
+      .sort((a, b) => b.score + b.order - (a.score + a.order))
+    // Dos respuestas del duplicado no pueden ser la misma opción del destino: si chocan, no coinciden.
+    if (matched.has(best.key)) {
+      if (entry.conflictNote) continue
+      return fail(`dos respuestas se parecen a la misma opción de ${target.id}`)
+    }
+    // Con otra respuesta declarada, la de la fuente puede no existir siquiera en el banco (opción rota).
+    if (best.score < SAME_ANSWER) {
+      if (entry.conflictNote) continue
+      return fail(`la respuesta "${text}" no se parece a ninguna opción de ${target.id}`)
+    }
     matched.add(best.key)
   }
-  const agrees = matched.size === target.correct.length && target.correct.every((key) => matched.has(key))
+  const agrees =
+    matched.size === p.correct.length && matched.size === target.correct.length && target.correct.every((key) => matched.has(key))
+  if (entry.conflictNote) {
+    if (agrees) fail(`tiene conflictNote pero da la misma respuesta que ${target.id}: quítala`)
+    return
+  }
   if (agrees) return
   if (!entry.reviewNote || (target.review !== 'corrected' && target.review !== 'disputed')) {
     fail(`es duplicado de ${target.id} pero sus respuestas no coinciden: marca el destino como "corrected" o "disputed" y explica la diferencia en reviewNote`)
@@ -243,6 +297,22 @@ function checkDuplicate(p: ParsedQuestion, entry: CurationEntry, included: Map<s
 
 export const words = (text: string): Set<string> => new Set(canonical(text).split(' '))
 const tokens = (q: Question): Set<string> => words(`${q.stem} ${q.options.map((o) => o.text).sort().join(' ')}`)
+
+/** Palabras en orden, con los operadores lógicos de las fórmulas convertidos en palabras. */
+export const sequence = (text: string): string[] =>
+  canonical(text.replace(/&&/g, ' and ').replace(/\|\|/g, ' or ').replace(/!=|<>/g, ' ne ')).split(' ').filter(Boolean)
+
+/** Parecido según el orden: subsecuencia común más larga, de 0 a 1. */
+export function orderSimilarity(a: readonly string[], b: readonly string[]): number {
+  if (!a.length || !b.length) return 0
+  let prev = new Array<number>(b.length + 1).fill(0)
+  for (const token of a) {
+    const row = [0]
+    for (let j = 0; j < b.length; j++) row.push(token === b[j] ? prev[j] + 1 : Math.max(prev[j + 1], row[j]))
+    prev = row
+  }
+  return (2 * prev[b.length]) / (a.length + b.length)
+}
 
 export function jaccard(a: Set<string>, b: Set<string>): number {
   let shared = 0
@@ -269,7 +339,7 @@ function checkNearDuplicates(questions: Question[], curation: Map<string, Curati
 
 function report(questions: Question[], config: CertConfig, sourceIds: string[]): string[] {
   const count = (pred: (q: Question) => boolean) => questions.filter(pred).length
-  const pool = filterPool(questions, config, { excludeDoubtful: true, officialOnly: false })
+  const pool = filterPool(questions, { excludeDoubtful: true })
   const quota = apportion(config.exam.questionCount, config.sections.map((s) => s.weight))
   const lines = [
     `Banco ${config.name}: ${questions.length} preguntas · ` +

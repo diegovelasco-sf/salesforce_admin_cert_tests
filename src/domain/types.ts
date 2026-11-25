@@ -22,7 +22,7 @@ export type SectionKey =
 /** Certificación a la que pertenece una pregunta: cada una tiene su banco, su examen y su progreso. */
 export type CertId = 'admin' | 'appbuilder' | 'developer'
 
-/** abv2335: FreeCram V23.35 en la versión revisada a mano (documento «Platform App Builder Exam Questions»), la fuente principal de App Builder · abs4e: demo de Success4Exam · abfc143 y abfc108: FreeCram v2026-06-30 y v2026-09-05 · abfc35: FreeCram sin fecha. */
+/** abv2335: FreeCram V23.35 en la versión revisada a mano (documento «Platform App Builder Exam Questions»), la fuente principal de App Builder · abs4e: Success4Exam 2026 (Practice Test completo, 188 preguntas) · abfc143 y abfc108: FreeCram v2026-06-30 y v2026-09-05 · abfc35: FreeCram sin fecha. */
 export type SourceId =
   | 'freecram'
   | 'crt101'
@@ -88,6 +88,23 @@ export interface Question {
   explanationEn?: string
   learnMore: LearnMore[]
   authoredOptions?: boolean
+  /** Otras fuentes que traen esta misma pregunta (sus duplicados unificados), para filtrar por fuente y citarlas. */
+  alsoIn?: SourceRef[]
+  /** Fuentes que traen esta pregunta con otra respuesta, y por qué se mantiene la del banco. */
+  conflicts?: SourceConflict[]
+}
+
+export interface SourceRef {
+  source: SourceId
+  ref: string
+}
+
+export interface SourceConflict extends SourceRef {
+  /** Texto de las opciones que esa fuente da por correctas. */
+  answer: string[]
+  /** Por qué la respuesta del banco es la correcta. */
+  note: string
+  noteEn?: string
 }
 
 export interface Bank {
@@ -113,6 +130,12 @@ export interface CurationEntry {
   review?: ReviewStatus
   /** Motivo de la revisión. En un duplicado con otra clave que su destino, explica cómo se ha resuelto. */
   reviewNote?: string
+  /**
+   * Solo en un duplicado: su fuente da otra respuesta que la del banco, y esta nota explica por qué la del
+   * banco es la correcta. La pregunta del banco la muestra junto a las dos respuestas.
+   */
+  conflictNote?: string
+  conflictNoteEn?: string
   textFixes?: TextFix[]
   explanationEs?: string
   explanationEn?: string

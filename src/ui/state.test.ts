@@ -5,6 +5,7 @@ import { mulberry32 } from '../domain/rng.ts'
 import { createExamSession } from '../domain/session.ts'
 import { emptyProgress } from '../domain/storage.ts'
 import { makeCertData } from './certdata.ts'
+import { packProgress, packQuestions } from '../domain/study.ts'
 import { createReducer, initState, makeRun, type AppState } from './state.ts'
 
 const data = makeCertData(CERTS.admin, makeBank(20, 'v1'))
@@ -113,5 +114,69 @@ describe('Platform App Builder', () => {
     expect(() => data.question(appBuilderId)).toThrow(/Platform Administrator/)
     expect(appbuilder.byId.has(adminId)).toBe(false)
     expect(data.byId.has(appBuilderId)).toBe(false)
+  })
+})
+
+describe('estudio y notas', () => {
+  it('las respuestas de un paquete cuentan en las estadísticas y en el dominio del paquete', () => {
+    const [q] = bank.questions
+    const plan = { size: 30 as const, excludeDoubtful: true, packs: [[q.id]], stats: {}, createdAt: 0 }
+    let state = reducer(fresh(), { type: 'study/plan', plan })
+    state = reducer(state, { type: 'navigate', screen: { name: 'practice', run: makeRun('study', [q], mulberry32(1), 0) } })
+    state = reducer(state, { type: 'practice/select', id: q.id, keys: ['B'] })
+    state = reducer(state, { type: 'practice/check', id: q.id, now: 5 })
+    expect(state.progress.stats[q.id]).toMatchObject({ seen: 1, correct: 0 })
+    expect(state.progress.study!.stats[q.id]).toMatchObject({ seen: 1, correct: 0 })
+  })
+
+  it('una práctica normal no toca el dominio de los paquetes', () => {
+    const [q] = bank.questions
+    let state = reducer(fresh(), { type: 'study/plan', plan: { size: 30, excludeDoubtful: true, packs: [[q.id]], stats: {}, createdAt: 0 } })
+    state = reducer(state, { type: 'navigate', screen: { name: 'practice', run: makeRun('practice', [q], mulberry32(1)) } })
+    state = reducer(state, { type: 'practice/select', id: q.id, keys: ['A'] })
+    state = reducer(state, { type: 'practice/check', id: q.id, now: 5 })
+    expect(state.progress.study!.stats).toEqual({})
+  })
+
+  it('guarda, cambia y borra notas', () => {
+    let state = reducer(fresh(), { type: 'note/set', id: 'x', text: 'truco' })
+    expect(state.progress.notes).toEqual({ x: 'truco' })
+    state = reducer(state, { type: 'note/set', id: 'x', text: '   ' })
+    expect(state.progress.notes).toEqual({})
+  })
+
+  it('al cargar, el plan de estudio se pone al día con el banco y avisa', () => {
+    const [a, b] = bank.questions
+    const progress = { ...emptyProgress('admin'), study: { size: 30 as const, excludeDoubtful: true, packs: [[a.id, 'retirada']], stats: {}, createdAt: 0 } }
+    const state = initState(data, { progress }, 0)
+    expect(state.progress.study!.packs[0]).toContain(a.id)
+    expect(state.progress.study!.packs.flat()).toContain(b.id)
+    expect(state.progress.study!.packs.flat()).not.toContain('retirada')
+    expect(state.notices).toEqual([{ kind: 'study-synced', added: bank.questions.length - 1, removed: 1 }])
+  })
+})
+
+describe('tanda de estudio completa', () => {
+  it('fallar, repetir solo las falladas y dominarlas con dos aciertos seguidos', () => {
+    const qs = bank.questions.slice(0, 3)
+    const plan = { size: 30 as const, excludeDoubtful: true, packs: [qs.map((q) => q.id)], stats: {}, createdAt: 0 }
+    let state = reducer(fresh(), { type: 'study/plan', plan })
+    const answer = (q: (typeof qs)[number], keys: string[], now: number) => {
+      state = reducer(state, { type: 'navigate', screen: { name: 'practice', run: makeRun('study', [q], mulberry32(now), 0) } })
+      state = reducer(state, { type: 'practice/select', id: q.id, keys })
+      state = reducer(state, { type: 'practice/check', id: q.id, now })
+    }
+    // Primera vuelta: acierta la primera, falla las otras dos.
+    answer(qs[0], ['A'], 1)
+    answer(qs[1], ['B'], 2)
+    answer(qs[2], ['B'], 3)
+    const failedIds = () => packQuestions(state.progress.study!.packs[0], 'failed', state.progress.study!.stats, state.progress.flagged)
+    expect(failedIds()).toEqual([qs[1].id, qs[2].id])
+    // Un acierto no basta; dos seguidos sí.
+    answer(qs[1], ['A'], 4)
+    expect(failedIds()).toEqual([qs[1].id, qs[2].id])
+    answer(qs[1], ['A'], 5)
+    expect(failedIds()).toEqual([qs[2].id])
+    expect(packProgress(state.progress.study!.packs[0], state.progress.study!.stats)).toEqual({ total: 3, new: 0, learning: 1, mastered: 2 })
   })
 })

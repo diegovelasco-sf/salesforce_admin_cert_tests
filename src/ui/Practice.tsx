@@ -2,27 +2,38 @@
 import { useState, type Dispatch } from 'react'
 import { isCorrect } from '../domain/grading.ts'
 import { mulberry32, randomSeed } from '../domain/rng.ts'
-import { filterPool, isDoubtful, samplePractice } from '../domain/sampling.ts'
+import { filterPool, inSources, isDoubtful, samplePractice } from '../domain/sampling.ts'
 import { toggleSelection } from '../domain/selection.ts'
 import type { Progress } from '../domain/storage.ts'
-import type { SectionKey } from '../domain/types.ts'
+import type { SectionKey, SourceId } from '../domain/types.ts'
 import { useCert } from './cert.ts'
 import { Stat } from './common.tsx'
 import { percent } from './format.ts'
 import { useI18n } from './lang.ts'
-import { certTexts, sectionText } from './messages.ts'
+import { sectionText } from './messages.ts'
 import { QuestionCard } from './QuestionCard.tsx'
+import { SourcePicker } from './SourcePicker.tsx'
 import { makeRun, type Action, type PracticeRun } from './state.ts'
+import { packQuestions } from '../domain/study.ts'
+import { startPack } from './modes.ts'
 import { useShortcuts } from './useShortcuts.ts'
 
 const COUNTS = [10, 20, 40, 60, 0] as const
 
-export function PracticeSetup({ progress, dispatch }: { progress: Progress; dispatch: Dispatch<Action> }) {
+export function PracticeSetup({
+  progress,
+  dispatch,
+  initialSections,
+}: {
+  progress: Progress
+  dispatch: Dispatch<Action>
+  /** Secciones con las que se abre (desde «practicar esta sección»); por defecto, todas. */
+  initialSections?: SectionKey[]
+}) {
   const { cert, bank } = useCert()
   const { t, lang } = useI18n()
-  const hasOfficial = cert.officialSources.length > 0
-  const [sections, setSections] = useState<SectionKey[]>(cert.sections.map((s) => s.key))
-  const [officialOnly, setOfficialOnly] = useState(hasOfficial && progress.settings.officialOnly)
+  const [sections, setSections] = useState<SectionKey[]>(initialSections ?? cert.sections.map((s) => s.key))
+  const [sources, setSources] = useState<SourceId[] | undefined>(progress.settings.sources.practice)
   const [unseenOnly, setUnseenOnly] = useState(false)
   const [excludeDoubtful, setExcludeDoubtful] = useState(progress.settings.excludeDoubtful)
   const [count, setCount] = useState<number>(20)
@@ -30,10 +41,10 @@ export function PracticeSetup({ progress, dispatch }: { progress: Progress; disp
   const [draft, setDraft] = useState('')
   const [focused, setFocused] = useState(false)
 
-  const base = filterPool(bank.questions, cert, { excludeDoubtful, officialOnly }).filter(
-    (q) => !unseenOnly || !progress.stats[q.id],
-  )
-  const pool = base.filter((q) => sections.includes(q.section))
+  // Sin el filtro de fuentes, para que cada fuente diga cuántas aportaría.
+  const unsourced = filterPool(bank.questions, { excludeDoubtful, sections }).filter((q) => !unseenOnly || !progress.stats[q.id])
+  const base = filterPool(bank.questions, { excludeDoubtful, sources }).filter((q) => !unseenOnly || !progress.stats[q.id])
+  const pool = unsourced.filter((q) => inSources(q, sources))
   const size = count === 0 ? pool.length : Math.min(count, pool.length)
   // Número exacto: de 1 al tamaño del filtro. Al entrar en el campo adopta el número que ya está en uso.
   const exactMax = Math.max(pool.length, 1)
@@ -49,6 +60,8 @@ export function PracticeSetup({ progress, dispatch }: { progress: Progress; disp
     setSections((current) => (current.includes(key) ? current.filter((k) => k !== key) : [...current, key]))
 
   const start = () => {
+    // Las fuentes elegidas se recuerdan para la próxima práctica.
+    dispatch({ type: 'settings/update', settings: { sources: { ...progress.settings.sources, practice: sources } } })
     const rng = mulberry32(randomSeed())
     const questions = samplePractice(pool, size, rng)
     dispatch({ type: 'navigate', screen: { name: 'practice', run: makeRun('practice', questions, rng) } })
@@ -81,21 +94,11 @@ export function PracticeSetup({ progress, dispatch }: { progress: Progress; disp
 
       <fieldset>
         <legend>{t.practice.sources}</legend>
-        {hasOfficial && (
-          <>
-            <label className="check">
-              <input type="radio" name="sources" checked={!officialOnly} onChange={() => setOfficialOnly(false)} />
-              {t.all}
-            </label>
-            <label className="check">
-              <input type="radio" name="sources" checked={officialOnly} onChange={() => setOfficialOnly(true)} />
-              {t.practice.officialOnly(
-                bank.questions.filter((q) => cert.officialSources.includes(q.source)).length,
-                certTexts(cert, lang).officialNames,
-              )}
-            </label>
-          </>
-        )}
+        <SourcePicker value={sources} onChange={setSources} questions={unsourced} name={t.practice.sources} />
+      </fieldset>
+
+      <fieldset>
+        <legend>{t.practice.filters}</legend>
         <label className="check">
           <input type="checkbox" checked={unseenOnly} onChange={() => setUnseenOnly(!unseenOnly)} />
           {t.practice.unseenOnly}
@@ -171,6 +174,7 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
   const { question } = useCert()
   const { t } = useI18n()
   const [summary, setSummary] = useState(false)
+  const [editingNote, setEditingNote] = useState(false)
   const total = run.questionIds.length
   const id = run.questionIds[run.index]
   const current = question(id)
@@ -183,7 +187,10 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
   const ok = checked && isCorrect(current, selected)
   const title = t.runTitle[run.kind]
 
-  const go = (index: number) => dispatch({ type: 'practice/goto', index })
+  const go = (index: number) => {
+    setEditingNote(false)
+    dispatch({ type: 'practice/goto', index })
+  }
   const check = () => ready && !checked && dispatch({ type: 'practice/check', id, now: Date.now() })
   const advance = () => (last ? setSummary(true) : go(run.index + 1))
   const select = (keys: string[]) => dispatch({ type: 'practice/select', id, keys })
@@ -193,14 +200,20 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
       option: (i) => !checked && order[i] && select(toggleSelection(selected, order[i], current.correct.length)),
       enter: () => (checked ? advance() : check()),
       flag: () => dispatch({ type: 'flag/toggle', id }),
+      note: () => setEditingNote(true),
       prev: () => go(run.index - 1),
       next: () => checked && advance(),
     },
-    !summary,
+    !summary && !editingNote,
   )
 
   if (summary) {
     const failed = run.checked.filter((qid) => !correctIds.includes(qid))
+    const plan = progress.study
+    const pack = run.kind === 'study' && plan && run.pack !== undefined ? plan.packs[run.pack] : undefined
+    // En el estudio, «falladas» son las que aún no domina el paquete, no solo las de esta tanda.
+    const packFailed = pack ? packQuestions(pack, 'failed', plan!.stats, progress.flagged).length : 0
+    const nextPack = pack && plan!.packs[run.pack! + 1] ? run.pack! + 1 : undefined
     return (
       <section className="card summary">
         <h1>{t.practice.summary(title)}</h1>
@@ -210,10 +223,27 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
           <Stat label={t.practice.unanswered} value={total - run.checked.length} />
         </div>
         <div className="actions">
-          <button type="button" onClick={() => dispatch({ type: 'navigate', screen: { name: 'home' } })}>
-            {t.backHome}
+          <button type="button" onClick={() => dispatch({ type: 'navigate', screen: { name: pack ? 'study' : 'home' } })}>
+            {pack ? t.practice.backToStudy : t.backHome}
           </button>
-          {failed.length > 0 && (
+          {pack && nextPack !== undefined && (
+            <button type="button" onClick={() => startPack(dispatch, progress, nextPack, 'all', question)}>
+              {t.practice.nextPack}
+            </button>
+          )}
+          {pack && packFailed > 0 && (
+            <button
+              type="button"
+              className="primary"
+              onClick={() => {
+                setSummary(false)
+                startPack(dispatch, progress, run.pack!, 'failed', question)
+              }}
+            >
+              {t.study.repeatFailed(packFailed)}
+            </button>
+          )}
+          {!pack && failed.length > 0 && (
             <button
               type="button"
               className="primary"
@@ -250,6 +280,10 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
         position={{ index: run.index, total }}
         flagged={progress.flagged.includes(id)}
         onToggleFlag={() => dispatch({ type: 'flag/toggle', id })}
+        note={progress.notes[id]}
+        onNote={(text) => dispatch({ type: 'note/set', id, text })}
+        editingNote={editingNote}
+        onEditingNote={setEditingNote}
       />
 
       <p className="sr-only" aria-live="polite">
