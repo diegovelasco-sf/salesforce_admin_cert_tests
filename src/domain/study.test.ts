@@ -94,3 +94,28 @@ describe('dominio de un paquete', () => {
     expect(packQuestions(pack, 'flagged', stats, ['new', 'other'])).toEqual(['new'])
   })
 })
+
+describe('paquetes de unas secciones', () => {
+  const questions = bank(300)
+  const sections = ['logic', 'ui'] as const
+  const pool = questions.filter((q) => (sections as readonly string[]).includes(q.section))
+  const packs = buildPacks(pool, appbuilder, 30, mulberry32(3))
+
+  it('solo llevan preguntas de las secciones elegidas, en su proporción del banco', () => {
+    const section = (id: string) => questions.find((q) => q.id === id)!.section
+    expect(packs.flat().every((id) => (sections as readonly string[]).includes(section(id)))).toBe(true)
+    // 96 de logic y 51 de ui: 147 preguntas, 5 paquetes de 29 o 30, cada uno con unas 19 de logic y 10 de ui.
+    expect(packs).toHaveLength(5)
+    for (const pack of packs) {
+      const logic = pack.filter((id) => section(id) === 'logic').length
+      expect(logic).toBeGreaterThanOrEqual(19)
+      expect(logic).toBeLessThanOrEqual(20)
+    }
+  })
+
+  it('al ponerse al día con el banco, no mete preguntas de otras secciones', () => {
+    const plan: StudyPlan = { size: 30, excludeDoubtful: true, sections: [...sections], packs, stats: {}, createdAt: 0 }
+    // El plan se sincroniza con el pool ya filtrado por sus secciones, como hace initState.
+    expect(syncPlan(plan, pool)).toBe(plan)
+  })
+})

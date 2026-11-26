@@ -82,6 +82,7 @@ function parseStudy(raw: unknown): StudyPlan | undefined {
   return {
     size,
     ...(isStringArray(raw.sources) ? { sources: raw.sources as SourceId[] } : {}),
+    ...(isStringArray(raw.sections) ? { sections: raw.sections as SectionKey[] } : {}),
     excludeDoubtful: raw.excludeDoubtful !== false,
     packs: raw.packs as string[][],
     stats: isObject(raw.stats) ? (raw.stats as Stats) : {},

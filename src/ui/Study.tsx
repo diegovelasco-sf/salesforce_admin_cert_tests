@@ -4,11 +4,11 @@ import { mulberry32, randomSeed } from '../domain/rng.ts'
 import { filterPool, inSources, isDoubtful } from '../domain/sampling.ts'
 import type { Progress } from '../domain/storage.ts'
 import { PACK_SIZES, buildPacks, packProgress, packQuestions, type PackFilter, type PackSize, type StudyPlan } from '../domain/study.ts'
-import type { SourceId } from '../domain/types.ts'
+import type { SectionKey, SourceId } from '../domain/types.ts'
 import { useCert } from './cert.ts'
 import { ConfirmDialog } from './common.tsx'
 import { useI18n } from './lang.ts'
-import { sectionName, sourceLabel } from './messages.ts'
+import { sectionName, sectionText, sourceLabel } from './messages.ts'
 import { SourcePicker } from './SourcePicker.tsx'
 import { startPack } from './modes.ts'
 import type { Action } from './state.ts'
@@ -42,20 +42,29 @@ function StudySetup({
   onDone: () => void
 }) {
   const { cert, bank } = useCert()
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const current = progress.study
+  const allSections = cert.sections.map((s) => s.key)
   const [size, setSize] = useState<PackSize>(current?.size ?? 30)
   const [sources, setSources] = useState<SourceId[] | undefined>(current?.sources ?? progress.settings.sources.study)
+  const [sections, setSections] = useState<SectionKey[]>(current?.sections ?? allSections)
   const [excludeDoubtful, setExcludeDoubtful] = useState(current?.excludeDoubtful ?? true)
   const [confirm, setConfirm] = useState(false)
-  const unsourced = filterPool(bank.questions, { excludeDoubtful })
+  // Cada filtro cuenta sus opciones con el otro aplicado: las fuentes, dentro de las secciones elegidas, y al revés.
+  const doubtfulOk = filterPool(bank.questions, { excludeDoubtful })
+  const unsourced = doubtfulOk.filter((q) => sections.includes(q.section))
+  const sectionless = doubtfulOk.filter((q) => inSources(q, sources))
   const pool = unsourced.filter((q) => inSources(q, sources))
-  const packs = Math.ceil(pool.length / size)
+  const packs = Math.max(pool.length ? 1 : 0, Math.round(pool.length / size))
+  const toggleSection = (key: SectionKey) =>
+    setSections((list) => (list.includes(key) ? list.filter((k) => k !== key) : allSections.filter((k) => k === key || list.includes(k))))
+  const everySection = allSections.every((k) => sections.includes(k))
 
   const create = (now: number) => {
     const plan: StudyPlan = {
       size,
       ...(sources ? { sources } : {}),
+      ...(everySection ? {} : { sections }),
       excludeDoubtful,
       packs: buildPacks(pool, cert, size, mulberry32(randomSeed())),
       stats: {},
@@ -81,6 +90,26 @@ function StudySetup({
             </label>
           ))}
         </div>
+      </fieldset>
+      <fieldset>
+        <legend>{t.study.sectionsLegend}</legend>
+        <div className="checks">
+          {cert.sections.map((s) => (
+            <label key={s.key} className="check">
+              <input type="checkbox" checked={sections.includes(s.key)} onChange={() => toggleSection(s.key)} />
+              {sectionText(s, lang)} <span className="muted">({sectionless.filter((q) => q.section === s.key).length})</span>
+            </label>
+          ))}
+        </div>
+        <div className="inline-actions">
+          <button type="button" className="link-button" onClick={() => setSections(allSections)}>
+            {t.all}
+          </button>
+          <button type="button" className="link-button" onClick={() => setSections([])}>
+            {t.none}
+          </button>
+        </div>
+        {!everySection && sections.length > 0 && <p className="muted">{t.study.sectionsNote}</p>}
       </fieldset>
       <fieldset>
         <legend>{t.study.sources}</legend>
@@ -121,6 +150,7 @@ function PackList({ plan, progress, dispatch, onRebuild }: { plan: StudyPlan; pr
   const total = plan.packs.reduce((n, p) => n + p.length, 0)
   const mastered = plan.packs.reduce((n, p) => n + packProgress(p, plan.stats).mastered, 0)
   const sources = plan.sources?.map((s) => sourceLabel(s, lang)).join(', ') || t.study.allSources
+  const sections = plan.sections?.map((key) => sectionName(cert, key, lang)).join(', ') || t.study.allSections
 
   return (
     <>
@@ -128,7 +158,7 @@ function PackList({ plan, progress, dispatch, onRebuild }: { plan: StudyPlan; pr
         <p>
           <strong>{t.study.totalMastered(mastered, total)}</strong>
           <br />
-          <span className="muted">{t.study.planInfo(total, plan.packs.length, plan.size, sources)}</span>
+          <span className="muted">{t.study.planInfo(total, plan.packs.length, plan.size, sources, sections)}</span>
         </p>
         <button type="button" className="link-button" onClick={onRebuild}>
           {t.study.recreate}

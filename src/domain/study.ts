@@ -4,7 +4,7 @@ import type { CertConfig } from './certs.ts'
 import type { Rng } from './rng.ts'
 import { shuffle } from './shuffle.ts'
 import { REVIEW_STREAK, type QuestionStat, type Stats } from './stats.ts'
-import type { Question, SourceId } from './types.ts'
+import type { Question, SectionKey, SourceId } from './types.ts'
 
 export const PACK_SIZES = [30, 60] as const
 export type PackSize = (typeof PACK_SIZES)[number]
@@ -14,6 +14,8 @@ export interface StudyPlan {
   size: PackSize
   /** Fuentes con las que se creó; sin indicar, todas. */
   sources?: SourceId[]
+  /** Secciones con las que se creó; sin indicar, todas. */
+  sections?: SectionKey[]
   excludeDoubtful: boolean
   /** Ids de cada paquete. El último puede ir llenándose con las preguntas que se añadan al banco. */
   packs: string[][]

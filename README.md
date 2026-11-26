@@ -72,8 +72,10 @@ indica en qué otras fuentes aparece.
 
 ### Modo estudio
 
-Los paquetes se crean una vez por certificación, con el tamaño (30 o 60) y las fuentes que elijas, y se
-guardan con el progreso. Cada sección se baraja y se reparte por turnos entre todos los paquetes, así que
+Los paquetes se crean una vez por certificación, con el tamaño (30 o 60), las secciones y las fuentes que
+elijas, y se guardan con el progreso. Con todas las secciones siguen la mezcla del examen; con unas pocas
+(por ejemplo, las que suspendiste en el examen real), cada paquete solo lleva preguntas de esas secciones, en
+la proporción que tienen en el banco. Cada sección se baraja y se reparte por turnos entre todos los paquetes, así que
 cada pregunta está en un solo paquete, todos llevan la misma mezcla de secciones (la del banco, que se parece a
 la del examen) y sus tamaños difieren como mucho en una pregunta: 302 preguntas en paquetes de 30 son 10
 paquetes de 30 o 31.

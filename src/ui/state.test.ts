@@ -180,3 +180,17 @@ describe('tanda de estudio completa', () => {
     expect(packProgress(state.progress.study!.packs[0], state.progress.study!.stats)).toEqual({ total: 3, new: 0, learning: 1, mastered: 2 })
   })
 })
+
+describe('plan de estudio con secciones', () => {
+  it('al cargar, solo añade preguntas nuevas de las secciones del plan', () => {
+    const [a] = bank.questions.filter((q) => q.section === 'config')
+    const progress = {
+      ...emptyProgress('admin'),
+      study: { size: 30 as const, excludeDoubtful: true, sections: ['config' as const], packs: [[a.id]], stats: {}, createdAt: 0 },
+    }
+    const state = initState(data, { progress }, 0)
+    const ids = state.progress.study!.packs.flat()
+    expect(ids.every((id) => data.question(id).section === 'config')).toBe(true)
+    expect(ids).toHaveLength(bank.questions.filter((q) => q.section === 'config').length)
+  })
+})

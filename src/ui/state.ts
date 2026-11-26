@@ -118,7 +118,7 @@ export function initState(data: CertData, loaded: { progress: Progress; backupKe
   // Los paquetes siguen al banco sin moverse: las preguntas retiradas salen y las nuevas van al final.
   if (progress.study) {
     const plan = progress.study
-    const synced = syncPlan(plan, filterPool(data.bank.questions, { excludeDoubtful: plan.excludeDoubtful, sources: plan.sources }))
+    const synced = syncPlan(plan, filterPool(data.bank.questions, { excludeDoubtful: plan.excludeDoubtful, sources: plan.sources, sections: plan.sections }))
     if (synced !== plan) {
       const before = new Set(plan.packs.flat())
       const after = new Set(synced.packs.flat())

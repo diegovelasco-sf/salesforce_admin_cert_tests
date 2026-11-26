@@ -222,11 +222,12 @@ const es = {
   study: {
     title: 'Estudio',
     intro:
-      'El banco se reparte en paquetes fijos que no se solapan: cada pregunta está en un solo paquete y todos llevan la misma mezcla de secciones, la del banco, parecida a la del examen. Repite cada paquete hasta dominarlo: una pregunta está dominada si nunca la has fallado en el estudio o si, tras fallarla, la aciertas dos veces seguidas.',
+      'Las preguntas que elijas (por secciones y fuentes) se reparten en paquetes fijos que no se solapan: cada pregunta está en un solo paquete y todos llevan la misma mezcla de secciones. Con todas, es la del banco, parecida a la del examen; con unas pocas, puedes centrarte en las que más te cuestan. Repite cada paquete hasta dominarlo: una pregunta está dominada si nunca la has fallado en el estudio o si, tras fallarla, la aciertas dos veces seguidas.',
     setupTitle: 'Crear los paquetes',
     size: 'Tamaño de cada paquete',
     sizeOption: (n: number) => `${n} preguntas`,
     sources: 'Fuentes',
+    sectionsLegend: 'Secciones',
     excludeDoubtful: (n: number) => `Sin preguntas dudosas ni obsoletas (${n} en el banco)`,
     preview: (questions: number, packs: number) =>
       questions ? `${plural(questions, 'pregunta', 'preguntas')} en ${plural(packs, 'paquete', 'paquetes')}.` : 'No hay preguntas con estas fuentes.',
@@ -236,9 +237,11 @@ const es = {
     recreateBody:
       'Se repartirán de nuevo las preguntas y se borrará el dominio de cada paquete. Tus estadísticas generales, las marcas y las notas no cambian.',
     recreateConfirm: 'Rehacer',
-    planInfo: (questions: number, packs: number, size: number, sources: string) =>
-      `${plural(questions, 'pregunta', 'preguntas')} en ${plural(packs, 'paquete', 'paquetes')} de ${size} · Fuentes: ${sources}.`,
+    planInfo: (questions: number, packs: number, size: number, sources: string, sections: string) =>
+      `${plural(questions, 'pregunta', 'preguntas')} en ${plural(packs, 'paquete', 'paquetes')} de ${size} · Secciones: ${sections} · Fuentes: ${sources}.`,
     allSources: 'todas',
+    allSections: 'todas',
+    sectionsNote: 'Con menos secciones, cada paquete solo lleva preguntas de las elegidas, en la misma proporción que tienen en el banco.',
     synced: (added: number, removed: number) =>
       `El banco ha cambiado: ${[added ? plural(added, 'pregunta nueva', 'preguntas nuevas') + ' en los últimos paquetes' : '', removed ? plural(removed, 'pregunta retirada', 'preguntas retiradas') : ''].filter(Boolean).join(' y ')}. El resto sigue en su paquete.`,
     pack: (n: number) => `Paquete ${n}`,
@@ -593,11 +596,12 @@ const en: Messages = {
   study: {
     title: 'Study',
     intro:
-      'The bank is split into fixed packs that do not overlap: each question is in a single pack and every pack has the same section mix, the bank\'s, close to the exam\'s. Repeat each pack until you master it: a question is mastered if you have never failed it while studying or if, after failing it, you get it right twice in a row.',
+      'The questions you choose (by section and source) are split into fixed packs that do not overlap: each question is in a single pack and every pack has the same section mix. With every section it is the bank\'s, close to the exam\'s; with a few, you can focus on the ones you find hardest. Repeat each pack until you master it: a question is mastered if you have never failed it while studying or if, after failing it, you get it right twice in a row.',
     setupTitle: 'Create the packs',
     size: 'Size of each pack',
     sizeOption: (n) => `${n} questions`,
     sources: 'Sources',
+    sectionsLegend: 'Sections',
     excludeDoubtful: (n) => `No doubtful or outdated questions (${n} in the bank)`,
     preview: (questions, packs) =>
       questions ? `${plural(questions, 'question', 'questions')} in ${plural(packs, 'pack', 'packs')}.` : 'There are no questions with these sources.',
@@ -606,9 +610,11 @@ const en: Messages = {
     recreateTitle: 'Rebuild the packs?',
     recreateBody: 'The questions will be split again and the mastery of each pack will be cleared. Your overall stats, flags and notes do not change.',
     recreateConfirm: 'Rebuild',
-    planInfo: (questions, packs, size, sources) =>
-      `${plural(questions, 'question', 'questions')} in ${plural(packs, 'pack', 'packs')} of ${size} · Sources: ${sources}.`,
+    planInfo: (questions, packs, size, sources, sections) =>
+      `${plural(questions, 'question', 'questions')} in ${plural(packs, 'pack', 'packs')} of ${size} · Sections: ${sections} · Sources: ${sources}.`,
     allSources: 'all',
+    allSections: 'all',
+    sectionsNote: 'With fewer sections, each pack only has questions from the chosen ones, in the same proportion they have in the bank.',
     synced: (added, removed) =>
       `The bank has changed: ${[added ? plural(added, 'new question', 'new questions') + ' in the last packs' : '', removed ? plural(removed, 'question removed', 'questions removed') : ''].filter(Boolean).join(' and ')}. The rest stay in their pack.`,
     pack: (n) => `Pack ${n}`,
