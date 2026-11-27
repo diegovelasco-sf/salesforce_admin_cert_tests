@@ -66,6 +66,19 @@ const es = {
     string
   >,
 
+  packNav: {
+    label: 'Navegación del paquete',
+    back: '← Volver a los grupos de paquetes',
+    group: (name: string) => `Grupo: ${name}`,
+    repeatAll: (n: number) => `↻ Empezar de nuevo el paquete (${n})`,
+    packs: 'Paquetes del grupo:',
+    item: (n: number, mastered: number, total: number, current: boolean) =>
+      `Paquete ${n}${current ? ' (el actual)' : ''}: ${mastered} de ${total} dominadas`,
+    leaveTitle: '¿Dejar esta tanda?',
+    leaveBody: 'Las respuestas que ya has comprobado se quedan guardadas; solo se pierde la posición en esta tanda.',
+    leaveConfirm: 'Sí, cambiar',
+  },
+
   tracker: {
     label: 'Progreso de la tanda',
     progress: (answered: number, total: number) => `${answered} de ${total} respondidas`,
@@ -117,10 +130,10 @@ const es = {
     reviewButton: 'Repasar',
     reviewEmptySources: 'Con las fuentes elegidas no tienes preguntas en repaso.',
     studyTitle: 'Estudio',
-    studyText: (packs: number, size: number) =>
-      packs
-        ? `${plural(packs, 'paquete fijo', 'paquetes fijos')} de unas ${size} preguntas con la mezcla de secciones del examen. Repítelos enteros, solo las falladas o solo las marcadas hasta dominarlos.`
-        : 'Divide el banco en paquetes fijos de 30 o 60 preguntas, con la mezcla de secciones del examen, para repetirlos hasta memorizarlos.',
+    studyText: (plans: number, packs: number) =>
+      plans
+        ? `${plural(plans, 'grupo', 'grupos')} con ${plural(packs, 'paquete fijo', 'paquetes fijos')}. Repítelos enteros, solo las falladas o solo las marcadas hasta dominarlos.`
+        : 'Reparte en paquetes fijos de 30 o 60 preguntas las secciones y fuentes que elijas, para repetirlos hasta memorizarlos.',
     studyButton: (hasPlan: boolean): string => (hasPlan ? 'Estudiar' : 'Crear paquetes'),
     progressLabel: 'Tu progreso',
     seen: 'Preguntas vistas',
@@ -222,26 +235,31 @@ const es = {
   study: {
     title: 'Estudio',
     intro:
-      'Las preguntas que elijas (por secciones y fuentes) se reparten en paquetes fijos que no se solapan: cada pregunta está en un solo paquete y todos llevan la misma mezcla de secciones. Con todas, es la del banco, parecida a la del examen; con unas pocas, puedes centrarte en las que más te cuestan. Repite cada paquete hasta dominarlo: una pregunta está dominada si nunca la has fallado en el estudio o si, tras fallarla, la aciertas dos veces seguidas.',
-    setupTitle: 'Crear los paquetes',
+      'Crea grupos de paquetes con las secciones y las fuentes que quieras, por ejemplo solo Success4Exam con Fundamentos y Modelado de datos. Cada grupo reparte sus preguntas en paquetes fijos que no se solapan, todos con la misma mezcla de secciones. Puedes tener varios grupos a la vez, cada uno con su propio dominio. Una pregunta está dominada si nunca la has fallado en ese grupo o si, tras fallarla, la aciertas dos veces seguidas.',
+    newGroup: '+ Nuevo grupo de paquetes',
+    setupTitle: 'Nuevo grupo de paquetes',
     size: 'Tamaño de cada paquete',
     sizeOption: (n: number) => `${n} preguntas`,
     sources: 'Fuentes',
     sectionsLegend: 'Secciones',
     excludeDoubtful: (n: number) => `Sin preguntas dudosas ni obsoletas (${n} en el banco)`,
     preview: (questions: number, packs: number) =>
-      questions ? `${plural(questions, 'pregunta', 'preguntas')} en ${plural(packs, 'paquete', 'paquetes')}.` : 'No hay preguntas con estas fuentes.',
-    create: 'Crear paquetes',
-    recreate: 'Rehacer los paquetes',
-    recreateTitle: '¿Rehacer los paquetes?',
-    recreateBody:
-      'Se repartirán de nuevo las preguntas y se borrará el dominio de cada paquete. Tus estadísticas generales, las marcas y las notas no cambian.',
-    recreateConfirm: 'Rehacer',
-    planInfo: (questions: number, packs: number, size: number, sources: string, sections: string) =>
-      `${plural(questions, 'pregunta', 'preguntas')} en ${plural(packs, 'paquete', 'paquetes')} de ${size} · Secciones: ${sections} · Fuentes: ${sources}.`,
+      questions
+        ? `${plural(questions, 'pregunta', 'preguntas')} en ${plural(packs, 'paquete', 'paquetes')}.`
+        : 'No hay preguntas con estas secciones y fuentes.',
+    create: 'Crear el grupo',
+    planSources: (sources: string) => `Fuentes: ${sources}`,
+    planInfo: (questions: number, packs: number, size: number) =>
+      `${plural(questions, 'pregunta', 'preguntas')} en ${plural(packs, 'paquete', 'paquetes')} de unas ${size}`,
+    groupLabel: (sections: string, sources: string) => `Grupo de paquetes: ${sections}; fuentes: ${sources}`,
+    remove: 'Borrar este grupo',
+    removeTitle: '¿Borrar este grupo de paquetes?',
+    removeBody: (sections: string, sources: string) =>
+      `Se borrará el grupo «${sections}» (fuentes: ${sources}) y el dominio de sus paquetes. Tus estadísticas generales, las marcas, las notas y los demás grupos no cambian.`,
+    removeConfirm: 'Borrar',
     allSources: 'todas',
-    allSections: 'todas',
-    sectionsNote: 'Con menos secciones, cada paquete solo lleva preguntas de las elegidas, en la misma proporción que tienen en el banco.',
+    allSections: 'Todas las secciones',
+    sectionsNote: 'Cada paquete solo llevará preguntas de las secciones elegidas, en la proporción que tienen en el banco.',
     synced: (added: number, removed: number) =>
       `El banco ha cambiado: ${[added ? plural(added, 'pregunta nueva', 'preguntas nuevas') + ' en los últimos paquetes' : '', removed ? plural(removed, 'pregunta retirada', 'preguntas retiradas') : ''].filter(Boolean).join(' y ')}. El resto sigue en su paquete.`,
     pack: (n: number) => `Paquete ${n}`,
@@ -445,6 +463,18 @@ const en: Messages = {
 
   runTitle: { practice: 'Practice', review: 'Review', failed: 'Failed questions', 'exam-failed': 'Failed in the mock exam', study: 'Study' },
 
+  packNav: {
+    label: 'Pack navigation',
+    back: '← Back to the pack groups',
+    group: (name) => `Group: ${name}`,
+    repeatAll: (n) => `↻ Restart the pack (${n})`,
+    packs: 'Packs in this group:',
+    item: (n, mastered, total, current) => `Pack ${n}${current ? ' (current)' : ''}: ${mastered} of ${total} mastered`,
+    leaveTitle: 'Leave this run?',
+    leaveBody: 'The answers you have already checked stay saved; only your place in this run is lost.',
+    leaveConfirm: 'Yes, switch',
+  },
+
   tracker: {
     label: 'Run progress',
     progress: (answered, total) => `${answered} of ${total} answered`,
@@ -495,10 +525,10 @@ const en: Messages = {
     reviewButton: 'Review',
     reviewEmptySources: 'With the chosen sources you have no questions in review.',
     studyTitle: 'Study',
-    studyText: (packs, size) =>
-      packs
-        ? `${plural(packs, 'fixed pack', 'fixed packs')} of about ${size} questions with the exam's section mix. Repeat them in full, only the failed ones or only the flagged ones until you master them.`
-        : 'Split the bank into fixed packs of 30 or 60 questions, with the exam\'s section mix, to repeat them until you memorize them.',
+    studyText: (plans, packs) =>
+      plans
+        ? `${plural(plans, 'group', 'groups')} with ${plural(packs, 'fixed pack', 'fixed packs')}. Repeat them in full, only the failed ones or only the flagged ones until you master them.`
+        : 'Split the sections and sources you choose into fixed packs of 30 or 60 questions, to repeat them until you memorize them.',
     studyButton: (hasPlan) => (hasPlan ? 'Study' : 'Create packs'),
     progressLabel: 'Your progress',
     seen: 'Questions seen',
@@ -596,25 +626,28 @@ const en: Messages = {
   study: {
     title: 'Study',
     intro:
-      'The questions you choose (by section and source) are split into fixed packs that do not overlap: each question is in a single pack and every pack has the same section mix. With every section it is the bank\'s, close to the exam\'s; with a few, you can focus on the ones you find hardest. Repeat each pack until you master it: a question is mastered if you have never failed it while studying or if, after failing it, you get it right twice in a row.',
-    setupTitle: 'Create the packs',
+      'Create pack groups with the sections and sources you want, for example only Success4Exam with Fundamentals and Data Modeling. Each group splits its questions into fixed packs that do not overlap, all with the same section mix. You can have several groups at once, each with its own mastery. A question is mastered if you have never failed it in that group or if, after failing it, you get it right twice in a row.',
+    newGroup: '+ New pack group',
+    setupTitle: 'New pack group',
     size: 'Size of each pack',
     sizeOption: (n) => `${n} questions`,
     sources: 'Sources',
     sectionsLegend: 'Sections',
     excludeDoubtful: (n) => `No doubtful or outdated questions (${n} in the bank)`,
     preview: (questions, packs) =>
-      questions ? `${plural(questions, 'question', 'questions')} in ${plural(packs, 'pack', 'packs')}.` : 'There are no questions with these sources.',
-    create: 'Create packs',
-    recreate: 'Rebuild the packs',
-    recreateTitle: 'Rebuild the packs?',
-    recreateBody: 'The questions will be split again and the mastery of each pack will be cleared. Your overall stats, flags and notes do not change.',
-    recreateConfirm: 'Rebuild',
-    planInfo: (questions, packs, size, sources, sections) =>
-      `${plural(questions, 'question', 'questions')} in ${plural(packs, 'pack', 'packs')} of ${size} · Sections: ${sections} · Sources: ${sources}.`,
+      questions ? `${plural(questions, 'question', 'questions')} in ${plural(packs, 'pack', 'packs')}.` : 'There are no questions with these sections and sources.',
+    create: 'Create the group',
+    planSources: (sources) => `Sources: ${sources}`,
+    planInfo: (questions, packs, size) => `${plural(questions, 'question', 'questions')} in ${plural(packs, 'pack', 'packs')} of about ${size}`,
+    groupLabel: (sections, sources) => `Pack group: ${sections}; sources: ${sources}`,
+    remove: 'Delete this group',
+    removeTitle: 'Delete this pack group?',
+    removeBody: (sections, sources) =>
+      `The group «${sections}» (sources: ${sources}) and the mastery of its packs will be deleted. Your overall stats, flags, notes and other groups do not change.`,
+    removeConfirm: 'Delete',
     allSources: 'all',
-    allSections: 'all',
-    sectionsNote: 'With fewer sections, each pack only has questions from the chosen ones, in the same proportion they have in the bank.',
+    allSections: 'All sections',
+    sectionsNote: 'Each pack will only have questions from the chosen sections, in the proportion they have in the bank.',
     synced: (added, removed) =>
       `The bank has changed: ${[added ? plural(added, 'new question', 'new questions') + ' in the last packs' : '', removed ? plural(removed, 'question removed', 'questions removed') : ''].filter(Boolean).join(' and ')}. The rest stay in their pack.`,
     pack: (n) => `Pack ${n}`,

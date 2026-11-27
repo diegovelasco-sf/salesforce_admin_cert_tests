@@ -32,8 +32,8 @@ export interface PracticeRun {
   index: number
   selected: Record<string, string[]>
   checked: string[]
-  /** Paquete del modo estudio (índice en el plan): sus respuestas cuentan también para el dominio del paquete. */
-  pack?: number
+  /** Paquete del modo estudio: plan e índice. Sus respuestas cuentan también para el dominio de ese plan. */
+  pack?: { plan: string; index: number }
 }
 
 export type Screen =
@@ -66,12 +66,13 @@ export type Action =
   | { type: 'exam/submit'; now: number }
   | { type: 'exam/close'; next?: Screen }
   | { type: 'settings/update'; settings: Partial<Settings> }
-  | { type: 'study/plan'; plan: StudyPlan | undefined }
+  | { type: 'study/add'; plan: StudyPlan }
+  | { type: 'study/remove'; id: string }
   | { type: 'note/set'; id: string; text: string }
   | { type: 'progress/replace'; progress: Progress; notice?: Notice }
   | { type: 'notice/dismiss'; index: number }
 
-export function makeRun(kind: RunKind, questions: readonly Question[], rng: Rng, pack?: number): PracticeRun {
+export function makeRun(kind: RunKind, questions: readonly Question[], rng: Rng, pack?: { plan: string; index: number }): PracticeRun {
   return {
     kind,
     ...(pack !== undefined ? { pack } : {}),
@@ -116,18 +117,19 @@ export function initState(data: CertData, loaded: { progress: Progress; backupKe
   let progress = loaded.progress
   let screen: Screen = { name: 'home' }
   // Los paquetes siguen al banco sin moverse: las preguntas retiradas salen y las nuevas van al final.
-  if (progress.study) {
-    const plan = progress.study
+  let added = 0
+  let removed = 0
+  const studyPlans = progress.studyPlans.map((plan) => {
     const synced = syncPlan(plan, filterPool(data.bank.questions, { excludeDoubtful: plan.excludeDoubtful, sources: plan.sources, sections: plan.sections }))
-    if (synced !== plan) {
-      const before = new Set(plan.packs.flat())
-      const after = new Set(synced.packs.flat())
-      const added = [...after].filter((id) => !before.has(id)).length
-      const removed = [...before].filter((id) => !after.has(id)).length
-      if (added || removed) notices.push({ kind: 'study-synced', added, removed })
-      progress = { ...progress, study: synced }
-    }
-  }
+    if (synced === plan) return plan
+    const before = new Set(plan.packs.flat())
+    const after = new Set(synced.packs.flat())
+    added += [...after].filter((id) => !before.has(id)).length
+    removed += [...before].filter((id) => !after.has(id)).length
+    return synced
+  })
+  if (studyPlans.some((plan, i) => plan !== progress.studyPlans[i])) progress = { ...progress, studyPlans }
+  if (added || removed) notices.push({ kind: 'study-synced', added, removed })
   const saved = progress.activeExam
   if (saved) {
     const { session } = resumeExam(saved, data.bank, now)
@@ -163,13 +165,13 @@ export function createReducer(data: CertData) {
         const question = byId.get(action.id)
         if (screen.name !== 'practice' || !question || screen.run.checked.includes(action.id)) return state
         const ok = isCorrect(question, screen.run.selected[action.id])
-        const study =
-          screen.run.kind === 'study' && progress.study
-            ? { ...progress.study, stats: recordAnswer(progress.study.stats, action.id, ok, action.now) }
-            : progress.study
+        const planId = screen.run.kind === 'study' ? screen.run.pack?.plan : undefined
+        const studyPlans = planId
+          ? progress.studyPlans.map((plan) => (plan.id === planId ? { ...plan, stats: recordAnswer(plan.stats, action.id, ok, action.now) } : plan))
+          : progress.studyPlans
         return {
           ...state,
-          progress: { ...progress, stats: recordAnswer(progress.stats, action.id, ok, action.now), ...(study ? { study } : {}) },
+          progress: { ...progress, stats: recordAnswer(progress.stats, action.id, ok, action.now), studyPlans },
           screen: { name: 'practice', run: { ...screen.run, checked: [...screen.run.checked, action.id] } },
         }
       }
@@ -207,10 +209,10 @@ export function createReducer(data: CertData) {
 
       case 'settings/update':
         return { ...state, progress: { ...progress, settings: { ...progress.settings, ...action.settings } } }
-      case 'study/plan': {
-        const { study: _old, ...rest } = progress
-        return { ...state, progress: action.plan ? { ...rest, study: action.plan } : rest }
-      }
+      case 'study/add':
+        return { ...state, progress: { ...progress, studyPlans: [...progress.studyPlans.filter((p) => p.id !== action.plan.id), action.plan] } }
+      case 'study/remove':
+        return { ...state, progress: { ...progress, studyPlans: progress.studyPlans.filter((p) => p.id !== action.id) } }
       case 'note/set': {
         const { [action.id]: _old, ...notes } = progress.notes
         const text = action.text.trim()

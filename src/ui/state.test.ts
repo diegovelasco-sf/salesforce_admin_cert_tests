@@ -120,22 +120,22 @@ describe('Platform App Builder', () => {
 describe('estudio y notas', () => {
   it('las respuestas de un paquete cuentan en las estadísticas y en el dominio del paquete', () => {
     const [q] = bank.questions
-    const plan = { size: 30 as const, excludeDoubtful: true, packs: [[q.id]], stats: {}, createdAt: 0 }
-    let state = reducer(fresh(), { type: 'study/plan', plan })
-    state = reducer(state, { type: 'navigate', screen: { name: 'practice', run: makeRun('study', [q], mulberry32(1), 0) } })
+    const plan = { id: 'p', size: 30 as const, excludeDoubtful: true, packs: [[q.id]], stats: {}, createdAt: 0 }
+    let state = reducer(fresh(), { type: 'study/add', plan })
+    state = reducer(state, { type: 'navigate', screen: { name: 'practice', run: makeRun('study', [q], mulberry32(1), { plan: 'p', index: 0 }) } })
     state = reducer(state, { type: 'practice/select', id: q.id, keys: ['B'] })
     state = reducer(state, { type: 'practice/check', id: q.id, now: 5 })
     expect(state.progress.stats[q.id]).toMatchObject({ seen: 1, correct: 0 })
-    expect(state.progress.study!.stats[q.id]).toMatchObject({ seen: 1, correct: 0 })
+    expect(state.progress.studyPlans[0].stats[q.id]).toMatchObject({ seen: 1, correct: 0 })
   })
 
   it('una práctica normal no toca el dominio de los paquetes', () => {
     const [q] = bank.questions
-    let state = reducer(fresh(), { type: 'study/plan', plan: { size: 30, excludeDoubtful: true, packs: [[q.id]], stats: {}, createdAt: 0 } })
+    let state = reducer(fresh(), { type: 'study/add', plan: { id: 'p', size: 30, excludeDoubtful: true, packs: [[q.id]], stats: {}, createdAt: 0 } })
     state = reducer(state, { type: 'navigate', screen: { name: 'practice', run: makeRun('practice', [q], mulberry32(1)) } })
     state = reducer(state, { type: 'practice/select', id: q.id, keys: ['A'] })
     state = reducer(state, { type: 'practice/check', id: q.id, now: 5 })
-    expect(state.progress.study!.stats).toEqual({})
+    expect(state.progress.studyPlans[0].stats).toEqual({})
   })
 
   it('guarda, cambia y borra notas', () => {
@@ -147,11 +147,11 @@ describe('estudio y notas', () => {
 
   it('al cargar, el plan de estudio se pone al día con el banco y avisa', () => {
     const [a, b] = bank.questions
-    const progress = { ...emptyProgress('admin'), study: { size: 30 as const, excludeDoubtful: true, packs: [[a.id, 'retirada']], stats: {}, createdAt: 0 } }
+    const progress = { ...emptyProgress('admin'), studyPlans: [{ id: 'p', size: 30 as const, excludeDoubtful: true, packs: [[a.id, 'retirada']], stats: {}, createdAt: 0 }] }
     const state = initState(data, { progress }, 0)
-    expect(state.progress.study!.packs[0]).toContain(a.id)
-    expect(state.progress.study!.packs.flat()).toContain(b.id)
-    expect(state.progress.study!.packs.flat()).not.toContain('retirada')
+    expect(state.progress.studyPlans[0].packs[0]).toContain(a.id)
+    expect(state.progress.studyPlans[0].packs.flat()).toContain(b.id)
+    expect(state.progress.studyPlans[0].packs.flat()).not.toContain('retirada')
     expect(state.notices).toEqual([{ kind: 'study-synced', added: bank.questions.length - 1, removed: 1 }])
   })
 })
@@ -159,10 +159,10 @@ describe('estudio y notas', () => {
 describe('tanda de estudio completa', () => {
   it('fallar, repetir solo las falladas y dominarlas con dos aciertos seguidos', () => {
     const qs = bank.questions.slice(0, 3)
-    const plan = { size: 30 as const, excludeDoubtful: true, packs: [qs.map((q) => q.id)], stats: {}, createdAt: 0 }
-    let state = reducer(fresh(), { type: 'study/plan', plan })
+    const plan = { id: 'p', size: 30 as const, excludeDoubtful: true, packs: [qs.map((q) => q.id)], stats: {}, createdAt: 0 }
+    let state = reducer(fresh(), { type: 'study/add', plan })
     const answer = (q: (typeof qs)[number], keys: string[], now: number) => {
-      state = reducer(state, { type: 'navigate', screen: { name: 'practice', run: makeRun('study', [q], mulberry32(now), 0) } })
+      state = reducer(state, { type: 'navigate', screen: { name: 'practice', run: makeRun('study', [q], mulberry32(now), { plan: 'p', index: 0 }) } })
       state = reducer(state, { type: 'practice/select', id: q.id, keys })
       state = reducer(state, { type: 'practice/check', id: q.id, now })
     }
@@ -170,14 +170,14 @@ describe('tanda de estudio completa', () => {
     answer(qs[0], ['A'], 1)
     answer(qs[1], ['B'], 2)
     answer(qs[2], ['B'], 3)
-    const failedIds = () => packQuestions(state.progress.study!.packs[0], 'failed', state.progress.study!.stats, state.progress.flagged)
+    const failedIds = () => packQuestions(state.progress.studyPlans[0].packs[0], 'failed', state.progress.studyPlans[0].stats, state.progress.flagged)
     expect(failedIds()).toEqual([qs[1].id, qs[2].id])
     // Un acierto no basta; dos seguidos sí.
     answer(qs[1], ['A'], 4)
     expect(failedIds()).toEqual([qs[1].id, qs[2].id])
     answer(qs[1], ['A'], 5)
     expect(failedIds()).toEqual([qs[2].id])
-    expect(packProgress(state.progress.study!.packs[0], state.progress.study!.stats)).toEqual({ total: 3, new: 0, learning: 1, mastered: 2 })
+    expect(packProgress(state.progress.studyPlans[0].packs[0], state.progress.studyPlans[0].stats)).toEqual({ total: 3, new: 0, learning: 1, mastered: 2 })
   })
 })
 
@@ -186,11 +186,43 @@ describe('plan de estudio con secciones', () => {
     const [a] = bank.questions.filter((q) => q.section === 'config')
     const progress = {
       ...emptyProgress('admin'),
-      study: { size: 30 as const, excludeDoubtful: true, sections: ['config' as const], packs: [[a.id]], stats: {}, createdAt: 0 },
+      studyPlans: [{ id: 'p', size: 30 as const, excludeDoubtful: true, sections: ['config' as const], packs: [[a.id]], stats: {}, createdAt: 0 }],
     }
     const state = initState(data, { progress }, 0)
-    const ids = state.progress.study!.packs.flat()
+    const ids = state.progress.studyPlans[0].packs.flat()
     expect(ids.every((id) => data.question(id).section === 'config')).toBe(true)
     expect(ids).toHaveLength(bank.questions.filter((q) => q.section === 'config').length)
+  })
+})
+
+describe('varios grupos de paquetes', () => {
+  const [q] = bank.questions
+  const group = (id: string) => ({ id, size: 30 as const, excludeDoubtful: true, packs: [[q.id]], stats: {}, createdAt: 0 })
+
+  it('cada grupo lleva su propio dominio: responder en uno no cambia el otro', () => {
+    let state = reducer(fresh(), { type: 'study/add', plan: group('a') })
+    state = reducer(state, { type: 'study/add', plan: group('b') })
+    state = reducer(state, { type: 'navigate', screen: { name: 'practice', run: makeRun('study', [q], mulberry32(1), { plan: 'b', index: 0 }) } })
+    state = reducer(state, { type: 'practice/select', id: q.id, keys: ['A'] })
+    state = reducer(state, { type: 'practice/check', id: q.id, now: 5 })
+    const [a, b] = state.progress.studyPlans
+    expect(a.stats).toEqual({})
+    expect(b.stats[q.id]).toMatchObject({ seen: 1, correct: 1 })
+  })
+
+  it('borrar un grupo deja los demás intactos', () => {
+    let state = reducer(fresh(), { type: 'study/add', plan: group('a') })
+    state = reducer(state, { type: 'study/add', plan: group('b') })
+    state = reducer(state, { type: 'study/remove', id: 'a' })
+    expect(state.progress.studyPlans.map((p) => p.id)).toEqual(['b'])
+  })
+
+  it('al cargar, cada grupo se pone al día con sus propios filtros', () => {
+    const configOnly = { ...group('c'), sections: ['config' as const], packs: [[bank.questions.find((x) => x.section === 'config')!.id]] }
+    const all = { ...group('t'), packs: [[q.id]] }
+    const state = initState(data, { progress: { ...emptyProgress('admin'), studyPlans: [configOnly, all] } }, 0)
+    const [c, t] = state.progress.studyPlans
+    expect(c.packs.flat().every((id) => data.question(id).section === 'config')).toBe(true)
+    expect(t.packs.flat()).toHaveLength(bank.questions.length)
   })
 })

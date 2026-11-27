@@ -18,12 +18,18 @@ export function bankSources(questions: readonly Question[]): SourceId[] {
 export const normalizeSources = (chosen: readonly SourceId[], all: readonly SourceId[]): SourceId[] | undefined =>
   all.every((s) => chosen.includes(s)) ? undefined : all.filter((s) => chosen.includes(s))
 
-/** Inicia la tanda de un paquete. La usan la lista de paquetes y el resumen al acabar uno. */
-export function startPack(dispatch: Dispatch<Action>, progress: Progress, index: number, filter: PackFilter, byId: (id: string) => Question): void {
-  const plan = progress.study
-  if (!plan?.packs[index]) return
-  const ids = packQuestions(plan.packs[index], filter, plan.stats, progress.flagged)
+/** Inicia la tanda de un paquete de un plan. La usan la lista de paquetes y el resumen al acabar uno. */
+export function startPack(
+  dispatch: Dispatch<Action>,
+  progress: Progress,
+  pack: { plan: string; index: number },
+  filter: PackFilter,
+  byId: (id: string) => Question,
+): void {
+  const plan = progress.studyPlans.find((p) => p.id === pack.plan)
+  if (!plan?.packs[pack.index]) return
+  const ids = packQuestions(plan.packs[pack.index], filter, plan.stats, progress.flagged)
   if (!ids.length) return
   const rng = mulberry32(randomSeed())
-  dispatch({ type: 'navigate', screen: { name: 'practice', run: makeRun('study', ids.map(byId), rng, index) } })
+  dispatch({ type: 'navigate', screen: { name: 'practice', run: makeRun('study', ids.map(byId), rng, pack) } })
 }

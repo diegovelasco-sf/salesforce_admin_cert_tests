@@ -30,7 +30,7 @@ export function Home({ progress, notices, dispatch }: { progress: Progress; noti
   const reviewSources = progress.settings.sources.review
   const allReview = bank.questions.filter((q) => inReview(progress.stats[q.id], progress.flagged.includes(q.id)))
   const reviewQuestions = allReview.filter((q) => inSources(q, reviewSources))
-  const plan = progress.study
+  const plans = progress.studyPlans
   const seen = bank.questions.filter((q) => progress.stats[q.id]).length
   const totals = Object.values(progress.stats).reduce((acc, s) => ({ correct: acc.correct + s.correct, seen: acc.seen + s.seen }), {
     correct: 0,
@@ -111,9 +111,9 @@ export function Home({ progress, notices, dispatch }: { progress: Progress; noti
         </section>
         <section className="card mode">
           <h2>{t.home.studyTitle}</h2>
-          <p>{t.home.studyText(plan?.packs.length ?? 0, plan?.size ?? 30)}</p>
+          <p>{t.home.studyText(plans.length, plans.reduce((n, p) => n + p.packs.length, 0))}</p>
           <button type="button" className="primary" onClick={() => dispatch({ type: 'navigate', screen: { name: 'study' } })}>
-            {t.home.studyButton(!!plan)}
+            {t.home.studyButton(plans.length > 0)}
           </button>
         </section>
       </div>

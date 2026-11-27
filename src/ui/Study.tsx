@@ -1,4 +1,5 @@
-// Modo estudio: crea los paquetes fijos y muestra el dominio de cada uno, con sus tres formas de repetirlo.
+// Modo estudio: crea grupos de paquetes fijos con las secciones y fuentes elegidas, y muestra el dominio de
+// cada paquete con sus tres formas de repetirlo. Una certificación puede tener varios grupos a la vez.
 import { useState, type Dispatch } from 'react'
 import { mulberry32, randomSeed } from '../domain/rng.ts'
 import { filterPool, inSources, isDoubtful } from '../domain/sampling.ts'
@@ -9,23 +10,36 @@ import { useCert } from './cert.ts'
 import { ConfirmDialog } from './common.tsx'
 import { useI18n } from './lang.ts'
 import { sectionName, sectionText, sourceLabel } from './messages.ts'
-import { SourcePicker } from './SourcePicker.tsx'
 import { startPack } from './modes.ts'
+import { SourcePicker } from './SourcePicker.tsx'
 import type { Action } from './state.ts'
 
 export function Study({ progress, dispatch }: { progress: Progress; dispatch: Dispatch<Action> }) {
   const { t } = useI18n()
-  const plan = progress.study
-  const [rebuilding, setRebuilding] = useState(false)
+  const plans = progress.studyPlans
+  // Sin grupos, el formulario sale abierto; con grupos, plegado bajo un botón, para que la lista quede arriba.
+  const [creating, setCreating] = useState(plans.length === 0)
   return (
     <div className="study">
       <h1>{t.study.title}</h1>
       <p className="muted">{t.study.intro}</p>
-      {plan && !rebuilding ? (
-        <PackList plan={plan} progress={progress} dispatch={dispatch} onRebuild={() => setRebuilding(true)} />
+      {creating ? (
+        <StudySetup
+          progress={progress}
+          dispatch={dispatch}
+          onCancel={plans.length ? () => setCreating(false) : undefined}
+          onDone={() => setCreating(false)}
+        />
       ) : (
-        <StudySetup progress={progress} dispatch={dispatch} onCancel={plan ? () => setRebuilding(false) : undefined} onDone={() => setRebuilding(false)} />
+        <div className="actions start study-new">
+          <button type="button" className="primary" onClick={() => setCreating(true)}>
+            {t.study.newGroup}
+          </button>
+        </div>
       )}
+      {[...plans].reverse().map((plan) => (
+        <PlanBlock key={plan.id} plan={plan} progress={progress} dispatch={dispatch} />
+      ))}
     </div>
   )
 }
@@ -43,25 +57,24 @@ function StudySetup({
 }) {
   const { cert, bank } = useCert()
   const { t, lang } = useI18n()
-  const current = progress.study
   const allSections = cert.sections.map((s) => s.key)
-  const [size, setSize] = useState<PackSize>(current?.size ?? 30)
-  const [sources, setSources] = useState<SourceId[] | undefined>(current?.sources ?? progress.settings.sources.study)
-  const [sections, setSections] = useState<SectionKey[]>(current?.sections ?? allSections)
-  const [excludeDoubtful, setExcludeDoubtful] = useState(current?.excludeDoubtful ?? true)
-  const [confirm, setConfirm] = useState(false)
+  const [size, setSize] = useState<PackSize>(30)
+  const [sources, setSources] = useState<SourceId[] | undefined>(progress.settings.sources.study)
+  const [sections, setSections] = useState<SectionKey[]>(allSections)
+  const [excludeDoubtful, setExcludeDoubtful] = useState(true)
   // Cada filtro cuenta sus opciones con el otro aplicado: las fuentes, dentro de las secciones elegidas, y al revés.
   const doubtfulOk = filterPool(bank.questions, { excludeDoubtful })
   const unsourced = doubtfulOk.filter((q) => sections.includes(q.section))
   const sectionless = doubtfulOk.filter((q) => inSources(q, sources))
   const pool = unsourced.filter((q) => inSources(q, sources))
-  const packs = Math.max(pool.length ? 1 : 0, Math.round(pool.length / size))
+  const packs = pool.length ? Math.max(1, Math.round(pool.length / size)) : 0
+  const everySection = allSections.every((k) => sections.includes(k))
   const toggleSection = (key: SectionKey) =>
     setSections((list) => (list.includes(key) ? list.filter((k) => k !== key) : allSections.filter((k) => k === key || list.includes(k))))
-  const everySection = allSections.every((k) => sections.includes(k))
 
   const create = (now: number) => {
     const plan: StudyPlan = {
+      id: `plan-${Math.round(now)}-${randomSeed().toString(36)}`,
       size,
       ...(sources ? { sources } : {}),
       ...(everySection ? {} : { sections }),
@@ -70,27 +83,16 @@ function StudySetup({
       stats: {},
       createdAt: now,
     }
+    // Las fuentes elegidas se recuerdan para el siguiente grupo.
     const { study: _old, ...rest } = progress.settings.sources
     dispatch({ type: 'settings/update', settings: { sources: sources ? { ...rest, study: sources } : rest } })
-    dispatch({ type: 'study/plan', plan })
-    setConfirm(false)
+    dispatch({ type: 'study/add', plan })
     onDone()
   }
 
   return (
     <section className="card setup">
       <h2>{t.study.setupTitle}</h2>
-      <fieldset>
-        <legend>{t.study.size}</legend>
-        <div className="segmented">
-          {PACK_SIZES.map((n) => (
-            <label key={n} className={`segment${size === n ? ' on' : ''}`}>
-              <input type="radio" name="pack-size" checked={size === n} onChange={() => setSize(n)} />
-              {t.study.sizeOption(n)}
-            </label>
-          ))}
-        </div>
-      </fieldset>
       <fieldset>
         <legend>{t.study.sectionsLegend}</legend>
         <div className="checks">
@@ -109,7 +111,6 @@ function StudySetup({
             {t.none}
           </button>
         </div>
-        {!everySection && sections.length > 0 && <p className="muted">{t.study.sectionsNote}</p>}
       </fieldset>
       <fieldset>
         <legend>{t.study.sources}</legend>
@@ -119,49 +120,66 @@ function StudySetup({
           {t.study.excludeDoubtful(bank.questions.filter(isDoubtful).length)}
         </label>
       </fieldset>
-      <p>{t.study.preview(pool.length, packs)}</p>
+      <fieldset>
+        <legend>{t.study.size}</legend>
+        <div className="segmented">
+          {PACK_SIZES.map((n) => (
+            <label key={n} className={`segment${size === n ? ' on' : ''}`}>
+              <input type="radio" name="pack-size" checked={size === n} onChange={() => setSize(n)} />
+              {t.study.sizeOption(n)}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <p>
+        <strong>{t.study.preview(pool.length, packs)}</strong>
+        {!everySection && sections.length > 0 && <span className="muted"> {t.study.sectionsNote}</span>}
+      </p>
       <div className="actions">
         {onCancel && (
           <button type="button" onClick={onCancel}>
             {t.cancel}
           </button>
         )}
-        <button type="button" className="primary" disabled={!pool.length} onClick={(e) => (current ? setConfirm(true) : create(e.timeStamp + performance.timeOrigin))}>
-          {current ? t.study.recreate : t.study.create}
+        <button type="button" className="primary" disabled={!pool.length} onClick={(e) => create(e.timeStamp + performance.timeOrigin)}>
+          {t.study.create}
         </button>
       </div>
-      <ConfirmDialog
-        open={confirm}
-        title={t.study.recreateTitle}
-        confirmLabel={t.study.recreateConfirm}
-        danger
-        onConfirm={() => create(performance.timeOrigin + performance.now())}
-        onCancel={() => setConfirm(false)}
-      >
-        <p>{t.study.recreateBody}</p>
-      </ConfirmDialog>
     </section>
   )
 }
 
-function PackList({ plan, progress, dispatch, onRebuild }: { plan: StudyPlan; progress: Progress; dispatch: Dispatch<Action>; onRebuild: () => void }) {
+/** Nombre de un grupo: sus secciones y sus fuentes. */
+function usePlanName(plan: StudyPlan): { sections: string; sources: string } {
+  const { cert } = useCert()
+  const { t, lang } = useI18n()
+  return {
+    sections: plan.sections?.map((key) => sectionName(cert, key, lang)).join(', ') || t.study.allSections,
+    sources: plan.sources?.map((s) => sourceLabel(s, lang)).join(', ') || t.study.allSources,
+  }
+}
+
+function PlanBlock({ plan, progress, dispatch }: { plan: StudyPlan; progress: Progress; dispatch: Dispatch<Action> }) {
   const { cert, question, byId } = useCert()
   const { t, lang } = useI18n()
+  const [confirm, setConfirm] = useState(false)
+  const name = usePlanName(plan)
   const total = plan.packs.reduce((n, p) => n + p.length, 0)
   const mastered = plan.packs.reduce((n, p) => n + packProgress(p, plan.stats).mastered, 0)
-  const sources = plan.sources?.map((s) => sourceLabel(s, lang)).join(', ') || t.study.allSources
-  const sections = plan.sections?.map((key) => sectionName(cert, key, lang)).join(', ') || t.study.allSections
 
   return (
-    <>
+    <section className="study-plan" aria-label={t.study.groupLabel(name.sections, name.sources)}>
       <div className="study-head">
-        <p>
-          <strong>{t.study.totalMastered(mastered, total)}</strong>
-          <br />
-          <span className="muted">{t.study.planInfo(total, plan.packs.length, plan.size, sources, sections)}</span>
-        </p>
-        <button type="button" className="link-button" onClick={onRebuild}>
-          {t.study.recreate}
+        <div>
+          <h2 className="study-plan-title">{name.sections}</h2>
+          <p className="muted">
+            {t.study.planSources(name.sources)}
+            <br />
+            {t.study.planInfo(total, plan.packs.length, plan.size)} · <strong>{t.study.totalMastered(mastered, total)}</strong>
+          </p>
+        </div>
+        <button type="button" className="link-button danger-link" onClick={() => setConfirm(true)}>
+          {t.study.remove}
         </button>
       </div>
       <ol className="pack-list">
@@ -175,11 +193,11 @@ function PackList({ plan, progress, dispatch, onRebuild }: { plan: StudyPlan; pr
             .filter(([, n]) => n > 0)
             .map(([key, n]) => `${sectionName(cert, key, lang)} ${n}`)
             .join(' · ')
-          const start = (filter: PackFilter) => startPack(dispatch, progress, index, filter, question)
+          const start = (filter: PackFilter) => startPack(dispatch, progress, { plan: plan.id, index }, filter, question)
           return (
             <li key={index} className={`card pack${done ? ' pack-done' : ''}`}>
               <div className="pack-head">
-                <h2>{t.study.pack(index + 1)}</h2>
+                <h3>{t.study.pack(index + 1)}</h3>
                 {done && <span className="status status-good">{t.study.packDone}</span>}
               </div>
               <div
@@ -216,6 +234,19 @@ function PackList({ plan, progress, dispatch, onRebuild }: { plan: StudyPlan; pr
           )
         })}
       </ol>
-    </>
+      <ConfirmDialog
+        open={confirm}
+        title={t.study.removeTitle}
+        confirmLabel={t.study.removeConfirm}
+        danger
+        onConfirm={() => {
+          setConfirm(false)
+          dispatch({ type: 'study/remove', id: plan.id })
+        }}
+        onCancel={() => setConfirm(false)}
+      >
+        <p>{t.study.removeBody(name.sections, name.sources)}</p>
+      </ConfirmDialog>
+    </section>
   )
 }

@@ -33,8 +33,8 @@ export function History({ progress, dispatch }: { progress: Progress; dispatch: 
   const seen = bank.questions.filter((q) => progress.stats[q.id]).length
   const mastered = bank.questions.filter((q) => progress.stats[q.id] && studyState(progress.stats[q.id]) === 'mastered').length
   const reviewCount = bank.questions.filter((q) => inReview(progress.stats[q.id], progress.flagged.includes(q.id))).length
-  const plan = progress.study
-  const packsDone = plan ? plan.packs.filter((p) => { const pp = packProgress(p, plan.stats); return pp.mastered === pp.total }).length : 0
+  const allPacks = progress.studyPlans.flatMap((plan) => plan.packs.map((pack) => packProgress(pack, plan.stats)))
+  const packsDone = allPacks.filter((p) => p.mastered === p.total).length
   // Las tres secciones con menos acierto (con al menos 5 respuestas, para no fiarse de una sola).
   const weak = cert.sections
     .map((s) => ({ section: s, tally: answers[s.key] }))
@@ -50,7 +50,7 @@ export function History({ progress, dispatch }: { progress: Progress; dispatch: 
           <Stat label={t.history.seen} value={t.ofN(seen, bank.questions.length)} />
           <Stat label={t.history.mastered} value={mastered} detail={t.history.masteredDetail} />
           <Stat label={t.history.inReview} value={reviewCount} />
-          {plan && <Stat label={t.history.studyPacks} value={t.ofN(packsDone, plan.packs.length)} />}
+          {allPacks.length > 0 && <Stat label={t.history.studyPacks} value={t.ofN(packsDone, allPacks.length)} />}
         </div>
       </section>
 

@@ -15,8 +15,7 @@ import { QuestionCard } from './QuestionCard.tsx'
 import { RunTracker, type TrackState } from './RunTracker.tsx'
 import { SourcePicker } from './SourcePicker.tsx'
 import { makeRun, type Action, type PracticeRun } from './state.ts'
-import { packQuestions } from '../domain/study.ts'
-import { startPack } from './modes.ts'
+import { PackNav } from './PackNav.tsx'
 import { useShortcuts } from './useShortcuts.ts'
 
 const COUNTS = [10, 20, 40, 60, 0] as const
@@ -208,14 +207,13 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
     !summary && !editingNote,
   )
 
+  // Tanda de un paquete de estudio cuyo grupo sigue existiendo.
+  const packRef = run.kind === 'study' && run.pack && progress.studyPlans.some((p) => p.id === run.pack!.plan) ? run.pack : undefined
+
   if (summary) {
     const failed = run.checked.filter((qid) => !correctIds.includes(qid))
-    const plan = progress.study
-    const pack = run.kind === 'study' && plan && run.pack !== undefined ? plan.packs[run.pack] : undefined
-    // En el estudio, «falladas» son las que aún no domina el paquete, no solo las de esta tanda.
-    const packFailed = pack ? packQuestions(pack, 'failed', plan!.stats, progress.flagged).length : 0
-    const nextPack = pack && plan!.packs[run.pack! + 1] ? run.pack! + 1 : undefined
     return (
+      <div className="runner">
       <section className="card summary">
         <h1>{t.practice.summary(title)}</h1>
         <div className="kpis">
@@ -223,28 +221,12 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
           <Stat label={t.practice.hits} value={t.ofN(correctIds.length, run.checked.length)} />
           <Stat label={t.practice.unanswered} value={total - run.checked.length} />
         </div>
+        {!packRef && (
         <div className="actions">
-          <button type="button" onClick={() => dispatch({ type: 'navigate', screen: { name: pack ? 'study' : 'home' } })}>
-            {pack ? t.practice.backToStudy : t.backHome}
+          <button type="button" onClick={() => dispatch({ type: 'navigate', screen: { name: 'home' } })}>
+            {t.backHome}
           </button>
-          {pack && nextPack !== undefined && (
-            <button type="button" onClick={() => startPack(dispatch, progress, nextPack, 'all', question)}>
-              {t.practice.nextPack}
-            </button>
-          )}
-          {pack && packFailed > 0 && (
-            <button
-              type="button"
-              className="primary"
-              onClick={() => {
-                setSummary(false)
-                startPack(dispatch, progress, run.pack!, 'failed', question)
-              }}
-            >
-              {t.study.repeatFailed(packFailed)}
-            </button>
-          )}
-          {!pack && failed.length > 0 && (
+          {failed.length > 0 && (
             <button
               type="button"
               className="primary"
@@ -258,12 +240,18 @@ export function PracticeRunner({ run, progress, dispatch }: { run: PracticeRun; 
             </button>
           )}
         </div>
+        )}
       </section>
+      {packRef && (
+        <PackNav pack={packRef} progress={progress} dispatch={dispatch} answered={run.checked.length} finished onLeave={() => setSummary(false)} />
+      )}
+      </div>
     )
   }
 
   return (
     <div className="runner">
+      {packRef && <PackNav pack={packRef} progress={progress} dispatch={dispatch} answered={run.checked.length} />}
       <RunTracker
         title={title}
         states={run.questionIds.map((qid): TrackState => (!run.checked.includes(qid) ? 'pending' : correctIds.includes(qid) ? 'right' : 'wrong'))}

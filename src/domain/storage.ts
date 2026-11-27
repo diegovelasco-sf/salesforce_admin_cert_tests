@@ -35,8 +35,8 @@ export interface Progress {
   settings: Settings
   /** Notas propias por pregunta. */
   notes: Record<string, string>
-  /** Paquetes del modo estudio, si ya se han creado. */
-  study?: StudyPlan
+  /** Grupos de paquetes del modo estudio, del más antiguo al más reciente. */
+  studyPlans: StudyPlan[]
   activeExam?: ExamSession
 }
 
@@ -55,6 +55,7 @@ export const emptyProgress = (cert: CertId): Progress => ({
   history: [],
   settings: { excludeDoubtful: true, sources: {} },
   notes: {},
+  studyPlans: [],
 })
 
 const SOURCE_MODES: readonly SourceMode[] = ['practice', 'exam', 'review', 'study']
@@ -75,11 +76,12 @@ function parseSettings(raw: unknown, cert: CertId): Settings {
   return { excludeDoubtful: typeof data.excludeDoubtful === 'boolean' ? data.excludeDoubtful : true, sources }
 }
 
-function parseStudy(raw: unknown): StudyPlan | undefined {
+function parseStudy(raw: unknown, fallbackId: string): StudyPlan | undefined {
   if (!isObject(raw)) return undefined
   const size = PACK_SIZES.find((n) => n === raw.size)
   if (!size || !Array.isArray(raw.packs) || !raw.packs.every(isStringArray)) return undefined
   return {
+    id: typeof raw.id === 'string' && raw.id ? raw.id : fallbackId,
     size,
     ...(isStringArray(raw.sources) ? { sources: raw.sources as SourceId[] } : {}),
     ...(isStringArray(raw.sections) ? { sections: raw.sections as SectionKey[] } : {}),
@@ -109,7 +111,12 @@ export function parseProgress(text: string, cert: CertId): Progress {
   const owner = typeof data.cert === 'string' ? data.cert : 'admin'
   if (owner !== cert) throw new Error('Este progreso es de otra certificación, no de la que estás usando.')
   const empty = emptyProgress(cert)
-  const study = parseStudy(data.study)
+  // Antes había un solo plan (`study`); ahora una lista. El antiguo pasa a ser el primero, con su dominio.
+  const rawPlans = Array.isArray(data.studyPlans) ? data.studyPlans : data.study !== undefined ? [data.study] : []
+  const ids = new Set<string>()
+  const studyPlans = rawPlans
+    .map((raw, i) => parseStudy(raw, `plan-${i + 1}`))
+    .filter((plan): plan is StudyPlan => !!plan && !ids.has(plan.id) && !!ids.add(plan.id))
   return {
     schemaVersion: 1,
     cert,
@@ -118,7 +125,7 @@ export function parseProgress(text: string, cert: CertId): Progress {
     history: Array.isArray(data.history) ? (data.history as ExamRecord[]) : empty.history,
     settings: parseSettings(data.settings, cert),
     notes: parseNotes(data.notes),
-    ...(study ? { study } : {}),
+    studyPlans,
     activeExam: isObject(data.activeExam) ? (data.activeExam as unknown as ExamSession) : undefined,
   }
 }

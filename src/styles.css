@@ -1270,6 +1270,30 @@ figure.chart {
   margin: 0;
 }
 
+/* Cada grupo de paquetes: separado del anterior por una línea, con su nombre como título. */
+.study-new {
+  margin: 1rem 0 0;
+}
+
+.study-plan {
+  padding-top: 0.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border-strong);
+}
+
+.study-plan-title {
+  margin: 0 0 0.25rem;
+}
+
+.pack-head h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+button.link-button.danger-link {
+  color: var(--bad);
+}
+
 .pack-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -1715,4 +1739,61 @@ button.track-item.current.track-wrong {
   gap: 0.5rem 1rem;
   align-items: center;
   justify-content: space-between;
+}
+
+/* ---------- Navegación de un paquete de estudio ---------- */
+.pack-nav {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+}
+
+.pack-nav-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  align-items: center;
+}
+
+.pack-nav-group {
+  font-size: 0.9rem;
+}
+
+.pack-nav-label {
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+
+.pack-nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+button.pack-nav-item {
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0 0.5rem;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Paquete dominado: borde y texto verdes. El actual: relleno de marca, como en la cuadrícula de preguntas. */
+button.pack-nav-item.done {
+  color: var(--good);
+  background: var(--good-wash);
+  border-color: var(--good);
+}
+
+button.pack-nav-item.current {
+  color: #ffffff;
+  background: var(--btn-bg);
+  border-color: var(--btn-bg);
+}
+
+.summary + .pack-nav {
+  margin-top: 1rem;
 }

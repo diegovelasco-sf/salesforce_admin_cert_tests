@@ -1,5 +1,6 @@
-// Modo estudio: el banco se reparte una vez en paquetes fijos (30 o 60 preguntas) que no se solapan,
-// cada uno con una mezcla de secciones parecida a la del examen, para repetirlos hasta memorizarlos.
+// Modo estudio: las preguntas elegidas (por secciones y fuentes) se reparten una vez en paquetes fijos (30 o
+// 60 preguntas) que no se solapan, todos con la misma mezcla de secciones, para repetirlos hasta memorizarlos.
+// Una certificación puede tener varios grupos de paquetes (planes), cada uno con sus filtros y su dominio.
 import type { CertConfig } from './certs.ts'
 import type { Rng } from './rng.ts'
 import { shuffle } from './shuffle.ts'
@@ -9,8 +10,10 @@ import type { Question, SectionKey, SourceId } from './types.ts'
 export const PACK_SIZES = [30, 60] as const
 export type PackSize = (typeof PACK_SIZES)[number]
 
-/** Plan de estudio de una certificación: qué preguntas tiene cada paquete. Se guarda con el progreso. */
+/** Grupo de paquetes de estudio: sus filtros y qué preguntas tiene cada paquete. Se guarda con el progreso. */
 export interface StudyPlan {
+  /** Estable: lo usan las tandas para saber a qué plan pertenecen. */
+  id: string
   size: PackSize
   /** Fuentes con las que se creó; sin indicar, todas. */
   sources?: SourceId[]

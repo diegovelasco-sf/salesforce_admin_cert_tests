@@ -55,7 +55,7 @@ describe('buildPacks', () => {
 
 describe('syncPlan', () => {
   // Tamaño 3 para el test: fuera de PACK_SIZES, solo cambia dónde se abre un paquete nuevo.
-  const plan = { size: 3, excludeDoubtful: true, packs: [['a', 'b', 'c'], ['d', 'e']], stats: {}, createdAt: 0 } as unknown as StudyPlan
+  const plan = { id: 'p', size: 3, excludeDoubtful: true, packs: [['a', 'b', 'c'], ['d', 'e']], stats: {}, createdAt: 0 } as unknown as StudyPlan
   const qs = (...ids: string[]) => ids.map((id) => makeQuestion(id, 'logic'))
 
   it('no cambia nada si el banco es el mismo', () => {
@@ -114,7 +114,7 @@ describe('paquetes de unas secciones', () => {
   })
 
   it('al ponerse al día con el banco, no mete preguntas de otras secciones', () => {
-    const plan: StudyPlan = { size: 30, excludeDoubtful: true, sections: [...sections], packs, stats: {}, createdAt: 0 }
+    const plan: StudyPlan = { id: 'p', size: 30, excludeDoubtful: true, sections: [...sections], packs, stats: {}, createdAt: 0 }
     // El plan se sincroniza con el pool ya filtrado por sus secciones, como hace initState.
     expect(syncPlan(plan, pool)).toBe(plan)
   })

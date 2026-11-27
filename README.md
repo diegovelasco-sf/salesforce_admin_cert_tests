@@ -72,22 +72,28 @@ indica en qué otras fuentes aparece.
 
 ### Modo estudio
 
-Los paquetes se crean una vez por certificación, con el tamaño (30 o 60), las secciones y las fuentes que
-elijas, y se guardan con el progreso. Con todas las secciones siguen la mezcla del examen; con unas pocas
-(por ejemplo, las que suspendiste en el examen real), cada paquete solo lleva preguntas de esas secciones, en
-la proporción que tienen en el banco. Cada sección se baraja y se reparte por turnos entre todos los paquetes, así que
-cada pregunta está en un solo paquete, todos llevan la misma mezcla de secciones (la del banco, que se parece a
-la del examen) y sus tamaños difieren como mucho en una pregunta: 302 preguntas en paquetes de 30 son 10
-paquetes de 30 o 31.
+En Estudio se crean **grupos de paquetes**, cada uno con las secciones, las fuentes y el tamaño (30 o 60) que
+elijas: por ejemplo, solo Success4Exam con Fundamentos y Modelado de datos. Se pueden tener varios grupos a la vez
+(uno con todo el banco y otros para reforzar secciones concretas), cada uno con su propio dominio, y borrar
+cualquiera sin tocar los demás. Junto a cada sección y cada fuente se ve cuántas preguntas aporta con el otro
+filtro aplicado.
 
-Cada paquete lleva su propio dominio, separado de las estadísticas generales (que también cuentan lo que
-respondes en él). Una pregunta está **dominada** si nunca la has fallado en el estudio o si, tras fallarla, la
+Dentro de un grupo, cada sección se baraja y se reparte por turnos entre sus paquetes, así que cada pregunta está
+en un solo paquete, todos llevan la misma mezcla de secciones y sus tamaños difieren como mucho en una pregunta:
+302 preguntas en paquetes de 30 son 10 paquetes de 30 o 31. Con todas las secciones la mezcla es la del banco,
+parecida a la del examen.
+
+Cada grupo lleva su propio dominio, separado de las estadísticas generales (que también cuentan lo que
+respondes en él). Una pregunta está **dominada** si nunca la has fallado en ese grupo o si, tras fallarla, la
 aciertas dos veces seguidas; las **falladas** de un paquete son las que has fallado y aún no dominas. Al
-acabar una tanda puedes repetir sus falladas o pasar al siguiente paquete.
+Dentro de un paquete, encima de las preguntas y también en el resumen final, una barra permite volver a los
+grupos, empezar de nuevo el paquete entero, repetir solo sus falladas o saltar a cualquier otro paquete del
+grupo (los dominados salen en verde). Si ya has respondido algo en la tanda, pide confirmación antes de
+cambiar; las respuestas comprobadas se quedan guardadas.
 
-Si el banco cambia, los paquetes no se rehacen: las preguntas retiradas salen y las nuevas van al último
-paquete (o a uno nuevo), con un aviso. «Rehacer los paquetes» los reparte de nuevo y borra su dominio, sin
-tocar las estadísticas generales, las marcas ni las notas.
+Si el banco cambia, los paquetes no se rehacen: las preguntas retiradas salen y las nuevas (de las secciones y
+fuentes del grupo) van a su último paquete o a uno nuevo, con un aviso. Los progresos guardados con el antiguo
+plan único lo conservan como primer grupo, con su dominio.
 
 Atajos de teclado: `1`-`5` marcan opciones, `Enter` comprueba o avanza, `←`/`→` navegan, `M` marca la
 pregunta y `N` abre su nota (`Ctrl`/`⌘`+`Enter` la guarda, `Esc` la cierra).
@@ -414,6 +420,7 @@ mismo simulacro se puede reconstruir.
 | `History.tsx` | Progreso: resumen, secciones flojas, acierto acumulado por sección e historial de simulacros |
 | `ScoreTrend.tsx` | Evolución de la nota de los simulacros, con la línea de aprobado y vista de tabla |
 | `Study.tsx` | Modo estudio: creación de los paquetes y lista con su dominio |
+| `PackNav.tsx` | Navegación de un paquete de estudio: volver, repetirlo o pasar a otro del grupo |
 | `RunTracker.tsx` | Barra de progreso y cuadrícula de aciertos y fallos de la tanda, ocultable |
 | `Browse.tsx` | Banco: buscador y consulta de las preguntas |
 | `SourcePicker.tsx`, `modes.ts` | Elección de fuentes de cada modo y arranque de los paquetes |

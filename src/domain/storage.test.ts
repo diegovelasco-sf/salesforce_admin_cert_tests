@@ -89,7 +89,7 @@ describe('parseProgress', () => {
     const progress = parseProgress(JSON.stringify({ schemaVersion: 1, settings: { sources: { practice: ['crt101'] } } }), 'admin')
     expect(progress.settings).toEqual({ excludeDoubtful: true, sources: { practice: ['crt101'] } })
     expect(progress.notes).toEqual({})
-    expect(progress.study).toBeUndefined()
+    expect(progress.studyPlans).toEqual([])
     expect(parseProgress(exportProgress(progress), 'admin')).toEqual(progress)
   })
 
@@ -100,13 +100,25 @@ describe('parseProgress', () => {
     expect(parseProgress(JSON.stringify({ schemaVersion: 1, cert: 'appbuilder', settings: { officialOnly: true } }), 'appbuilder').settings.sources).toEqual({})
   })
 
-  it('conserva las notas y el plan de estudio, y descarta los que están dañados', () => {
-    const study = { size: 30, excludeDoubtful: true, packs: [['a', 'b'], ['c']], stats: {}, createdAt: 5 }
-    const progress = parseProgress(JSON.stringify({ schemaVersion: 1, notes: { a: 'truco', b: '  ', c: 3 }, study }), 'admin')
+  it('conserva las notas y los grupos de estudio, y descarta los que están dañados', () => {
+    const plan = { id: 'p1', size: 30, excludeDoubtful: true, sections: ['data'], packs: [['a', 'b'], ['c']], stats: {}, createdAt: 5 }
+    const other = { ...plan, id: 'p2', sections: undefined, sources: ['crt101'] }
+    const progress = parseProgress(
+      JSON.stringify({ schemaVersion: 1, notes: { a: 'truco', b: '  ', c: 3 }, studyPlans: [plan, other, { size: 45, packs: [] }, { ...plan }] }),
+      'admin',
+    )
     expect(progress.notes).toEqual({ a: 'truco' })
-    expect(progress.study).toEqual(study)
-    expect(parseProgress(JSON.stringify({ schemaVersion: 1, study: { size: 45, packs: [] } }), 'admin').study).toBeUndefined()
-    expect(parseProgress(JSON.stringify({ schemaVersion: 1, study: { size: 30, packs: [[1]] } }), 'admin').study).toBeUndefined()
+    // El de tamaño 45 no es válido y el último repite id: solo quedan los dos primeros.
+    expect(progress.studyPlans).toEqual([plan, { id: 'p2', size: 30, excludeDoubtful: true, sources: ['crt101'], packs: plan.packs, stats: {}, createdAt: 5 }])
+    expect(parseProgress(exportProgress(progress), 'admin')).toEqual(progress)
+  })
+
+  it('el antiguo plan único (study) pasa a ser el primer grupo, con su dominio', () => {
+    const stats = { a: { seen: 2, correct: 1, streak: 1, lastCorrect: true, lastAt: 9 } }
+    const study = { size: 60, excludeDoubtful: false, packs: [['a', 'b']], stats, createdAt: 5 }
+    const progress = parseProgress(JSON.stringify({ schemaVersion: 1, study }), 'admin')
+    expect(progress.studyPlans).toEqual([{ id: 'plan-1', ...study }])
+    expect(parseProgress(JSON.stringify({ schemaVersion: 1, study: { size: 30, packs: [[1]] } }), 'admin').studyPlans).toEqual([])
   })
 
   it('rechaza lo que no es un progreso de la app', () => {
